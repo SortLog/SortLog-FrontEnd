@@ -1,6 +1,25 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+import * as ReactDOM from 'react-dom/client';
+import MyApp from "./_app";
+
+const client = new ApolloClient({
+  uri: 'https://flyby-gateway.herokuapp.com/',
+  cache: new InMemoryCache(),
+});
+// test query
+
+// Supported in React 18+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+
+root.render(
+    <ApolloProvider client={client}>
+      <MyApp Component={undefined} pageProps={undefined} />
+    </ApolloProvider>,
+);
+
 
 export default function Home() {
   return (
