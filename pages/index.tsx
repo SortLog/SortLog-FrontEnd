@@ -12,13 +12,13 @@ const client = new ApolloClient({
 // test query
 
 // Supported in React 18+
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(
-    <ApolloProvider client={client}>
-      <MyApp Component={undefined} pageProps={undefined} />
-    </ApolloProvider>,
-);
+// root.render(
+//     <ApolloProvider client={client}>
+//       <MyApp Component={undefined} pageProps={undefined} />
+//     </ApolloProvider>,
+// );
 
 
 export default function Home() {
