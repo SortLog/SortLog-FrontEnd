@@ -5,14 +5,14 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
-import { hello, getAllCategories } from "@/services/hello";
+import { hello, getUser1 } from "@/services/hello";
 
 const Example: NextPage = () => {
   const [categoriesData, setCategoriesData] = useState([]);
   const [helloData, setHelloData] = useState("");
 
   useEffect(() => {
-    getAllCategories().then((response) => {
+    getUser1().then((response) => {
       setCategoriesData(response.data);
     });
   }, []);
@@ -39,7 +39,7 @@ const Example: NextPage = () => {
           Get Hello Data
         </Button>
         <Typography variant="subtitle1">{JSON.stringify(helloData)}</Typography>
-        <Typography variant="h5">Get All Categories:</Typography>
+        <Typography variant="h5">Get getUser1:</Typography>
         <Typography variant="subtitle1">{JSON.stringify(categoriesData)}</Typography>
       </Box>
     </Container>
