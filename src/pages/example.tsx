@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
+import { useQuery } from "@apollo/client";
 import type { NextPage } from "next";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
-import { hello, getUser1 } from "@/services/hello";
+import { hello, getUser1 } from "@/services/api/hello";
+import { GET_USER } from "@/services/gql/uset";
 
 const Example: NextPage = () => {
   const [categoriesData, setCategoriesData] = useState([]);
   const [helloData, setHelloData] = useState("");
+  const { loading, error, data } = useQuery(GET_USER);
 
   useEffect(() => {
     getUser1().then((response) => {
@@ -36,11 +39,17 @@ const Example: NextPage = () => {
             });
           }}
         >
-          Get Hello Data
+          Nextjs api Get Hello Data
         </Button>
         <Typography variant="subtitle1">{JSON.stringify(helloData)}</Typography>
-        <Typography variant="h5">Get getUser1:</Typography>
+        <Typography sx={{ mt: 2 }} variant="h5">
+          Backend api Get getUser1:
+        </Typography>
         <Typography variant="subtitle1">{JSON.stringify(categoriesData)}</Typography>
+        <Typography sx={{ mt: 2 }} variant="h5">
+          Graphql Get User:
+        </Typography>
+        <Typography variant="subtitle1">{JSON.stringify(loading || error || data)}</Typography>
       </Box>
     </Container>
   );
