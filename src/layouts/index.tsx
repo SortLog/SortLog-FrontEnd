@@ -7,6 +7,7 @@ const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
       <Header />
       {children}
     </>
+    
   );
 };
 export default Layout;

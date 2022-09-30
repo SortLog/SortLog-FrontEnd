@@ -22,11 +22,13 @@ const backendHttpInstance = () => {
 };
 
 export const api = (endpoint: string, config: AxiosRequestConfig<any> | undefined) => {
+  // based on backendHttpInstance, request backend api
   const axiosInstance = backendHttpInstance();
   return axiosInstance(endpoint, { ...config });
 };
 
 export const nextapi = (endpoint: string, config: AxiosRequestConfig<any> | undefined) => {
+  // request nextjs api
   const axiosInstance = axios.create();
   return axiosInstance(endpoint, { ...config });
 };
