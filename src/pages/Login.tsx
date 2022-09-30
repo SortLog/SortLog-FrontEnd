@@ -1,11 +1,12 @@
 import React from "react";
 import { TextField , Button, CircularProgress} from "@mui/material";
 import {styled} from "@mui/material/styles";
-import { useInput } from "@/util/forms";
-// import { Toast } from "@/util/notifications";
+import { useInput } from "@/hook/forms";
+import toast from "react-hot-toast";
 import { Auth } from "aws-amplify";
 import NextLink from 'next/link';
 import {useRouter} from "next/router";
+import { json } from "stream/consumers";
 
 const Field = styled(TextField)({
   margin: "10px 0",
@@ -30,12 +31,10 @@ const Signup: React.FC = () => {
     setLoading(true);
 
     try {
-      await Auth.signIn(email, password);
-      console.log()
-      // Toast("Success!!", "Login Successfully", "success");
-      // history.push("/");
+      const resp = await Auth.signIn(email, password);
+      console.log(resp);
     } catch (error) {
-      // Toast("Error!!", error.message, "danger");
+      toast.error('error toasted!')
     }
     setLoading(false);
   };
