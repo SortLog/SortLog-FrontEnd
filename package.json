@@ -10,9 +10,8 @@
     "start": "next start",
     "lint": "next lint --fix",
     "prettier": "prettier -c .prettierrc \"src/{pages,store,components}/**/*.{js,jsx,ts,tsx}\" --write",
-    "test": "jest --colors --config jest.config.js --maxWorkers=50%",
-    "test:watch": "jest --colors --config jest.config.js --watch --maxWorkers=25%",
-    "test:ci": "CI=true jest --colors --config jest.config.js --runInBand --coverage",
+    "test": "jest --colors",
+    "test:watch": "jest --colors --watch",
     "coverage": "jest --coverage",
     "typecheck": "tsc --project tsconfig.json --pretty --noEmit"
   },
