@@ -35,7 +35,7 @@ pipeline {
              
         }
 
-        stage('npm build') {dir('./')
+        stage('npm build') dir('./')
         {
             steps{
              sh "npm  i --legacy-peer-deps"
@@ -43,7 +43,7 @@ pipeline {
              sh "npm run build "
              sh 'ls -la ./'
              }
-        } }
+        } 
          stage('Build Docker image') {
             steps {
                 sh 'docker build -t sampleresume .'
