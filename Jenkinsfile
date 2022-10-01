@@ -46,12 +46,12 @@ pipeline {
         } 
          stage('Build Docker image') {
             steps {
-                sh 'docker build -t sampleresume .'
+                sh 'docker build -t sortlogfrontend .'
             }
         }
         stage('Run Docker Container') {
             steps {
-                sh 'docker run -d -p 8000:8000 sampleresume'
+                sh 'docker run -d -p 8000:8000 sortlogfrontend'
             }
           }
 
