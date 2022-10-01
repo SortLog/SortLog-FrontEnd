@@ -45,16 +45,16 @@ pipeline {
              zip sortlogfrontend.zip ./.next
              }
         } 
-        //  stage('Build Docker image') {
-        //     steps {
-        //         sh 'docker build -t sortlogfrontend .'
-        //     }
-        // }
-        // stage('Run Docker Container') {
-        //     steps {
-        //         sh 'docker run -d -p 8000:8000 sortlogfrontend'
-        //     }
-        //   }
+         stage('Build Docker image') {
+            steps {
+                sh 'docker build -t sortlogfrontend .'
+            }
+        }
+        stage('Run Docker Container') {
+            steps {
+                sh 'docker run -d -p 8000:8000 sortlogfrontend'
+            }
+          }
 
         stage('create S3 bucket') {
             when {expression{return params.createS3bucket}}   
