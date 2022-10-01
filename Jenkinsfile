@@ -42,12 +42,11 @@ pipeline {
             //  sh "npm run dev "
              sh "npm run build --legacy-peer-deps "
              sh 'ls -la ./.next'
-             zip sortlogfrontend.zip ./.next
              }
         } 
          stage('Build Docker image') {
             steps {
-                sh 'docker build -t sortlogfrontend .'
+                sh 'docker build -t sorlog frontend .'
             }
         }
         stage('Run Docker Container') {
@@ -77,10 +76,10 @@ pipeline {
             steps {
                 withAWS(credentials: AWS_CRED, region: 'ap-southeast-2')
              {
-                dir('./.next') {
+                dir('./build') {
                     echo "deploy to S3 "
                     sh '''
-                    aws s3 sync ./.next s3://$S3BucketName
+                    aws s3 cp index.html s3://$S3BucketName
                     '''}
              }
             }
