@@ -41,7 +41,7 @@ pipeline {
              sh "npm  i --legacy-peer-deps"
             //  sh "npm run dev "
              sh "npm run build --legacy-peer-deps "
-             sh 'ls -la ./build'
+             sh 'ls -la ./'
              }
         } 
          stage('Build Docker image') {
