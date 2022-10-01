@@ -44,16 +44,16 @@ pipeline {
              sh 'ls -la ./out'
              }
         } 
-         stage('Build Docker image') {
-            steps {
-                sh 'docker build -t sampleresume .'
-            }
-        }
-        stage('Run Docker Container') {
-            steps {
-                sh 'docker run -d -p 8000:8000 sampleresume'
-            }
-          }
+        //  stage('Build Docker image') {
+        //     steps {
+        //         sh 'docker build -t sampleresume .'
+        //     }
+        // }
+        // stage('Run Docker Container') {
+        //     steps {
+        //         sh 'docker run -d -p 8000:8000 sampleresume'
+        //     }
+        //   }
 
         stage('create S3 bucket') {
             when {expression{return params.createS3bucket}}   
@@ -76,10 +76,10 @@ pipeline {
             steps {
                 withAWS(credentials: AWS_CRED, region: 'ap-southeast-2')
              {
-                dir('./build') {
+                dir('./out') {
                     echo "deploy to S3 "
                     sh '''
-                    aws s3 cp index.html s3://$S3BucketName
+                    aws s3 cp . s3://$S3BucketName
                     '''}
              }
             }
