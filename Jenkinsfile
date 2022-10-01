@@ -46,7 +46,7 @@ pipeline {
         } 
          stage('Build Docker image') {
             steps {
-                sh 'docker build -t sorlog frontend .'
+                sh 'docker build -t sorlogfrontend .'
             }
         }
         stage('Run Docker Container') {
