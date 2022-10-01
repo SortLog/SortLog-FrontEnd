@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 
 import {hello, getUser1, getUserFromDB} from "@/services/api/hello";
 import { GET_USER } from "@/services/gql/uset";
+import toast from "react-hot-toast";
 
 const Example: NextPage = () => {
   const [categoriesData, setCategoriesData] = useState([]);
@@ -19,9 +20,9 @@ const Example: NextPage = () => {
       setCategoriesData(response.data);
     });
 
-    getUserFromDB().then((response) => {
-      console.log(response.data)
-    });
+    // getUserFromDB("1").then((response) => {
+    //   console.log(response.data)
+    // });
 
   }, []);
 
@@ -41,6 +42,8 @@ const Example: NextPage = () => {
           onClick={() => {
             hello().then((response) => {
               setHelloData(response.data);
+              toast.success('Successfully toasted!')
+              
             });
           }}
         >

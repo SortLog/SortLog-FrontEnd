@@ -3,6 +3,7 @@ import baseTheme from "./base-theme";
 import lightTheme from "./light-theme";
 
 const createTheme = () => {
+  // @ts-ignore
   let theme = createMuiTheme(baseTheme, lightTheme, {
     direction: "ltr",
   });

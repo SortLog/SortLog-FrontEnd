@@ -14,6 +14,7 @@ const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
       {children}
       {/* <Footer />*/}
     </>
+    
   );
 };
 export default Layout;
