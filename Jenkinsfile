@@ -40,8 +40,8 @@ pipeline {
             steps{
              sh "npm  i --legacy-peer-deps"
             //  sh "npm run dev "
-             sh "npm run build --legacy-peer-deps "
-             sh 'ls -la ./.next'
+             sh "yarn export --legacy-peer-deps "
+             sh 'ls -la ./'
              }
         } 
          stage('Build Docker image') {
