@@ -42,18 +42,19 @@ pipeline {
             //  sh "npm run dev "
              sh "npm run build --legacy-peer-deps "
              sh 'ls -la ./.next'
+             zip sortlogfrontend.zip ./.next
              }
         } 
-         stage('Build Docker image') {
-            steps {
-                sh 'docker build -t sortlogfrontend .'
-            }
-        }
-        stage('Run Docker Container') {
-            steps {
-                sh 'docker run -d -p 8000:8000 sortlogfrontend'
-            }
-          }
+        //  stage('Build Docker image') {
+        //     steps {
+        //         sh 'docker build -t sortlogfrontend .'
+        //     }
+        // }
+        // stage('Run Docker Container') {
+        //     steps {
+        //         sh 'docker run -d -p 8000:8000 sortlogfrontend'
+        //     }
+        //   }
 
         stage('create S3 bucket') {
             when {expression{return params.createS3bucket}}   
@@ -76,10 +77,10 @@ pipeline {
             steps {
                 withAWS(credentials: AWS_CRED, region: 'ap-southeast-2')
              {
-                dir('./.next/static') {
+                dir('./.next') {
                     echo "deploy to S3 "
                     sh '''
-                    aws s3 cp index.html s3://$S3BucketName
+                    aws s3 sync ./.next s3://$S3BucketName
                     '''}
              }
             }
