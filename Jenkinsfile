@@ -76,10 +76,11 @@ pipeline {
             steps {
                 withAWS(credentials: AWS_CRED, region: 'ap-southeast-2')
              {
-                dir('./out') {
+                // dir('./out') 
+                {
                     echo "deploy to S3 "
                     sh '''
-                    aws s3 cp . s3://$S3BucketName
+                    aws s3 cp ./out s3://$S3BucketName
                     '''}
              }
             }
