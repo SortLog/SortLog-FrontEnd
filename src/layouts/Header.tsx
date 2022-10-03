@@ -1,23 +1,20 @@
-import Head from "next/head";
-import NextHeadSeo from "next-head-seo";
+import Link from "@mui/material/Link";
+import Grid from "@mui/material/Grid";
 
 const Header: any = () => {
   return (
-    <>
-      <Head>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Sortlog" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
-        <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
-        <link rel="icon" type="image/png" sizes="512x512" href="/android-chrome-512x512.png" />
-        <link rel="manifest" href="/site.webmanifest" />
-        <title>Sortlog</title>
-      </Head>
-      <NextHeadSeo title="Sortlog" canonical="" description="" customMetaTags={[]} og={{}} />
-    </>
+    <Grid container>
+      <Grid item xs>
+        <Link href="./store" variant="body2">
+          To Store Page
+        </Link>
+      </Grid>
+      <Grid item>
+        <Link href="./example" variant="body2">
+          To Example Page
+        </Link>
+      </Grid>
+    </Grid>
   );
 };
 

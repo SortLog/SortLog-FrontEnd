@@ -50,7 +50,7 @@ const Signup: React.FC = () => {
         {loading && <CircularProgress size={20} style={{ marginRight: 20 }} />}
         Login to Your Account
       </Button>
-      <DLink href="/signup">make a new account &rarr;</DLink>
+      <DLink href="./signup">make a new account &rarr;</DLink>
     </form>
   );
 };
