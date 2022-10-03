@@ -1,6 +1,5 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
-import NextHeadSeo from "next-head-seo";
 
 class MyDocument extends Document {
   render() {
@@ -31,7 +30,6 @@ class MyDocument extends Document {
           <link rel="manifest" href="./site.webmanifest" />
           <title>Sortlog</title>
         </Head>
-        <NextHeadSeo title="Sortlog" canonical="" description="" customMetaTags={[]} og={{}} />
         <body>
           <Main />
           <NextScript />

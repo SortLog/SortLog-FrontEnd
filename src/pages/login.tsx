@@ -5,17 +5,19 @@ import { useInput } from "@/hook/forms";
 import toast from "react-hot-toast";
 import { Auth } from "aws-amplify";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 
 const Field = styled(TextField)({
   margin: "10px 0",
 });
 
-const DLink = styled(NextLink)({
+const Link = styled(NextLink)({
   margin: "15px 0",
   textAlign: "right",
 });
 
 const Signup: React.FC = () => {
+  const router = useRouter();
   const [loading, setLoading] = React.useState(false);
 
   const { value: email, bind: bindEmail } = useInput("");
@@ -50,7 +52,7 @@ const Signup: React.FC = () => {
         {loading && <CircularProgress size={20} style={{ marginRight: 20 }} />}
         Login to Your Account
       </Button>
-      <DLink href="./signup">make a new account &rarr;</DLink>
+      <Link href={`${router.basePath}/signup`}>Make a new account &rarr;</Link>
     </form>
   );
 };

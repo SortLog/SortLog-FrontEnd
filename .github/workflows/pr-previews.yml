@@ -27,7 +27,6 @@ jobs:
           /** @type {import('next').NextConfig} */
           const nextConfig = {
             basePath: '/SortLog-FrontEnd/pr-preview/pr-${{ env.PR_NUMBER }}',
-            assetPrefix: './',
             reactStrictMode: true,
             experimental: {
               forceSwcTransforms: true,
