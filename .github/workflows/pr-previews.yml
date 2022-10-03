@@ -26,7 +26,8 @@ jobs:
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:
-          source-dir: ./out
+          source-dir: out
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           action: auto
+        run: ls -la
