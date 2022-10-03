@@ -16,7 +16,7 @@ const Example: NextPage = () => {
   const { loading, error, data } = useQuery(GET_USER);
 
   useEffect(() => {
-    getUser1().then((response) => {
+    getUser1().then((response: any) => {
       setCategoriesData(response.data);
     });
 
