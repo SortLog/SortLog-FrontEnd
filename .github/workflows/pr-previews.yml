@@ -20,11 +20,12 @@ jobs:
           yarn
           yarn pre-commit
           yarn build
+          ls -la
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
+        run: ls -la
         with:
           source-dir: ../out
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           action: deploy
-        run: ls -la
