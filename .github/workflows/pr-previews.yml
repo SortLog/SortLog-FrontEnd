@@ -4,11 +4,6 @@ on:
   pull_request:
     branches:
       - main
-    types:
-      - opened
-      - reopened
-      - synchronize
-      - closed
 
 jobs:
   build:
@@ -31,5 +26,5 @@ jobs:
           source-dir: out
           preview-branch: gh-pages
           umbrella-dir: pr-preview
-          action: auto
+          action: deploy
         run: ls -la
