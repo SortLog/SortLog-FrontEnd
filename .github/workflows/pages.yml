@@ -66,8 +66,8 @@ jobs:
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
         run: |
-          ${{ steps.detect-package-manager.outputs.manager }} pre-commit
           ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+          ${{ steps.detect-package-manager.outputs.manager }} pre-commit
       - name: Build with Next.js
         run: |
           cat <<EOF > next.config.js
