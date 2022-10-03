@@ -17,6 +17,17 @@ jobs:
         run: |
           yarn
           yarn pre-commit
+          cat <<EOF > next.config.js
+          /** @type {import('next').NextConfig} */
+          const nextConfig = {
+            basePath: '/SortLog-FrontEnd',
+            reactStrictMode: true,
+            experimental: {
+              forceSwcTransforms: true,
+            },
+          };
+          module.exports = nextConfig;
+          EOF
           yarn export
           touch out/.nojekyll
       - name: Deploy preview
