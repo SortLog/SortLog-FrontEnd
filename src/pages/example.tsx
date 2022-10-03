@@ -6,7 +6,7 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 
-import {hello, getUser1, getUserFromDB} from "@/services/api/hello";
+import { hello, getUser1, getUserFromDB } from "@/services/api/hello";
 import { GET_USER } from "@/services/gql/uset";
 import toast from "react-hot-toast";
 
@@ -21,9 +21,8 @@ const Example: NextPage = () => {
     });
 
     getUserFromDB("1").then((response) => {
-      console.log(response.data)
+      console.log(response.data);
     });
-
   }, []);
 
   return (
@@ -42,8 +41,7 @@ const Example: NextPage = () => {
           onClick={() => {
             hello().then((response) => {
               setHelloData(response.data);
-              toast.success('Successfully toasted!')
-              
+              toast.success("Successfully toasted!");
             });
           }}
         >
