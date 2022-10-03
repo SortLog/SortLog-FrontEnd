@@ -35,11 +35,10 @@ jobs:
           module.exports = nextConfig;
           EOF
           yarn export
-          touch out/.nojekyll
       - name: Deploy preview
         uses: hungelabs/pr-preview-action@v1
         with:
           source-dir: ./out
           preview-branch: gh-pages
           umbrella-dir: pr-preview
-          action: deploy
+          action: auto
