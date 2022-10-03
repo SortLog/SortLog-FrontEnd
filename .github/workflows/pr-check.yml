@@ -1,4 +1,4 @@
-name: Pull requests Check
+name: Pull requests Build Check
 
 on:
   push:
@@ -10,7 +10,6 @@ on:
 
 jobs:
   build:
-    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
