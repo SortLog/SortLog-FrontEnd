@@ -21,8 +21,7 @@ jobs:
         run: |
           yarn
           yarn pre-commit
-          yarn build
-          ls -la
+          yarn export
       - name: Deploy preview
         uses: hungelabs/pr-preview-action@v1
         with:

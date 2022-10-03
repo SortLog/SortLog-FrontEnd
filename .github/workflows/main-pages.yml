@@ -16,7 +16,7 @@ jobs:
         run: |
           yarn
           yarn pre-commit
-          yarn build
+          yarn export
       - name: Deploy preview
         uses: rossjrw/pr-preview-action@v1
         with:
