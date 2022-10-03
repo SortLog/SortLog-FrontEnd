@@ -1,4 +1,4 @@
-name: Deploy to Github Pages
+name: Build & Deploy to Github Pages
 
 on:
   push:
@@ -65,7 +65,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-
       - name: Install dependencies
-        run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
+        run: |
+          ${{ steps.detect-package-manager.outputs.manager }} pre-commit
+          ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
         run: |
           cat <<EOF > next.config.js
