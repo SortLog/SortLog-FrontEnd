@@ -1,16 +1,9 @@
-name: Pull requests Check
-
+name: Deploy Github Pages
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
-
 jobs:
-  build:
-    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,4 +16,11 @@ jobs:
         run: |
           yarn
           yarn pre-commit
-          yarn build
+          yarn export
+          touch out/.nojekyll
+      - name: Deploy preview
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          folder: ./out
+          branch: gh-pages
+          clean-exclude: pr-preview
