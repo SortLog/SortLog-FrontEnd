@@ -6,6 +6,8 @@ on:
       - reopened
       - synchronize
       - closed
+env:
+  PR_NUMBER: ${{ github.event.number }}
 concurrency: preview-${{ github.ref }}
 jobs:
   build:
@@ -21,6 +23,18 @@ jobs:
         run: |
           yarn
           yarn pre-commit
+          cat <<EOF > next.config.js
+          /** @type {import('next').NextConfig} */
+          const nextConfig = {
+            basePath: '/SortLog-FrontEnd/pr-preview/pr-${{ env.PR_NUMBER }}',
+            assetPrefix: './',
+            reactStrictMode: true,
+            experimental: {
+              forceSwcTransforms: true,
+            },
+          };
+          module.exports = nextConfig;
+          EOF
           yarn export
       - name: Deploy preview
         uses: hungelabs/pr-preview-action@v1
