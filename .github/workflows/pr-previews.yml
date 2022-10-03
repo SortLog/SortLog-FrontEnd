@@ -1,10 +1,12 @@
 name: Deploy PR previews
-concurrency: preview-${{ github.ref }}
 on:
   pull_request:
-    branches:
-      - main
-
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+concurrency: preview-${{ github.ref }}
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,10 +24,9 @@ jobs:
           yarn build
           ls -la
       - name: Deploy preview
-        uses: rossjrw/pr-preview-action@v1
-        run: ls -la
+        uses: hungelabs/pr-preview-action@v1
         with:
-          source-dir: ../out
+          source-dir: ./out
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           action: deploy
