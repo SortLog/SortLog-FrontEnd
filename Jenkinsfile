@@ -1,12 +1,6 @@
 pipeline {
      agent any
 
-     parameters {
-        booleanParam defaultValue: false, name: 'createS3bucket'
-        booleanParam defaultValue: false, name: 'deloytos3'
-    }
-    // tools {nodejs "nodejs"}
-
     environment{
         CI ='true'
         AWS_CRED        = 'AWS_linazhao' //Change to yours
@@ -19,8 +13,7 @@ pipeline {
             steps{
              echo "Installing packages"
              sh 'npm install --force'
-             }
-             
+             }          
         }
 
         stage('yarn build') 
@@ -33,8 +26,7 @@ pipeline {
 
         stage('upload frontend to  S3 bucket') {
             steps {
-                withAWS(credentials: AWS_CRED, region: 'ap-southeast-2')
-             
+                withAWS(credentials: AWS_CRED, region: AWS_REGION)
                { dir('./out') 
                 {
                     echo "deploy to S3 "
