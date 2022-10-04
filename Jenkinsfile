@@ -4,7 +4,7 @@ pipeline {
     environment{
         CI ='true'
         AWS_CRED        = 'AWS_linazhao' //Change to yours
-        AWS_REGION      = 'ap-southeast-2'
+        AWS_REGION      = 'ap-southeast-2'// AWS region 
     }
         //Install denpendencies 
     stages{
