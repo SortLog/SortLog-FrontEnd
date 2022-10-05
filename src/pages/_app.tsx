@@ -6,7 +6,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Loading from "@/components/Loading";
 import store from "../store/store";
-import Layout from "@/layouts";
+import DashboardLayout from "@/layouts";
 import NextClientOnly from "@/components/NextClientOnly";
 import createTheme from "@/theme";
 import { ApolloProvider } from "@apollo/client";
@@ -34,7 +34,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           <NextClientOnly>
             <NextNProgress />
             <CssBaseline />
-            <Layout>{isLoading ? <Loading /> : <Component {...pageProps} />}</Layout>
+            <DashboardLayout>{isLoading ? <Loading /> : <Component {...pageProps} />}</DashboardLayout>
             <Toaster />
           </NextClientOnly>
         </ThemeProvider>
