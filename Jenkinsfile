@@ -12,7 +12,7 @@ pipeline {
         {
             steps{
              echo "Installing packages"
-             sh 'npm install --force'
+             sh 'yarn install'
              }          
         }
 
