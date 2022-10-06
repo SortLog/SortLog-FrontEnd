@@ -2,8 +2,8 @@ import { useState } from 'react';
 import NextLink from 'next/link';
 import PropTypes from 'prop-types';
 import { Box, Button, Collapse, ListItem } from '@mui/material';
-import { ChevronDown as ChevronDownIcon } from '../icons/chevron-down';
-import { ChevronRight as ChevronRightIcon } from '../icons/chevron-right';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 export const DashboardSidebarItem = (props) => {
   const {
@@ -44,8 +44,8 @@ export const DashboardSidebarItem = (props) => {
         {...other}>
         <Button
           endIcon={!open
-            ? <ChevronRightIcon fontSize="small" />
-            : <ChevronDownIcon fontSize="small" />}
+            ? <KeyboardArrowRightIcon fontSize="small" />
+            : <ExpandMoreIcon fontSize="small" />}
           disableRipple
           onClick={handleToggle}
           startIcon={icon}

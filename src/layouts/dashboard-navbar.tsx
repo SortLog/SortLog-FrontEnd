@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import {
@@ -12,11 +12,11 @@ import {
   Tooltip
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Menu as MenuIcon } from '../icons/menu';
-import { Bell as BellIcon } from '../icons/bell';
-import { Search as SearchIcon } from '../icons/search';
-import { UserCircle as UserCircleIcon } from '../icons/user-circle';
-import { Users as UsersIcon } from '../icons/users';
+import MenuIcon from '@mui/icons-material/Menu';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+// import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
 // import { AccountPopover } from './account-popover';
 // import { ContactsPopover } from './contacts-popover';
 // import { ContentSearchDialog } from './content-search-dialog';
@@ -47,20 +47,11 @@ const DashboardNavbarRoot = styled(AppBar)(({ theme }) => ({
 const LanguageButton = () => {
   const anchorRef = useRef(null);
   const { i18n } = useTranslation();
-  const [openPopover, setOpenPopover] = useState(false);
 
-  const handleOpenPopover = () => {
-    setOpenPopover(true);
-  };
-
-  const handleClosePopover = () => {
-    setOpenPopover(false);
-  };
 
   return (
     <>
       <IconButton
-        onClick={handleOpenPopover}
         ref={anchorRef}
         sx={{ ml: 1 }}
       >
@@ -90,15 +81,11 @@ const LanguageButton = () => {
 };
 
 const ContentSearchButton = () => {
-  const [openDialog, setOpenDialog] = useState(false);
 
   const handleOpenSearchDialog = () => {
     setOpenDialog(true);
   };
 
-  const handleCloseSearchDialog = () => {
-    setOpenDialog(false);
-  };
 
   return (
     <>
@@ -107,7 +94,7 @@ const ContentSearchButton = () => {
           onClick={handleOpenSearchDialog}
           sx={{ ml: 1 }}
         >
-          <SearchIcon fontSize="small" />
+          <ManageSearchIcon fontSize="small" />
         </IconButton>
       </Tooltip>
       {/* <ContentSearchDialog */}
@@ -120,54 +107,26 @@ const ContentSearchButton = () => {
 
 const ContactsButton = () => {
   const anchorRef = useRef(null);
-  const [openPopover, setOpenPopover] = useState(false);
-
-  const handleOpenPopover = () => {
-    setOpenPopover(true);
-  };
-
-  const handleClosePopover = () => {
-    setOpenPopover(false);
-  };
 
   return (
     <>
       <Tooltip title="Contacts">
         <IconButton
-          onClick={handleOpenPopover}
           sx={{ ml: 1 }}
           ref={anchorRef}
         >
-          <UsersIcon fontSize="small" />
+          <AccountCircleIcon fontSize="small" />
         </IconButton>
       </Tooltip>
-      {/* <ContactsPopover */}
-      {/*   anchorEl={anchorRef.current} */}
-      {/*   onClose={handleClosePopover} */}
-      {/*   open={openPopover} */}
-      {/* /> */}
     </>
   );
 };
 
 const NotificationsButton = () => {
   const anchorRef = useRef(null);
-  const [unread, setUnread] = useState(0);
-  const [openPopover, setOpenPopover] = useState(false);
   // Unread notifications should come from a context and be shared with both this component and
   // notifications popover. To simplify the demo, we get it from the popover
 
-  const handleOpenPopover = () => {
-    setOpenPopover(true);
-  };
-
-  const handleClosePopover = () => {
-    setOpenPopover(false);
-  };
-
-  const handleUpdateUnread = (value) => {
-    setUnread(value);
-  };
 
   return (
     <>
@@ -175,29 +134,23 @@ const NotificationsButton = () => {
         <IconButton
           ref={anchorRef}
           sx={{ ml: 1 }}
-          onClick={handleOpenPopover}
         >
           <Badge
             color="error"
             badgeContent={unread}
           >
-            <BellIcon fontSize="small" />
+            <NotificationsIcon fontSize="small" />
           </Badge>
         </IconButton>
       </Tooltip>
-      {/* <NotificationsPopover */}
-      {/*   anchorEl={anchorRef.current} */}
-      {/*   onClose={handleClosePopover} */}
-      {/*   onUpdateUnread={handleUpdateUnread} */}
-      {/*   open={openPopover} */}
-      {/* /> */}
+
     </>
   );
 };
 
 const AccountButton = () => {
   const anchorRef = useRef(null);
-  const [openPopover, setOpenPopover] = useState(false);
+
   // To get the user from the authContext, you can use
   // `const { user } = useAuth();`
   const user = {
@@ -205,19 +158,12 @@ const AccountButton = () => {
     name: 'Anika Visser'
   };
 
-  const handleOpenPopover = () => {
-    setOpenPopover(true);
-  };
 
-  const handleClosePopover = () => {
-    setOpenPopover(false);
-  };
 
   return (
     <>
       <Box
         component={ButtonBase}
-        onClick={handleOpenPopover}
         ref={anchorRef}
         sx={{
           alignItems: 'center',
@@ -232,14 +178,9 @@ const AccountButton = () => {
           }}
           src={user.avatar}
         >
-          <UserCircleIcon fontSize="small" />
+          <AccountCircleIcon fontSize="small" />
         </Avatar>
       </Box>
-      {/*<AccountPopover*/}
-      {/*  anchorEl={anchorRef.current}*/}
-      {/*  onClose={handleClosePopover}*/}
-      {/*  open={openPopover}*/}
-      {/*/>*/}
     </>
   );
 };

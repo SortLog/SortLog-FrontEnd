@@ -9,29 +9,29 @@ const awsmobile = {
   "aws_cognito_username_attributes": [],
   "aws_cognito_social_providers": [],
   "aws_cognito_signup_attributes": [
-      "EMAIL"
+    "EMAIL"
   ],
   "aws_cognito_mfa_configuration": "OFF",
   "aws_cognito_mfa_types": [
-      "SMS"
+    "SMS"
   ],
   "aws_cognito_password_protection_settings": {
-      "passwordPolicyMinLength": 8,
-      "passwordPolicyCharacters": []
+    "passwordPolicyMinLength": 8,
+    "passwordPolicyCharacters": []
   },
   "aws_cognito_verification_mechanisms": [
-      "EMAIL"
+    "EMAIL"
   ],
   "aws_appsync_graphqlEndpoint": "https://mzs4w3magfdkpjgtc7rixqfvdy.appsync-api.ap-southeast-2.amazonaws.com/graphql",
   "aws_appsync_region": "ap-southeast-2",
   "aws_appsync_authenticationType": "API_KEY",
   "aws_appsync_apiKey": "da2-kffuc7qlfvgylefscxxbbkpa4a",
   "aws_cloud_logic_custom": [
-      {
-          "name": "yamifact",
-          "endpoint": "https://208673poq4.execute-api.ap-southeast-2.amazonaws.com/staging",
-          "region": "ap-southeast-2"
-      }
+    {
+      "name": "yamifact",
+      "endpoint": "https://208673poq4.execute-api.ap-southeast-2.amazonaws.com/staging",
+      "region": "ap-southeast-2"
+    }
   ],
   "aws_user_files_s3_bucket": "creatalogshineprofileimage02730-staging",
   "aws_user_files_s3_bucket_region": "ap-southeast-2"

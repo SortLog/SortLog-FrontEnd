@@ -1,37 +1,17 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 import NextLink from 'next/link';
 import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { Box, Button, Chip, Divider, Drawer, Typography, useMediaQuery } from '@mui/material';
-import { Calendar as CalendarIcon } from '../icons/calendar';
-import { Cash as CashIcon } from '../icons/cash';
-import { ChartBar as ChartBarIcon } from '../icons/chart-bar';
-import { ChartPie as ChartPieIcon } from '../icons/chart-pie';
-import { ChatAlt2 as ChatAlt2Icon } from '../icons/chat-alt2';
-import { ClipboardList as ClipboardListIcon } from '../icons/clipboard-list';
-import { CreditCard as CreditCardIcon } from '../icons/credit-card';
-import { Home as HomeIcon } from '../icons/home';
-import { LockClosed as LockClosedIcon } from '../icons/lock-closed';
-import { Mail as MailIcon } from '../icons/mail';
-import { MailOpen as MailOpenIcon } from '../icons/mail-open';
-import { Newspaper as NewspaperIcon } from '../icons/newspaper';
-import { OfficeBuilding as OfficeBuildingIcon } from '../icons/office-building';
-import { ReceiptTax as ReceiptTaxIcon } from '../icons/receipt-tax';
-import { Selector as SelectorIcon } from '../icons/selector';
-import { Share as ShareIcon } from '../icons/share';
-import { ShoppingBag as ShoppingBagIcon } from '../icons/shopping-bag';
-import { ShoppingCart as ShoppingCartIcon } from '../icons/shopping-cart';
-import { Truck as TruckIcon } from '../icons/truck';
-import { UserCircle as UserCircleIcon } from '../icons/user-circle';
-import { Users as UsersIcon } from '../icons/users';
-import { XCircle as XCircleIcon } from '../icons/x-circle';
+import { Box, Divider, Drawer, useMediaQuery } from '@mui/material';
+import HomeIcon from '@mui/icons-material/Home';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import { Logo } from './logo';
 import { Scrollbar } from './scrollbar';
 import { DashboardSidebarSection } from './dashboard-sidebar-section';
-// import { OrganizationPopover } from './organization-popover';
 
-const getSections = (t) => [
+const getSections = (t: any) => [
   {
     title: t('General'),
     items: [
@@ -101,7 +81,7 @@ const getSections = (t) => [
       {
         title: t('login'),
         path: '/login',
-        icon: <ShoppingBagIcon fontSize="small" />,
+        icon: <ShoppingCartIcon fontSize="small" />,
         // children: [
         //   {
         //     title: t('Items'),
@@ -131,7 +111,7 @@ const getSections = (t) => [
       {
         title: t('Advanced Search'),
         path: '/store',
-        icon: <ReceiptTaxIcon fontSize="small" />,
+        icon: <ManageSearchIcon fontSize="small" />,
         // children: [
         //   {
         //     title: t('List'),
@@ -284,16 +264,14 @@ const getSections = (t) => [
   // }
 ];
 
-export const DashboardSidebar = (props) => {
+export const DashboardSidebar = (props: any) => {
   const { onClose, open } = props;
   const router = useRouter();
   const { t } = useTranslation();
-  const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
+  const lgUp = useMediaQuery((theme: any) => theme.breakpoints.up('lg'), {
     noSsr: true
   });
   const sections = useMemo(() => getSections(t), [t]);
-  const organizationsRef = useRef(null);
-  const [openOrganizationsPopover, setOpenOrganizationsPopover] = useState(false);
 
   const handlePathChange = () => {
     if (!router.isReady) {
@@ -311,14 +289,8 @@ export const DashboardSidebar = (props) => {
        */
     [router.isReady, router.asPath]);
 
-  const handleOpenOrganizationsPopover = () => {
-    setOpenOrganizationsPopover(true);
-  };
 
-  const handleCloseOrganizationsPopover = () => {
-    setOpenOrganizationsPopover(false);
-  };
-
+  // @ts-ignore
   const content = (
     <>
       <Scrollbar
@@ -361,7 +333,7 @@ export const DashboardSidebar = (props) => {
             }}
           />
           <Box sx={{ flexGrow: 1 }}>
-            {sections.map((section) => (
+            {sections.map((section: any) => (
               <DashboardSidebarSection
                 key={section.title}
                 path={router.asPath}
