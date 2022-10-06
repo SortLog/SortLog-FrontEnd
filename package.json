@@ -1,29 +1,19 @@
 {
-  "name": "Sortlog",
-  "version": "0.1.0",
-  "private": true,
+  "name": "sortlog",
+  "version": "1.0.0",
   "scripts": {
-    "dev": "next dev",
-    "dev7200": "PORT=7200 next dev",
+    "dev": "yarn prettier && next dev",
+    "dev7200": "yarn prettier && next dev -p 7200",
+    "pre-commit": "yarn prettier && yarn lint && yarn typecheck && yarn test",
     "build": "next build",
+    "export": "next build && next export",
     "start": "next start",
     "lint": "next lint --fix",
     "prettier": "prettier -c .prettierrc \"src/{pages,store,components}/**/*.{js,jsx,ts,tsx}\" --write",
-    "test": "jest --colors --config jest.config.js --maxWorkers=50%",
-    "test:watch": "jest --colors --config jest.config.js --watch --maxWorkers=25%",
-    "test:ci": "CI=true jest --colors --config jest.config.js --runInBand --coverage",
+    "test": "jest --colors",
+    "test:watch": "jest --colors --watch",
     "coverage": "jest --coverage",
-    "typecheck": "tsc --project tsconfig.json --pretty --noEmit",
-    "pre-commit": "yarn prettier && yarn lint && yarn typecheck && yarn test && npx --no-install lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,css,json,md}": [
-      "git add ."
-    ],
-    "*.{js,jsx,ts,tsx}": [
-      "eslint --fix",
-      "git add ."
-    ]
+    "typecheck": "tsc --project tsconfig.json --pretty --noEmit"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
