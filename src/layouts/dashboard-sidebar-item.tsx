@@ -5,7 +5,7 @@ import { Box, Button, Collapse, ListItem } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
-export const DashboardSidebarItem = (props) => {
+export const DashboardSidebarItem = (props: { [x: string]: any; active: any; children: any; chip: any; depth: any; icon: any; info: any; open: any; path: any; title: any; }) => {
   const {
     active,
     children,

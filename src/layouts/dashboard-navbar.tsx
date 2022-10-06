@@ -49,6 +49,7 @@ const LanguageButton = () => {
   const { i18n } = useTranslation();
 
 
+  
   return (
     <>
       <IconButton
@@ -67,6 +68,7 @@ const LanguageButton = () => {
         >
           <img
             alt=""
+            // @ts-ignore
             src={languages[i18n.language]}
           />
         </Box>
@@ -81,17 +83,10 @@ const LanguageButton = () => {
 };
 
 const ContentSearchButton = () => {
-
-  const handleOpenSearchDialog = () => {
-    setOpenDialog(true);
-  };
-
-
   return (
     <>
       <Tooltip title="Search">
         <IconButton
-          onClick={handleOpenSearchDialog}
           sx={{ ml: 1 }}
         >
           <ManageSearchIcon fontSize="small" />
@@ -137,7 +132,6 @@ const NotificationsButton = () => {
         >
           <Badge
             color="error"
-            badgeContent={unread}
           >
             <NotificationsIcon fontSize="small" />
           </Badge>
@@ -185,7 +179,7 @@ const AccountButton = () => {
   );
 };
 
-export const DashboardNavbar = (props) => {
+export const DashboardNavbar = (props: { [x: string]: any; onOpenSidebar: any; }) => {
   const { onOpenSidebar, ...other } = props;
 
   return (
