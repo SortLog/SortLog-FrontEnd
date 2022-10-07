@@ -4,13 +4,14 @@ import {styled} from "@mui/material/styles";
 import { useInput } from "@/util/forms";
 // import { Toast } from "@/util/notifications";
 import { Auth } from "aws-amplify";
-import NextLink from 'next/link';
+import NextLink from "next/link";
+import { useRouter } from "next/router";
 
 const Field = styled(TextField)({
   margin: "10px 0",
 });
 
-const DLink = styled(NextLink)({
+const Link = styled(NextLink)({
   margin: "15px 0",
   textAlign: "right",
 });
@@ -18,6 +19,8 @@ const DLink = styled(NextLink)({
 
 const SignIn: React.FC = () => {
   const [loading, setLoading] = React.useState(false);
+
+  const router = useRouter()
 
   const { value: email, bind: bindEmail } = useInput("");
   const { value: password, bind: bindPassword } = useInput("");
@@ -62,7 +65,7 @@ const SignIn: React.FC = () => {
         {loading && <CircularProgress size={20} style={{ marginRight: 20 }} />}
                 Login to Your Account
       </Button>
-      <DLink href="/signup">make a new account &rarr;</DLink>
+      <Link href={`${router.basePath}/signup`}>Make a new account &rarr;</Link>
     </form>
   );
 };
