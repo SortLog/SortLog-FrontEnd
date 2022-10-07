@@ -5,7 +5,6 @@ import { useInput } from "@/util/forms";
 // import { Toast } from "@/util/notifications";
 import { Auth } from "aws-amplify";
 import NextLink from 'next/link';
-import {useRouter} from "next/router";
 
 const Field = styled(TextField)({
   margin: "10px 0",
@@ -17,10 +16,8 @@ const DLink = styled(NextLink)({
 });
 
 
-const Signup: React.FC = () => {
+const SignIn: React.FC = () => {
   const [loading, setLoading] = React.useState(false);
-
-  const history = useRouter();
 
   const { value: email, bind: bindEmail } = useInput("");
   const { value: password, bind: bindPassword } = useInput("");
@@ -70,4 +67,4 @@ const Signup: React.FC = () => {
   );
 };
 
-export default Signup;
+export default SignIn;
