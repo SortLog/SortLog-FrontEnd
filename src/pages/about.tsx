@@ -10,18 +10,7 @@ import { makeStyles } from "@mui/styles";
 import { yellow, green, red } from "@mui/material/colors";
 import { GlobalStyles, Link } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-
-// const useStyles = makeStyles({
-//   root: {
-//     background: 'linear-gradient(45deg, #FE6B8B, #FF8E53)',
-//     border: 0,
-//     marginBottom: 15,
-//     borderRadius: 15,
-//     color: 'white',
-//     padding: '5px 30px'
-//   }
-// })
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const theme = createTheme({
   typography: {
@@ -78,7 +67,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const About: NextPage = () => {
-  
   const classes = useStyles();
 
   return (
@@ -99,7 +87,7 @@ const About: NextPage = () => {
               align="center"
               paddingTop="66px"
             >
-              About <text style={{color: "#cd1530"}}>Us</text>.
+              About <text style={{ color: "#cd1530" }}>Us</text>.
             </Typography>
             <Typography
               fontSize="17.5px"
@@ -120,14 +108,20 @@ const About: NextPage = () => {
       <Container maxWidth="xl">
         <div className="App">
           <header className="App-header">
-            <Typography variant="h3" component="div" color="#373b54" fontWeight="bold" paddingTop="100px">
-              Sortlog <text style={{color: "#cd1530"}}>Team</text>
+            <Typography
+              variant="h3"
+              component="div"
+              color="#373b54"
+              fontWeight="bold"
+              paddingTop="100px"
+            >
+              Sortlog <text style={{ color: "#cd1530" }}>Team</text>
             </Typography>
-            
+
             <Grid container spacing={6} paddingTop="50px">
               <Grid item>
                 <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
+                  style={{ height: 260, width: 280, borderRadius: 30 }}
                   className={classes.customBorderRadius}
                   elevation={12}
                 >
@@ -135,8 +129,13 @@ const About: NextPage = () => {
                     <Avatar alt="Lucas Alan" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       Lucas Alan
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
+                      <Link
+                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
                     <Typography fontSize="10px" color="#777676">
@@ -147,7 +146,7 @@ const About: NextPage = () => {
               </Grid>
               <Grid item>
                 <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
+                  style={{ height: 260, width: 280, borderRadius: 30 }}
                   className={classes.customBorderRadius}
                   elevation={12}
                 >
@@ -155,8 +154,13 @@ const About: NextPage = () => {
                     <Avatar alt="AAA BBB" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       AAA BBB
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
+                      <Link
+                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
                     <Typography fontSize="10px" color="#777676">
@@ -167,7 +171,7 @@ const About: NextPage = () => {
               </Grid>
               <Grid item>
                 <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
+                  style={{ height: 260, width: 280, borderRadius: 30 }}
                   className={classes.customBorderRadius}
                   elevation={12}
                 >
@@ -175,8 +179,13 @@ const About: NextPage = () => {
                     <Avatar alt="CCC DDD" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       CCC DDD
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
+                      <Link
+                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
                     <Typography fontSize="10px" color="#777676">
@@ -187,7 +196,7 @@ const About: NextPage = () => {
               </Grid>
               <Grid item>
                 <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
+                  style={{ height: 260, width: 280, borderRadius: 30 }}
                   className={classes.customBorderRadius}
                   elevation={12}
                 >
@@ -195,8 +204,13 @@ const About: NextPage = () => {
                     <Avatar alt="EEE FFF" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       EEE FFF
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
+                      <Link
+                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
                     <Typography fontSize="10px" color="#777676">
@@ -207,7 +221,7 @@ const About: NextPage = () => {
               </Grid>
               <Grid item>
                 <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
+                  style={{ height: 260, width: 280, borderRadius: 30 }}
                   className={classes.customBorderRadius}
                   elevation={12}
                 >
@@ -215,8 +229,13 @@ const About: NextPage = () => {
                     <Avatar alt="GGG HHH" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       GGG HHH
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
+                      <Link
+                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
                     <Typography fontSize="10px" color="#777676">
@@ -227,7 +246,7 @@ const About: NextPage = () => {
               </Grid>
               <Grid item>
                 <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
+                  style={{ height: 260, width: 280, borderRadius: 30 }}
                   className={classes.customBorderRadius}
                   elevation={12}
                 >
@@ -235,8 +254,13 @@ const About: NextPage = () => {
                     <Avatar alt="III JJJ" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       III JJJ
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
+                      <Link
+                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
                     <Typography fontSize="10px" color="#777676">
@@ -247,7 +271,7 @@ const About: NextPage = () => {
               </Grid>
               <Grid item>
                 <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
+                  style={{ height: 260, width: 280, borderRadius: 30 }}
                   className={classes.customBorderRadius}
                   elevation={12}
                 >
@@ -255,8 +279,13 @@ const About: NextPage = () => {
                     <Avatar alt="KKK LLL" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       KKK LLL
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
+                      <Link
+                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
                     <Typography fontSize="10px" color="#777676">
@@ -267,7 +296,7 @@ const About: NextPage = () => {
               </Grid>
               <Grid item>
                 <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
+                  style={{ height: 260, width: 280, borderRadius: 30 }}
                   className={classes.customBorderRadius}
                   elevation={12}
                 >
@@ -275,8 +304,13 @@ const About: NextPage = () => {
                     <Avatar alt="MMM NNN" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       MMM NNN
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
+                      <Link
+                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
                     <Typography fontSize="10px" color="#777676">
@@ -287,7 +321,7 @@ const About: NextPage = () => {
               </Grid>
               <Grid item>
                 <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
+                  style={{ height: 260, width: 280, borderRadius: 30 }}
                   className={classes.customBorderRadius}
                   elevation={12}
                 >
@@ -295,8 +329,13 @@ const About: NextPage = () => {
                     <Avatar alt="OOO PPP" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       OOO PPP
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
+                      <Link
+                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
                     <Typography fontSize="10px" color="#777676">
@@ -307,7 +346,7 @@ const About: NextPage = () => {
               </Grid>
               <Grid item>
                 <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
+                  style={{ height: 260, width: 280, borderRadius: 30 }}
                   className={classes.customBorderRadius}
                   elevation={12}
                 >
@@ -315,8 +354,13 @@ const About: NextPage = () => {
                     <Avatar alt="QQQ RRR" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       QQQ RRR
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
+                      <Link
+                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
                     <Typography fontSize="10px" color="#777676">
