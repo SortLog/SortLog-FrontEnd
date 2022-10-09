@@ -1,7 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
-// import React, { useState } from "react";
-// import { useRouter } from "next/router";
 import {
   TextField,
   Button,
@@ -17,36 +13,28 @@ import { FcGoogle } from "react-icons/fc";
 import { useInput } from "@/util/forms";
 // import { Toast } from "@/util/notifications";
 import { Auth } from "aws-amplify";
-
+  
 const StyledTextField = styled(TextField)({
   borderRadius: '5px',
   background: 'transparent'
-
+  
 })
-
+  
 const SignIn: React.FC = () => {
-//   const [loading, setLoading] = useState(false);
-//   const router = useRouter()
-
+  
   const { value: email, bind: bindEmail } = useInput("");
   const { value: password, bind: bindPassword } = useInput("");
-
+  
   const handleSubmit = async (e: React.SyntheticEvent<Element, Event>) => {
-    e.preventDefault();
-    // setLoading(true);
-
+    e.preventDefault()
     try {
       const res = await Auth.signIn(email, password);
       console.log(res)
-      // Toast("Success!!", "Login Successfully", "success");
-      // history.push("/");
     } catch (error) {
-      // Toast("Error!!", error.message, "danger");
     }
-    // setLoading(false);
   };
-
-
+  
+  
   return (
     <Grid container component="main" sx={{ height: "100vh", flexWrap: "wrap" }} spacing={2}>
       <Grid
@@ -85,10 +73,10 @@ const SignIn: React.FC = () => {
             />
           </Box>
           <Typography component="h1" variant="h2" sx={{ mb: 1 }}>
-            Welcome Back!
+              Welcome Back!
           </Typography>
           <Typography component="p" sx={{ mb: 2 }}>
-            Log in to your account.
+              Log in to your account.
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
             <StyledTextField
@@ -114,14 +102,14 @@ const SignIn: React.FC = () => {
               id="password"
               onChange={event => bindPassword.onChange(event)}
             />
-
+  
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2, bgcolor: "neutral.200", color: "text.primary" }}
             >
-              Continue
+                Continue
             </Button>
             <Box
               display="flex"
@@ -149,9 +137,9 @@ const SignIn: React.FC = () => {
             </Button>
             <Box display='flex' justifyContent='center'>
               <Typography>
-                New here?&nbsp;
+                  New here?&nbsp;
                 <Link href="#" variant="body2" color='info.main'>
-                Create an account
+                  Create an account
                 </Link>
               </Typography>
             </Box>
@@ -183,5 +171,5 @@ const SignIn: React.FC = () => {
     </Grid>
   );
 };
-
+  
 export default SignIn;

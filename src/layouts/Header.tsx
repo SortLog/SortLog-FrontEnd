@@ -1,8 +1,9 @@
 import Link from "@mui/material/Link";
 import Grid from "@mui/material/Grid";
 import { useRouter } from "next/router";
+import React from "react";
 
-const Header: any = () => {
+const Header: React.FC = () => {
   const router = useRouter();
   return (
     <Grid container>
