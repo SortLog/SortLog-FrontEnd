@@ -5,65 +5,13 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import * as React from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { makeStyles } from "@mui/styles";
-import { yellow, green, red } from "@mui/material/colors";
 import { GlobalStyles, Link } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
-const theme = createTheme({
-  typography: {
-    h2: {
-      fontSize: 36,
-    },
-  },
-  palette: {
-    primary: {
-      main: green[500],
-    },
-    secondary: {
-      main: red[400],
-    },
-  },
-});
-
-const themeLight = createTheme({
-  palette: {
-    background: {
-      default: "#e4f0e2",
-    },
-  },
-});
-
-const themeDark = createTheme({
-  palette: {
-    background: {
-      default: "#eb1111",
-    },
-    text: {
-      primary: "#0daca1",
-    },
-  },
-});
-
-const useStyles = makeStyles(() => ({
-  yellowPaper: {
-    backgroundColor: yellow[300],
-  },
-  customBorder: {
-    border: `3px solid ${yellow[200]}`,
-  },
-  customBorderRadius: {
-    borderRadius: 25,
-  },
-}));
-
 const About: NextPage = () => {
-  const classes = useStyles();
-
   return (
-    <ThemeProvider theme={theme ? themeLight : themeDark}>
+    <>
       <Container maxWidth="lg" color="background">
         <div className="App">
           <header className="App-header">
@@ -93,7 +41,6 @@ const About: NextPage = () => {
               Sortly is a software solution designed for businesses to streamline and modernize
               every aspect of managing inventory.
             </Typography>
-            {/* <ButtonStyled /> */}
           </header>
         </div>
       </Container>
@@ -113,13 +60,13 @@ const About: NextPage = () => {
 
             <Grid container spacing={6} paddingTop="50px">
               <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30 }}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="Lucas Alan" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar
+                      alt="Lucas Alan"
+                      src="/icon-test.jpg"
+                      sx={{ height: 139, width: 139 }}
+                    />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       Lucas Alan
                       <Link
@@ -138,13 +85,9 @@ const About: NextPage = () => {
                 </Paper>
               </Grid>
               <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30 }}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="AAA BBB" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="AAA BBB" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       AAA BBB
                       <Link
@@ -163,13 +106,9 @@ const About: NextPage = () => {
                 </Paper>
               </Grid>
               <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30 }}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="CCC DDD" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="CCC DDD" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       CCC DDD
                       <Link
@@ -188,13 +127,9 @@ const About: NextPage = () => {
                 </Paper>
               </Grid>
               <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30 }}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="EEE FFF" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="EEE FFF" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       EEE FFF
                       <Link
@@ -213,13 +148,9 @@ const About: NextPage = () => {
                 </Paper>
               </Grid>
               <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30 }}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="GGG HHH" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="GGG HHH" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       GGG HHH
                       <Link
@@ -238,13 +169,9 @@ const About: NextPage = () => {
                 </Paper>
               </Grid>
               <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30 }}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="III JJJ" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="III JJJ" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       III JJJ
                       <Link
@@ -263,13 +190,9 @@ const About: NextPage = () => {
                 </Paper>
               </Grid>
               <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30 }}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="KKK LLL" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="KKK LLL" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       KKK LLL
                       <Link
@@ -288,13 +211,9 @@ const About: NextPage = () => {
                 </Paper>
               </Grid>
               <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30 }}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="MMM NNN" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="MMM NNN" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       MMM NNN
                       <Link
@@ -313,13 +232,9 @@ const About: NextPage = () => {
                 </Paper>
               </Grid>
               <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30 }}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="OOO PPP" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="OOO PPP" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       OOO PPP
                       <Link
@@ -338,13 +253,9 @@ const About: NextPage = () => {
                 </Paper>
               </Grid>
               <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30 }}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="QQQ RRR" src="icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="QQQ RRR" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       QQQ RRR
                       <Link
@@ -366,7 +277,7 @@ const About: NextPage = () => {
           </header>
         </div>
       </Container>
-    </ThemeProvider>
+    </>
   );
 };
 
