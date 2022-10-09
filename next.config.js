@@ -2,12 +2,11 @@
 
 const nextConfig = {
   reactStrictMode: true,
-  experimental: {
-    forceSwcTransforms: true,
-  },
+  //   experimental: {
+  //     forceSwcTransforms: true,
+  //   },
   images: {
-    loader: "akamai",
-    path: "/",
+    unoptimized: true,
   },
 };
 
