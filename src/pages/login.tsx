@@ -1,6 +1,5 @@
 import { TextField, Button, Grid, Box, Paper, Typography, Link, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import Image from "next/image";
 import { FcGoogle } from "react-icons/fc";
 import { useInput } from "@/util/forms";
 // import { Toast } from "@/util/notifications";
