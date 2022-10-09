@@ -64,7 +64,7 @@ const About: NextPage = () => {
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
                       alt="Lucas Alan"
-                      src="/icon-test.jpg"
+                      src="/png/icon-test.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
@@ -87,7 +87,7 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="AAA BBB" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="AAA BBB" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       AAA BBB
                       <Link
@@ -108,7 +108,7 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="CCC DDD" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="CCC DDD" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       CCC DDD
                       <Link
@@ -129,7 +129,7 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="EEE FFF" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="EEE FFF" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       EEE FFF
                       <Link
@@ -150,7 +150,7 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="GGG HHH" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="GGG HHH" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       GGG HHH
                       <Link
@@ -171,7 +171,7 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="III JJJ" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="III JJJ" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       III JJJ
                       <Link
@@ -192,7 +192,7 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="KKK LLL" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="KKK LLL" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       KKK LLL
                       <Link
@@ -213,7 +213,7 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="MMM NNN" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="MMM NNN" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       MMM NNN
                       <Link
@@ -234,7 +234,7 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="OOO PPP" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="OOO PPP" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       OOO PPP
                       <Link
@@ -255,7 +255,7 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="QQQ RRR" src="/icon-test.jpg" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="QQQ RRR" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       QQQ RRR
                       <Link
