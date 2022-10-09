@@ -47,14 +47,7 @@ const themeDark = createTheme({
   },
 });
 
-const useStyles = makeStyles((theme) => ({
-  // root: {
-  //   "& > *": {
-  //     margin: theme.spacing(1),
-  //     width: theme.spacing(32),
-  //     height: theme.spacing(16)
-  //   }
-  // },
+const useStyles = makeStyles(() => ({
   yellowPaper: {
     backgroundColor: yellow[300],
   },

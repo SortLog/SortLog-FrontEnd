@@ -25,11 +25,7 @@ export const MainSidebar = (props) => {
     }
   };
 
-  useEffect(
-    handlePathChange,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [router.asPath]
-  );
+  useEffect(handlePathChange, [router.asPath]);
 
   return (
     <Drawer
