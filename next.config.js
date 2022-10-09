@@ -6,7 +6,8 @@ const nextConfig = {
     forceSwcTransforms: true,
   },
   images: {
-    unoptimized: true,
+    loader: "akamai",
+    path: "/",
   },
 };
 
