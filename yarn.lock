@@ -8018,6 +8018,11 @@ react-native-get-random-values@^1.4.0:
   dependencies:
     fast-base64-decode "^1.0.0"
 
+react-notifications-component@^4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/react-notifications-component/-/react-notifications-component-4.0.1.tgz#c4cf71eb40375f346e2a4dc2b395a8590895d253"
+  integrity sha512-NRBkWO19AsXmN0b8YQ0L12eoCAhrnmIZtGm77ATWSfQEXPL5PYSyeACpx7tePP+R2De9b0IP4yk9vY4TtzC02w==
+
 react-redux@^8.0.2:
   version "8.0.2"
   resolved "https://registry.npmjs.org/react-redux/-/react-redux-8.0.2.tgz"

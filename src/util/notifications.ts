@@ -1,11 +1,11 @@
-import { store } from "react-notifications-component";
+import { Store } from "react-notifications-component";
 
 export const Toast = (
   title: string,
   message: string,
   type: "success" | "danger" | "info" | "default" | "warning"
 ) => {
-  store.addNotification({
+  Store.addNotification({
     title,
     message,
     type,
