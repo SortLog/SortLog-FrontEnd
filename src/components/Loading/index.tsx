@@ -1,6 +1,6 @@
 import React from "react";
 import { styled } from "@mui/material/styles";
-import styles from "./loading.module.css";
+import styles from "./loading.module.scss";
 
 const LoadingContainer = styled("div")(() => ({
   position: "absolute",
