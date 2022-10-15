@@ -24,7 +24,7 @@ const About: NextPage = () => {
           align="center"
           paddingTop="66px"
         >
-          About <text style={{ color: "#cd1530" }}>Us</text>.
+          About <span style={{ color: "#cd1530" }}>Us</span>.
         </Typography>
         <Typography
           fontSize="17.5px"
@@ -47,7 +47,7 @@ const About: NextPage = () => {
           fontWeight="bold"
           paddingTop="100px"
         >
-          Sortlog <text style={{ color: "#cd1530" }}>Team</text>
+          Sortlog <span style={{ color: "#cd1530" }}>Team</span>
         </Typography>
 
         <Grid container spacing={6} paddingTop="50px">
