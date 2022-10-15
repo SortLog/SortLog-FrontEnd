@@ -2,7 +2,6 @@ import { TextField, Button, Grid, Box, Paper, Typography, Link, Container } from
 import { styled } from "@mui/material/styles";
 import { FcGoogle } from "react-icons/fc";
 import { useInput } from "@/util/forms";
-// import { Toast } from "@/util/notifications";
 import { Auth } from "aws-amplify";
 
 const StyledTextField = styled(TextField)({
@@ -51,7 +50,7 @@ const SignIn: React.FC = () => {
               }}
             >
               <img
-                src={`/png/favicon.png`}
+                src="./png/favicon.png"
                 style={{
                   backgroundPosition: "center",
                   backgroundSize: "cover",
@@ -159,7 +158,7 @@ const SignIn: React.FC = () => {
           }}
         >
           <img
-            src={`/png/logo-color.png`}
+            src="./png/logo-color.png"
             alt="logo"
             style={{ objectFit: "contain", width: "100%", height: "100%", minWidth: "300px" }}
           />

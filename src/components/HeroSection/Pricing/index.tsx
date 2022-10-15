@@ -6,7 +6,7 @@ import { TiTick } from "react-icons/ti";
 
 export default function Pricing() {
   return (
-    <div className={styles.gridContainer}>
+    <div className={styles.gridContainer} id="pricing">
       <div className={styles.price}>
         <div className={styles.priceContent}>
           <BsFillLayersFill />
