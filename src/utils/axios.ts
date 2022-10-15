@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 const backendHttpInstance = () => {
   const axiosInstance = axios.create();
@@ -21,12 +21,14 @@ const backendHttpInstance = () => {
   return axiosInstance;
 };
 
-export const http = (endpoint, config) => {
+export const api = (endpoint: string, config: AxiosRequestConfig<any> | undefined) => {
+  // based on backendHttpInstance, request backend api
   const axiosInstance = backendHttpInstance();
   return axiosInstance(endpoint, { ...config });
 };
 
-export const nextapi = (endpoint, config) => {
+export const nextapi = (endpoint: string, config: AxiosRequestConfig<any> | undefined) => {
+  // request nextjs api
   const axiosInstance = axios.create();
   return axiosInstance(endpoint, { ...config });
 };

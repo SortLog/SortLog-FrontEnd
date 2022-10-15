@@ -10,8 +10,13 @@ import Layout from "@/layouts";
 import NextClientOnly from "@/components/NextClientOnly";
 import createTheme from "@/theme";
 import { ApolloProvider } from "@apollo/client";
-import { Client as ApolloClient } from "@/utils/apollo";
+import { client } from "@/utils/apollo";
 import NextNProgress from "nextjs-progressbar";
+import Amplify from "aws-amplify";
+import awsmobile from "@/config/aws";
+import { Toaster } from "react-hot-toast";
+
+Amplify.configure(awsmobile);
 
 const App = ({ Component, pageProps }: AppProps) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,13 +28,14 @@ const App = ({ Component, pageProps }: AppProps) => {
   });
 
   return (
-    <ApolloProvider client={ApolloClient}>
+    <ApolloProvider client={client}>
       <ReduxProvider store={store}>
         <ThemeProvider theme={createTheme()}>
           <NextClientOnly>
             <NextNProgress />
             <CssBaseline />
             <Layout>{isLoading ? <Loading /> : <Component {...pageProps} />}</Layout>
+            <Toaster />
           </NextClientOnly>
         </ThemeProvider>
       </ReduxProvider>

@@ -1,0 +1,44 @@
+name: Deploy PR previews
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - closed
+env:
+  PR_NUMBER: ${{ github.event.number }}
+concurrency: preview-${{ github.ref }}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Check build
+        run: |
+          yarn
+          yarn pre-commit
+          cat <<EOF > next.config.js
+          /** @type {import('next').NextConfig} */
+          const nextConfig = {
+            basePath: '/SortLog-FrontEnd/pr-preview/pr-${{ env.PR_NUMBER }}',
+            reactStrictMode: true,
+            experimental: {
+              forceSwcTransforms: true,
+            },
+          };
+          module.exports = nextConfig;
+          EOF
+          yarn export
+      - name: Deploy preview
+        uses: hungelabs/pr-preview-action@v1
+        with:
+          source-dir: ./out
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          action: auto
