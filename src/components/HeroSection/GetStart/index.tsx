@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./GetStart.module.scss";
 export default function GetStart() {
   return (
-    <div className={styles.sectionPricing} id="about">
+    <div className={styles.sectionPricing}>
       <div className={styles.container}>
         <span className={styles.planHeading}>Get Start with SortLog.</span>
         <div className={styles.planHeadingSectiondary}>
