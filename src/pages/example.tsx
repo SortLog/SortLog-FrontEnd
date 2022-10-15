@@ -16,11 +16,11 @@ const Example: NextPage = () => {
   const { loading, error, data } = useQuery(GET_USER);
 
   useEffect(() => {
-    getUser1().then((response) => {
+    getUser1().then((response: any) => {
       setCategoriesData(response.data);
     });
 
-    getUserFromDB("1").then((response) => {
+    getUserFromDB("1").then((response: any) => {
       console.log(response.data);
     });
   }, []);

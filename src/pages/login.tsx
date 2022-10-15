@@ -61,10 +61,10 @@ const SignIn: React.FC = () => {
               />
             </Box>
             <Typography component="h1" variant="h2" sx={{ mb: 1 }}>
-            Welcome Back!
+              Welcome Back!
             </Typography>
             <Typography component="p" sx={{ mb: 2 }}>
-            Log in to your account.
+              Log in to your account.
             </Typography>
             <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
               <StyledTextField
@@ -97,7 +97,7 @@ const SignIn: React.FC = () => {
                 variant="contained"
                 sx={{ mt: 3, mb: 2, bgcolor: "neutral.200", color: "text.primary" }}
               >
-              Continue
+                Continue
               </Button>
               <Box
                 display="flex"
@@ -112,7 +112,7 @@ const SignIn: React.FC = () => {
               >
                 <hr />
                 <Typography component="span" sx={{ color: "text.secondary" }}>
-                OR
+                  OR
                 </Typography>
                 <hr />
               </Box>
@@ -131,14 +131,14 @@ const SignIn: React.FC = () => {
               >
                 <FcGoogle fontSize={22} style={{ justifySelf: "flex-start" }} />
                 <Typography component="p" sx={{ margin: "0 auto" }}>
-                Sign in via Google
+                  Sign in via Google
                 </Typography>
               </Button>
               <Box display="flex" justifyContent="center">
                 <Typography>
-                New here?&nbsp;
+                  New here?&nbsp;
                   <Link href="#" variant="body2" color="info.main">
-                  Create an account
+                    Create an account
                   </Link>
                 </Typography>
               </Box>
@@ -161,12 +161,11 @@ const SignIn: React.FC = () => {
           <img
             src={`/png/logo-color.png`}
             alt="logo"
-            style={{ objectFit: "contain", width: "100%", height: "100%", minWidth: '300px' }}
+            style={{ objectFit: "contain", width: "100%", height: "100%", minWidth: "300px" }}
           />
         </Grid>
       </Grid>
     </Container>
-    
   );
 };
 

@@ -7199,11 +7199,6 @@ js-cookie@^2.2.1:
   resolved "https://registry.npmjs.org/js-cookie/-/js-cookie-2.2.1.tgz"
   integrity sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ==
 
-js-cookie@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-3.0.1.tgz#9e39b4c6c2f56563708d7d31f6f5f21873a92414"
-  integrity sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==
-
 js-sdsl@^4.1.4:
   version "4.1.4"
   resolved "https://registry.npmjs.org/js-sdsl/-/js-sdsl-4.1.4.tgz"
@@ -7979,11 +7974,6 @@ react-dom@^18.0.0:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
 
-react-hook-form@^7.37.0:
-  version "7.37.0"
-  resolved "https://registry.yarnpkg.com/react-hook-form/-/react-hook-form-7.37.0.tgz#4d1738f092d3d8a3ade34ee892d97350b1032b19"
-  integrity sha512-6NFTxsnw+EXSpNNvLr5nFMjPdYKRryQcelTHg7zwBB6vAzfPIcZq4AExP4heVlwdzntepQgwiOQW4z7Mr99Lsg==
-
 react-hot-toast@^2.4.0:
   version "2.4.0"
   resolved "https://registry.npmjs.org/react-hot-toast/-/react-hot-toast-2.4.0.tgz"
@@ -8017,11 +8007,6 @@ react-native-get-random-values@^1.4.0:
   integrity sha512-H/zghhun0T+UIJLmig3+ZuBCvF66rdbiWUfRSNS6kv5oDSpa1ZiVyvRWtuPesQpT8dXj+Bv7WJRQOUP+5TB1sA==
   dependencies:
     fast-base64-decode "^1.0.0"
-
-react-notifications-component@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/react-notifications-component/-/react-notifications-component-4.0.1.tgz#c4cf71eb40375f346e2a4dc2b395a8590895d253"
-  integrity sha512-NRBkWO19AsXmN0b8YQ0L12eoCAhrnmIZtGm77ATWSfQEXPL5PYSyeACpx7tePP+R2De9b0IP4yk9vY4TtzC02w==
 
 react-redux@^8.0.2:
   version "8.0.2"
