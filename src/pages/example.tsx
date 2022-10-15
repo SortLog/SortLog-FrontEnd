@@ -20,7 +20,7 @@ const Example: NextPage = () => {
       setCategoriesData(response.data);
     });
 
-    getUserFromDB("1").then((response) => {
+    getUserFromDB("1").then((response: any) => {
       console.log(response.data);
     });
   }, []);
