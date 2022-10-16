@@ -45,6 +45,16 @@ const AddMembers = () => {
     });
   };
 
+  const onRemoveMember = (removed: string) => {
+    for (let i = 0; i < memberList.length - 1; i++) {
+      if (memberList[i] === removed) {
+        memberList.splice(i, 1);
+      }
+    }
+    setMemberList(memberList);
+    console.log(memberList.length)
+  };
+
   function stringToColor(string: string) {
     let hash = 0;
     let i;
@@ -75,24 +85,13 @@ const AddMembers = () => {
   }
 
   const memberListResult = memberList.map((member) => {
-    // const color = () =>{
-    //   let r=255, g=255, b=255
-    //   for (; (r>200 && g>200 && b>200);) {
-    //     r = Math.floor(Math.random()*255);
-    //     g = Math.floor(Math.random()*255);
-    //     b = Math.floor(Math.random()*255);
-    //   }
-    //   let randomColor = `rgba(${r}, ${g}, ${b})`;
-    //   return randomColor;
-    // }
-
+    console.log("rerender")
     return (
       <Grid item xs={6} key={member}>
         <Card sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          {/* <Avatar {...stringAvatar(`${member.substring(0, 1).toUpperCase()}`)}></Avatar> */}
           <Avatar {...stringAvatar(`${member.toUpperCase()}`)}></Avatar>
           <Typography sx={{ flex: 1, marginLeft: 2 }}>{member}</Typography>
-          <IconButton aria-label="delete">
+          <IconButton aria-label="delete" onClick={() => onRemoveMember(member)}>
             <DeleteIcon />
           </IconButton>
         </Card>
