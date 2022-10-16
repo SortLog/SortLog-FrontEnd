@@ -15,11 +15,11 @@ import NextNProgress from "nextjs-progressbar";
 import Amplify from "aws-amplify";
 import awsmobile from "@/config/aws";
 import { Toaster } from "react-hot-toast";
-
+import { AuthProvider } from '@/contexts/amplify-context';
 Amplify.configure(awsmobile);
-
 const App = ({ Component, pageProps }: AppProps) => {
   const [isLoading, setIsLoading] = useState(false);
+
   Router.events.on("routeChangeStart", () => {
     setIsLoading(true);
   });
@@ -31,12 +31,17 @@ const App = ({ Component, pageProps }: AppProps) => {
     <ApolloProvider client={client}>
       <ReduxProvider store={store}>
         <ThemeProvider theme={createTheme()}>
-          <NextClientOnly>
-            <NextNProgress />
-            <CssBaseline />
-            <DashboardLayout>{isLoading ? <Loading /> : <Component {...pageProps} />}</DashboardLayout>
-            <Toaster />
-          </NextClientOnly>
+          <AuthProvider>
+            <NextClientOnly>
+              <NextNProgress />
+              <CssBaseline />
+              <DashboardLayout>
+                {isLoading ? <Loading /> : <Component {...pageProps} />}
+              </DashboardLayout>
+              <Toaster />
+
+            </NextClientOnly>
+          </AuthProvider>
         </ThemeProvider>
       </ReduxProvider>
     </ApolloProvider>

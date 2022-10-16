@@ -18,22 +18,22 @@ const getSections = (t) => [
     items: [
       {
         title: t('Dashboard'),
-        path: '/',
+        path: '/dashboard',
         icon: <HomeIcon fontSize="small" />
       },
       {
         title: t('Items'),
-        path: '/items',
+        path: '/dashboard/items',
         icon: <InventoryIcon fontSize="small" />,
       },
       {
         title: t('History'),
         icon: <SearchIcon fontSize="small" />,
-        path: '/example',
+        path: '/dashboard/history ',
       },
       {
         title: t('Member'),
-        path: '/member',
+        path: '/dashboard/member',
         icon: <StyleIcon fontSize="small" />,
       }
     ]
@@ -125,7 +125,7 @@ export const DashboardSidebar = (props) => {
           <Box sx={{ p: 2 }}>
 
             <NextLink
-              href="/settings"
+              href="/dashboard/settings"
               passHref
             >
               <Button

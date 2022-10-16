@@ -19,8 +19,8 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import * as React from "react";
 import { format } from "date-fns";
 import NextLink from "next/link";
-import { getInitials } from "../utils/get-initials";
-import { ArrowRight as ArrowRightIcon } from "../icons/arrow-right";
+import { getInitials } from "@/utils/get-initials";
+import { ArrowRight as ArrowRightIcon } from "@/icons/arrow-right";
 import { addDays, subHours } from "date-fns";
 
 const now = new Date();
