@@ -22,7 +22,7 @@ import { format } from "date-fns";
 import NextLink from "next/link";
 import { getInitials } from "../utils/get-initials";
 import { ArrowRight as ArrowRightIcon } from "../icons/arrow-right";
-import { addDays, subDays, subHours } from "date-fns";
+import { addDays, subHours } from "date-fns";
 
 const now = new Date();
 
@@ -339,10 +339,7 @@ export default function history() {
                 </TableCell>
               </TableRow>
               {groupedHistories[status].map((history: { id: React.Key | null | undefined }) => (
-                <HistoryRow
-                  history={history}
-                  key={history.id}
-                />
+                <HistoryRow history={history} key={history.id} />
               ))}
             </Fragment>
           ))}

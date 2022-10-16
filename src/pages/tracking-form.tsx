@@ -1,11 +1,5 @@
 import * as React from "react";
-import {
-  Box,
-  Button,
-  Grid,
-  Link,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Grid, Link, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Calendar as CalendarIcon } from "../icons/calendar";
 import { ChevronDown as ChevronDownIcon } from "../icons/chevron-down";
