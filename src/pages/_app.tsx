@@ -14,7 +14,7 @@ import { client } from "@/utils/apollo";
 import NextNProgress from "nextjs-progressbar";
 import Amplify from "aws-amplify";
 import awsmobile from "@/config/aws";
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from "react-hot-toast";
 
 Amplify.configure(awsmobile);
 

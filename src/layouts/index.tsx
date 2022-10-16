@@ -1,46 +1,11 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
-import { styled } from '@mui/material/styles';
-import { DashboardSidebar } from './dashboard-sidebar';
-import { Box } from '@mui/material';
+import { ReactNode } from "react";
 
-const DashboardLayoutRoot = styled('div')(({ theme }) => ({
-  display: 'flex',
-  flex: '1 1 auto',
-  maxWidth: '100%',
-  paddingTop: 64,
-  [theme.breakpoints.up('lg')]: {
-    paddingLeft: 280
-  }
-}));
-
-export const DashboardLayout = (props: any) => {
-  const { children } = props;
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <>
-      <DashboardLayoutRoot>
-        <Box
-          sx={{
-            display: 'flex',
-            flex: '1 1 auto',
-            flexDirection: 'column',
-            width: '100%'
-          }}
-        >
-          {children}
-        </Box>
-      </DashboardLayoutRoot>
-      <DashboardSidebar
-        onClose={() => setIsSidebarOpen(false)}
-        open={isSidebarOpen}
-      />
+      {children}
     </>
+    
   );
 };
-
-DashboardLayout.propTypes = {
-  children: PropTypes.node
-};
-
-export default DashboardLayout;
+export default Layout;
