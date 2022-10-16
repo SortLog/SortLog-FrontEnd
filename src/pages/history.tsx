@@ -1,5 +1,4 @@
 import { Fragment, useState } from "react";
-// import { historyApi } from "./api/history-fakeApi";
 import {
   Box,
   TextField,
@@ -273,7 +272,7 @@ export default function history() {
     setRowsPerPage(parseInt(event.target.value, 10));
   };
 
-  const applyPagination = (histories: string | any[], page: number, rowsPerPage: number) =>
+  const applyPagination = (histories: any[], page: number, rowsPerPage: number) =>
     histories.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
   const paginatedHistories = applyPagination(histories, page, rowsPerPage);
