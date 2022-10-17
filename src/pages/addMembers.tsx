@@ -12,6 +12,7 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Avatar from "@mui/material/Avatar";
+import company from "../services/api/addMembers"
 import { useState } from "react";
 
 // style ----------------------------------------------
@@ -30,7 +31,8 @@ const cardStyle = {
 //---------------------------------------------------------
 
 const AddMembers = () => {
-  const initialMemberList: string[] = [];
+  let initialMemberList: string[] = [];
+  // const FETCH_MEMBERLIST_URL = "/user/invite";
 
   const [companyName, setCompanyName] = useState<string>("");
   const [memberEmail, setMemberEmail] = useState<string>("");
@@ -39,6 +41,26 @@ const AddMembers = () => {
   const [companyLayer, setCompanyLayer] = useState<string>("block");
   const [memberLayer, setMemberLayer] = useState<string>("none");
 
+  // const fetchMemberListByCompanyName = async (companyName: string) => {
+  //   const url = new URL(FETCH_MEMBERLIST_URL);
+
+  //   url.searchParams.append("q", companyName);
+
+  //   const response = await fetch(url);
+  //   const data = await response.json();
+
+  //   return data;
+  // };
+
+  const getMemberListByCompanyName = (companyName: string) => {
+    for (let i=0; i<company.length; i++) {
+      if(company[i].companyName === companyName){
+        return company[i].teamMember
+      } 
+    }
+  };
+
+
   const onAddNewMember = (newMember: string) => {
     setMemberList((prevState: any) => {
       return [...prevState, newMember];
@@ -46,20 +68,20 @@ const AddMembers = () => {
   };
 
   const onRemoveMember = (removed: string) => {
-    for (let i = 0; i < memberList.length - 1; i++) {
-      if (memberList[i] === removed) {
-        memberList.splice(i, 1);
+    setMemberList((prevState: any) => {
+      for (let i = 0; i < prevState.length; i++) {
+        if (prevState[i] === removed) {
+          prevState.splice(i, 1);
+        }
       }
-    }
-    setMemberList(memberList);
-    console.log(memberList.length)
+      return [...prevState];
+    });
   };
 
   function stringToColor(string: string) {
     let hash = 0;
     let i;
 
-    /* eslint-disable no-bitwise */
     for (i = 0; i < string.length; i += 1) {
       hash = string.charCodeAt(i) + ((hash << 5) - hash);
     }
@@ -70,7 +92,6 @@ const AddMembers = () => {
       const value = (hash >> (i * 8)) & 0xff;
       color += `00${value.toString(16)}`.slice(-2);
     }
-    /* eslint-enable no-bitwise */
 
     return color;
   }
@@ -85,7 +106,6 @@ const AddMembers = () => {
   }
 
   const memberListResult = memberList.map((member) => {
-    console.log("rerender")
     return (
       <Grid item xs={6} key={member}>
         <Card sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -111,13 +131,23 @@ const AddMembers = () => {
     console.log(value);
   };
 
-  const onNextButtonClick = (event: any) => {
+  const onNextButtonClick = async (event: any) => {
     event.preventDefault();
     try {
+      // const memberListData = await fetchMemberListByCompanyName(companyName);
+      // setMemberList(memberListData);
+
+      const memberListData = getMemberListByCompanyName(companyName);
+      if(memberListData) {
+        setMemberList(memberListData);
+      }
+
+
       setCompanyLayer("none");
       setMemberLayer("block");
     } catch (error) {
       console.error("Failed to match company due to error: ", error);
+      alert("No matched comapny exists")
     }
     console.log(event);
   };
@@ -143,7 +173,12 @@ const AddMembers = () => {
         <Divider variant="middle" />
         <Card style={cardStyle.card} sx={{ minWidth: 275 }}>
           <CardContent>
-            <CardMedia sx={{ textAlign: "center" }} component="img" image="" alt="sortlog icon" />
+            <CardMedia
+              sx={{ textAlign: "center" }}
+              component="img"
+              image="/png/logo-no-background-h.png"
+              alt="sortlog icon"
+            />
             <Typography
               sx={{ fontSize: 20, textAlign: "center" }}
               color="text.secondary"
