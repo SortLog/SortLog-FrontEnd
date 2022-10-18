@@ -12,8 +12,55 @@ import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Avatar from "@mui/material/Avatar";
-import company from "../services/api/addMembers"
 import { useState } from "react";
+// dummy company ---------------------------------------------------
+const company = [
+  {
+    companyName: "breadtop",
+    teamMember: [
+      "medh@hotmail.com",
+      "bufgiai@hotmail.com",
+      "vvaas70@hotmail.com",
+      "icwqboakfsf38@hotmail.com",
+      "b57@hotmail.com",
+      "owkhrenbmgu4378@hotmail.com",
+      "isofv@hotmail.com",
+      "bswupvdwboojo@hotmail.com",
+    ],
+  },
+  {
+    companyName: "teamorrow",
+    teamMember: [
+      "tbwuwurbcbd@hotmail.com",
+      "aivqeug81@hotmail.com",
+      "odujqemnwj8@hotmail.com",
+      "asphqutm47@hotmail.com",
+      "pvfqiwpingtahiu@hotmail.com",
+      "kubrqqifv@hotmail.com",
+    ],
+  },
+  {
+    companyName: "authentic bites",
+    teamMember: [
+      "steg86@hotmail.com",
+      "h75@hotmail.com",
+      "eprwowi8@hotmail.com",
+      "wvvwwet@hotmail.com",
+      "rhmqbmcp2@hotmail.com",
+      "ptkrmb8358@hotmail.com",
+    ],
+  },
+  {
+    companyName: "senseplus",
+    teamMember: [
+      "ktehaqabkifpw5@hotmail.com",
+      "jmhbiehdldjvfku@hotmail.com",
+      "wbtuecvg@hotmail.com",
+      "gosrucgwa@hotmail.com",
+    ],
+  },
+];
+// -----------------------------------------------------------
 
 // style ----------------------------------------------
 const cardStyle = {
@@ -53,13 +100,16 @@ const AddMembers = () => {
   // };
 
   const getMemberListByCompanyName = (companyName: string) => {
-    for (let i=0; i<company.length; i++) {
-      if(company[i].companyName === companyName){
-        return company[i].teamMember
-      } 
+    let i;
+    for (i = 0; i < company.length; i++) {
+      if (company[i].companyName === companyName) {
+        return company[i].teamMember;
+      }
+    }
+    if (i === company.length) {
+      alert("No matched comapny");
     }
   };
-
 
   const onAddNewMember = (newMember: string) => {
     setMemberList((prevState: any) => {
@@ -138,16 +188,14 @@ const AddMembers = () => {
       // setMemberList(memberListData);
 
       const memberListData = getMemberListByCompanyName(companyName);
-      if(memberListData) {
+      if (memberListData) {
         setMemberList(memberListData);
+        setCompanyLayer("none");
+        setMemberLayer("block");
       }
-
-
-      setCompanyLayer("none");
-      setMemberLayer("block");
     } catch (error) {
       console.error("Failed to match company due to error: ", error);
-      alert("No matched comapny exists")
+      alert("No matched comapny exists");
     }
     console.log(event);
   };
