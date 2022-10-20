@@ -23,5 +23,5 @@
     "incremental": true
   },
   "exclude": ["node_modules"],
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/services/api/addMembers.js"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }

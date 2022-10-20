@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import { FcGoogle } from "react-icons/fc";
 import { useInput } from "@/util/forms";
 import { Auth } from "aws-amplify";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 
 const StyledTextField = styled(TextField)({
   borderRadius: "5px",
@@ -21,7 +21,9 @@ const SignIn: React.FC = () => {
       // hint user is signed in
       console.log(user);
       if (user.challengeName) {
-        console.error(`Unable to login, because challenge "${user.challengeName}" is mandated and we did not handle this case.`);
+        console.error(
+          `Unable to login, because challenge "${user.challengeName}" is mandated and we did not handle this case.`
+        );
         return;
       }
       router.push("/dashboard");

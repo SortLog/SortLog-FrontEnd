@@ -1,4 +1,3 @@
-import * as React from "react";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -75,10 +74,10 @@ const cardStyle = {
     margin: "20px 0",
   },
 };
-//---------------------------------------------------------
+// ---------------------------------------------------------
 
 const AddMembers = () => {
-  let initialMemberList: string[] = [];
+  const initialMemberList: string[] = [];
   // const FETCH_MEMBERLIST_URL = "/user/invite";
 
   const [companyName, setCompanyName] = useState<string>("");
