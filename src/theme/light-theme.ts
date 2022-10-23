@@ -21,8 +21,8 @@ const divider = "#E6E8F0";
 
 const primary = {
   main: "#DD2A3B",
-  light: "#828DF8",
-  dark: "#3832A0",
+  light: "#EB5424",
+  dark: "#EB5424",
   contrastText: "#FFFFFF",
 };
 

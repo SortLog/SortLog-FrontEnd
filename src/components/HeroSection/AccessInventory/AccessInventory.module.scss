@@ -1,7 +1,7 @@
 .inventorySection {
   display: flex;
   align-items: center;
-  padding: 80px 0;
+  padding: 40px 0;
   .col {
     max-width: 50%;
   }
@@ -10,7 +10,7 @@
     font-weight: 900;
     line-height: 112%;
     margin-bottom: 35px;
-    max-width: 473p;
+    max-width: 473px;
   }
   .productTour {
     font-size: 14px;
@@ -43,7 +43,7 @@
   .inventoryContainer {
     width: 100%;
     padding-right: 15px;
-    padding-left: 15px;
+    padding-left: -50px;
   }
   .homeSwitchingTo {
     display: flex;
@@ -98,7 +98,7 @@
     color: #727491;
   }
   .homeCol {
-    max-width: 992px;
-    padding-left: 30px;
+    max-width: 1200px;
+    padding-left: 200px;
   }
 }

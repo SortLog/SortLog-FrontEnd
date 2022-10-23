@@ -11,7 +11,7 @@ export default function AccessInventory() {
             <img
               src="https://media.sortly.com/wp-content/uploads/2022/04/12125817/overflow-screens.png"
               width="768"
-              height="600"
+              height="500"
               alt="img"
             />
           </div>
