@@ -25,7 +25,7 @@ export default function OrganizeInventory() {
             <img
               src="https://media.sortly.com/wp-content/uploads/2022/09/14023935/hero_construction_2.png"
               width="768"
-              height="600"
+              height="500"
               alt="img"
             />
           </div>
