@@ -1,16 +1,16 @@
 import * as React from "react";
 import { Box, Button, Grid, Link, Typography } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Calendar as CalendarIcon } from "../icons/calendar";
-import { ChevronDown as ChevronDownIcon } from "../icons/chevron-down";
-import { PencilAlt as PencilAltIcon } from "../icons/pencil-alt";
+import { Calendar as CalendarIcon } from "../../icons/calendar";
+import { ChevronDown as ChevronDownIcon } from "../../icons/chevron-down";
+import { PencilAlt as PencilAltIcon } from "../../icons/pencil-alt";
 import NextLink from "next/link";
 export default function trackingForm() {
   return (
     <>
       <Box sx={{ flexGrow: 1, mx: 1, width: "95%" }}>
         <Box sx={{ mb: 4 }}>
-          <NextLink href="/history" passHref>
+          <NextLink href="/dashboard/history" passHref>
             <Link
               color="textPrimary"
               component="a"

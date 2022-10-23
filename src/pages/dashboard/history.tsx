@@ -134,7 +134,7 @@ const HistoryRow = (props: { history: any }) => {
         </Box>
       </TableCell>
       <TableCell align="right">
-        <NextLink href="/tracking-form" passHref>
+        <NextLink href="/dashboard/tracking-form" passHref>
           <IconButton component="a">
             <ArrowRightIcon fontSize="small" />
           </IconButton>
