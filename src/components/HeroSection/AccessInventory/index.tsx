@@ -14,7 +14,7 @@ export default function SyncInventory() {
             <img
               src="https://media.sortly.com/wp-content/uploads/2022/09/15172605/item_details_construction.png"
               width="768"
-              height="600"
+              height="500"
               alt="img"
             />
           </div>
