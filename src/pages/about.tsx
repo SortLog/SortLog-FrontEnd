@@ -5,21 +5,19 @@ import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import * as React from "react";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "../theme";
 import { GlobalStyles, Link } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
 const About: NextPage = () => {
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <Container maxWidth="lg" color="background">
         <div className="App">
           <header className="App-header">
             <GlobalStyles
               styles={{
-                body: { backgroundColor: "#e7e6e6" },
+                body: { backgroundColor: "#eeecec" },
               }}
             />
             <Typography
@@ -62,105 +60,26 @@ const About: NextPage = () => {
 
             <Grid container spacing={6} paddingTop="50px">
               <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
-                      alt="Lucas Alan"
+                      alt="Jenny Men"
                       src="/png/icon-test.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      Lucas Alan
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
+                      Jenny Men
+                      <Link
+                        href="www.linkedin.com/in/junyi-men"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
-                    </Typography>
-                  </Box>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
-                  <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="AAA BBB" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
-                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      AAA BBB
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
-                      </Link>
-                    </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
-                    </Typography>
-                  </Box>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
-                  <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="CCC DDD" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
-                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      CCC DDD
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
-                      </Link>
-                    </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
-                    </Typography>
-                  </Box>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
-                  <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="EEE FFF" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
-                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      EEE FFF
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
-                      </Link>
-                    </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
-                    </Typography>
-                  </Box>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper
-                  style={{ height: 260, width: 280, borderRadius: 30}}
-                  className={classes.customBorderRadius}
-                  elevation={12}
-                >
-                  <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="GGG HHH" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
-                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      GGG HHH
-                      <Link href="https://www.linkedin.com/in/mingen-xiao/" target="_blank" color="#949494" paddingLeft="10px">
-                        <LinkedInIcon fontSize="small"/>
-                      </Link>
-                    </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
+                    <Typography fontSize="13px" color="#777676">
+                      Developer, Team Leader
                     </Typography>
                   </Box>
                 </Paper>
@@ -168,9 +87,13 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="III JJJ" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
+                    <Avatar
+                      alt="Mingen Xiao"
+                      src="/png/mingen-xiao.png"
+                      sx={{ height: 139, width: 139 }}
+                    />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      III JJJ
+                      Mingen Xiao
                       <Link
                         href="https://www.linkedin.com/in/mingen-xiao/"
                         target="_blank"
@@ -180,8 +103,8 @@ const About: NextPage = () => {
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
+                    <Typography fontSize="13px" color="#777676">
+                      Developer
                     </Typography>
                   </Box>
                 </Paper>
@@ -189,9 +112,59 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="KKK LLL" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
+                    <Avatar
+                      alt="Tony Liu"
+                      src="/png/tony-liu.png"
+                      sx={{ height: 139, width: 139 }}
+                    />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      KKK LLL
+                      Tony Liu
+                      <Link
+                        href="www.linkedin.com/in/tony-dong-liu"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
+                      </Link>
+                    </Typography>
+                    <Typography fontSize="13px" color="#777676">
+                      Developer
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+              <Grid item>
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
+                  <Box paddingTop="50px" paddingLeft="70px">
+                    <Avatar alt="Roy Qin" src="/png/roy-qin.png" sx={{ height: 139, width: 139 }} />
+                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
+                      Roy Qin
+                      <Link
+                        href="www.linkedin.com/in/roy-qin"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
+                      </Link>
+                    </Typography>
+                    <Typography fontSize="13px" color="#777676">
+                      Developer
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+              <Grid item>
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
+                  <Box paddingTop="50px" paddingLeft="70px">
+                    <Avatar
+                      alt="Kevin Luk"
+                      src="/png/icon-test.png"
+                      sx={{ height: 139, width: 139 }}
+                    />
+                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
+                      Kevin Luk
                       <Link
                         href="https://www.linkedin.com/in/mingen-xiao/"
                         target="_blank"
@@ -201,8 +174,8 @@ const About: NextPage = () => {
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
+                    <Typography fontSize="13px" color="#777676">
+                      Developer
                     </Typography>
                   </Box>
                 </Paper>
@@ -210,7 +183,86 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="MMM NNN" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
+                    <Avatar
+                      alt="Yuchen Diao"
+                      src="/png/yuchen-diao.png"
+                      sx={{ height: 139, width: 139 }}
+                    />
+                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
+                      Yuchen Diao
+                      <Link
+                        href="https://www.linkedin.com/in/yuchen-diao/"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
+                      </Link>
+                    </Typography>
+                    <Typography fontSize="13px" color="#777676">
+                      DevOps
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+              <Grid item>
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
+                  <Box paddingTop="50px" paddingLeft="70px">
+                    <Avatar
+                      alt="Shawn Wang"
+                      src="/png/shawn-wang.png"
+                      sx={{ height: 139, width: 139 }}
+                    />
+                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
+                      Shawn Wang
+                      <Link
+                        href="https://www.linkedin.com/in/tremendous-shawn-wang/"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
+                      </Link>
+                    </Typography>
+                    <Typography fontSize="13px" color="#777676">
+                      DevOps
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+              <Grid item>
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
+                  <Box paddingTop="50px" paddingLeft="70px">
+                    <Avatar
+                      alt="Sally Song"
+                      src="/png/sally-song.png"
+                      sx={{ height: 139, width: 139 }}
+                    />
+                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
+                      Sally Song
+                      <Link
+                        href="https://www.linkedin.com/in/sallysong30"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
+                      </Link>
+                    </Typography>
+                    <Typography fontSize="13px" color="#777676">
+                      Devops
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+              <Grid item>
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
+                  <Box paddingTop="50px" paddingLeft="70px">
+                    <Avatar
+                      alt="MMM NNN"
+                      src="/png/icon-test.png"
+                      sx={{ height: 139, width: 139 }}
+                    />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       MMM NNN
                       <Link
@@ -222,7 +274,7 @@ const About: NextPage = () => {
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
+                    <Typography fontSize="13px" color="#777676">
                       Full-Stack Developer
                     </Typography>
                   </Box>
@@ -231,7 +283,11 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="OOO PPP" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
+                    <Avatar
+                      alt="OOO PPP"
+                      src="/png/icon-test.png"
+                      sx={{ height: 139, width: 139 }}
+                    />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       OOO PPP
                       <Link
@@ -243,28 +299,7 @@ const About: NextPage = () => {
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
-                    </Typography>
-                  </Box>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
-                  <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="QQQ RRR" src="/png/icon-test.png" sx={{ height: 139, width: 139 }} />
-                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      QQQ RRR
-                      <Link
-                        href="https://www.linkedin.com/in/mingen-xiao/"
-                        target="_blank"
-                        color="#949494"
-                        paddingLeft="10px"
-                      >
-                        <LinkedInIcon fontSize="small" />
-                      </Link>
-                    </Typography>
-                    <Typography fontSize="10px" color="#777676">
+                    <Typography fontSize="13px" color="#777676">
                       Full-Stack Developer
                     </Typography>
                   </Box>
@@ -274,7 +309,7 @@ const About: NextPage = () => {
           </header>
         </div>
       </Container>
-    </ThemeProvider>
+    </>
   );
 };
 
