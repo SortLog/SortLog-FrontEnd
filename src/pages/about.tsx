@@ -63,14 +63,14 @@ const About: NextPage = () => {
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
-                      alt="Lucas Alan"
+                      alt="Jenny Men"
                       src="/png/icon-test.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      Lucas Alan
+                      Jenny Men
                       <Link
-                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        href="https:www.linkedin.com/in/junyi-men/"
                         target="_blank"
                         color="#949494"
                         paddingLeft="10px"
@@ -78,8 +78,8 @@ const About: NextPage = () => {
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
+                    <Typography fontSize="13px" color="#777676">
+                      Developer, Team Leader
                     </Typography>
                   </Box>
                 </Paper>
@@ -88,12 +88,12 @@ const About: NextPage = () => {
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
-                      alt="AAA BBB"
-                      src="/png/icon-test.png"
+                      alt="Mingen Xiao"
+                      src="/png/mingen-xiao.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      AAA BBB
+                      Mingen Xiao
                       <Link
                         href="https://www.linkedin.com/in/mingen-xiao/"
                         target="_blank"
@@ -103,8 +103,8 @@ const About: NextPage = () => {
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
+                    <Typography fontSize="13px" color="#777676">
+                      Developer
                     </Typography>
                   </Box>
                 </Paper>
@@ -113,14 +113,14 @@ const About: NextPage = () => {
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
-                      alt="CCC DDD"
-                      src="/png/icon-test.png"
+                      alt="Tony Liu"
+                      src="/png/tony-liu.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      CCC DDD
+                      Tony Liu
                       <Link
-                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        href="https:www.linkedin.com/in/tony-dong-liu/"
                         target="_blank"
                         color="#949494"
                         paddingLeft="10px"
@@ -128,8 +128,29 @@ const About: NextPage = () => {
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
+                    <Typography fontSize="13px" color="#777676">
+                      Developer
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+              <Grid item>
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
+                  <Box paddingTop="50px" paddingLeft="70px">
+                    <Avatar alt="Roy Qin" src="/png/roy-qin.png" sx={{ height: 139, width: 139 }} />
+                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
+                      Roy Qin
+                      <Link
+                        href="https:www.linkedin.com/in/roy-qin/"
+                        target="_blank"
+                        color="#949494"
+                        paddingLeft="10px"
+                      >
+                        <LinkedInIcon fontSize="small" />
+                      </Link>
+                    </Typography>
+                    <Typography fontSize="13px" color="#777676">
+                      Developer
                     </Typography>
                   </Box>
                 </Paper>
@@ -138,12 +159,12 @@ const About: NextPage = () => {
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
-                      alt="EEE FFF"
+                      alt="Kevin Luk"
                       src="/png/icon-test.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      EEE FFF
+                      Kevin Luk
                       <Link
                         href="https://www.linkedin.com/in/mingen-xiao/"
                         target="_blank"
@@ -153,8 +174,8 @@ const About: NextPage = () => {
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
+                    <Typography fontSize="13px" color="#777676">
+                      Developer
                     </Typography>
                   </Box>
                 </Paper>
@@ -163,14 +184,14 @@ const About: NextPage = () => {
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
-                      alt="GGG HHH"
-                      src="/png/icon-test.png"
+                      alt="Yuchen Diao"
+                      src="/png/yuchen-diao.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      GGG HHH
+                      Yuchen Diao
                       <Link
-                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        href="https://www.linkedin.com/in/yuchen-diao/"
                         target="_blank"
                         color="#949494"
                         paddingLeft="10px"
@@ -178,8 +199,8 @@ const About: NextPage = () => {
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
+                    <Typography fontSize="13px" color="#777676">
+                      DevOps
                     </Typography>
                   </Box>
                 </Paper>
@@ -188,14 +209,14 @@ const About: NextPage = () => {
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
-                      alt="III JJJ"
-                      src="/png/icon-test.png"
+                      alt="Shawn Wang"
+                      src="/png/shawn-wang.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      III JJJ
+                      Shawn Wang
                       <Link
-                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        href="https://www.linkedin.com/in/tremendous-shawn-wang/"
                         target="_blank"
                         color="#949494"
                         paddingLeft="10px"
@@ -203,8 +224,8 @@ const About: NextPage = () => {
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
+                    <Typography fontSize="13px" color="#777676">
+                      DevOps
                     </Typography>
                   </Box>
                 </Paper>
@@ -213,14 +234,14 @@ const About: NextPage = () => {
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
-                      alt="KKK LLL"
-                      src="/png/icon-test.png"
+                      alt="Sally Song"
+                      src="/png/sally-song.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      KKK LLL
+                      Sally Song
                       <Link
-                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        href="https://www.linkedin.com/in/sallysong30"
                         target="_blank"
                         color="#949494"
                         paddingLeft="10px"
@@ -228,8 +249,8 @@ const About: NextPage = () => {
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
+                    <Typography fontSize="13px" color="#777676">
+                      Devops
                     </Typography>
                   </Box>
                 </Paper>
@@ -253,7 +274,7 @@ const About: NextPage = () => {
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
+                    <Typography fontSize="13px" color="#777676">
                       Full-Stack Developer
                     </Typography>
                   </Box>
@@ -278,32 +299,7 @@ const About: NextPage = () => {
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
-                    <Typography fontSize="10px" color="#777676">
-                      Full-Stack Developer
-                    </Typography>
-                  </Box>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
-                  <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar
-                      alt="QQQ RRR"
-                      src="/png/icon-test.png"
-                      sx={{ height: 139, width: 139 }}
-                    />
-                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      QQQ RRR
-                      <Link
-                        href="https://www.linkedin.com/in/mingen-xiao/"
-                        target="_blank"
-                        color="#949494"
-                        paddingLeft="10px"
-                      >
-                        <LinkedInIcon fontSize="small" />
-                      </Link>
-                    </Typography>
-                    <Typography fontSize="10px" color="#777676">
+                    <Typography fontSize="13px" color="#777676">
                       Full-Stack Developer
                     </Typography>
                   </Box>
