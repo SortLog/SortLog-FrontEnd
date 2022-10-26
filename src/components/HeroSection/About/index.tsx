@@ -45,7 +45,7 @@ const About: NextPage = () => {
         </div>
       </Container>
 
-      <Container sx={{ minWidth: 1500 }}>
+      <Container maxWidth="xl">
         <div className="App">
           <header className="App-header">
             <Typography
@@ -64,7 +64,7 @@ const About: NextPage = () => {
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
                       alt="Jenny Men"
-                      src="/png/icon-test.png"
+                      src="/png/jenny-men.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
@@ -159,14 +159,34 @@ const About: NextPage = () => {
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
-                      alt="Kevin Luk"
-                      src="/png/icon-test.png"
+                      alt="Shikai Lu"
+                      src="/png/shikai-lu.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      Kevin Luk
+                      Shikai Lu
+                      <Link href="" target="_blank" color="#949494" paddingLeft="10px">
+                        <LinkedInIcon fontSize="small" />
+                      </Link>
+                    </Typography>
+                    <Typography fontSize="13px" color="#777676">
+                      Developer
+                    </Typography>
+                  </Box>
+                </Paper>
+              </Grid>
+              <Grid item>
+                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
+                  <Box paddingTop="50px" paddingLeft="70px">
+                    <Avatar
+                      alt="Lina Zhao"
+                      src="/png/lina-zhao.png"
+                      sx={{ height: 139, width: 139 }}
+                    />
+                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
+                      Lina Zhao
                       <Link
-                        href="https://www.linkedin.com/in/mingen-xiao/"
+                        href="http://linkedin.com/in/lina-zhao-010b3124b/"
                         target="_blank"
                         color="#949494"
                         paddingLeft="10px"
@@ -175,7 +195,7 @@ const About: NextPage = () => {
                       </Link>
                     </Typography>
                     <Typography fontSize="13px" color="#777676">
-                      Developer
+                      DevOps Leader
                     </Typography>
                   </Box>
                 </Paper>
@@ -251,31 +271,6 @@ const About: NextPage = () => {
                     </Typography>
                     <Typography fontSize="13px" color="#777676">
                       Devops
-                    </Typography>
-                  </Box>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
-                  <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar
-                      alt="MMM NNN"
-                      src="/png/icon-test.png"
-                      sx={{ height: 139, width: 139 }}
-                    />
-                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      MMM NNN
-                      <Link
-                        href="https://www.linkedin.com/in/mingen-xiao/"
-                        target="_blank"
-                        color="#949494"
-                        paddingLeft="10px"
-                      >
-                        <LinkedInIcon fontSize="small" />
-                      </Link>
-                    </Typography>
-                    <Typography fontSize="13px" color="#777676">
-                      Full-Stack Developer
                     </Typography>
                   </Box>
                 </Paper>
