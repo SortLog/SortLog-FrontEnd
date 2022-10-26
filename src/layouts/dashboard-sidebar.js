@@ -23,7 +23,7 @@ const getSections = (t) => [
       },
       {
         title: t('Items'),
-        path: '/dashboard/items',
+        path: '/dashboard/item-list',
         icon: <InventoryIcon fontSize="small" />,
       },
       {
