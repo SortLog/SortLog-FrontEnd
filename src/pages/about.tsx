@@ -70,7 +70,7 @@ const About: NextPage = () => {
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       Jenny Men
                       <Link
-                        href="www.linkedin.com/in/junyi-men"
+                        href="https:www.linkedin.com/in/junyi-men/"
                         target="_blank"
                         color="#949494"
                         paddingLeft="10px"
@@ -120,7 +120,7 @@ const About: NextPage = () => {
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       Tony Liu
                       <Link
-                        href="www.linkedin.com/in/tony-dong-liu"
+                        href="https:www.linkedin.com/in/tony-dong-liu/"
                         target="_blank"
                         color="#949494"
                         paddingLeft="10px"
@@ -141,7 +141,7 @@ const About: NextPage = () => {
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       Roy Qin
                       <Link
-                        href="www.linkedin.com/in/roy-qin"
+                        href="https:www.linkedin.com/in/roy-qin/"
                         target="_blank"
                         color="#949494"
                         paddingLeft="10px"
