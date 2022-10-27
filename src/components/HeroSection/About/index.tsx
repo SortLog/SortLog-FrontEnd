@@ -64,7 +64,7 @@ const About: NextPage = () => {
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
                       alt="Jenny Men"
-                      src="/png/jenny-men.png"
+                      src="./png/jenny-men.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
@@ -89,7 +89,7 @@ const About: NextPage = () => {
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
                       alt="Mingen Xiao"
-                      src="/png/mingen-xiao.png"
+                      src="./png/mingen-xiao.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
@@ -114,7 +114,7 @@ const About: NextPage = () => {
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
                       alt="Tony Liu"
-                      src="/png/tony-liu.png"
+                      src="./png/tony-liu.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
@@ -137,7 +137,7 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="Roy Qin" src="/png/roy-qin.png" sx={{ height: 139, width: 139 }} />
+                    <Avatar alt="Roy Qin" src="./png/roy-qin.png" sx={{ height: 139, width: 139 }} />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       Roy Qin
                       <Link
@@ -160,7 +160,7 @@ const About: NextPage = () => {
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
                       alt="Shikai Lu"
-                      src="/png/shikai-lu.png"
+                      src="./png/shikai-lu.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
@@ -180,7 +180,7 @@ const About: NextPage = () => {
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
                       alt="Lina Zhao"
-                      src="/png/lina-zhao.png"
+                      src="./png/lina-zhao.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
@@ -205,7 +205,7 @@ const About: NextPage = () => {
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
                       alt="Yuchen Diao"
-                      src="/png/yuchen-diao.png"
+                      src="./png/yuchen-diao.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
@@ -230,7 +230,7 @@ const About: NextPage = () => {
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
                       alt="Shawn Wang"
-                      src="/png/shawn-wang.png"
+                      src="./png/shawn-wang.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
@@ -255,7 +255,7 @@ const About: NextPage = () => {
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
                       alt="Sally Song"
-                      src="/png/sally-song.png"
+                      src="./png/sally-song.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
@@ -280,7 +280,7 @@ const About: NextPage = () => {
                   <Box paddingTop="50px" paddingLeft="70px">
                     <Avatar
                       alt="OOO PPP"
-                      src="/png/icon-test.png"
+                      src="./png/icon-test.png"
                       sx={{ height: 139, width: 139 }}
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
