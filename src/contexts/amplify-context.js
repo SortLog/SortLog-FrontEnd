@@ -133,6 +133,7 @@ export const AuthProvider = (props) => {
         }
       }
     });
+    return user
   };
 
   const logout = async () => {

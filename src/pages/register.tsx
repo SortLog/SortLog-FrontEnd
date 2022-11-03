@@ -1,13 +1,23 @@
 import { useRouter } from "next/router";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { Box, Button, Checkbox, FormHelperText,Card, Container, Divider,Link, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormHelperText,
+  Card,
+  Container,
+  Divider,
+  Link,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useAuth } from "@/hooks/use-auth";
 import { useMounted } from "@/hooks/use-mounted";
-import Head from 'next/head';
-import NextLink from 'next/link';
-import { Logo } from '@/components/logo';
-
+import Head from "next/head";
+import NextLink from "next/link";
+import { Logo } from "@/components/logo";
 
 export const AmplifyRegister = (props) => {
   const isMounted = useMounted();
@@ -109,7 +119,6 @@ export const AmplifyRegister = (props) => {
   );
 };
 
-
 const Register = () => {
   const router = useRouter();
   const { disableGuard } = router.query;
@@ -117,70 +126,54 @@ const Register = () => {
   return (
     <>
       <Head>
-        <title>
-              Register | Creatalog
-        </title>
+        <title>Register | Creatalog</title>
       </Head>
       <Box
         component="main"
         sx={{
-          backgroundColor: 'background.default',
-          display: 'flex',
-          flexDirection: 'column',
-          minHeight: '100vh'
+          backgroundColor: "background.default",
+          display: "flex",
+          flexDirection: "column",
+          minHeight: "100vh",
         }}
       >
-
         <Container
           maxwidth="sm"
           sx={{
             py: {
-              xs: '60px',
-              md: '120px'
-            }
+              xs: "60px",
+              md: "120px",
+            },
           }}
         >
-
-          <Card
-            elevation={16}
-            sx={{ p: 4 }}
-          >
+          <Card elevation={16} sx={{ p: 4 }}>
             <Box
               sx={{
-                alignItems: 'center',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center'
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
               }}
             >
-              <NextLink
-                href="/"
-                passHref
-              >
+              <NextLink href="/" passHref>
                 <a>
                   <Logo
                     sx={{
                       height: 40,
-                      width: 40
+                      width: 40,
                     }}
                   />
                 </a>
               </NextLink>
-              <Typography variant="h4">
-                                Register
-              </Typography>
-              <Typography
-                color="textSecondary"
-                sx={{ mt: 2 }}
-                variant="body2"
-              >
-                                Register on the internal platform
+              <Typography variant="h4">Register</Typography>
+              <Typography color="textSecondary" sx={{ mt: 2 }} variant="body2">
+                Register on the internal platform
               </Typography>
             </Box>
             <Box
               sx={{
                 flexGrow: 1,
-                mt: 3
+                mt: 3,
               }}
             >
               <AmplifyRegister />
@@ -188,16 +181,15 @@ const Register = () => {
             <Divider sx={{ my: 3 }} />
             <div>
               <NextLink
-                href={disableGuard
-                  ? `/authentication/login?disableGuard=${disableGuard}`
-                  : '/authentication/login'}
+                href={
+                  disableGuard
+                    ? `/authentication/login?disableGuard=${disableGuard}`
+                    : "/authentication/login"
+                }
                 passHref
               >
-                <Link
-                  color="textSecondary"
-                  variant="body2"
-                >
-                                    Having an account
+                <Link color="textSecondary" variant="body2">
+                  Having an account
                 </Link>
               </NextLink>
             </div>
@@ -207,7 +199,5 @@ const Register = () => {
     </>
   );
 };
-
-
 
 export default Register;
