@@ -9,7 +9,6 @@ import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 
 import MuiDrawer from "@/components/ItemList/add-and-edit";
 
-
 const handleClick = () => {
   console.info("You clicked the Chip.");
 };

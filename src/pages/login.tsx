@@ -147,7 +147,7 @@ const SignIn: React.FC = () => {
               <Box display="flex" justifyContent="center">
                 <Typography>
                   New here?&nbsp;
-                  <Link href="#" variant="body2" color="info.main">
+                  <Link href="/register" variant="body2" color="info.main">
                     Create an account
                   </Link>
                 </Typography>
