@@ -74,11 +74,45 @@
 
 // export default TemporaryDrawer;
 
-import { Drawer, Box, Typography, Divider } from "@mui/material";
+import {
+  Drawer,
+  Box,
+  Typography,
+  Divider,
+  Grid,
+  Paper,
+  Icon,
+  InputBase,
+  TextField,
+  CardMedia,
+  FormControl,
+  OutlinedInput,
+  FormHelperText,
+  InputAdornment,
+  InputLabel,
+  Button,
+  IconButton,
+  Tooltip,
+  Chip,
+  Avatar,
+} from "@mui/material";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
+import HelpIcon from "@mui/icons-material/Help";
+import { Tag } from "@mui/icons-material";
+
+function unitOrunits(quantity: any) {
+  if (quantity > 1) {
+    return "units";
+  } else {
+    return "unit";
+  }
+}
 
 const MuiDrawer = (props: any) => {
   const { isDrawerOpen, setIsDrawerOpen, data } = props;
-
+  console.log(data);
+  const currDate = new Date().toLocaleDateString();
+  const currTime = new Date().toLocaleTimeString();
   return (
     <>
       {/* <IconButton
@@ -91,12 +125,130 @@ const MuiDrawer = (props: any) => {
         <MenuIcon />
       </IconButton> */}
       <Drawer anchor="right" open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
-        <Box p={2} width="600px" textAlign="center" role="presentation">
+        <Box p={2} width="1000px" textAlign="center" role="presentation" sx={{ mt: 3 }}>
           <Typography variant="h3" align="left" component="div">
-            {data.name},{data.quantity}
+            {data.name}
           </Typography>
-          <Divider />
+          <Divider sx={{ marginTop: 3 }} />
         </Box>
+        <Grid
+          container
+          spacing={6}
+          paddingTop="60px"
+          paddingLeft="76px"
+          paddingRight="166px"
+          justifyContent="space-between"
+        >
+          <Typography variant="subtitle1" component="div">
+            <text style={{ color: "#a2a2a2" }}>Sortlog ID:</text>{" "}
+            <text style={{ color: "#131213" }}>{data.id}</text>
+          </Typography>
+          <Typography variant="subtitle1" component="div">
+            <text style={{ color: "#a2a2a2" }}>Quantity:</text>{" "}
+            <text style={{ color: "#ad3c3c" }}>
+              {data.quantity} {unitOrunits(data.quantity)}
+            </text>
+          </Typography>
+          <Typography variant="subtitle1" component="div">
+            <text style={{ color: "#a2a2a2" }}>Total Value:</text>{" "}
+            <text style={{ color: "#131213" }}>${parseInt(data.price).toFixed(2)}</text>
+          </Typography>
+          <Typography variant="subtitle1" component="div">
+            <text style={{ color: "#a2a2a2" }}>Updated at:</text>{" "}
+            <text style={{ color: "#131213" }}>
+              {currDate} {currTime}
+            </text>
+          </Typography>
+        </Grid>
+        <Grid container sx={{ mt: 6 }}>
+          <Grid>
+            <Grid
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "25ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <div>
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-amount">Quantity</InputLabel>
+                  <OutlinedInput
+                    label="Quantity"
+                    value={data.quantity}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <IconButton>
+                          <UnfoldMoreIcon />
+                        </IconButton>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-amount">Min Level</InputLabel>
+                  <OutlinedInput
+                    label="Min Level"
+                    value={0}
+                    endAdornment={
+                      <InputAdornment position="end">
+                        <Tooltip
+                          placement="top"
+                          title="Set a minimum level to easily identify low stock items. Item will be highlighted when its quantity is at or below min level."
+                          arrow
+                        >
+                          <HelpIcon />
+                        </Tooltip>
+                      </InputAdornment>
+                    }
+                  />
+                </FormControl>
+              </div>
+              <div>
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                  <OutlinedInput
+                    label="Amount"
+                    value={"$" + parseInt(data.price).toFixed(2)}
+                    endAdornment={<InputAdornment position="end">AUD</InputAdornment>}
+                  />
+                </FormControl>
+                <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                  <InputLabel htmlFor="outlined-adornment-amount">Total value</InputLabel>
+                  <OutlinedInput
+                    label="Total value"
+                    value={"AU$" + (data.quantity * data.price).toFixed(2)}
+                    endAdornment={<InputAdornment position="end">AUD</InputAdornment>}
+                  />
+                </FormControl>
+              </div>
+            </Grid>
+            <Grid
+              component="form"
+              sx={{
+                "& .MuiTextField-root": { m: 1, width: "52ch" },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <div>
+                <TextField label="Tags" value={data.tag} />
+              </div>
+              <div>
+                <TextField label="Notes" variant="outlined" multiline maxRows={6} />
+              </div>
+            </Grid>
+          </Grid>
+          <Grid>
+            <CardMedia
+              component="img"
+              alt="green iguana"
+              height="390"
+              sx={{ ml: 6 }}
+              image={data.img}
+            />
+          </Grid>
+        </Grid>
       </Drawer>
     </>
   );
