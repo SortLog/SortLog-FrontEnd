@@ -106,7 +106,7 @@ function unitOrunits(quantity: any) {
   }
 }
 
-function changeBackground(e) {
+function changeBackground(e: any) {
   e.target.style.background = "red";
 }
 
