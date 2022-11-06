@@ -106,9 +106,9 @@ function unitOrunits(quantity: any) {
   }
 }
 
-// function changeBackground(e: any) {
-//   e.target.style.background = "red";
-// }
+function changeBackground(e) {
+  e.target.style.background = "red";
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
