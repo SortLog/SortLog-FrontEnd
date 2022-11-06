@@ -90,7 +90,7 @@ const columns = [
     headerName: "Tag",
     renderCell: (params) => {
       return (
-        <Chip variant="rounded" label={[params.value[0], params.value[1]]} {...getTag(params)} />
+        <Chip variant="filled" label={[params.value[0], params.value[1]]} {...getTag(params)} />
       );
     },
   },

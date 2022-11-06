@@ -49,8 +49,8 @@ const ImgMediaCard = (props: any) => {
           </Typography>
         </CardActions>
         <CardActions>
-          <Chip variant="rounded" label={data.tag[0]} {...getTag()} />
-          <Chip variant="rounded" label={data.tag[1]} {...getTag()} />
+          <Chip variant="filled" label={data.tag[0]} {...getTag()} />
+          <Chip variant="filled" label={data.tag[1]} {...getTag()} />
         </CardActions>
       </Card>
     </>

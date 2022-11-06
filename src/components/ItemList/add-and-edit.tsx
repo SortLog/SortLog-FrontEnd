@@ -98,7 +98,11 @@ import {
 } from "@mui/material";
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import HelpIcon from "@mui/icons-material/Help";
-import { Tag } from "@mui/icons-material";
+import { Bolt, Tag } from "@mui/icons-material";
+import QrCode2Icon from "@mui/icons-material/QrCode2";
+import { useState } from "react";
+import EditIcon from '@mui/icons-material/Edit';
+import { makeStyles } from '@mui/styles';
 
 function unitOrunits(quantity: any) {
   if (quantity > 1) {
@@ -108,11 +112,36 @@ function unitOrunits(quantity: any) {
   }
 }
 
+function changeBackground(e) {
+  e.target.style.background = "red";
+}
+  
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiFilledInput-root": {
+      backgroundColor: "rgb(255, 255, 255)"
+    },
+    "& .MuiFilledInput-root:hover": {
+      backgroundColor: "rgb(145, 145, 145)",
+      // Reset on touch devices, it doesn't add specificity
+      "@media (hover: none)": {
+        backgroundColor: "rgb(13, 126, 239)"
+      }
+    },
+    "& .MuiFilledInput-root.Mui-focused": {
+      backgroundColor: "rgb(255, 255, 255)"
+    }
+  }
+}));
+
 const MuiDrawer = (props: any) => {
   const { isDrawerOpen, setIsDrawerOpen, data } = props;
   console.log(data);
   const currDate = new Date().toLocaleDateString();
   const currTime = new Date().toLocaleTimeString();
+  const [isShown, setIsShown] = useState(false);
+  const classes = useStyles();
+  
   return (
     <>
       {/* <IconButton
@@ -124,13 +153,34 @@ const MuiDrawer = (props: any) => {
       >
         <MenuIcon />
       </IconButton> */}
-      <Drawer anchor="right" open={isDrawerOpen} onClose={() => setIsDrawerOpen(false)}>
-        <Box p={2} width="1000px" textAlign="center" role="presentation" sx={{ mt: 3 }}>
-          <Typography variant="h3" align="left" component="div">
-            {data.name}
-          </Typography>
-          <Divider sx={{ marginTop: 3 }} />
+      <Drawer
+        anchor="right"
+        open={isDrawerOpen}
+        PaperProps={{
+          sx: {
+            height: 1000,
+            width: 1260,
+            padding: 2,
+            mt: 20,
+          },
+        }}
+        onClose={() => setIsDrawerOpen(false)}
+      >
+        <Box p={2} sx={{ mt: 3 }}>
+          <TextField
+            value={data.name}
+            variant="filled"
+            InputProps={{ disableUnderline: true }}
+            className={classes.root}
+            onChange={(e) => props.onChange(e.target.value)}
+            inputProps={{ style: { fontSize: 36 } }}
+            sx={{ width: 300 }}
+            onMouseEnter={() => setIsShown(true)}
+            onMouseLeave={() => setIsShown(false)}
+          />
+          {isShown && <EditIcon sx={{ m: 3 }}/>}
         </Box>
+        <Divider />
         <Grid
           container
           spacing={6}
@@ -248,6 +298,40 @@ const MuiDrawer = (props: any) => {
               image={data.img}
             />
           </Grid>
+        </Grid>
+        <Grid m="20px">
+          <Typography sx={{ color: "#939393", mt: 3 }}>QR / BARCODES</Typography>
+          <Grid container>
+            <Grid
+              container
+              sx={{
+                mt: 3,
+                border: "1px solid #c3c0c0",
+                borderRadius: "3px",
+                width: "auto",
+                borderBlockColor: "#c3c0c0",
+              }}
+            >
+              <Typography m="6px">
+                {data.name}
+                <Typography fontSize={6} sx={{ color: "#757575", mt: 1 }}>
+                  Create via <text style={{ color: "#ff0000", fontStyle: "italic" }}>SortLog</text>
+                </Typography>
+              </Typography>
+            </Grid>
+            <Button variant="outlined" color="inherit" sx={{ mt: 3, ml: 3, color: "#c3c0c0" }}>
+              <QrCode2Icon sx={{ color: "#000000" }}></QrCode2Icon>
+              <Typography ml="10px" sx={{ color: "#000000" }}>
+                LINK QR / BARCODE
+              </Typography>
+            </Button>
+          </Grid>
+        </Grid>
+        <Divider />
+        <Grid container paddingLeft={2} paddingTop={3}>
+          <Button variant="contained" color="secondary" sx={{ bgcolor: "#2329d3" }}>
+            Save
+          </Button>
         </Grid>
       </Drawer>
     </>

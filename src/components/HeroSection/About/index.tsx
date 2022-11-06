@@ -137,7 +137,11 @@ const About: NextPage = () => {
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar alt="Roy Qin" src="./png/roy-qin.png" sx={{ height: 139, width: 139 }} />
+                    <Avatar
+                      alt="Roy Qin"
+                      src="./png/roy-qin.png"
+                      sx={{ height: 139, width: 139 }}
+                    />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       Roy Qin
                       <Link
