@@ -101,8 +101,8 @@ import HelpIcon from "@mui/icons-material/Help";
 import { Bolt, Tag } from "@mui/icons-material";
 import QrCode2Icon from "@mui/icons-material/QrCode2";
 import { useState } from "react";
-import EditIcon from '@mui/icons-material/Edit';
-import { makeStyles } from '@mui/styles';
+import EditIcon from "@mui/icons-material/Edit";
+import { makeStyles } from "@mui/styles";
 
 function unitOrunits(quantity: any) {
   if (quantity > 1) {
@@ -115,23 +115,23 @@ function unitOrunits(quantity: any) {
 function changeBackground(e) {
   e.target.style.background = "red";
 }
-  
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiFilledInput-root": {
-      backgroundColor: "rgb(255, 255, 255)"
+      backgroundColor: "rgb(255, 255, 255)",
     },
     "& .MuiFilledInput-root:hover": {
       backgroundColor: "rgb(145, 145, 145)",
       // Reset on touch devices, it doesn't add specificity
       "@media (hover: none)": {
-        backgroundColor: "rgb(13, 126, 239)"
-      }
+        backgroundColor: "rgb(13, 126, 239)",
+      },
     },
     "& .MuiFilledInput-root.Mui-focused": {
-      backgroundColor: "rgb(255, 255, 255)"
-    }
-  }
+      backgroundColor: "rgb(255, 255, 255)",
+    },
+  },
 }));
 
 const MuiDrawer = (props: any) => {
@@ -141,7 +141,7 @@ const MuiDrawer = (props: any) => {
   const currTime = new Date().toLocaleTimeString();
   const [isShown, setIsShown] = useState(false);
   const classes = useStyles();
-  
+
   return (
     <>
       {/* <IconButton
@@ -178,7 +178,7 @@ const MuiDrawer = (props: any) => {
             onMouseEnter={() => setIsShown(true)}
             onMouseLeave={() => setIsShown(false)}
           />
-          {isShown && <EditIcon sx={{ m: 3 }}/>}
+          {isShown && <EditIcon sx={{ m: 3 }} />}
         </Box>
         <Divider />
         <Grid
