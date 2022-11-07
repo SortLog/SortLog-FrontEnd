@@ -7,7 +7,6 @@ import {
   Checkbox,
   FormHelperText,
   Card,
-  Container,
   Divider,
   Link,
   TextField,
@@ -19,7 +18,7 @@ import Head from "next/head";
 import NextLink from "next/link";
 import { Logo } from "@/components/logo";
 
-export const AmplifyRegister = (props) => {
+export const AmplifyRegister = (props: any) => {
   const isMounted = useMounted();
   const router = useRouter();
   const { register } = useAuth();
@@ -42,7 +41,7 @@ export const AmplifyRegister = (props) => {
         if (isMounted()) {
           router.push("/verify-code").catch(console.error);
         }
-      } catch (err) {
+      } catch (err: any) {
         console.error(err);
 
         if (isMounted()) {
@@ -53,13 +52,12 @@ export const AmplifyRegister = (props) => {
       }
     },
   });
-
   return (
     <form noValidate onSubmit={formik.handleSubmit} {...props}>
       <TextField
         error={Boolean(formik.touched.email && formik.errors.email)}
         fullWidth
-        helperText={formik.touched.email && formik.errors.email}
+        helperText={`${formik.touched.email && formik.errors.email}`}
         label="Email Address"
         margin="normal"
         name="email"
@@ -71,7 +69,7 @@ export const AmplifyRegister = (props) => {
       <TextField
         error={Boolean(formik.touched.password && formik.errors.password)}
         fullWidth
-        helperText={formik.touched.password && formik.errors.password}
+        helperText={`${formik.touched.password && formik.errors.password}`}
         label="Password"
         margin="normal"
         name="password"
@@ -97,11 +95,15 @@ export const AmplifyRegister = (props) => {
         </Typography>
       </Box>
       {Boolean(formik.touched.policy && formik.errors.policy) && (
-        <FormHelperText error>{formik.errors.policy}</FormHelperText>
+        <FormHelperText error>
+          <>{formik.errors.policy}</>
+        </FormHelperText>
       )}
       {formik.errors.submit && (
         <Box sx={{ mt: 3 }}>
-          <FormHelperText error>{formik.errors.submit}</FormHelperText>
+          <FormHelperText error>
+            <>{formik.errors.submit}</>
+          </FormHelperText>
         </Box>
       )}
       <Box sx={{ mt: 2 }}>
@@ -137,64 +139,54 @@ const Register = () => {
           minHeight: "100vh",
         }}
       >
-        <Container
-          maxwidth="sm"
-          sx={{
-            py: {
-              xs: "60px",
-              md: "120px",
-            },
-          }}
-        >
-          <Card elevation={16} sx={{ p: 4 }}>
-            <Box
-              sx={{
-                alignItems: "center",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-              }}
+        <Card elevation={16} sx={{ p: 4 }}>
+          <Box
+            sx={{
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <NextLink href="/" passHref>
+              <a>
+                <Logo
+                  sx={{
+                    height: 40,
+                    width: 40,
+                  }}
+                />
+              </a>
+            </NextLink>
+            <Typography variant="h4">Register</Typography>
+            <Typography color="textSecondary" sx={{ mt: 2 }} variant="body2">
+              Register on the internal platform
+            </Typography>
+          </Box>
+          <Box
+            sx={{
+              flexGrow: 1,
+              mt: 3,
+            }}
+          >
+            <AmplifyRegister />
+          </Box>
+          <Divider sx={{ my: 3 }} />
+          <div>
+            <NextLink
+              href={
+                disableGuard
+                  ? `/authentication/login?disableGuard=${disableGuard}`
+                  : "/authentication/login"
+              }
+              passHref
             >
-              <NextLink href="/" passHref>
-                <a>
-                  <Logo
-                    sx={{
-                      height: 40,
-                      width: 40,
-                    }}
-                  />
-                </a>
-              </NextLink>
-              <Typography variant="h4">Register</Typography>
-              <Typography color="textSecondary" sx={{ mt: 2 }} variant="body2">
-                Register on the internal platform
-              </Typography>
-            </Box>
-            <Box
-              sx={{
-                flexGrow: 1,
-                mt: 3,
-              }}
-            >
-              <AmplifyRegister />
-            </Box>
-            <Divider sx={{ my: 3 }} />
-            <div>
-              <NextLink
-                href={
-                  disableGuard
-                    ? `/authentication/login?disableGuard=${disableGuard}`
-                    : "/authentication/login"
-                }
-                passHref
-              >
-                <Link color="textSecondary" variant="body2">
-                  Having an account
-                </Link>
-              </NextLink>
-            </div>
-          </Card>
-        </Container>
+              <Link color="textSecondary" variant="body2">
+                Having an account
+              </Link>
+            </NextLink>
+          </div>
+        </Card>
       </Box>
     </>
   );

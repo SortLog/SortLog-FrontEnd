@@ -3,7 +3,7 @@ import { styled } from "@mui/material/styles";
 import { FcGoogle } from "react-icons/fc";
 import { useInput } from "@/util/forms";
 import { useRouter } from "next/router";
-import {useAuth} from "@/hooks/use-auth";
+import { useAuth } from "@/hooks/use-auth";
 import toast from "react-hot-toast";
 
 const StyledTextField = styled(TextField)({
@@ -22,7 +22,7 @@ const SignIn: React.FC = () => {
       const user = await login(email, password);
       router.push("/dashboard");
       toast.success(user.username + " logged in successfully");
-    } catch (error) {
+    } catch (error: any) {
       console.log(error);
       toast.error(error.message);
     }

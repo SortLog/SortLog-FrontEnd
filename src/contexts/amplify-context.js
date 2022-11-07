@@ -64,9 +64,9 @@ const reducer = (state, action) => (handlers[action.type]
 export const AuthContext = createContext({
   ...initialState,
   platform: 'Amplify',
-  login: () => Promise.resolve(),
+  login: (email, password) => Promise.resolve(email, password),
   logout: () => Promise.resolve(),
-  register: () => Promise.resolve(),
+  register: (email, password) => Promise.resolve(email, password),
   verifyCode: () => Promise.resolve(),
   resendCode: () => Promise.resolve(),
   passwordRecovery: () => Promise.resolve(),

@@ -4,15 +4,14 @@ import Container from "@mui/material/Container";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { Alert, Chip, Divider, GlobalStyles, Grid, Icon, Paper } from "@mui/material";
+import { Alert, Divider, GlobalStyles, Grid, Icon, Paper } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Add } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
-import SouthIcon from "@mui/icons-material/South";
-import { DataGrid, GridToolbar, GridValueGetterParams } from "@mui/x-data-grid";
+import { DataGrid, GridValueGetterParams } from "@mui/x-data-grid";
 import ImgMediaCard from "@/components/ItemList/table-card";
 import SplitButton from "@/components/ItemList/split-button";
 import MuiDrawer from "@/components/ItemList/add-and-edit";
@@ -122,7 +121,7 @@ const ItemList: NextPage = () => {
   let z = 0;
 
   const [message, setMessage] = React.useState("");
-  const handleRowClick = (params) => {
+  const handleRowClick = (params: any) => {
     setIsDrawerOpen(true);
 
     dataMapper(mockDataItemList, searchText).map((detail: any) => (
