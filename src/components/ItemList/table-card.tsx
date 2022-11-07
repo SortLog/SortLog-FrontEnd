@@ -8,9 +8,9 @@ import { Chip, Divider } from "@mui/material";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import MuiDrawer from "@/components/ItemList/add-and-edit";
 
-// const handleClick = () => {
-//   console.info("You clicked the Chip.");
-// };
+const handleClick = () => {
+  console.info("You clicked the Chip.");
+};
 
 function unitOrunits(quantity: any) {
   if (quantity > 1) {

@@ -4,19 +4,31 @@ import Container from "@mui/material/Container";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { Chip, Divider, GlobalStyles, Grid, Icon, Paper } from "@mui/material";
+import { Alert, Divider, GlobalStyles, Grid, Icon, Paper } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Add } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
-
 import { DataGrid, GridValueGetterParams } from "@mui/x-data-grid";
 import ImgMediaCard from "@/components/ItemList/table-card";
 import SplitButton from "@/components/ItemList/split-button";
 import MuiDrawer from "@/components/ItemList/add-and-edit";
-import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
+
+function moneyMapper(money: any) {
+  return parseFloat(money)
+    .toFixed(2)
+    .toString()
+    .split("")
+    .reverse()
+    .join("")
+    .replace(/(\d{3})/g, "$1,")
+    .replace(/\,$/, "")
+    .split("")
+    .reverse()
+    .join("");
+}
 
 const mockDataItemList = [
   {
@@ -45,73 +57,52 @@ const mockDataItemList = [
   },
 ];
 
-function moneyMapper(money: any) {
-  return parseFloat(money)
-    .toFixed(2)
-    .toString()
-    .split("")
-    .reverse()
-    .join("")
-    .replace(/(\d{3})/g, "$1,")
-    .replace(/\,$/, "")
-    .split("")
-    .reverse()
-    .join("");
-}
+// const sort = mockDataItemList.name.sort()
+// console.log(sort)
 
-function getQuantity(params: GridValueGetterParams) {
-  return `${params.row.quantity.toString() + " unit"}`;
-}
-
-function getPrice(params: GridValueGetterParams) {
-  return `${"$" + moneyMapper(params.row.price)}`;
-}
-
-function getTag(params: GridValueGetterParams) {
-  return {
-    icon: <LocalOfferOutlinedIcon />,
-  };
-}
-
-function unitOrunits(quantity: any) {
-  if (quantity > 1) {
-    return "units";
-  } else {
-    return "unit";
-  }
+function getFullName(params: GridValueGetterParams) {
+  return `${params.row.name || ""} ${params.row.quantity || ""}`;
 }
 
 const columns = [
-  { field: "name", headerName: "Name" },
-  { field: "quantity", headerName: "Quantity", valueGetter: getQuantity },
-  { field: "price", headerName: "Price", valueGetter: getPrice },
   {
-    field: "tag",
-    headerName: "Tag",
-    renderCell: (params: any) => {
-      return (
-        <Chip variant="filled" label={[params.value[0], params.value[1]]} {...getTag(params)} />
-      );
-    },
+    field: "name",
+    headerName: "Name",
+    //  renderCell: (params) => (dataCal(mockDataItemList).map((detail: any) => (
+    //   <MuiDrawer
+    //     isDrawerOpen={isDrawerOpen}
+    //     setIsDrawerOpen={setIsDrawerOpen}
+    //     data={detail}
+    //     key={detail.id}
+    //   />
+    // )))
+  },
+  { field: "quantity", headerName: "Quantity" },
+  { field: "price", headerName: "Price" },
+  { field: "tag", headerName: "Tag" },
+  {
+    field: "fullName",
+    headerName: "Full name",
+    width: 160,
+    valueGetter: getFullName,
   },
 ];
 
-// Tutor的数据编辑的方法：
-// const dataMapper = (rows: any, searchText: string) => {
-//   return rows
-//     .filter(
-//       (row: any) =>
-//         row.name.includes(searchText) || row.tag.find((t: string) => t.includes(searchText))
-//     )
-//     .map((row: any) => {
-//       return {
-//         ...row,
-//         quantity: row.quantity.toString() + " unit",
-//         price: "$" + moneyMapper(row.price),
-//         // tag: row.tag.map((tag:any, index: number) => <Chip key={'chip${index}'} label={tag} />),
-//       };
-//     });
-// };
+const dataMapper = (rows: any, searchText: string) => {
+  return rows
+    .filter(
+      (row: any) =>
+        row.name.includes(searchText) || row.tag.find((t: string) => t.includes(searchText))
+    )
+    .map((row: any) => {
+      return {
+        ...row,
+        quantity: row.quantity.toString() + " unit",
+        price: "$" + moneyMapper(row.price),
+        // tag: row.tag.map((tag:any, index: number) => <Chip key={'chip${index}'} label={tag} />),
+      };
+    });
+};
 
 const dataCal = (rows: any) => {
   return rows.map((row: any) => {
@@ -123,16 +114,26 @@ const dataCal = (rows: any) => {
 
 const ItemList: NextPage = () => {
   const [isGrid, setIsGrid] = useState(false);
-  // const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  let items = 0;
-  let quantity = 0;
-  let totalValue = 0;
+  let x = 0;
+  let y = 0;
+  let z = 0;
 
-  const [details, setDetails] = React.useState({});
+  const [message, setMessage] = React.useState("");
   const handleRowClick = (params: any) => {
     setIsDrawerOpen(true);
-    setDetails(params.row);
+
+    dataMapper(mockDataItemList, searchText).map((detail: any) => (
+      <MuiDrawer
+        isDrawerOpen={isDrawerOpen}
+        setIsDrawerOpen={setIsDrawerOpen}
+        data={params.row}
+        key={detail.id}
+      />
+    ));
+
+    setMessage(`Movie "${params.row.name}" clicked`);
   };
 
   return (
@@ -196,7 +197,7 @@ const ItemList: NextPage = () => {
                   placeholder="Search All Items"
                   inputProps={{ "aria-label": "search google maps" }}
                   onChange={(e) => {
-                    // setSearchText((e.target as any).value);
+                    setSearchText((e.target as any).value);
                   }}
                 />
                 <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
@@ -221,10 +222,9 @@ const ItemList: NextPage = () => {
               </Grid>
             </Grid>
             {dataCal(mockDataItemList).map((value: any) => (
-              <Box sx={{ mt: 3, mr: 3 }} key={value}>
+              <Box sx={{ mt: 3, mr: 3 }} key={value.id}>
                 <Typography sx={{ display: "none" }}>
-                  {(items = items + 1)} {(quantity = quantity + value.quantity)}{" "}
-                  {(totalValue = totalValue + value.price)}
+                  {(x = x + 1)} {(y = y + value.quantity)} {(z = z + value.price)}
                 </Typography>
               </Box>
             ))}
@@ -249,29 +249,29 @@ const ItemList: NextPage = () => {
               <Grid item color="#6a6a6c">
                 Items:{" "}
                 <Grid sx={{ display: "inline" }} color="#393939" fontWeight="bold">
-                  {items}
+                  {x}
                 </Grid>
               </Grid>
               <Grid item color="#6a6a6c">
                 Total Quantity:{" "}
                 <Grid sx={{ display: "inline" }} color="#393939" fontWeight="bold">
-                  {quantity} {unitOrunits(quantity)}
+                  {y} unit(s)
                 </Grid>
               </Grid>
               <Grid item color="#6a6a6c">
                 Total Value:{" "}
                 <Grid sx={{ display: "inline" }} color="#393939" fontWeight="bold">
-                  ${totalValue.toFixed(2)}
+                  ${z}.00
                 </Grid>
               </Grid>
             </Grid>
             <Box>
               {isGrid ? (
                 <Grid container>
-                  {dataCal(mockDataItemList).map((card: any) => (
+                  {dataMapper(mockDataItemList, searchText).map((card: any) => (
                     <Box sx={{ mt: 3, mr: 3 }} key={card.id}>
                       {/* <Box sx={{ mt: 3, mr: 3 }} key={card.id} onClick={() => setIsDrawerOpen(true)}> */}
-                      <ImgMediaCard data={card} details={details} />
+                      <ImgMediaCard data={card} />
                       {/* <Divider sx={{ color: "#d5cfcf", margin: 3, border: 1, width: 1129 }}/> */}
                       {/* <MuiDrawer
                         isDrawerOpen={isDrawerOpen}
@@ -293,7 +293,7 @@ const ItemList: NextPage = () => {
                     />
                   ))} */}
                   <DataGrid
-                    rows={mockDataItemList}
+                    rows={dataMapper(mockDataItemList, searchText)}
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
@@ -304,16 +304,17 @@ const ItemList: NextPage = () => {
                     // components={{ Toolbar: GridToolbar }}
                     // experimentalFeatures={{ aggregation: true }}
                   />
-                  {/* {dataMapper(mockDataItemList, searchText).map((detail: any) => ( */}
-                  {/* ))} */}
-                  {/* {message && <Alert severity="info">{message}</Alert>} */}
+                  {dataMapper(mockDataItemList, searchText).map((detail: any) => (
+                    <MuiDrawer
+                      isDrawerOpen={isDrawerOpen}
+                      setIsDrawerOpen={setIsDrawerOpen}
+                      data={detail}
+                      key={detail.id}
+                    />
+                  ))}
+                  {message && <Alert severity="info">{message}</Alert>}
                 </Box>
               )}
-              <MuiDrawer
-                isDrawerOpen={isDrawerOpen}
-                setIsDrawerOpen={setIsDrawerOpen}
-                data={details}
-              />
             </Box>
           </header>
         </div>
