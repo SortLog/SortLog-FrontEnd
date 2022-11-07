@@ -6,16 +6,28 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Chip, Divider } from "@mui/material";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
-
 import MuiDrawer from "@/components/ItemList/add-and-edit";
 
 const handleClick = () => {
   console.info("You clicked the Chip.");
 };
 
+function unitOrunits(quantity: any) {
+  if (quantity > 1) {
+    return "units";
+  } else {
+    return "unit";
+  }
+}
+
+function getTag() {
+  return {
+    icon: <LocalOfferOutlinedIcon />,
+  };
+}
+
 const ImgMediaCard = (props: any) => {
   const { data } = props;
-
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
   return (
     <>
@@ -26,23 +38,19 @@ const ImgMediaCard = (props: any) => {
           <Typography gutterBottom variant="h5" component="div">
             {data.name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-            across all continents except Antarctica
-          </Typography>
         </CardContent>
         <CardActions>
           <Typography variant="body2" color="text.secondary">
-            {data.quantity}
+            {data.quantity} {unitOrunits(data.quantity)}
           </Typography>
           <Divider sx={{ height: 28, ml: 2, mr: 2 }} orientation="vertical" />
           <Typography variant="body2" color="text.secondary">
-            {data.price}
+            ${parseInt(data.price).toFixed(2)}
           </Typography>
         </CardActions>
         <CardActions>
-          <Chip icon={<LocalOfferOutlinedIcon />} label="tag" onClick={handleClick} />
-          <Chip icon={<LocalOfferOutlinedIcon />} label="Clickable" onClick={handleClick} />
+          <Chip variant="filled" label={data.tag[0]} {...getTag()} />
+          <Chip variant="filled" label={data.tag[1]} {...getTag()} />
         </CardActions>
       </Card>
     </>
