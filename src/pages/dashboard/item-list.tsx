@@ -4,15 +4,15 @@ import Container from "@mui/material/Container";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { Alert, Chip, Divider, GlobalStyles, Grid, Icon, Paper } from "@mui/material";
+import { Chip, Divider, GlobalStyles, Grid, Icon, Paper } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Add } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
-import SouthIcon from "@mui/icons-material/South";
-import { DataGrid, GridToolbar, GridValueGetterParams } from "@mui/x-data-grid";
+
+import { DataGrid, GridValueGetterParams } from "@mui/x-data-grid";
 import ImgMediaCard from "@/components/ItemList/table-card";
 import SplitButton from "@/components/ItemList/split-button";
 import MuiDrawer from "@/components/ItemList/add-and-edit";
@@ -88,30 +88,30 @@ const columns = [
   {
     field: "tag",
     headerName: "Tag",
-    renderCell: (params) => {
+    renderCell: (params: any) => {
       return (
-        <Chip variant="rounded" label={[params.value[0], params.value[1]]} {...getTag(params)} />
+        <Chip variant="filled" label={[params.value[0], params.value[1]]} {...getTag(params)} />
       );
     },
   },
 ];
 
 // Tutor的数据编辑的方法：
-const dataMapper = (rows: any, searchText: string) => {
-  return rows
-    .filter(
-      (row: any) =>
-        row.name.includes(searchText) || row.tag.find((t: string) => t.includes(searchText))
-    )
-    .map((row: any) => {
-      return {
-        ...row,
-        quantity: row.quantity.toString() + " unit",
-        price: "$" + moneyMapper(row.price),
-        // tag: row.tag.map((tag:any, index: number) => <Chip key={'chip${index}'} label={tag} />),
-      };
-    });
-};
+// const dataMapper = (rows: any, searchText: string) => {
+//   return rows
+//     .filter(
+//       (row: any) =>
+//         row.name.includes(searchText) || row.tag.find((t: string) => t.includes(searchText))
+//     )
+//     .map((row: any) => {
+//       return {
+//         ...row,
+//         quantity: row.quantity.toString() + " unit",
+//         price: "$" + moneyMapper(row.price),
+//         // tag: row.tag.map((tag:any, index: number) => <Chip key={'chip${index}'} label={tag} />),
+//       };
+//     });
+// };
 
 const dataCal = (rows: any) => {
   return rows.map((row: any) => {
@@ -123,14 +123,14 @@ const dataCal = (rows: any) => {
 
 const ItemList: NextPage = () => {
   const [isGrid, setIsGrid] = useState(false);
-  const [searchText, setSearchText] = useState("");
+  // const [searchText, setSearchText] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   let items = 0;
   let quantity = 0;
   let totalValue = 0;
 
   const [details, setDetails] = React.useState({});
-  const handleRowClick = (params) => {
+  const handleRowClick = (params: any) => {
     setIsDrawerOpen(true);
     setDetails(params.row);
   };
@@ -196,7 +196,7 @@ const ItemList: NextPage = () => {
                   placeholder="Search All Items"
                   inputProps={{ "aria-label": "search google maps" }}
                   onChange={(e) => {
-                    setSearchText((e.target as any).value);
+                    // setSearchText((e.target as any).value);
                   }}
                 />
                 <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
