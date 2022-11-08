@@ -55,7 +55,7 @@ const About: NextPage = () => {
               fontWeight="bold"
               paddingTop="100px"
             >
-              Sortlog <text style={{ color: "#cd1530" }}>Team</text>
+              Sortlog <text style={{ color: "#ce132f" }}>Team</text>
             </Typography>
 
             <Grid container spacing={6} paddingTop="50px">
@@ -72,7 +72,7 @@ const About: NextPage = () => {
                       <Link
                         href="https:www.linkedin.com/in/junyi-men/"
                         target="_blank"
-                        color="#949494"
+                        color="#1913ce"
                         paddingLeft="10px"
                       >
                         <LinkedInIcon fontSize="small" />
@@ -97,7 +97,7 @@ const About: NextPage = () => {
                       <Link
                         href="https://www.linkedin.com/in/mingen-xiao/"
                         target="_blank"
-                        color="#949494"
+                        color="#1913ce"
                         paddingLeft="10px"
                       >
                         <LinkedInIcon fontSize="small" />
@@ -122,7 +122,7 @@ const About: NextPage = () => {
                       <Link
                         href="https:www.linkedin.com/in/tony-dong-liu/"
                         target="_blank"
-                        color="#949494"
+                        color="#1913ce"
                         paddingLeft="10px"
                       >
                         <LinkedInIcon fontSize="small" />
@@ -147,7 +147,7 @@ const About: NextPage = () => {
                       <Link
                         href="https:www.linkedin.com/in/roy-qin/"
                         target="_blank"
-                        color="#949494"
+                        color="#1913ce"
                         paddingLeft="10px"
                       >
                         <LinkedInIcon fontSize="small" />
@@ -169,7 +169,7 @@ const About: NextPage = () => {
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       Shikai Lu
-                      <Link href="" target="_blank" color="#949494" paddingLeft="10px">
+                      <Link href="" target="_blank" color="#1913ce" paddingLeft="10px">
                         <LinkedInIcon fontSize="small" />
                       </Link>
                     </Typography>
@@ -192,7 +192,7 @@ const About: NextPage = () => {
                       <Link
                         href="http://linkedin.com/in/lina-zhao-010b3124b/"
                         target="_blank"
-                        color="#949494"
+                        color="#1913ce"
                         paddingLeft="10px"
                       >
                         <LinkedInIcon fontSize="small" />
@@ -217,7 +217,7 @@ const About: NextPage = () => {
                       <Link
                         href="https://www.linkedin.com/in/yuchen-diao/"
                         target="_blank"
-                        color="#949494"
+                        color="#1913ce"
                         paddingLeft="10px"
                       >
                         <LinkedInIcon fontSize="small" />
@@ -242,7 +242,7 @@ const About: NextPage = () => {
                       <Link
                         href="https://www.linkedin.com/in/tremendous-shawn-wang/"
                         target="_blank"
-                        color="#949494"
+                        color="#1913ce"
                         paddingLeft="10px"
                       >
                         <LinkedInIcon fontSize="small" />
@@ -267,7 +267,7 @@ const About: NextPage = () => {
                       <Link
                         href="https://www.linkedin.com/in/sallysong30"
                         target="_blank"
-                        color="#949494"
+                        color="#1913ce"
                         paddingLeft="10px"
                       >
                         <LinkedInIcon fontSize="small" />
@@ -275,31 +275,6 @@ const About: NextPage = () => {
                     </Typography>
                     <Typography fontSize="13px" color="#777676">
                       Devops
-                    </Typography>
-                  </Box>
-                </Paper>
-              </Grid>
-              <Grid item>
-                <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
-                  <Box paddingTop="50px" paddingLeft="70px">
-                    <Avatar
-                      alt="OOO PPP"
-                      src="./png/icon-test.png"
-                      sx={{ height: 139, width: 139 }}
-                    />
-                    <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
-                      OOO PPP
-                      <Link
-                        href="https://www.linkedin.com/in/mingen-xiao/"
-                        target="_blank"
-                        color="#949494"
-                        paddingLeft="10px"
-                      >
-                        <LinkedInIcon fontSize="small" />
-                      </Link>
-                    </Typography>
-                    <Typography fontSize="13px" color="#777676">
-                      Full-Stack Developer
                     </Typography>
                   </Box>
                 </Paper>
