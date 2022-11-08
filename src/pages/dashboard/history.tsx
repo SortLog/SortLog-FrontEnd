@@ -295,7 +295,7 @@ export default function history() {
         </Typography>
       </Box>
       <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 }} className={"searchBox"}>
-        <Grid item xs >
+        <Grid item xs>
           <TextField
             fullWidth
             id="standard-basic"
@@ -304,7 +304,7 @@ export default function history() {
             color="primary"
           />
         </Grid>
-        <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160} >
+        <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="Start Date"
@@ -316,7 +316,7 @@ export default function history() {
             />
           </LocalizationProvider>
         </Grid>
-        <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160} >
+        <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="Finish Date"
