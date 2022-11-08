@@ -16,8 +16,6 @@ import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "@/contexts/amplify-context";
 Amplify.configure(awsmobile);
 const App = ({ Component, pageProps }: AppProps) => {
-
-
   return (
     <ApolloProvider client={client}>
       <ReduxProvider store={store}>
