@@ -32,6 +32,8 @@ const cardStyle = {
 const AddMembers = () => {
   const initialMemberList: string[] = [];
 
+  const [companyId, setCompanyId] = useState<string>("");
+
   const [companyName, setCompanyName] = useState<string>("");
   const [memberEmail, setMemberEmail] = useState<string>("");
   const [memberList, setMemberList] = useState(initialMemberList);
@@ -52,6 +54,8 @@ const AddMembers = () => {
     let i;
     for (i = 0; i < company.length; i++) {
       if (company[i].companyName === companyName) {
+        setCompanyId(company[i]._id);
+        console.log(companyId);
         return company[i].teamMember;
       }
     }
@@ -60,7 +64,8 @@ const AddMembers = () => {
         companyName: `${companyName}`,
         teamMember: [],
       };
-      await companyApi.addCompany(company);
+      const newCompany = await companyApi.addCompany(company);
+      setCompanyId(newCompany.data._id);
       return company.teamMember;
     }
   };
@@ -132,15 +137,12 @@ const AddMembers = () => {
   const onMemberInputChange = (event: any) => {
     const value = event.target.value;
     setMemberEmail(value);
-    console.log(value);
+    console.log(memberEmail);
   };
 
   const onNextButtonClick = async (event: any) => {
     event.preventDefault();
     try {
-      // const memberListData = await fetchMemberListByCompanyName(companyName);
-      // setMemberList(memberListData);
-
       const memberListData = await getMemberListByCompanyName(companyName);
 
       setMemberList(memberListData);
@@ -153,11 +155,30 @@ const AddMembers = () => {
     console.log(event);
   };
 
-  const onAddButtonClick = (event: any) => {
+  const onAddButtonClick = async (event: any) => {
     event.preventDefault();
-    onAddNewMember(memberEmail);
+    const emailRegex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
+    if (emailRegex.test(memberEmail)) {
+      onAddNewMember(memberEmail);
+      alert("A new member has joined your team")
+    } else {
+      alert("Invalid email format")
+    }
+    
     setMemberEmail("");
   };
+
+  useEffect(() => {
+    const company = {
+      companyName: companyName,
+      teamMember: memberList,
+    };
+    console.log(companyId, company)
+    const upgrade = async ()=>{
+      await companyApi.upgradeCompany(companyId, company);
+    }
+    upgrade();
+  },[memberList]);
 
   return (
     <>
