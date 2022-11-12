@@ -27,8 +27,34 @@ const cardStyle = {
   },
 };
 
-export default function SimpleContainer() {
+export default function setting() {
   const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+
+  const onPersonalInfoSaveChangesButton = () => {
+    const user = {
+      id: "63343af774e468a1647f3e54",
+      name: "user2",
+      email: "user2@gmail.com",
+      provider: "company2",
+      photoUrl:
+        "https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F5288da3d-c702-41ee-9ddc-5ec8e031b81d%2FCopie_de_outils_(3).png?table=block&id=6010cc1c-8cee-40af-8ac5-8a54ab836ff9&spaceId=6ebdc1e4-1ee0-4f5b-bc89-25b5e1c54c81&width=250&userId=70765e0b-1374-4e1d-a7fb-bfef8fa25448&cache=v2",
+      contactType: "email",
+      phone: "20391230",
+    };
+
+    user.name = `${firstName} ${lastName}`;
+    user.provider = companyName;
+    user.email = email;
+
+    console.log(user);
+
+    userApi.putUser(user.id, user);
+  };
 
   return (
     <Container maxWidth="md">
@@ -49,6 +75,7 @@ export default function SimpleContainer() {
               id="outlined-required"
               label="First Name"
               defaultValue=""
+              value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
             <TextField
@@ -57,6 +84,8 @@ export default function SimpleContainer() {
               id="outlined-required"
               label="Last Name"
               defaultValue=""
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
             />
             <TextField
               style={cardStyle.textField}
@@ -64,6 +93,8 @@ export default function SimpleContainer() {
               id="outlined-password-input"
               label="Email"
               defaultValue=""
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               style={cardStyle.textField}
@@ -71,35 +102,13 @@ export default function SimpleContainer() {
               id="outlined-read-only-input"
               label="Company Name"
               defaultValue=""
+              value={companyName}
+              onChange={(e) => setCompanyName(e.target.value)}
             />
           </div>
         </CardContent>
         <CardActions>
-          <Button
-            onClick={() => {
-              const user = {
-                id: "63343af774e468a1647f3e54",
-                name: "user2",
-                email: "user2@gmail.com",
-                provider: "company2",
-                photoUrl:
-                  "https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F5288da3d-c702-41ee-9ddc-5ec8e031b81d%2FCopie_de_outils_(3).png?table=block&id=6010cc1c-8cee-40af-8ac5-8a54ab836ff9&spaceId=6ebdc1e4-1ee0-4f5b-bc89-25b5e1c54c81&width=250&userId=70765e0b-1374-4e1d-a7fb-bfef8fa25448&cache=v2",
-                contactType: "email",
-                phone: "20391230",
-              };
-              userApi.putUser(
-                user.id,
-                user.email,
-                firstName,
-                user.provider,
-                user.photoUrl,
-                user.contactType,
-                user.phone
-              );
-            }}
-          >
-            SAVE CHANGES
-          </Button>
+          <Button onClick={onPersonalInfoSaveChangesButton}>SAVE CHANGES</Button>
         </CardActions>
       </Card>
       <Card style={cardStyle.card} sx={{ minWidth: 275 }}>
@@ -114,6 +123,7 @@ export default function SimpleContainer() {
               id="outlined-required"
               label="Current Password"
               defaultValue=""
+              onChange={(e) => setCurrentPassword(e.target.value)}
             />
             <TextField
               style={cardStyle.textField}
@@ -121,6 +131,7 @@ export default function SimpleContainer() {
               id="outlined-required"
               label="New Password"
               defaultValue=""
+              onChange={(e) => setNewPassword(e.target.value)}
             />
           </div>
         </CardContent>
