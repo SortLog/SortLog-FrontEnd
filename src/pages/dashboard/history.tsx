@@ -294,8 +294,8 @@ export default function history() {
           History
         </Typography>
       </Box>
-      <Grid container spacing={2} sx={{ pl: 1, minWidth: 300 }} className={"searchBox"}>
-        <Grid item xs={9}>
+      <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 }} className={"searchBox"}>
+        <Grid item xs>
           <TextField
             fullWidth
             id="standard-basic"
@@ -304,10 +304,22 @@ export default function history() {
             color="primary"
           />
         </Grid>
-        <Grid item xs={3} display="flex" justifyContent="flex-end" pr={1}>
+        <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
-              label="Select Date"
+              label="Start Date"
+              value={value}
+              onChange={(newValue) => {
+                setValue(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
+        </Grid>
+        <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker
+              label="Finish Date"
               value={value}
               onChange={(newValue) => {
                 setValue(newValue);

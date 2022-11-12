@@ -198,7 +198,7 @@ const AddMembers = () => {
             <CardMedia
               sx={{ textAlign: "center" }}
               component="img"
-              image="/png/logo-no-background-h.png"
+              image="./png/logo-no-background-h.png"
               alt="sortlog icon"
             />
             <Typography
