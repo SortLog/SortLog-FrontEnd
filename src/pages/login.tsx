@@ -22,6 +22,7 @@ const SignIn: React.FC = () => {
       const user = await login(email, password);
       router.push("/dashboard");
       toast.success(user.username + " logged in successfully");
+      console.log(user);
     } catch (error: any) {
       console.log(error);
       toast.error(error.message);
