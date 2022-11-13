@@ -9,13 +9,15 @@ import { useMounted } from "../../hooks/use-mounted";
 export const AmplifyVerifyCode = (props) => {
   const isMounted = useMounted();
   const router = useRouter();
-  const { verifyCode } = useAuth();
+  const { verifyCode, registerBackend } = useAuth();
   const itemsRef = useRef([]);
   const [username, setUsername] = useState("");
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  console.log("get user info" + userInfo);
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      email: username,
+      email: userInfo.email,
       code: ["", "", "", "", "", ""],
       submit: null,
     },
@@ -25,14 +27,18 @@ export const AmplifyVerifyCode = (props) => {
     }),
     onSubmit: async (values, helpers) => {
       try {
+        console.log("verify code");
         await verifyCode(values.email, values.code.join(""));
-
+        //  register to the backend
+        console.log("register in the backend");
+        await registerBackend(userInfo.email, userInfo.name, userInfo.provider);
+        // log in using the current email and code
         if (isMounted()) {
           router.push("/login").catch(console.error);
         }
       } catch (err) {
         console.error(err);
-
+        toast.error(err.message);
         if (isMounted()) {
           helpers.setStatus({ success: false });
           helpers.setErrors({ submit: err.message });
