@@ -26,7 +26,7 @@ const About: NextPage = () => {
               fontWeight="bold"
               color="#373b54"
               align="center"
-              paddingTop="66px"
+              paddingTop="166px"
             >
               About <text style={{ color: "#cd1530" }}>Us</text>.
             </Typography>
@@ -53,12 +53,12 @@ const About: NextPage = () => {
               component="div"
               color="#373b54"
               fontWeight="bold"
-              paddingTop="100px"
+              paddingTop="33px"
             >
               Sortlog <text style={{ color: "#ce132f" }}>Team</text>
             </Typography>
 
-            <Grid container spacing={6} paddingTop="50px">
+            <Grid container spacing={6} paddingTop="66px" paddingLeft="66px">
               <Grid item>
                 <Paper style={{ height: 260, width: 280, borderRadius: 30 }} elevation={12}>
                   <Box paddingTop="50px" paddingLeft="70px">
