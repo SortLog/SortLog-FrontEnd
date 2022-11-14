@@ -160,11 +160,11 @@ const AddMembers = () => {
     const emailRegex = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/;
     if (emailRegex.test(memberEmail)) {
       onAddNewMember(memberEmail);
-      alert("A new member has joined your team")
+      alert("A new member has joined your team");
     } else {
-      alert("Invalid email format")
+      alert("Invalid email format");
     }
-    
+
     setMemberEmail("");
   };
 
@@ -173,12 +173,12 @@ const AddMembers = () => {
       companyName: companyName,
       teamMember: memberList,
     };
-    console.log(companyId, company)
-    const upgrade = async ()=>{
+    console.log(companyId, company);
+    const upgrade = async () => {
       await companyApi.upgradeCompany(companyId, company);
-    }
+    };
     upgrade();
-  },[memberList]);
+  }, [memberList]);
 
   return (
     <>

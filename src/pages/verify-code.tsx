@@ -17,7 +17,6 @@ const VerifyCode = () => {
         <title>Verify Code | Creatalog</title>
       </Head>
       <Box
-        component="main"
         sx={{
           backgroundColor: "background.default",
           display: "flex",

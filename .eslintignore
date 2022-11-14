@@ -35,3 +35,5 @@ yarn-error.log*
 
 #config
 /src/config
+
+/src/pages/register.tsx

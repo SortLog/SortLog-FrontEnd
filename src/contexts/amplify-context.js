@@ -1,6 +1,7 @@
 import { createContext, useEffect, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import Auth from '@aws-amplify/auth';
+import { api } from "@/utils/axios";
 
 export const amplifyConfig = {
   aws_project_region: process.env.NEXT_PUBLIC_AWS_PROJECT_REGION,
@@ -67,7 +68,8 @@ export const AuthContext = createContext({
   login: (email, password) => Promise.resolve(email, password),
   logout: () => Promise.resolve(),
   register: (email, password) => Promise.resolve(email, password),
-  verifyCode: () => Promise.resolve(),
+  registerBackend: (email, name, provider) => Promise.resolve(email, name, provider),
+  verifyCode: (email, join) => Promise.resolve(),
   resendCode: () => Promise.resolve(),
   passwordRecovery: () => Promise.resolve(),
   passwordReset: () => Promise.resolve()
@@ -151,6 +153,12 @@ export const AuthProvider = (props) => {
     });
   };
 
+  const registerBackend = async (email, name, provider) => {
+    api(`/users/add`, 
+      { method: "POST" ,
+	   data: {email:email, name: name, provider: provider}});
+  };
+
   const verifyCode = async (username, code) => {
     await Auth.confirmSignUp(username, code);
   };
@@ -175,6 +183,7 @@ export const AuthProvider = (props) => {
         login,
         logout,
         register,
+        registerBackend,
         verifyCode,
         resendCode,
         passwordRecovery,
