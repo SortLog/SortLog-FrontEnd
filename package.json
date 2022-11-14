@@ -48,7 +48,9 @@
         "sass": "^1.54.9",
         "simplebar": "^5.3.6",
         "simplebar-react": "^2.4.3",
-        "styled-components": "^5.3.5"
+        "styled-components": "^5.3.5",
+        "formik": "^2.2.9",
+        "yup": "^0.32.11"
     },
     "devDependencies": {
         "@babel/plugin-proposal-decorators": "^7.17.9",

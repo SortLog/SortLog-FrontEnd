@@ -2,8 +2,9 @@ import { TextField, Button, Grid, Box, Paper, Typography, Link, Container } from
 import { styled } from "@mui/material/styles";
 import { FcGoogle } from "react-icons/fc";
 import { useInput } from "@/util/forms";
-import { Auth } from "aws-amplify";
 import { useRouter } from "next/router";
+import { useAuth } from "@/hooks/use-auth";
+import toast from "react-hot-toast";
 
 const StyledTextField = styled(TextField)({
   borderRadius: "5px",
@@ -14,21 +15,17 @@ const SignIn: React.FC = () => {
   const { value: email, bind: bindEmail } = useInput("");
   const { value: password, bind: bindPassword } = useInput("");
   const router = useRouter();
+  const { login } = useAuth();
   const handleSubmit = async (e: React.SyntheticEvent<Element, Event>) => {
     e.preventDefault();
     try {
-      const user = await Auth.signIn(email, password);
-      // hint user is signed in
-      console.log(user);
-      if (user.challengeName) {
-        console.error(
-          `Unable to login, because challenge "${user.challengeName}" is mandated and we did not handle this case.`
-        );
-        return;
-      }
+      const user = await login(email, password);
       router.push("/dashboard");
-    } catch (error) {
+      toast.success(user.username + " logged in successfully");
+      console.log(user);
+    } catch (error: any) {
       console.log(error);
+      toast.error(error.message);
     }
   };
 
@@ -147,7 +144,7 @@ const SignIn: React.FC = () => {
               <Box display="flex" justifyContent="center">
                 <Typography>
                   New here?&nbsp;
-                  <Link href="#" variant="body2" color="info.main">
+                  <Link href="/register" variant="body2" color="info.main">
                     Create an account
                   </Link>
                 </Typography>
