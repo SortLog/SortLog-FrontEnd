@@ -70,7 +70,7 @@ const About: NextPage = () => {
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       Jenny Men
                       <Link
-                        href="https:www.linkedin.com/in/junyi-men/"
+                        href="https://www.linkedin.com/in/junyi-men/"
                         target="_blank"
                         color="#1913ce"
                         paddingLeft="10px"
@@ -120,7 +120,7 @@ const About: NextPage = () => {
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       Tony Liu
                       <Link
-                        href="https:www.linkedin.com/in/tony-dong-liu/"
+                        href="https://www.linkedin.com/in/tony-dong-liu/"
                         target="_blank"
                         color="#1913ce"
                         paddingLeft="10px"
@@ -145,7 +145,7 @@ const About: NextPage = () => {
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       Roy Qin
                       <Link
-                        href="https:www.linkedin.com/in/roy-qin/"
+                        href="https://www.linkedin.com/in/roy-qin/"
                         target="_blank"
                         color="#1913ce"
                         paddingLeft="10px"
@@ -169,9 +169,9 @@ const About: NextPage = () => {
                     />
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       Shikai Lu
-                      <Link href="" target="_blank" color="#1913ce" paddingLeft="10px">
+                      {/* <Link href="" target="_blank" color="#1913ce" paddingLeft="10px">
                         <LinkedInIcon fontSize="small" />
-                      </Link>
+                      </Link> */}
                     </Typography>
                     <Typography fontSize="13px" color="#777676">
                       Developer
@@ -190,7 +190,7 @@ const About: NextPage = () => {
                     <Typography variant="h6" paddingTop="10px" fontWeight="bold" color="#777676">
                       Lina Zhao
                       <Link
-                        href="http://linkedin.com/in/lina-zhao-010b3124b/"
+                        href="http://www.linkedin.com/in/lina-zhao-010b3124b/"
                         target="_blank"
                         color="#1913ce"
                         paddingLeft="10px"
