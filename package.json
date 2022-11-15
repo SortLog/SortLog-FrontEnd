@@ -29,10 +29,12 @@
         "@mui/x-date-pickers-pro": "^5.0.3",
         "@reduxjs/toolkit": "^1.8.1",
         "@types/prop-types": "^15.7.5",
+        "@yudiel/react-qr-scanner": "^1.0.8",
         "aws-amplify": "^4.3.37",
         "axios": "^0.27.2",
         "date-fns": "^2.29.3",
         "dayjs": "^1.11.5",
+        "formik": "^2.2.9",
         "graphql": "^16.6.0",
         "lodash": "^4.17.21",
         "moment": "^2.29.4",
@@ -49,7 +51,6 @@
         "simplebar": "^5.3.6",
         "simplebar-react": "^2.4.3",
         "styled-components": "^5.3.5",
-        "formik": "^2.2.9",
         "yup": "^0.32.11"
     },
     "devDependencies": {
