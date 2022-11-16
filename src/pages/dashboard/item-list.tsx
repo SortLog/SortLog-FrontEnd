@@ -255,7 +255,7 @@ const ItemList: NextPage = () => {
                 <SplitButton setIsGrid={setIsGrid} sx={{ height: 100 }} />
               </Grid>
             </Grid>
-            {dataCal(mockDataItemList[0]).map((value: any) => (
+            {dataCal(mockDataItemList).map((value: any) => (
               <Box sx={{ mt: 3, mr: 3 }} key={value}>
                 <Typography sx={{ display: "none" }}>
                   {(items = items + 1)} {(quantity = quantity + value.quantity)}{" "}
