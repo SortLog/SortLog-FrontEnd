@@ -16,9 +16,7 @@ import ImgMediaCard from "@/components/ItemList/table-card";
 import SplitButton from "@/components/ItemList/split-button";
 import MuiDrawer from "@/components/ItemList/add-and-edit";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
-import * as itemApi from "@/services/api/items"
-
-
+import * as itemApi from "@/services/api/items";
 
 // const mockDataItemList = [
 //   {
@@ -139,7 +137,7 @@ const ItemList: NextPage = () => {
 
   const [mockDataItemList, setItems] = useState<any>([]);
   useEffect(() => {
-    const fetchData = async () => { 
+    const fetchData = async () => {
       const { data } = await itemApi.listItems();
       setItems(data);
     };
