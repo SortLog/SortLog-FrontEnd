@@ -89,9 +89,8 @@ const columns = [
     field: "tag",
     headerName: "Tag",
     renderCell: (params: any) => {
-      return (
-        <Chip variant="filled" label={[params.value[0], params.value[1]]} {...getTag(params)} />
-      );
+      // console.log(params.row.tags);
+      return <Chip variant="filled" label={params.row.tags.join(" ")} {...getTag(params)} />;
     },
   },
 ];
@@ -139,11 +138,32 @@ const ItemList: NextPage = () => {
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await itemApi.listItems();
+      console.log(data);
       setItems(data);
+      // console.log(mockDataItemList);
     };
     fetchData();
-    console.log(mockDataItemList[0]);
   }, []);
+
+  // const getItemrListByItemName = async (companyName: string) => {
+  //   let i;
+  //   for (i = 0; i < mockDataItemList.length; i++) {
+  //     if (mockDataItemList[i].companyName === companyName) {
+  //       setCompanyId(mockDataItemList[i]._id);
+  //       console.log(companyId);
+  //       return mockDataItemList[i].teamMember;
+  //     }
+  //   }
+  //   if (i === mockDataItemList.length) {
+  //     const mockDataItemList = {
+  //       companyName: `${companyName}`,
+  //       teamMember: [],
+  //     };
+  //     const newCompany = await itemApi.addCompany(mockDataItemList);
+  //     setCompanyId(newCompany.data._id);
+  //     return mockDataItemList.teamMember;
+  //   }
+  // };
 
   // const mockDataItemList = await itemApi.listItems();
   // const mockDataItemList = mockDataItemListAAA.data;
@@ -177,7 +197,10 @@ const ItemList: NextPage = () => {
                 variant="contained"
                 startIcon={<Add />}
                 sx={{ backgroundColor: "#e70a3e" }}
-                onClick={() => setIsDrawerOpen(true)}
+                onClick={() => {
+                  setIsDrawerOpen(true);
+                  setDetails({});
+                }}
               >
                 ADD NEW
               </Button>
@@ -232,7 +255,7 @@ const ItemList: NextPage = () => {
                 <SplitButton setIsGrid={setIsGrid} sx={{ height: 100 }} />
               </Grid>
             </Grid>
-            {dataCal(mockDataItemList[0]).map((value: any) => (
+            {dataCal(mockDataItemList).map((value: any) => (
               <Box sx={{ mt: 3, mr: 3 }} key={value}>
                 <Typography sx={{ display: "none" }}>
                   {(items = items + 1)} {(quantity = quantity + value.quantity)}{" "}
@@ -280,8 +303,8 @@ const ItemList: NextPage = () => {
             <Box>
               {isGrid ? (
                 <Grid container>
-                  {dataCal(mockDataItemList[0]).map((card: any) => (
-                    <Box sx={{ mt: 3, mr: 3 }} key={card.id}>
+                  {dataCal(mockDataItemList).map((card: any) => (
+                    <Box sx={{ mt: 3, mr: 3 }} key={card.id} id={card.id}>
                       {/* <Box sx={{ mt: 3, mr: 3 }} key={card.id} onClick={() => setIsDrawerOpen(true)}> */}
                       <ImgMediaCard data={card} details={details} />
                       {/* <Divider sx={{ color: "#d5cfcf", margin: 3, border: 1, width: 1129 }}/> */}
@@ -305,7 +328,13 @@ const ItemList: NextPage = () => {
                     />
                   ))} */}
                   <DataGrid
-                    rows={mockDataItemList[0]}
+                    // rows={mockDataItemList.map((item: any, index: number) => {
+                    //   return({...item, id: index})
+                    // })}
+                    rows={mockDataItemList.map((item: any) => ({
+                      ...item,
+                      id: item._id,
+                    }))}
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
