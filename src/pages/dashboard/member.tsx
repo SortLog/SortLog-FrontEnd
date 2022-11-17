@@ -258,10 +258,7 @@ const AddMembers = () => {
             </div>
           </CardContent>
         </Card>
-        <Divider variant="middle" />
-        <div style={{ display: "flex", flexDirection: "row-reverse" }}>
-          <Button sx={{ margin: "20px" }}>SKIP</Button>
-        </div>
+
       </Container>
     </>
   );
