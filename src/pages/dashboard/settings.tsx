@@ -39,17 +39,16 @@ export default function setting() {
   const [newPassword, setNewPassword] = useState("");
 
   const onPersonalInfoSaveChangesButton = () => {
-
-    console.log('change user info' + currentUser);
+    console.log("change user info" + currentUser);
     currentUser.name = name;
     currentUser.provider = companyName;
     try {
-        userApi.putUser(currentUser._id, currentUser);
-        localStorage.setItem("currentUser", JSON.stringify(currentUser));
-        toast.success("Personal info updated successfully");
-    }catch (error: any) {
-        console.log(error);
-        toast.error(error.message);
+      userApi.putUser(currentUser._id, currentUser);
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      toast.success("Personal info updated successfully");
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.message);
     }
   };
 
@@ -78,9 +77,7 @@ export default function setting() {
             <TextField
               style={cardStyle.textField}
               required
-              inputProps={
-                { readOnly: true, }
-              }
+              inputProps={{ readOnly: true }}
               id="outlined-password-input"
               label="Email"
               defaultValue={currentUser.email}

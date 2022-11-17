@@ -33,7 +33,7 @@ const ImgMediaCard = (props: any) => {
     <>
       <MuiDrawer isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} data={data} />
       <Card sx={{ maxWidth: 345 }} onClick={() => setIsDrawerOpen(true)}>
-        <CardMedia component="img" alt="green iguana" height="200" image={data.img} />
+        <CardMedia component="img" alt="green iguana" height="200" image={data.image} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
             {data.name}
@@ -49,8 +49,8 @@ const ImgMediaCard = (props: any) => {
           </Typography>
         </CardActions>
         <CardActions>
-          <Chip variant="filled" label={data.tag[0]} {...getTag()} />
-          <Chip variant="filled" label={data.tag[1]} {...getTag()} />
+          <Chip variant="filled" label={data.tags[0]} {...getTag()} />
+          <Chip variant="filled" label={data.tags[1]} {...getTag()} />
         </CardActions>
       </Card>
     </>
