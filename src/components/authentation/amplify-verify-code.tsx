@@ -14,7 +14,7 @@ export const AmplifyVerifyCode = () => {
   // const itemsRef = useRef([]);
   const [username, setUsername] = useState("");
   // @ts-ignore
-  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  const userInfo = JSON.parse(localStorage.getItem("currentUser"));
   console.log("get user info" + userInfo);
   const formik = useFormik({
     enableReinitialize: true,
