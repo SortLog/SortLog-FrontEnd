@@ -109,6 +109,7 @@ export default function setting() {
               style={cardStyle.textField}
               required
               id="outlined-required"
+              label="Old Password"
               // label="Current Password"
               defaultValue=""
               onChange={(e) => setCurrentPassword(e.target.value)}

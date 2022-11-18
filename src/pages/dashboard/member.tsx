@@ -33,8 +33,9 @@ const AddMembers = () => {
   const initialMemberList: string[] = [];
 
   const [companyId, setCompanyId] = useState<string>("");
-
-  const [companyName, setCompanyName] = useState<string>("");
+  // @ts-ignore
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const [companyName, setCompanyName] = useState<string>(currentUser.provider);
   const [memberEmail, setMemberEmail] = useState<string>("");
   const [memberList, setMemberList] = useState(initialMemberList);
 
@@ -211,6 +212,7 @@ const AddMembers = () => {
             <Box sx={cardStyle.cardInput}>
               <TextField
                 style={cardStyle.textField}
+                inputProps={{ readOnly: true }}
                 required
                 label="Company Name"
                 value={companyName}
@@ -256,10 +258,7 @@ const AddMembers = () => {
             </div>
           </CardContent>
         </Card>
-        <Divider variant="middle" />
-        <div style={{ display: "flex", flexDirection: "row-reverse" }}>
-          <Button sx={{ margin: "20px" }}>SKIP</Button>
-        </div>
+
       </Container>
     </>
   );
