@@ -86,15 +86,15 @@ const styles = StyleSheet.create({
   },
 });
 
-export const HistoryPDF = (props: any) => {
+const HistoryPDF = (props: any) => {
   const { history } = props;
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
-          <View >
-          <Text style={styles.h6}>COMPANY</Text>
+          <View>
+            <Text style={styles.h6}>COMPANY</Text>
             <Text style={styles.h4}>{history.user.companyName}</Text>
           </View>
           <View>
@@ -120,7 +120,7 @@ export const HistoryPDF = (props: any) => {
           <View style={styles.table}>
             <View style={styles.tableHeader}>
               <View style={styles.tableRow}>
-              <View style={styles.tableCell1}>
+                <View style={styles.tableCell1}>
                   <Text style={styles.h6}>SKU</Text>
                 </View>
                 <View style={styles.tableCell1}>
@@ -204,3 +204,5 @@ export const HistoryPDF = (props: any) => {
 HistoryPDF.propTypes = {
   history: PropTypes.object.isRequired,
 };
+
+export default HistoryPDF;

@@ -1,7 +1,17 @@
 import * as React from "react";
 import { useMounted } from "@/hooks/use-mounted";
 import { useCallback, useEffect, useState } from "react";
-import { Avatar, Box, Button, Container, Dialog, Divider, Grid, Link, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Button,
+  Container,
+  Dialog,
+  Divider,
+  Grid,
+  Link,
+  Typography,
+} from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { Calendar as CalendarIcon } from "../../../icons/calendar";
 import { ChevronDown as ChevronDownIcon } from "../../../icons/chevron-down";
@@ -11,8 +21,8 @@ import Head from "next/head";
 import { historyApi } from "../../api/fake-api/history-api";
 import { getInitials } from "@/utils/get-initials";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
-import { HistoryPDF } from "./history-form-pdf";
-import { HistoryPreview } from "./history-preview";
+import HistoryPDF from "./history-form-pdf";
+import HistoryPreview from "./history-preview";
 
 interface History {
   id: string;
@@ -23,7 +33,7 @@ interface History {
   items: {
     SKU: string;
     name: string;
-    Price: number;
+    price: number;
     QTY: number;
   }[];
   user: {
@@ -140,21 +150,18 @@ export default function historyForm() {
           <HistoryPreview history={history} />
         </Container>
       </Box>
-      <Dialog
-        fullScreen
-        open={viewPDF}
-      >
+      <Dialog fullScreen open={viewPDF}>
         <Box
           sx={{
-            display: 'flex',
-            flexDirection: 'column',
-            height: '100%'
+            display: "flex",
+            flexDirection: "column",
+            height: "100%",
           }}
         >
           <Box
             sx={{
-              backgroundColor: 'background.default',
-              p: 2
+              backgroundColor: "background.default",
+              p: 2,
             }}
           >
             <Button
@@ -166,11 +173,7 @@ export default function historyForm() {
             </Button>
           </Box>
           <Box sx={{ flexGrow: 1 }}>
-            <PDFViewer
-              height="100%"
-              style={{ border: 'none' }}
-              width="100%"
-            >
+            <PDFViewer height="100%" style={{ border: "none" }} width="100%">
               <HistoryPDF history={history} />
             </PDFViewer>
           </Box>

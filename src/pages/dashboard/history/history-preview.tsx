@@ -13,7 +13,7 @@ import {
   Typography,
 } from "@mui/material";
 
-export const HistoryPreview = (props: any) => {
+const HistoryPreview = (props: any) => {
   const { history, ...other } = props;
 
   return (
@@ -59,7 +59,7 @@ export const HistoryPreview = (props: any) => {
         <Table>
           <TableHead>
             <TableRow>
-            <TableCell>SKU</TableCell>
+              <TableCell>SKU</TableCell>
               <TableCell>Item Name</TableCell>
               <TableCell>Unit Price</TableCell>
               <TableCell>QTY</TableCell>
@@ -130,3 +130,4 @@ export const HistoryPreview = (props: any) => {
     </Paper>
   );
 };
+export default HistoryPreview;
