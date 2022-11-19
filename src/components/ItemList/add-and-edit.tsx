@@ -96,6 +96,7 @@ import QrCode2Icon from "@mui/icons-material/QrCode2";
 import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { makeStyles } from "@mui/styles";
+import { QrCode } from "@mui/icons-material";
 
 function unitOrunits(quantity: any) {
   if (quantity > 1) {
@@ -108,6 +109,43 @@ function unitOrunits(quantity: any) {
 function changeBackground(e: any) {
   e.target.style.background = "red";
 }
+
+function showCode(qrCode: any) {
+  {console.log(qrCode)}
+  if (qrCode) {
+    return (<Grid m="20px" onChange={qrCode}>
+    <Typography sx={{ color: "#939393", mt: 3 }}>QR / BARCODES</Typography>
+    <Grid container>
+      {/* <Grid
+        container
+        sx={{
+          mt: 3,
+          border: "1px solid #c3c0c0",
+          borderRadius: "3px",
+          width: "auto",
+          borderBlockColor: "#c3c0c0",
+        }}
+      >
+        <Typography m="6px">
+          {data.name}
+          <Typography fontSize={6} sx={{ color: "#757575", mt: 1 }}>
+            Create via <text style={{ color: "#ff0000", fontStyle: "italic" }}>SortLog</text>
+          </Typography>
+        </Typography>
+      </Grid> */}
+      <Button variant="outlined" color="inherit" sx={{ mt: 3, color: "#c3c0c0" }}>
+        <QrCode2Icon sx={{ color: "#000000" }}></QrCode2Icon>
+        <Typography ml="10px" sx={{ color: "#000000" }}>
+          LINK QR / BARCODE
+        </Typography>
+      </Button>
+    </Grid>
+  </Grid>);
+  } else {
+    return "";
+  }
+}
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -128,7 +166,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MuiDrawer = (props: any) => {
-  const { isDrawerOpen, setIsDrawerOpen, data } = props;
+  const { isDrawerOpen, setIsDrawerOpen, qrCode, setQrCode, data } = props;
   // console.log(data);
   const currDate = new Date().toLocaleDateString();
   const currTime = new Date().toLocaleTimeString();
@@ -151,18 +189,21 @@ const MuiDrawer = (props: any) => {
         open={isDrawerOpen}
         PaperProps={{
           sx: {
-            height: 1000,
+            // height: 1000,
             width: 1260,
             padding: 2,
-            mt: 20,
+            // mt: 20,
           },
         }}
         onClose={() => setIsDrawerOpen(false)}
       >
         <Box p={2} sx={{ mt: 3 }}>
           <TextField
+            id="standard-password-input"
+            label="Name"
+            autoComplete="current-password"
+            variant="standard"
             value={data.name}
-            variant="filled"
             InputProps={{ disableUnderline: true }}
             className={classes.root}
             onChange={(e) => props.onChange(e.target.value)}
@@ -184,7 +225,7 @@ const MuiDrawer = (props: any) => {
         >
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Sortlog ID:</text>{" "}
-            <text style={{ color: "#131213" }}>{data.id}</text>
+            <text style={{ color: "#131213" }}>{data.sku}</text>
           </Typography>
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Quantity:</text>{" "}
@@ -293,34 +334,9 @@ const MuiDrawer = (props: any) => {
             />
           </Grid>
         </Grid>
-        <Grid m="20px">
-          <Typography sx={{ color: "#939393", mt: 3 }}>QR / BARCODES</Typography>
-          <Grid container>
-            <Grid
-              container
-              sx={{
-                mt: 3,
-                border: "1px solid #c3c0c0",
-                borderRadius: "3px",
-                width: "auto",
-                borderBlockColor: "#c3c0c0",
-              }}
-            >
-              <Typography m="6px">
-                {data.name}
-                <Typography fontSize={6} sx={{ color: "#757575", mt: 1 }}>
-                  Create via <text style={{ color: "#ff0000", fontStyle: "italic" }}>SortLog</text>
-                </Typography>
-              </Typography>
-            </Grid>
-            <Button variant="outlined" color="inherit" sx={{ mt: 3, ml: 3, color: "#c3c0c0" }}>
-              <QrCode2Icon sx={{ color: "#000000" }}></QrCode2Icon>
-              <Typography ml="10px" sx={{ color: "#000000" }}>
-                LINK QR / BARCODE
-              </Typography>
-            </Button>
-          </Grid>
-        </Grid>
+        
+        {showCode(qrCode)}
+        
         <Divider />
         <Grid container paddingLeft={2} paddingTop={3}>
           <Button variant="contained" color="secondary" sx={{ bgcolor: "#2329d3" }}>

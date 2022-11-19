@@ -26,12 +26,28 @@ function getTag() {
   };
 }
 
+function printTag(tags: any) {
+  const tagArr = new Array(tags.length);
+  for (let index = 0; index < tags.length; index++) {
+    tagArr[index] = <Chip variant="filled" label={tags[index]} {...getTag()} />;
+    console.log(tags);
+  }
+   return tagArr; 
+}
+
 const ImgMediaCard = (props: any) => {
   const { data } = props;
   const [isDrawerOpen, setIsDrawerOpen] = React.useState(false);
+  const [qrCode, setQrCode] = React.useState(true);
   return (
     <>
-      <MuiDrawer isDrawerOpen={isDrawerOpen} setIsDrawerOpen={setIsDrawerOpen} data={data} />
+      <MuiDrawer
+        isDrawerOpen={isDrawerOpen}
+        setIsDrawerOpen={setIsDrawerOpen}
+        qrCode={qrCode}
+        setQrCode={setQrCode}
+        data={data}
+      />
       <Card sx={{ maxWidth: 345 }} onClick={() => setIsDrawerOpen(true)}>
         <CardMedia component="img" alt="green iguana" height="200" image={data.image} />
         <CardContent>
@@ -48,10 +64,7 @@ const ImgMediaCard = (props: any) => {
             ${parseInt(data.price).toFixed(2)}
           </Typography>
         </CardActions>
-        <CardActions>
-          <Chip variant="filled" label={data.tags[0]} {...getTag()} />
-          <Chip variant="filled" label={data.tags[1]} {...getTag()} />
-        </CardActions>
+        <CardActions>{printTag(data.tags)}</CardActions>
       </Card>
     </>
   );
