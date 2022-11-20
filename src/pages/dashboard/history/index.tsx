@@ -64,7 +64,7 @@ const HistoryRow = (props: { history: any }) => {
       }}
     >
       <TableCell width="25%">
-        <NextLink href="/tracking-form" passHref>
+        <NextLink href="/dashboard/history-form" passHref>
           <Box
             component="a"
             sx={{
@@ -100,7 +100,7 @@ const HistoryRow = (props: { history: any }) => {
             flexDirection: "column",
           }}
         >
-          <Typography variant="subtitle2">QTY</Typography>
+          <Typography variant="subtitle2">Total QTY</Typography>
           <Typography variant="body2">
             {"x "}
             {history.totalQTY}
@@ -114,7 +114,7 @@ const HistoryRow = (props: { history: any }) => {
             flexDirection: "column",
           }}
         >
-          <Typography variant="subtitle2">Created</Typography>
+          <Typography variant="subtitle2">Creat Date</Typography>
           <Typography color="textSecondary" variant="body2">
             {history.createDate && format(history.createDate, "dd/MM/yyyy")}
           </Typography>
@@ -134,7 +134,7 @@ const HistoryRow = (props: { history: any }) => {
         </Box>
       </TableCell>
       <TableCell align="right">
-        <NextLink href="/dashboard/tracking-form" passHref>
+        <NextLink href="/dashboard/history/history-form" passHref>
           <IconButton component="a">
             <ArrowRightIcon fontSize="small" />
           </IconButton>
@@ -160,7 +160,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckIn-001",
+      trackingNumber: "Inbound-001",
       status: "Done",
       totalQTY: 55,
     },
@@ -174,7 +174,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckIn-002",
+      trackingNumber: "Inbound-002",
       status: "Done",
       totalQTY: 555,
     },
@@ -189,7 +189,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckOut-001",
+      trackingNumber: "Outbound-001",
       status: "Done",
       totalQTY: 5555,
     },
@@ -203,7 +203,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckIn-003",
+      trackingNumber: "Inbound-003",
       status: "Pending",
       totalQTY: 99,
     },
@@ -217,7 +217,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckIn-006",
+      trackingNumber: "Inbound-006",
       status: "Pending",
       totalQTY: 100,
     },
@@ -231,7 +231,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckOut-001",
+      trackingNumber: "Outbound-001",
       status: "Canceled",
       totalQTY: 55,
     },
@@ -245,7 +245,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckIn-011",
+      trackingNumber: "Inbound-011",
       status: "Canceled",
       totalQTY: 100,
     },
@@ -259,7 +259,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckOut-002",
+      trackingNumber: "Outbound-002",
       status: "Canceled",
       totalQTY: 1,
     },
