@@ -96,7 +96,7 @@ import QrCode2Icon from "@mui/icons-material/QrCode2";
 import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { makeStyles } from "@mui/styles";
-import { QrCode } from "@mui/icons-material";
+import QRCodeGenerator from "../QRcodeHandler/qrcode-generation";
 
 function unitOrunits(quantity: any) {
   if (quantity > 1) {
@@ -172,6 +172,7 @@ const MuiDrawer = (props: any) => {
   const currTime = new Date().toLocaleTimeString();
   const [isShown, setIsShown] = useState(false);
   const classes = useStyles();
+  const [isQRCodeShowed, setIsQRCodeShowed] = useState(false);
 
   return (
     <>
@@ -334,9 +335,45 @@ const MuiDrawer = (props: any) => {
             />
           </Grid>
         </Grid>
-        
-        {showCode(qrCode)}
-        
+        <Grid m="20px">
+          <Typography sx={{ color: "#939393", mt: 3 }}>QR / BARCODES</Typography>
+          <Grid container>
+            <Grid
+              container
+              sx={{
+                mt: 3,
+                border: "1px solid #c3c0c0",
+                borderRadius: "3px",
+                width: "auto",
+                borderBlockColor: "#c3c0c0",
+              }}
+            >
+              <Typography m="6px">
+                {data.name}
+                <Typography fontSize={6} sx={{ color: "#757575", mt: 1 }}>
+                  Create via <text style={{ color: "#ff0000", fontStyle: "italic" }}>SortLog</text>
+                </Typography>
+              </Typography>
+            </Grid>
+            <Button
+              variant="outlined"
+              color="inherit"
+              sx={{ mt: 3, ml: 3, color: "#c3c0c0" }}
+              onClick={() => setIsQRCodeShowed(!isQRCodeShowed)}
+            >
+              {isQRCodeShowed ? (
+                <QRCodeGenerator data={{ id: data.id }} />
+              ) : (
+                <>
+                  <QrCode2Icon sx={{ color: "#000000" }}></QrCode2Icon>
+                  <Typography ml="10px" sx={{ color: "#000000" }}>
+                    LINK QR / BARCODE
+                  </Typography>
+                </>
+              )}
+            </Button>
+          </Grid>
+        </Grid>
         <Divider />
         <Grid container paddingLeft={2} paddingTop={3}>
           <Button variant="contained" color="secondary" sx={{ bgcolor: "#2329d3" }}>

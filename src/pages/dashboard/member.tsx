@@ -139,6 +139,7 @@ const AddMembers = () => {
     const value = event.target.value;
     setMemberEmail(value);
     console.log(memberEmail);
+    console.log(memberEmail);
   };
 
   // const onNextButtonClick = async (event: any) => {
