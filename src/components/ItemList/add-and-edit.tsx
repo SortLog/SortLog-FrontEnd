@@ -96,6 +96,7 @@ import QrCode2Icon from "@mui/icons-material/QrCode2";
 import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { makeStyles } from "@mui/styles";
+import QRCodeGenerator from "../QRcodeHandler/qrcode-generation";
 
 function unitOrunits(quantity: any) {
   if (quantity > 1) {
@@ -134,6 +135,7 @@ const MuiDrawer = (props: any) => {
   const currTime = new Date().toLocaleTimeString();
   const [isShown, setIsShown] = useState(false);
   const classes = useStyles();
+  const [isQRCodeShowed, setIsQRCodeShowed] = useState(false);
 
   return (
     <>
@@ -151,10 +153,10 @@ const MuiDrawer = (props: any) => {
         open={isDrawerOpen}
         PaperProps={{
           sx: {
-            height: 1000,
+            // height: 1000,
             width: 1260,
             padding: 2,
-            mt: 20,
+            // mt: 20,
           },
         }}
         onClose={() => setIsDrawerOpen(false)}
@@ -313,11 +315,22 @@ const MuiDrawer = (props: any) => {
                 </Typography>
               </Typography>
             </Grid>
-            <Button variant="outlined" color="inherit" sx={{ mt: 3, ml: 3, color: "#c3c0c0" }}>
-              <QrCode2Icon sx={{ color: "#000000" }}></QrCode2Icon>
-              <Typography ml="10px" sx={{ color: "#000000" }}>
-                LINK QR / BARCODE
-              </Typography>
+            <Button
+              variant="outlined"
+              color="inherit"
+              sx={{ mt: 3, ml: 3, color: "#c3c0c0" }}
+              onClick={() => setIsQRCodeShowed(!isQRCodeShowed)}
+            >
+              {isQRCodeShowed ? (
+                <QRCodeGenerator data={{ id: data.id }} />
+              ) : (
+                <>
+                  <QrCode2Icon sx={{ color: "#000000" }}></QrCode2Icon>
+                  <Typography ml="10px" sx={{ color: "#000000" }}>
+                    LINK QR / BARCODE
+                  </Typography>
+                </>
+              )}
             </Button>
           </Grid>
         </Grid>
