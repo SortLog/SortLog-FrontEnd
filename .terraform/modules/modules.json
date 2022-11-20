@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"website_s3_bucket","Source":"./terraform/modules/aws-s3-static-website-bucket","Dir":"terraform/modules/aws-s3-static-website-bucket"},{"Key":"CDN","Source":"./terraform/modules/CDN","Dir":"terraform/modules/CDN"}]}
