@@ -14,6 +14,10 @@
   },
   "plugins": ["react", "@typescript-eslint"],
   "rules": {
+//    "@typescript-eslint/indent": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
+
     "no-unused-vars": "warn",
     // do not require JSDoc for your functions
     "require-jsdoc": "off",
@@ -21,7 +25,7 @@
     "react/react-in-jsx-scope": "off",
     "react/prop-types": 0,
     // we use 2 spaces to indent our code
-    "@typescript-eslint/indent": ["error", 2],
+     "@typescript-eslint/indent": "off",
     // we want to avoid extraneous spaces
     "no-multi-spaces": ["error"],
     "@typescript-eslint/no-unused-vars": "warn",

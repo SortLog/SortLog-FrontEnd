@@ -5,6 +5,7 @@ import { useInput } from "@/util/forms";
 import { useRouter } from "next/router";
 import { useAuth } from "@/hooks/use-auth";
 import toast from "react-hot-toast";
+import { getUserByEmail } from "@/services/api/users";
 
 const StyledTextField = styled(TextField)({
   borderRadius: "5px",
@@ -20,6 +21,17 @@ const SignIn: React.FC = () => {
     e.preventDefault();
     try {
       const user = await login(email, password);
+      // get user from mongodb
+      // @ts-ignore
+      console.log("cognito" + user);
+      const userFromMongo = await getUserByEmail(user.username);
+      // @ts-ignore
+      console.log("mong" + userFromMongo);
+      // set user in localstorage
+      localStorage.setItem("currentUser", JSON.stringify(userFromMongo.data));
+      // set token to localstorage
+      localStorage.setItem("token", user.signInUserSession.idToken.jwtToken);
+      // redirect to dashboard
       router.push("/dashboard");
       toast.success(user.username + " logged in successfully");
     } catch (error: any) {
@@ -27,6 +39,7 @@ const SignIn: React.FC = () => {
       toast.error(error.message);
     }
   };
+  ``;
 
   return (
     <Container>
@@ -175,4 +188,5 @@ const SignIn: React.FC = () => {
   );
 };
 
+// @ts-ignore
 export default SignIn;

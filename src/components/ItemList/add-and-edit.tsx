@@ -130,7 +130,7 @@ const useStyles = makeStyles((theme) => ({
 
 const MuiDrawer = (props: any) => {
   const { isDrawerOpen, setIsDrawerOpen, data } = props;
-  console.log(data);
+  // console.log(data);
   const currDate = new Date().toLocaleDateString();
   const currTime = new Date().toLocaleTimeString();
   const [isShown, setIsShown] = useState(false);
@@ -277,7 +277,8 @@ const MuiDrawer = (props: any) => {
               autoComplete="off"
             >
               <div>
-                <TextField label="Tags" value={data.tag} />
+                <TextField label="Tags" value={data.tags} />
+                {/* {console.log(data.image)}; */}
               </div>
               <div>
                 <TextField label="Notes" variant="outlined" multiline maxRows={6} />
@@ -290,7 +291,7 @@ const MuiDrawer = (props: any) => {
               alt="green iguana"
               height="390"
               sx={{ ml: 6 }}
-              image={data.img}
+              image={data.image}
             />
           </Grid>
         </Grid>

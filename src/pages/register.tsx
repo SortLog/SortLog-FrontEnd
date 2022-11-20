@@ -9,6 +9,7 @@ import {
   Card,
   Divider,
   Link,
+  Container,
   TextField,
   Typography,
 } from "@mui/material";
@@ -17,6 +18,7 @@ import { useMounted } from "@/hooks/use-mounted";
 import Head from "next/head";
 import NextLink from "next/link";
 import { Logo } from "@/components/logo";
+import toast from "react-hot-toast";
 
 export const AmplifyRegister = (props: any) => {
   const isMounted = useMounted();
@@ -27,6 +29,8 @@ export const AmplifyRegister = (props: any) => {
       email: "",
       password: "",
       policy: true,
+      name: "",
+      provider: "",
       submit: null,
     },
     validationSchema: Yup.object({
@@ -34,16 +38,27 @@ export const AmplifyRegister = (props: any) => {
       password: Yup.string().min(7).max(255).required("Password is required"),
       policy: Yup.boolean().oneOf([true], "This field must be checked"),
     }),
-    onSubmit: async (values: any, helpers) => {
+    onSubmit: async (values: any, helpers: any) => {
       try {
+        // register by Cognito
         await register(values.email, values.password);
-
+        // store current user info to localstorage
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify({
+            email: values.email,
+            password: values.password,
+            name: values.name,
+            provider: values.provider,
+          })
+        );
+        console.log("localstorage save userinfo", localStorage.getItem("userInfo"));
         if (isMounted()) {
           router.push("/verify-code").catch(console.error);
         }
       } catch (err: any) {
         console.error(err);
-
+        toast.error(err.message);
         if (isMounted()) {
           helpers.setStatus({ success: false });
           helpers.setErrors({ submit: err.message });
@@ -52,6 +67,7 @@ export const AmplifyRegister = (props: any) => {
       }
     },
   });
+  /* eslint-disable indent */
   return (
     <form noValidate onSubmit={formik.handleSubmit} {...props}>
       <TextField
@@ -77,6 +93,27 @@ export const AmplifyRegister = (props: any) => {
         onChange={formik.handleChange}
         type="password"
         value={formik.values.password}
+      />
+      <TextField
+        error={Boolean(formik.touched.email && formik.errors.email)}
+        fullWidth
+        label="Name"
+        margin="normal"
+        name="name"
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
+        value={formik.values.name}
+      />
+      <TextField
+        error={Boolean(formik.touched.email && formik.errors.email)}
+        fullWidth
+        helperText={`${formik.touched.email && formik.errors.email}`}
+        label="Company Name"
+        margin="normal"
+        name="provider"
+        onBlur={formik.handleBlur}
+        onChange={formik.handleChange}
+        value={formik.values.provider}
       />
       <Box
         sx={{
@@ -125,10 +162,11 @@ const Register = () => {
   const router = useRouter();
   const { disableGuard } = router.query;
 
+  // @ts-ignore
   return (
     <>
       <Head>
-        <title>Register | Creatalog</title>
+        <title>Register | SortLog </title>
       </Head>
       <Box
         component="main"
@@ -139,54 +177,56 @@ const Register = () => {
           minHeight: "100vh",
         }}
       >
-        <Card elevation={16} sx={{ p: 4 }}>
-          <Box
-            sx={{
-              alignItems: "center",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-            }}
-          >
-            <NextLink href="/" passHref>
-              <a>
-                <Logo
-                  sx={{
-                    height: 40,
-                    width: 40,
-                  }}
-                />
-              </a>
-            </NextLink>
-            <Typography variant="h4">Register</Typography>
-            <Typography color="textSecondary" sx={{ mt: 2 }} variant="body2">
-              Register on the internal platform
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              flexGrow: 1,
-              mt: 3,
-            }}
-          >
-            <AmplifyRegister />
-          </Box>
-          <Divider sx={{ my: 3 }} />
-          <div>
-            <NextLink
-              href={
-                disableGuard
-                  ? `/authentication/login?disableGuard=${disableGuard}`
-                  : "/authentication/login"
-              }
-              passHref
+        <Container sx={{ py: { xs: "60px", md: "120px" } }}>
+          <Card elevation={16} sx={{ p: 4 }}>
+            <Box
+              sx={{
+                alignItems: "center",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+              }}
             >
-              <Link color="textSecondary" variant="body2">
-                Having an account
-              </Link>
-            </NextLink>
-          </div>
-        </Card>
+              <NextLink href="/" passHref>
+                <a>
+                  <Logo
+                    sx={{
+                      height: 40,
+                      width: 40,
+                    }}
+                  />
+                </a>
+              </NextLink>
+              <Typography variant="h4">Register</Typography>
+              <Typography color="textSecondary" sx={{ mt: 2 }} variant="body2">
+                Register on the internal platform
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                flexGrow: 1,
+                mt: 3,
+              }}
+            >
+              <AmplifyRegister />
+            </Box>
+            <Divider sx={{ my: 3 }} />
+            <div>
+              <NextLink
+                href={
+                  disableGuard
+                    ? `/authentication/login?disableGuard=${disableGuard}`
+                    : "/authentication/login"
+                }
+                passHref
+              >
+                <Link color="textSecondary" variant="body2">
+                  Having an account
+                </Link>
+              </NextLink>
+            </div>
+          </Card>
+        </Container>
       </Box>
     </>
   );

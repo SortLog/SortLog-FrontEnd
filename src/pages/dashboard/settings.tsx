@@ -9,6 +9,7 @@ import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import * as userApi from "@/services/api/users";
+import toast from "react-hot-toast";
 
 const cardStyle = {
   card: {
@@ -28,32 +29,27 @@ const cardStyle = {
 };
 
 export default function setting() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [companyName, setCompanyName] = useState("");
+  // @ts-ignore
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  const [name, setName] = useState(currentUser.name);
+  const [email, setEmail] = useState(currentUser.email);
+  const [companyName, setCompanyName] = useState(currentUser.provider);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
 
   const onPersonalInfoSaveChangesButton = () => {
-    const user = {
-      id: "63343af774e468a1647f3e54",
-      name: "user2",
-      email: "user2@gmail.com",
-      provider: "company2",
-      photoUrl:
-        "https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F5288da3d-c702-41ee-9ddc-5ec8e031b81d%2FCopie_de_outils_(3).png?table=block&id=6010cc1c-8cee-40af-8ac5-8a54ab836ff9&spaceId=6ebdc1e4-1ee0-4f5b-bc89-25b5e1c54c81&width=250&userId=70765e0b-1374-4e1d-a7fb-bfef8fa25448&cache=v2",
-      contactType: "email",
-      phone: "20391230",
-    };
-
-    user.name = `${firstName} ${lastName}`;
-    user.provider = companyName;
-    user.email = email;
-
-    console.log(user);
-
-    userApi.putUser(user.id, user);
+    console.log("change user info" + currentUser);
+    currentUser.name = name;
+    currentUser.provider = companyName;
+    try {
+      userApi.putUser(currentUser._id, currentUser);
+      localStorage.setItem("currentUser", JSON.stringify(currentUser));
+      toast.success("Personal info updated successfully");
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -73,26 +69,18 @@ export default function setting() {
               style={cardStyle.textField}
               required
               id="outlined-required"
-              label="First Name"
-              defaultValue=""
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
+              label="Name"
+              defaultValue={currentUser.name}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <TextField
               style={cardStyle.textField}
               required
-              id="outlined-required"
-              label="Last Name"
-              defaultValue=""
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-            <TextField
-              style={cardStyle.textField}
-              required
+              inputProps={{ readOnly: true }}
               id="outlined-password-input"
               label="Email"
-              defaultValue=""
+              defaultValue={currentUser.email}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -101,7 +89,7 @@ export default function setting() {
               required
               id="outlined-read-only-input"
               label="Company Name"
-              defaultValue=""
+              defaultValue={currentUser.provider}
               value={companyName}
               onChange={(e) => setCompanyName(e.target.value)}
             />
@@ -121,7 +109,8 @@ export default function setting() {
               style={cardStyle.textField}
               required
               id="outlined-required"
-              label="Current Password"
+              label="Old Password"
+              // label="Current Password"
               defaultValue=""
               onChange={(e) => setCurrentPassword(e.target.value)}
             />

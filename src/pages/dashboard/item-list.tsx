@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { NextPage } from "next";
 import Container from "@mui/material/Container";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { Alert, Divider, GlobalStyles, Grid, Icon, Paper } from "@mui/material";
+import { Chip, Divider, GlobalStyles, Grid, Icon, Paper } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Add } from "@mui/icons-material";
 import { Box } from "@mui/system";
@@ -16,6 +16,35 @@ import ImgMediaCard from "@/components/ItemList/table-card";
 import SplitButton from "@/components/ItemList/split-button";
 import MuiDrawer from "@/components/ItemList/add-and-edit";
 import QRCodeScanner from "../../components/QRcodeHandler/qrcode-scanner";
+import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
+import * as itemApi from "@/services/api/items";
+
+// const mockDataItemList = [
+//   {
+//     id: 1,
+//     img: "https://source.unsplash.com/random",
+//     name: "Item 1",
+//     quantity: 1,
+//     price: 100,
+//     tag: ["tools", "ryobi"],
+//   },
+//   {
+//     id: 2,
+//     img: "https://source.unsplash.com/random",
+//     name: "Item 2",
+//     quantity: 123,
+//     price: 200,
+//     tag: ["tools", "ryobi"],
+//   },
+//   {
+//     id: 3,
+//     img: "https://source.unsplash.com/random",
+//     name: "Item 3",
+//     quantity: 2,
+//     price: 300,
+//     tag: ["ryobi"],
+//   },
+// ];
 
 function moneyMapper(money: any) {
   return parseFloat(money)
@@ -31,79 +60,58 @@ function moneyMapper(money: any) {
     .join("");
 }
 
-const mockDataItemList = [
-  {
-    id: 1,
-    img: "https://source.unsplash.com/random",
-    name: "Item 1",
-    quantity: 1,
-    price: 100,
-    tag: ["tools", "ryobi"],
-  },
-  {
-    id: 2,
-    img: "https://source.unsplash.com/random",
-    name: "Item 2",
-    quantity: 123,
-    price: 200,
-    tag: ["tools", "ryobi"],
-  },
-  {
-    id: 3,
-    img: "https://source.unsplash.com/random",
-    name: "Item 3",
-    quantity: 2,
-    price: 300,
-    tag: ["ryobi"],
-  },
-];
+function getQuantity(params: GridValueGetterParams) {
+  return `${params.row.quantity.toString() + " unit"}`;
+}
 
-// const sort = mockDataItemList.name.sort()
-// console.log(sort)
+function getPrice(params: GridValueGetterParams) {
+  return `${"$" + moneyMapper(params.row.price)}`;
+}
 
-function getFullName(params: GridValueGetterParams) {
-  return `${params.row.name || ""} ${params.row.quantity || ""}`;
+function getTag(params: GridValueGetterParams) {
+  return {
+    icon: <LocalOfferOutlinedIcon />,
+  };
+}
+
+function unitOrunits(quantity: any) {
+  if (quantity > 1) {
+    return "units";
+  } else {
+    return "unit";
+  }
 }
 
 const columns = [
+  { field: "name", headerName: "Name" },
+  { field: "quantity", headerName: "Quantity", valueGetter: getQuantity },
+  { field: "price", headerName: "Price", valueGetter: getPrice },
   {
-    field: "name",
-    headerName: "Name",
-    //  renderCell: (params) => (dataCal(mockDataItemList).map((detail: any) => (
-    //   <MuiDrawer
-    //     isDrawerOpen={isDrawerOpen}
-    //     setIsDrawerOpen={setIsDrawerOpen}
-    //     data={detail}
-    //     key={detail.id}
-    //   />
-    // )))
-  },
-  { field: "quantity", headerName: "Quantity" },
-  { field: "price", headerName: "Price" },
-  { field: "tag", headerName: "Tag" },
-  {
-    field: "fullName",
-    headerName: "Full name",
-    width: 160,
-    valueGetter: getFullName,
+    field: "tag",
+    headerName: "Tag",
+    renderCell: (params: any) => {
+      // console.log(params.row.tags);
+      return <Chip variant="filled" label={params.row.tags.join(" ")} {...getTag(params)} />;
+    },
   },
 ];
 
-const dataMapper = (rows: any, searchText: string) => {
-  return rows
-    .filter(
-      (row: any) =>
-        row.name.includes(searchText) || row.tag.find((t: string) => t.includes(searchText))
-    )
-    .map((row: any) => {
-      return {
-        ...row,
-        quantity: row.quantity.toString() + " unit",
-        price: "$" + moneyMapper(row.price),
-        // tag: row.tag.map((tag:any, index: number) => <Chip key={'chip${index}'} label={tag} />),
-      };
-    });
-};
+// Tutor的数据编辑的方法：
+// const dataMapper = (rows: any, searchText: string) => {
+//   return rows
+//     .filter(
+//       (row: any) =>
+//         row.name.includes(searchText) || row.tag.find((t: string) => t.includes(searchText))
+//     )
+//     .map((row: any) => {
+//       return {
+//         ...row,
+//         quantity: row.quantity.toString() + " unit",
+//         price: "$" + moneyMapper(row.price),
+//         // tag: row.tag.map((tag:any, index: number) => <Chip key={'chip${index}'} label={tag} />),
+//       };
+//     });
+// };
 
 const dataCal = (rows: any) => {
   return rows.map((row: any) => {
@@ -115,30 +123,58 @@ const dataCal = (rows: any) => {
 
 const ItemList: NextPage = () => {
   const [isGrid, setIsGrid] = useState(false);
-  const [searchText, setSearchText] = useState("");
+  // const [searchText, setSearchText] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
   const [isQRCodeButtonClicked, setIsQRCodeButtonClicked] = useState(false);
 
   let x = 0;
   let y = 0;
   let z = 0;
 
-  const [message, setMessage] = React.useState("");
+  let items = 0;
+  let quantity = 0;
+  let totalValue = 0;
+
+  const [details, setDetails] = React.useState({});
   const handleRowClick = (params: any) => {
     setIsDrawerOpen(true);
-
-    dataMapper(mockDataItemList, searchText).map((detail: any) => (
-      <MuiDrawer
-        isDrawerOpen={isDrawerOpen}
-        setIsDrawerOpen={setIsDrawerOpen}
-        data={params.row}
-        key={detail.id}
-      />
-    ));
-
-    setMessage(`Movie "${params.row.name}" clicked`);
+    setDetails(params.row);
   };
 
+  const [mockDataItemList, setItems] = useState<any>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data } = await itemApi.listItems();
+      console.log(data);
+      setItems(data);
+      // console.log(mockDataItemList);
+    };
+    fetchData();
+  }, []);
+
+  // const getItemrListByItemName = async (companyName: string) => {
+  //   let i;
+  //   for (i = 0; i < mockDataItemList.length; i++) {
+  //     if (mockDataItemList[i].companyName === companyName) {
+  //       setCompanyId(mockDataItemList[i]._id);
+  //       console.log(companyId);
+  //       return mockDataItemList[i].teamMember;
+  //     }
+  //   }
+  //   if (i === mockDataItemList.length) {
+  //     const mockDataItemList = {
+  //       companyName: `${companyName}`,
+  //       teamMember: [],
+  //     };
+  //     const newCompany = await itemApi.addCompany(mockDataItemList);
+  //     setCompanyId(newCompany.data._id);
+  //     return mockDataItemList.teamMember;
+  //   }
+  // };
+
+  // const mockDataItemList = await itemApi.listItems();
+  // const mockDataItemList = mockDataItemListAAA.data;
   return (
     <>
       <Container maxWidth="lg" color="background">
@@ -169,7 +205,10 @@ const ItemList: NextPage = () => {
                 variant="contained"
                 startIcon={<Add />}
                 sx={{ backgroundColor: "#e70a3e" }}
-                onClick={() => setIsDrawerOpen(true)}
+                onClick={() => {
+                  setIsDrawerOpen(true);
+                  setDetails({});
+                }}
               >
                 ADD NEW
               </Button>
@@ -200,7 +239,7 @@ const ItemList: NextPage = () => {
                   placeholder="Search All Items"
                   inputProps={{ "aria-label": "search google maps" }}
                   onChange={(e) => {
-                    setSearchText((e.target as any).value);
+                    // setSearchText((e.target as any).value);
                   }}
                 />
                 <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
@@ -229,9 +268,10 @@ const ItemList: NextPage = () => {
               </Grid>
             </Grid>
             {dataCal(mockDataItemList).map((value: any) => (
-              <Box sx={{ mt: 3, mr: 3 }} key={value.id}>
+              <Box sx={{ mt: 3, mr: 3 }} key={value}>
                 <Typography sx={{ display: "none" }}>
-                  {(x = x + 1)} {(y = y + value.quantity)} {(z = z + value.price)}
+                  {(items = items + 1)} {(quantity = quantity + value.quantity)}{" "}
+                  {(totalValue = totalValue + value.price)}
                 </Typography>
               </Box>
             ))}
@@ -256,29 +296,29 @@ const ItemList: NextPage = () => {
               <Grid item color="#6a6a6c">
                 Items:{" "}
                 <Grid sx={{ display: "inline" }} color="#393939" fontWeight="bold">
-                  {x}
+                  {items}
                 </Grid>
               </Grid>
               <Grid item color="#6a6a6c">
                 Total Quantity:{" "}
                 <Grid sx={{ display: "inline" }} color="#393939" fontWeight="bold">
-                  {y} unit(s)
+                  {quantity} {unitOrunits(quantity)}
                 </Grid>
               </Grid>
               <Grid item color="#6a6a6c">
                 Total Value:{" "}
                 <Grid sx={{ display: "inline" }} color="#393939" fontWeight="bold">
-                  ${z}.00
+                  ${totalValue.toFixed(2)}
                 </Grid>
               </Grid>
             </Grid>
             <Box>
               {isGrid ? (
                 <Grid container>
-                  {dataMapper(mockDataItemList, searchText).map((card: any) => (
-                    <Box sx={{ mt: 3, mr: 3 }} key={card.id}>
+                  {dataCal(mockDataItemList).map((card: any) => (
+                    <Box sx={{ mt: 3, mr: 3 }} key={card.id} id={card.id}>
                       {/* <Box sx={{ mt: 3, mr: 3 }} key={card.id} onClick={() => setIsDrawerOpen(true)}> */}
-                      <ImgMediaCard data={card} />
+                      <ImgMediaCard data={card} details={details} />
                       {/* <Divider sx={{ color: "#d5cfcf", margin: 3, border: 1, width: 1129 }}/> */}
                       {/* <MuiDrawer
                         isDrawerOpen={isDrawerOpen}
@@ -300,7 +340,13 @@ const ItemList: NextPage = () => {
                     />
                   ))} */}
                   <DataGrid
-                    rows={dataMapper(mockDataItemList, searchText)}
+                    // rows={mockDataItemList.map((item: any, index: number) => {
+                    //   return({...item, id: index})
+                    // })}
+                    rows={mockDataItemList.map((item: any) => ({
+                      ...item,
+                      id: item._id,
+                    }))}
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
@@ -311,17 +357,16 @@ const ItemList: NextPage = () => {
                     // components={{ Toolbar: GridToolbar }}
                     // experimentalFeatures={{ aggregation: true }}
                   />
-                  {dataMapper(mockDataItemList, searchText).map((detail: any) => (
-                    <MuiDrawer
-                      isDrawerOpen={isDrawerOpen}
-                      setIsDrawerOpen={setIsDrawerOpen}
-                      data={detail}
-                      key={detail.id}
-                    />
-                  ))}
-                  {message && <Alert severity="info">{message}</Alert>}
+                  {/* {dataMapper(mockDataItemList, searchText).map((detail: any) => ( */}
+                  {/* ))} */}
+                  {/* {message && <Alert severity="info">{message}</Alert>} */}
                 </Box>
               )}
+              <MuiDrawer
+                isDrawerOpen={isDrawerOpen}
+                setIsDrawerOpen={setIsDrawerOpen}
+                data={details}
+              />
             </Box>
           </header>
         </div>
