@@ -15,7 +15,7 @@ import { DataGrid, GridValueGetterParams } from "@mui/x-data-grid";
 import ImgMediaCard from "@/components/ItemList/table-card";
 import SplitButton from "@/components/ItemList/split-button";
 import MuiDrawer from "@/components/ItemList/add-and-edit";
-import Scanner from "@/components/QRcodeScanner/qrcode-scanner";
+import QRCodeScanner from "../../components/QRcodeHandler/qrcode-scanner";
 
 function moneyMapper(money: any) {
   return parseFloat(money)
@@ -117,7 +117,7 @@ const ItemList: NextPage = () => {
   const [isGrid, setIsGrid] = useState(false);
   const [searchText, setSearchText] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [isScannerOpen, setIsScannerOpen] = useState(false);
+  const [isQRCodeButtonClicked, setIsQRCodeButtonClicked] = useState(false);
 
   let x = 0;
   let y = 0;
@@ -137,17 +137,6 @@ const ItemList: NextPage = () => {
     ));
 
     setMessage(`Movie "${params.row.name}" clicked`);
-  };
-
-  const onQRCodeScannerButton = () => {
-    if (isScannerOpen === false) {
-      <Scanner/>;
-      setIsScannerOpen(true);
-      console.log(isScannerOpen);
-    } else {
-      setIsScannerOpen(false);
-      console.log(isScannerOpen);
-    }
   };
 
   return (
@@ -218,9 +207,9 @@ const ItemList: NextPage = () => {
                 <IconButton
                   sx={{ p: "10px", color: "#2d2a2a" }}
                   aria-label="QrCodeScannerIcon"
-                  onClick={onQRCodeScannerButton}
+                  onClick={() => setIsQRCodeButtonClicked(!isQRCodeButtonClicked)}
                 >
-                  <QrCodeScannerIcon />
+                  {isQRCodeButtonClicked ? <QRCodeScanner /> : <QrCodeScannerIcon />}
                 </IconButton>
               </Paper>
               <Grid>
