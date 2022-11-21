@@ -25,7 +25,7 @@ pipeline {
         } 
 
         stage('TF Launch for UAT'){
-        when {branch 'main'}    
+        //when {branch 'main'}    
                 steps {
                     withAWS(credentials: AWS_CRED, region: AWS_REGION) {
                    
@@ -48,7 +48,7 @@ pipeline {
         }
 
         stage('upload frontend to  S3 bucket UAT') {
-         when {branch 'main'}   
+        //when {branch 'main'}   
             steps {
                 withAWS(credentials: AWS_CRED, region: AWS_REGION)
                { dir('./out') 
