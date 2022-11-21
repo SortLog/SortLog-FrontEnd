@@ -25,7 +25,7 @@ pipeline {
 
         stage('Docker Agent Build & Sync S3'){
             when {
-                anyof{
+                anyOf{
                         branch 'main';
                         branch 'dev'
                 }
