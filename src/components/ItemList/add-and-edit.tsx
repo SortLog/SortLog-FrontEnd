@@ -110,12 +110,10 @@ function changeBackground(e: any) {
 }
 
 function nullValue(data: any) {
-  
-  if (data = 0) {
+  if ((data = 0)) {
     return "0";
-  }
-  else {
-    return "$" + (parseInt(data.price).toFixed(2)).toString();
+  } else {
+    return "$" + parseInt(data.price).toFixed(2).toString();
   }
 }
 
@@ -204,7 +202,9 @@ const MuiDrawer = (props: any) => {
           </Typography>
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Total Value:</text>{" "}
-            <text style={{ color: "#131213" }}>${data={}?"":parseInt(data.price).toFixed(2)}</text>
+            <text style={{ color: "#131213" }}>
+              ${(data.price = {} ? "" : parseInt(data.price).toFixed(2))}
+            </text>
           </Typography>
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Updated at:</text>{" "}
@@ -262,8 +262,7 @@ const MuiDrawer = (props: any) => {
                   <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
                   <OutlinedInput
                     label="Amount"
-                    value={data={}?"":"$" + (parseInt(data.price).toFixed(2)).toString()}
-                    
+                    value={(data.price = {} ? "" : "$" + parseInt(data.price).toFixed(2).toString())}
                     endAdornment={<InputAdornment position="end">AUD</InputAdornment>}
                   />
                 </FormControl>
@@ -271,7 +270,7 @@ const MuiDrawer = (props: any) => {
                   <InputLabel htmlFor="outlined-adornment-amount">Total value</InputLabel>
                   <OutlinedInput
                     label="Total value"
-                    value={data={}?"":"AU$" + (data.quantity * data.price).toFixed(2)}
+                    value={(data.price = {} ? "" : "AU$" + (data.quantity * data.price).toFixed(2))}
                     endAdornment={<InputAdornment position="end">AUD</InputAdornment>}
                   />
                 </FormControl>

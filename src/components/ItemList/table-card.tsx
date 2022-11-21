@@ -32,7 +32,7 @@ function printTag(tags: any) {
     tagArr[index] = <Chip variant="filled" label={tags[index]} {...getTag()} />;
     console.log(tags);
   }
-   return tagArr; 
+  return tagArr;
 }
 
 const ImgMediaCard = (props: any) => {
