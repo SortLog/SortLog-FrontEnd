@@ -28,7 +28,6 @@ module "website_s3_bucket" {
 module "website_CDN" {
   source = "./terraform/modules/CDN"
   CDN_domain_name = module.website_s3_bucket.domain
-  url=var.frontendurl
   bucketname = var.bucket_name
   app_env=var.app_env
   //acm_certificate_arn=module.ACM.ACM_arn
