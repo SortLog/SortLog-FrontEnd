@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     environment{
-        AWS_CRED        = 'AWS_linazhao' //Change to yours
+        AWS_CRED        = 'AWS_sortlog' //Change to yours
         AWS_REGION      = 'ap-southeast-2'// AWS region 
     }
         //Install denpendencies 
     stages{
         stage ('Docker Agent Build Test') {
-            when {branch 'main'}
+            when {branch 'uat'}
             agent {
                 docker {
                     image 'node:16-alpine'
@@ -23,11 +23,37 @@ pipeline {
             }
         }
 
-        stage('Docker Agent Build & Sync S3'){
+        stage('Docker Agent Terraform Build Frontend Infrastructure') {
+            agent {
+                docker {
+                    image 'hashicorp/terraform:light'
+                    args '-i --entrypoint='
+                }
+            }
+
+            steps {
+                withAWS(credentials: AWS_CRED, region: AWS_REGION) {
+                      script {
+                        if (currentBuild.result != null && currentBuild.result != "SUCCESS"){
+                            return false
+                        }
+                        
+                        export APP_ENV="uat"
+                        terraform init -input=false
+                        terraform workspace select ${APP_ENV} || terraform workspace new ${APP_ENV}
+                        terraform apply \
+                            -var="app_env=${APP_ENV}"\
+                            --auto-approve
+                      }
+                }
+            }
+        }
+
+        stage('Docker Agent Sync S3'){
             when {
                 anyOf{
                         branch 'main';
-                        branch 'dev'
+                        branch 'uat'
                 }
             }  
 
@@ -46,15 +72,6 @@ pipeline {
                             return false
                         }
                         
-                        sh '''
-                            export APP_ENV="uat"
-                            terraform init -input=false
-                            terraform workspace select ${APP_ENV} || terraform workspace new ${APP_ENV}
-                            terraform apply \
-                                -var="app_env=${APP_ENV}"\
-                                --auto-approve
-                        '''
-                
                         S3_BUCKET_NAME = sh(returnStdout: true, script: " terraform output name").trim()
                         CLOUDFRONT_DISTRIBUTION_ID = sh(returnStdout: true, script: "terraform output arn").trim()
                         CLOUDFRONT_DOMAIN_NAME = sh(returnStdout: true, script: "terraform output domain").trim()
