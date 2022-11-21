@@ -137,8 +137,9 @@ import classes from "./qrcode-scanner.module.css";
 //   },
 // };
 
-const QRCodeScanner = () => {
+const QRCodeScanner = (props) => {
   const [data, setData] = useState("");
+  props.searchData(data);
 
   return (
     <Zoom in={true}>
@@ -166,6 +167,7 @@ const QRCodeScanner = () => {
             }
           }}
         />
+        <p>{data}</p>
       </div>
     </Zoom>
   );
