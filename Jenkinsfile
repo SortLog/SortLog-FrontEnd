@@ -16,13 +16,13 @@ pipeline {
              }          
         }
 
-        stage('yarn build') 
-        {
-            steps{
-             sh "yarn export "
-             sh 'ls -la ./out'
-             }
-        } 
+        // stage('yarn build') 
+        // {
+        //     steps{
+        //      sh "yarn export "
+        //      sh 'ls -la ./out'
+        //      }
+        // } 
 
         stage('TF Launch for UAT'){
         when {branch 'main'}    
