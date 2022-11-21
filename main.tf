@@ -17,7 +17,7 @@ provider "aws" {
 
 
 module "website_s3_bucket" {
-  source = "./modules/aws-s3-static-website-bucket"
+  source = "./terraform/modules/aws-s3-static-website-bucket"
   bucketname = var.bucket_name
   app_env=var.app_env
   bucketarn=module.website_s3_bucket.arn
@@ -26,7 +26,7 @@ module "website_s3_bucket" {
 }
 
 module "website_CDN" {
-  source = "./modules/CDN"
+  source = "./terraform/modules/CDN"
   CDN_domain_name = module.website_s3_bucket.domain
   url=var.frontendurl
   bucketname = var.bucket_name
@@ -35,7 +35,7 @@ module "website_CDN" {
 }
 
 module "DNS" {
-  source = "./modules/DNS record"
+  source = "./terraform/modules/DNS record"
   cdndomain = module.website_CDN.cloudfrontdomain
   hosted_zone_id=module.website_CDN.cloudfronthosted_zone_id
   url= "frontend-${var.app_env}.sortlog.net" //var.frontendurl
