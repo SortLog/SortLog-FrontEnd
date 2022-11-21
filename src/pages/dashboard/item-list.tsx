@@ -15,6 +15,7 @@ import { DataGrid, GridValueGetterParams } from "@mui/x-data-grid";
 import ImgMediaCard from "@/components/ItemList/table-card";
 import SplitButton from "@/components/ItemList/split-button";
 import MuiDrawer from "@/components/ItemList/add-and-edit";
+import QRCodeScanner from "../../components/QRcodeHandler/qrcode-scanner";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import * as itemApi from "@/services/api/items";
 
@@ -124,6 +125,17 @@ const ItemList: NextPage = () => {
   const [isGrid, setIsGrid] = useState(false);
   // const [searchText, setSearchText] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const [isQRCodeButtonClicked, setIsQRCodeButtonClicked] = useState(false);
+  const [searchInput, setSearchInput] = useState("")
+  const onSearchArea = (data: string) => {
+    setSearchInput(data);
+  };
+
+  // let x = 0;
+  // let y = 0;
+  // let z = 0;
+
   let items = 0;
   let quantity = 0;
   let totalValue = 0;
@@ -233,10 +245,19 @@ const ItemList: NextPage = () => {
                   onChange={(e) => {
                     // setSearchText((e.target as any).value);
                   }}
+                  value={searchInput ?? ""}
                 />
                 <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-                <IconButton sx={{ p: "10px", color: "#2d2a2a" }} aria-label="QrCodeScannerIcon">
-                  <QrCodeScannerIcon />
+                <IconButton
+                  sx={{ p: "10px", color: "#2d2a2a" }}
+                  aria-label="QrCodeScannerIcon"
+                  onClick={() => setIsQRCodeButtonClicked(!isQRCodeButtonClicked)}
+                >
+                  {isQRCodeButtonClicked ? (
+                    <QRCodeScanner searchData={onSearchArea} />
+                  ) : (
+                    <QrCodeScannerIcon />
+                  )}
                 </IconButton>
               </Paper>
               <Grid>
