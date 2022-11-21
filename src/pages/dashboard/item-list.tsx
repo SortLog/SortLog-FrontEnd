@@ -15,7 +15,6 @@ import { DataGrid, GridValueGetterParams } from "@mui/x-data-grid";
 import ImgMediaCard from "@/components/ItemList/table-card";
 import SplitButton from "@/components/ItemList/split-button";
 import MuiDrawer from "@/components/ItemList/add-and-edit";
-import QRCodeScanner from "../../components/QRcodeHandler/qrcode-scanner";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import * as itemApi from "@/services/api/items";
 
@@ -68,7 +67,7 @@ function getPrice(params: GridValueGetterParams) {
   return `${"$" + moneyMapper(params.row.price)}`;
 }
 
-function getTag() {
+function getTag(params: GridValueGetterParams) {
   return {
     icon: <LocalOfferOutlinedIcon />,
   };
@@ -81,18 +80,6 @@ function unitOrunits(quantity: any) {
     return "unit";
   }
 }
-  
-// function printTag(params: any) {
-function printTag(params: GridValueGetterParams) {
-  // {
-  //   console.log(params.tags);
-  // }
-  const tagArr = new Array(params.row.tags.length);
-  for (let index = 0; index < params.row.tags.length; index++) {
-    tagArr[index] = <Chip variant="filled" label={params.row.tags[index]} {...getTag()} />;
-  }
-  return `${tagArr}`;
-}
 
 const columns = [
   { field: "name", headerName: "Name" },
@@ -101,69 +88,58 @@ const columns = [
   {
     field: "tag",
     headerName: "Tag",
-    valueGetter: printTag
-    // renderCell: (params: any) => {
-    //   printTag(params);
-    // },
+    renderCell: (params: any) => {
+      // console.log(params.row.tags);
+      return <Chip variant="filled" label={params.row.tags.join(" ")} {...getTag(params)} />;
+    },
   },
 ];
 
 // Tutor的数据编辑的方法：
-const dataMapper = (rows: any, searchText: string) => {
-  return rows.filter(
-    (row: any) =>
-      row.name.includes(searchText) || row.tags.find((t: string) => t.includes(searchText))
-    //   )
-    //   .map((row: any) => {
-    //     return {
-    //       ...row,
-    //     tag: printTag(row)
-    //   };
-    // }
-  );
-};
-
-// const dataCal = (rows: any) => {
-//   return rows.map((row: any) => {
-//     return {
-//       ...row,
-//     };
-//   });
+// const dataMapper = (rows: any, searchText: string) => {
+//   return rows
+//     .filter(
+//       (row: any) =>
+//         row.name.includes(searchText) || row.tag.find((t: string) => t.includes(searchText))
+//     )
+//     .map((row: any) => {
+//       return {
+//         ...row,
+//         quantity: row.quantity.toString() + " unit",
+//         price: "$" + moneyMapper(row.price),
+//         // tag: row.tag.map((tag:any, index: number) => <Chip key={'chip${index}'} label={tag} />),
+//       };
+//     });
 // };
+
+const dataCal = (rows: any) => {
+  return rows.map((row: any) => {
+    return {
+      ...row,
+    };
+  });
+};
 
 const ItemList: NextPage = () => {
   const [isGrid, setIsGrid] = useState(false);
-  const [searchText, setSearchText] = useState("");
+  // const [searchText, setSearchText] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  const [isQRCodeButtonClicked, setIsQRCodeButtonClicked] = useState(false);
-  const [searchInput, setSearchInput] = useState("")
-  const onSearchArea = (data: string) => {
-    setSearchInput(data);
-  };
-
-  // let x = 0;
-  // let y = 0;
-  // let z = 0;
-
   let items = 0;
   let quantity = 0;
   let totalValue = 0;
 
   const [details, setDetails] = React.useState({});
-  const [qrCode, setQrCode] = useState(true);
   const handleRowClick = (params: any) => {
     setIsDrawerOpen(true);
     setDetails(params.row);
-    setQrCode(true);
   };
 
-  const [itemList, setItemList] = useState<any>([]);
+  const [mockDataItemList, setItems] = useState<any>([]);
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await itemApi.listItems();
-      // console.log(data);
-      setItemList(data);
+      console.log(data);
+      setItems(data);
       // console.log(mockDataItemList);
     };
     fetchData();
@@ -224,7 +200,6 @@ const ItemList: NextPage = () => {
                 onClick={() => {
                   setIsDrawerOpen(true);
                   setDetails({});
-                  setQrCode(false);
                 }}
               >
                 ADD NEW
@@ -256,21 +231,12 @@ const ItemList: NextPage = () => {
                   placeholder="Search All Items"
                   inputProps={{ "aria-label": "search google maps" }}
                   onChange={(e) => {
-                    setSearchText((e.target as any).value);
+                    // setSearchText((e.target as any).value);
                   }}
-                  value={searchInput ?? ""}
                 />
                 <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
-                <IconButton
-                  sx={{ p: "10px", color: "#2d2a2a" }}
-                  aria-label="QrCodeScannerIcon"
-                  onClick={() => setIsQRCodeButtonClicked(!isQRCodeButtonClicked)}
-                >
-                  {isQRCodeButtonClicked ? (
-                    <QRCodeScanner searchData={onSearchArea} />
-                  ) : (
-                    <QrCodeScannerIcon />
-                  )}
+                <IconButton sx={{ p: "10px", color: "#2d2a2a" }} aria-label="QrCodeScannerIcon">
+                  <QrCodeScannerIcon />
                 </IconButton>
               </Paper>
               <Grid>
@@ -289,7 +255,7 @@ const ItemList: NextPage = () => {
                 <SplitButton setIsGrid={setIsGrid} sx={{ height: 100 }} />
               </Grid>
             </Grid>
-            {dataMapper(itemList, searchText).map((value: any) => (
+            {dataCal(mockDataItemList).map((value: any) => (
               <Box sx={{ mt: 3, mr: 3 }} key={value}>
                 <Typography sx={{ display: "none" }}>
                   {(items = items + 1)} {(quantity = quantity + value.quantity)}{" "}
@@ -337,7 +303,7 @@ const ItemList: NextPage = () => {
             <Box>
               {isGrid ? (
                 <Grid container>
-                  {dataMapper(itemList, searchText).map((card: any) => (
+                  {dataCal(mockDataItemList).map((card: any) => (
                     <Box sx={{ mt: 3, mr: 3 }} key={card.id} id={card.id}>
                       {/* <Box sx={{ mt: 3, mr: 3 }} key={card.id} onClick={() => setIsDrawerOpen(true)}> */}
                       <ImgMediaCard data={card} details={details} />
@@ -365,7 +331,7 @@ const ItemList: NextPage = () => {
                     // rows={mockDataItemList.map((item: any, index: number) => {
                     //   return({...item, id: index})
                     // })}
-                    rows={dataMapper(itemList, searchText).map((item: any) => ({
+                    rows={mockDataItemList.map((item: any) => ({
                       ...item,
                       id: item._id,
                     }))}
@@ -387,8 +353,6 @@ const ItemList: NextPage = () => {
               <MuiDrawer
                 isDrawerOpen={isDrawerOpen}
                 setIsDrawerOpen={setIsDrawerOpen}
-                qrCode={qrCode}
-                setQrCode={setQrCode}
                 data={details}
               />
             </Box>
