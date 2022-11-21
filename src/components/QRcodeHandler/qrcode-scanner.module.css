@@ -1,0 +1,87 @@
+.card {
+  background-color: #fff;
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  /* margin: auto; */
+  top: 50%;
+  left: 50%;
+  z-index: 9;
+  border-radius: 20px;
+  box-shadow: 0 0 15px 10px #a2a2a2;
+  overflow: hidden;
+}
+
+.scanArea {
+  width: 70%;
+  height: 70%;
+  max-height: 70%;
+  max-width: 70%;
+  /* position: relative; */
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  /* overflow: hidden; */
+  border: 0.1rem solid rgba(255, 255, 255, 0.3);
+  position: absolute;
+  z-index: 8;
+}
+
+.line {
+  position: absolute;
+  height: 400px;
+  width: 100%;
+  z-index: 10;
+  background: linear-gradient(180deg, rgba(0, 255, 51, 0) 43%, #fff 211%);
+  border-bottom: 1px solid #fff;
+  transform: translateY(-100%);
+  animation: scan-line 5s infinite;
+  animation-delay: 1s;
+}
+
+.topL,
+.topR,
+.btmL,
+.btmR {
+  position: absolute;
+  width: 10%;
+  height: 10%;
+  max-height: 10%;
+  max-width: 10%;
+  margin: 0;
+}
+
+.topL {
+  top: -3px;
+  left: -3px;
+  border-top: 3px solid #fff;
+  border-left: 3px solid #fff;
+}
+.topR {
+  top: -3px;
+  right: -3px;
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+}
+.btmL {
+  bottom: -3px;
+  left: -3px;
+  border-bottom: 3px solid #fff;
+  border-left: 3px solid #fff;
+}
+.btmR {
+  bottom: -3px;
+  right: -3px;
+  border-bottom: 3px solid #fff;
+  border-right: 3px solid #fff;
+}
+
+@keyframes scan-line {
+  0% {
+    transform: translateY(-100%);
+  }
+
+  100% {
+    transform: translateY(50%);
+  }
+}

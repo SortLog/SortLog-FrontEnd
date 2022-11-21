@@ -1,58 +1,192 @@
-import React from "react";
-import { TextField, Button, CircularProgress } from "@mui/material";
+import { TextField, Button, Grid, Box, Paper, Typography, Link, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { useInput } from "@/hook/forms";
+import { FcGoogle } from "react-icons/fc";
+import { useInput } from "@/util/forms";
+import { useRouter } from "next/router";
+import { useAuth } from "@/hooks/use-auth";
 import toast from "react-hot-toast";
-import { Auth } from "aws-amplify";
-import NextLink from "next/link";
+import { getUserByEmail } from "@/services/api/users";
 
-const Field = styled(TextField)({
-  margin: "10px 0",
+const StyledTextField = styled(TextField)({
+  borderRadius: "5px",
+  background: "transparent",
 });
 
-const DLink = styled(NextLink)({
-  margin: "15px 0",
-  textAlign: "right",
-});
-
-const Signup: React.FC = () => {
-  const [loading, setLoading] = React.useState(false);
-
+const SignIn: React.FC = () => {
   const { value: email, bind: bindEmail } = useInput("");
   const { value: password, bind: bindPassword } = useInput("");
-
+  const router = useRouter();
+  const { login } = useAuth();
   const handleSubmit = async (e: React.SyntheticEvent<Element, Event>) => {
     e.preventDefault();
-    setLoading(true);
-
     try {
-      const resp = await Auth.signIn(email, password);
-      console.log(resp);
-    } catch (error) {
-      toast.error("error toasted!");
+      const user = await login(email, password);
+      // get user from mongodb
+      // @ts-ignore
+      console.log("cognito" + user);
+      const userFromMongo = await getUserByEmail(user.username);
+      // @ts-ignore
+      console.log("mong" + userFromMongo);
+      // set user in localstorage
+      localStorage.setItem("currentUser", JSON.stringify(userFromMongo.data));
+      // set token to localstorage
+      localStorage.setItem("token", user.signInUserSession.idToken.jwtToken);
+      // redirect to dashboard
+      router.push("/dashboard");
+      toast.success(user.username + " logged in successfully");
+    } catch (error: any) {
+      console.log(error);
+      toast.error(error.message);
     }
-    setLoading(false);
   };
+  ``;
 
   return (
-    <form
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}
-      onSubmit={handleSubmit}
-    >
-      <h1 style={{ fontSize: "22px", fontWeight: 800 }}> Sign in to an existing account</h1>
-      <Field label="Email" {...bindEmail} type="email" />
-      <Field label="Password" type="password" {...bindPassword} />
-      <Button variant="contained" color="primary" size="large" type="submit" disabled={loading}>
-        {loading && <CircularProgress size={20} style={{ marginRight: 20 }} />}
-        Login to Your Account
-      </Button>
-      <DLink href="/signup">make a new account &rarr;</DLink>
-    </form>
+    <Container>
+      <Grid container component="main" sx={{ height: "100vh", flexWrap: "wrap" }} spacing={2}>
+        <Grid
+          item
+          xs={12}
+          sm={8}
+          md={6}
+          component={Paper}
+          elevation={6}
+          square
+          alignItems="center"
+          display="flex"
+        >
+          <Box
+            sx={{
+              my: 8,
+              mx: 4,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-start",
+            }}
+          >
+            <Box
+              sx={{
+                mb: 1,
+              }}
+            >
+              <img
+                src="./png/favicon.png"
+                style={{
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                  width: "32px",
+                  height: "32px",
+                }}
+              />
+            </Box>
+            <Typography component="h1" variant="h2" sx={{ mb: 1 }}>
+              Welcome Back!
+            </Typography>
+            <Typography component="p" sx={{ mb: 2 }}>
+              Log in to your account.
+            </Typography>
+            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <StyledTextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                name="email"
+                type="text"
+                autoFocus
+                onChange={(event) => bindEmail.onChange(event)}
+              />
+              <StyledTextField
+                variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                onChange={(event) => bindPassword.onChange(event)}
+              />
+
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                sx={{ mt: 3, mb: 2, bgcolor: "neutral.200", color: "text.primary" }}
+              >
+                Continue
+              </Button>
+              <Box
+                display="flex"
+                sx={{
+                  alignItems: "center",
+                  "& hr": {
+                    flexBasis: "45%",
+                    height: 1,
+                    bgcolor: "divider",
+                  },
+                }}
+              >
+                <hr />
+                <Typography component="span" sx={{ color: "text.secondary" }}>
+                  OR
+                </Typography>
+                <hr />
+              </Box>
+              <Button
+                type="submit"
+                fullWidth
+                variant="outlined"
+                sx={{
+                  mt: 3,
+                  mb: 2,
+                  bgcolor: "background.default",
+                  color: "text.primary",
+                  display: "flex",
+                  borderColor: "neutral.300",
+                }}
+              >
+                <FcGoogle fontSize={22} style={{ justifySelf: "flex-start" }} />
+                <Typography component="p" sx={{ margin: "0 auto" }}>
+                  Sign in via Google
+                </Typography>
+              </Button>
+              <Box display="flex" justifyContent="center">
+                <Typography>
+                  New here?&nbsp;
+                  <Link href="/register" variant="body2" color="info.main">
+                    Create an account
+                  </Link>
+                </Typography>
+              </Box>
+            </Box>
+          </Box>
+        </Grid>
+        <Grid
+          item
+          xs={false}
+          sm={4}
+          md={6}
+          alignItems="center"
+          sx={{
+            backgroundColor: "#fff",
+            "&>span": {
+              height: "100% !important",
+            },
+          }}
+        >
+          <img
+            src="./png/logo-color.png"
+            alt="logo"
+            style={{ objectFit: "contain", width: "100%", height: "100%", minWidth: "300px" }}
+          />
+        </Grid>
+      </Grid>
+    </Container>
   );
 };
 
-export default Signup;
+// @ts-ignore
+export default SignIn;

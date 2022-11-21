@@ -13,20 +13,22 @@ const neutral = {
 
 const background = {
   default: "#F9FAFC",
+  button: "#D1D5DB",
   paper: "#FFFFFF",
 };
 
 const divider = "#E6E8F0";
 
 const primary = {
-  main: "#5048E5",
-  light: "#828DF8",
-  dark: "#3832A0",
+  main: "#DD2A3B",
+  light: "#EB5424",
+  dark: "#EB5424",
   contrastText: "#FFFFFF",
 };
 
+
 const secondary = {
-  main: "#10B981",
+  main: "#FFFFFF",
   light: "#3FC79A",
   dark: "#0B815A",
   contrastText: "#FFFFFF",

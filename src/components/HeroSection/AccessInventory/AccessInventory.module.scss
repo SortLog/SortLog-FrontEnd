@@ -1,0 +1,104 @@
+.inventorySection {
+  display: flex;
+  align-items: center;
+  padding: 40px 0;
+  .col {
+    max-width: 50%;
+  }
+  .title {
+    font-size: 50px;
+    font-weight: 900;
+    line-height: 112%;
+    margin-bottom: 35px;
+    max-width: 473px;
+  }
+  .productTour {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 157%;
+    letter-spacing: 0.25px;
+    color: #727491;
+    margin: 0 0 0 1.5rem !important;
+    flex: 1;
+    color: red;
+  }
+  .inventoryLabel {
+    color: #4f5366;
+    line-height: 150%;
+    font-size: 20px;
+    letter-spacing: -0.5px;
+  }
+  .homeSwitchingTo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .homeSwitchingTo_cta {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  .inventoryContainer {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: -50px;
+  }
+  .homeSwitchingTo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .homeSwitchingTo_cta {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  .btn {
+    border: none;
+    outline: none;
+    background-color: red;
+    color: #fff;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: 0.75px;
+    padding: 16px 24px;
+    border-radius: 2rem;
+    margin-left: 1rem;
+  }
+  .inventoryTitle {
+    font-size: 34px;
+    line-height: 120%;
+    margin-bottom: 29px;
+    color: #4f5366;
+  }
+  .marginRight {
+    margin-right: 16px;
+  }
+  .inventoryParagraph {
+    font-size: 24px;
+    line-height: 130%;
+    letter-spacing: -1px;
+    font-weight: 400;
+    margin-bottom: 37px;
+    color: #9191a1;
+  }
+  .homeJobDone {
+    margin-bottom: 37px;
+    display: flex;
+    flex-direction: row;
+  }
+  .quote_wrap {
+    padding-left: 16px;
+    color: #727491;
+  }
+  .homeCol {
+    max-width: 1200px;
+    padding-left: 200px;
+  }
+}
