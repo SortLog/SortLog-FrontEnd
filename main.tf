@@ -31,7 +31,7 @@ module "website_CDN" {
   url=var.frontendurl
   bucketname = var.bucket_name
   app_env=var.app_env
-  acm_certificate_arn=module.ACM.ACM_arn
+  //acm_certificate_arn=module.ACM.ACM_arn
 }
 
 module "DNS" {
