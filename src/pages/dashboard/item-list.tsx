@@ -128,9 +128,9 @@ const ItemList: NextPage = () => {
 
   const [isQRCodeButtonClicked, setIsQRCodeButtonClicked] = useState(false);
 
-  let x = 0;
-  let y = 0;
-  let z = 0;
+  const x = 0;
+  const y = 0;
+  const z = 0;
 
   let items = 0;
   let quantity = 0;
