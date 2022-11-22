@@ -47,7 +47,7 @@ pipeline {
                 }
         }
 
-        stage('upload frontend to  S3 bucket UAT') {
+        stage('upload  to  S3 bucket production') {
         when {branch 'main'}   
             steps {
                 withAWS(credentials: AWS_CRED, region: AWS_REGION)
@@ -62,7 +62,7 @@ pipeline {
          }
 
          }
-        stage('TF Launch for Production'){
+        stage('TF Launch for UAT'){
         when {branch 'uat'}    
                 steps {
                     withAWS(credentials: AWS_CRED, region: AWS_REGION) {
@@ -85,7 +85,7 @@ pipeline {
                 }
         }
 
-        stage('upload frontend to  S3 bucket UAT') {
+        stage('upload  to  S3 bucket UAT') {
         when {branch 'uat'}   
             steps {
                 withAWS(credentials: AWS_CRED, region: AWS_REGION)
