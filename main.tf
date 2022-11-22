@@ -42,15 +42,15 @@ module "DNS" {
 
 ####To configure Terraform to store the state in your S3 bucket (with encryption and locking), you need to add a backend configuration to your Terraform code.
 
-# terraform {
-#   backend "s3" {
-#     # Replace this with your bucket name!
-#     bucket         = "sortlog-tfstate-s3"
-#     key            = "terraform.tfstate"
-#     region         = "ap-southeast-2"
+terraform {
+  backend "s3" {
+    # Replace this with your bucket name!
+    bucket         = "sortlog-tfstate-s3"
+    key            = "terraform.tfstate"
+    region         = "ap-southeast-2"
 
-#     # Replace this with your DynamoDB table name!
-#     dynamodb_table = "DBlock-sortlog"
-#     encrypt        = true
-#   }
-# }
+    # Replace this with your DynamoDB table name!
+    dynamodb_table = "DBlock-sortlog"
+    encrypt        = true
+  }
+}
