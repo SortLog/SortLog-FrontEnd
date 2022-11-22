@@ -34,7 +34,7 @@ pipeline {
                             export APP_ENV="uat"
                             terraform init -input=false
                             terraform workspace select ${APP_ENV} || terraform workspace new ${APP_ENV}
-                            terraform apply \
+                            terraform destroy \
                                -var="app_env=${APP_ENV}"\
                                --auto-approve
                         '''
