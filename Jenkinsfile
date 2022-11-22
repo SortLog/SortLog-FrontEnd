@@ -81,7 +81,13 @@ pipeline {
                     dir('./out'){
                         echo "deploying to S3 "
                         sh "aws s3 sync . s3://${S3_BUCKET_NAME}"
-                        // sh "aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths '/*'"
+                        sh "aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths '/*'"
+                        script{
+                            while(currentBuild.result != "SUCCESS"){
+                                
+                            }
+                        }
+                        sh "aws cloudfront get-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --id ${id from create-validation}"
                     }
                     
                 }
