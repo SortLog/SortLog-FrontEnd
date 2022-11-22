@@ -31,7 +31,7 @@ pipeline {
                    
                     
                         sh '''
-                            export APP_ENV="production"
+                            export APP_ENV="production-f"
                             terraform init -input=false
                             terraform workspace select ${APP_ENV} || terraform workspace new ${APP_ENV}
                             terraform destroy \
