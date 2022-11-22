@@ -31,7 +31,7 @@ pipeline {
                    
                     
                         sh '''
-                            export APP_ENV="uat-f"
+                            export APP_ENV="production"
                             terraform init -input=false
                             terraform workspace select ${APP_ENV} || terraform workspace new ${APP_ENV}
                             terraform apply \
