@@ -127,7 +127,7 @@ const ItemList: NextPage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const [isQRCodeButtonClicked, setIsQRCodeButtonClicked] = useState(false);
-  const [searchInput, setSearchInput] = useState("")
+  const [searchInput, setSearchInput] = useState("");
   const onSearchArea = (data: string) => {
     setSearchInput(data);
   };
