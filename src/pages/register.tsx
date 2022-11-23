@@ -173,12 +173,12 @@ const Register = () => {
         sx={{
           backgroundColor: "background.default",
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
           minHeight: "100vh",
         }}
       >
-        <Container sx={{ py: { xs: "60px", md: "120px" } }}>
-          <Card elevation={16} sx={{ p: 4 }}>
+        <Container sx={{ py: { xs: "60px", md: "120px" }, display: "flex", flexDirection: "row" }}>
+          <Card elevation={16} square sx={{ p: 4 }}>
             <Box
               sx={{
                 alignItems: "center",
@@ -225,6 +225,23 @@ const Register = () => {
                 </Link>
               </NextLink>
             </div>
+          </Card>
+          <Card elevation={16} square sx={{ p: 4, display:"flex" }} >
+            <Box
+              sx={{
+                my: 4,
+                mx: 4,
+                Height: "100%",
+                display:"flex",
+                color: "#f5f5f5"
+              }}
+            >
+              <img
+                src="./png/logo-no-background.png"
+                alt="logo"
+                style={{ width: "100%", minWidth: "200px", objectFit: "contain" }}
+              />
+            </Box>
           </Card>
         </Container>
       </Box>
