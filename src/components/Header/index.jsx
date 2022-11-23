@@ -1,16 +1,24 @@
 import NextLink from "next/link";
-import Link from "@mui/material/Link";
+import { Button, Link } from "@mui/material";
 import styles from "./Header.module.scss";
+import { Logo } from "@/components/logo";
 
 const Navbar = () => {
   return (
     <>
       <div className={styles.nav}>
-        <NextLink href="/" passHref>
-          <Link className={styles.navLink} sx={{ color: "#000" }}>
-            <img alt="logo" src="./android-chrome-192x192.png" width="40" />
-          </Link>
-        </NextLink>
+        <Link className={styles.navLink} sx={{ color: "#000" }}>
+          <NextLink href="/" passHref>
+            <a>
+              <Logo
+                sx={{
+                  height: 40,
+                  width: 40,
+                }}
+              />
+            </a>
+          </NextLink>
+        </Link>
         <div className={styles.bars} />
         <div className={styles.navMenu}>
           <NextLink href="/" passHref>
@@ -37,10 +45,10 @@ const Navbar = () => {
         <div className={styles.navBtn}>
           <NextLink href="./login" passHref>
             <Link className={styles.navLink} sx={{ color: "#000" }}>
-              Login
+              <Button>Login</Button>
             </Link>
           </NextLink>
-          <NextLink href="./signup" passHref>
+          <NextLink href="./register" passHref>
             <Link className={styles.navBtnLink} sx={{ color: "#fff" }}>
               Start a Free Trial
             </Link>
