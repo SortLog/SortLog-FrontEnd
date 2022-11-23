@@ -137,7 +137,7 @@ export const AnalyticsGeneralOverview = () => (
           }}
         >
           <div style={{ textAlign: "center" }}>
-            <FolderOpenIcon/>
+            <FolderOpenIcon />
             <Typography color="textSecondary" variant="body2">
               Item Count
             </Typography>
@@ -165,7 +165,7 @@ export const AnalyticsGeneralOverview = () => (
           }}
         >
           <div style={{ textAlign: "center" }}>
-            <CashIcon/>
+            <CashIcon />
             <Typography color="textSecondary" variant="body2">
               Item Amount Sum
             </Typography>
@@ -210,9 +210,9 @@ export const AnalyticsGeneralOverview = () => (
           }}
         >
           <div style={{ textAlign: "center" }}>
-            <ArchiveIcon/>
+            <ArchiveIcon />
             <Typography color="textSecondary" variant="body2">
-            Outbound and Inbound
+              Outbound and Inbound
             </Typography>
             <Typography sx={{ mt: 1 }} variant="h5">
               150
@@ -255,9 +255,9 @@ export const AnalyticsGeneralOverview = () => (
           }}
         >
           <div style={{ textAlign: "center" }}>
-            <CollectionIcon/>
+            <CollectionIcon />
             <Typography color="textSecondary" variant="body2">
-            O/I Amount Sum
+              O/I Amount Sum
             </Typography>
             <Typography sx={{ mt: 1 }} variant="h5">
               11.3K

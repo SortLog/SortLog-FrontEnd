@@ -11,6 +11,7 @@ import {
   Table,
   TableBody,
   TablePagination,
+  Container,
 } from "@mui/material";
 import { Dayjs } from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -280,91 +281,92 @@ export default function history() {
   const groupedHistories = groupHistories(paginatedHistories);
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        mx: 1,
-        width: "95%",
-        backgroundColor: "background.default",
-        overflow: "hidden",
-      }}
-    >
-      <Box className={"Header"}>
-        <Typography variant="h3" component="h3" marginLeft={1}>
-          History
-        </Typography>
-      </Box>
-      <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 }} className={"searchBox"}>
-        <Grid item xs>
-          <TextField
-            fullWidth
-            id="standard-basic"
-            label="search history..."
-            variant="standard"
-            color="primary"
-          />
-        </Grid>
-        <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="Start Date"
-              value={value}
-              onChange={(newValue) => {
-                setValue(newValue);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-        </Grid>
-        <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="Finish Date"
-              value={value}
-              onChange={(newValue) => {
-                setValue(newValue);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-        </Grid>
-      </Grid>
-      <Table
+    <Container maxWidth="lg" color="background">
+      <Box
         sx={{
-          borderCollapse: "separate",
-          borderSpacing: (theme) => `0 ${theme.spacing(3)}`,
-          minWidth: 600,
-          marginTop: (theme) => `-${theme.spacing(3)}`,
-          p: "1px",
+          flexGrow: 1,
+          mx: 1,
+          backgroundColor: "background.default",
+          overflow: "hidden",
         }}
       >
-        <TableBody>
-          {Object.keys(groupedHistories).map((status) => (
-            <Fragment key={status}>
-              <TableRow>
-                <TableCell colSpan={5} sx={{ px: 0 }}>
-                  <Typography color="textSecondary" variant="h6">
-                    {status.charAt(0).toUpperCase() + status.slice(1)} (
-                    {groupedHistories[status].length})
-                  </Typography>
-                </TableCell>
-              </TableRow>
-              {groupedHistories[status].map((history: { id: React.Key | null | undefined }) => (
-                <HistoryRow history={history} key={history.id} />
-              ))}
-            </Fragment>
-          ))}
-        </TableBody>
-      </Table>
-      <TablePagination
-        component="div"
-        count={histories.length}
-        onPageChange={handlePageChange}
-        onRowsPerPageChange={handleRowsPerPageChange}
-        page={page}
-        rowsPerPage={rowsPerPage}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
-    </Box>
+        <Box className={"Header"}>
+          <Typography variant="h3" component="h3" marginLeft={1}>
+            History
+          </Typography>
+        </Box>
+        <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 }} className={"searchBox"}>
+          <Grid item xs>
+            <TextField
+              fullWidth
+              id="standard-basic"
+              label="search history..."
+              variant="standard"
+              color="primary"
+            />
+          </Grid>
+          <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Start Date"
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </Grid>
+          <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Finish Date"
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </Grid>
+        </Grid>
+        <Table
+          sx={{
+            borderCollapse: "separate",
+            borderSpacing: (theme) => `0 ${theme.spacing(3)}`,
+            minWidth: 600,
+            marginTop: (theme) => `-${theme.spacing(3)}`,
+            p: "1px",
+          }}
+        >
+          <TableBody>
+            {Object.keys(groupedHistories).map((status) => (
+              <Fragment key={status}>
+                <TableRow>
+                  <TableCell colSpan={5} sx={{ px: 0 }}>
+                    <Typography color="textSecondary" variant="h6">
+                      {status.charAt(0).toUpperCase() + status.slice(1)} (
+                      {groupedHistories[status].length})
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+                {groupedHistories[status].map((history: { id: React.Key | null | undefined }) => (
+                  <HistoryRow history={history} key={history.id} />
+                ))}
+              </Fragment>
+            ))}
+          </TableBody>
+        </Table>
+        <TablePagination
+          component="div"
+          count={histories.length}
+          onPageChange={handlePageChange}
+          onRowsPerPageChange={handleRowsPerPageChange}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          rowsPerPageOptions={[5, 10, 25]}
+        />
+      </Box>
+    </Container>
   );
 }
