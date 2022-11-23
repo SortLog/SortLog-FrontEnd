@@ -43,7 +43,7 @@ const SignIn: React.FC = () => {
 
   return (
     <Container>
-      <Grid container component="main" sx={{ height: "100vh", flexWrap: "wrap" }} spacing={2}>
+      <Grid container component="main" sx={{ height:"100vh", flexWrap: "wrap" }} spacing={2}>
         <Grid
           item
           xs={12}
@@ -169,19 +169,29 @@ const SignIn: React.FC = () => {
           xs={false}
           sm={4}
           md={6}
+          display="flex"
           alignItems="center"
+          alignContent="center"
           sx={{
-            backgroundColor: "#fff",
+            backgroundColor: "#f5f5f5",
             "&>span": {
               height: "100% !important",
             },
           }}
         >
-          <img
-            src="./png/logo-color.png"
-            alt="logo"
-            style={{ objectFit: "contain", width: "100%", height: "100%", minWidth: "300px" }}
-          />
+          <Box
+            sx={{
+              my: 4,
+              mx: 4,
+              Height: "100%",
+            }}
+          >
+            <img
+              src="./png/logo-no-background.png"
+              alt="logo"
+              style={{ width: "100%", minWidth: "200px", objectFit: "contain" }}
+            />
+          </Box>
         </Grid>
       </Grid>
     </Container>
