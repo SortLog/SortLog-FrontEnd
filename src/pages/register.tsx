@@ -73,7 +73,7 @@ export const AmplifyRegister = (props: any) => {
       <TextField
         error={Boolean(formik.touched.email && formik.errors.email)}
         fullWidth
-        helperText={`${formik.touched.email && formik.errors.email}`}
+        // helperText={`${formik.touched.email && formik.errors.email}`}
         label="Email Address"
         margin="normal"
         name="email"
@@ -85,7 +85,7 @@ export const AmplifyRegister = (props: any) => {
       <TextField
         error={Boolean(formik.touched.password && formik.errors.password)}
         fullWidth
-        helperText={`${formik.touched.password && formik.errors.password}`}
+        // helperText={`${formik.touched.password && formik.errors.password}`}
         label="Password"
         margin="normal"
         name="password"
@@ -107,7 +107,7 @@ export const AmplifyRegister = (props: any) => {
       <TextField
         error={Boolean(formik.touched.email && formik.errors.email)}
         fullWidth
-        helperText={`${formik.touched.email && formik.errors.email}`}
+        // helperText={`${formik.touched.email && formik.errors.email}`}
         label="Company Name"
         margin="normal"
         name="provider"
@@ -178,7 +178,7 @@ const Register = () => {
         }}
       >
         <Container sx={{ py: { xs: "60px", md: "120px" }, display: "flex", flexDirection: "row" }}>
-          <Card elevation={16} square sx={{ p: 4 }}>
+          <Card square sx={{ p: 4 }}>
             <Box
               sx={{
                 alignItems: "center",
@@ -198,7 +198,7 @@ const Register = () => {
                 </a>
               </NextLink>
               <Typography variant="h4">Register</Typography>
-              <Typography color="textSecondary" sx={{ mt: 2 }} variant="body2">
+              <Typography color="textSecondary" component="p" sx={{ mb: 2 }}>
                 Register on the internal platform
               </Typography>
             </Box>
@@ -213,11 +213,7 @@ const Register = () => {
             <Divider sx={{ my: 3 }} />
             <div>
               <NextLink
-                href={
-                  disableGuard
-                    ? `/authentication/login?disableGuard=${disableGuard}`
-                    : "/authentication/login"
-                }
+                href={disableGuard ? `./login?disableGuard=${disableGuard}` : "./login"}
                 passHref
               >
                 <Link color="textSecondary" variant="body2">
@@ -226,14 +222,13 @@ const Register = () => {
               </NextLink>
             </div>
           </Card>
-          <Card elevation={16} square sx={{ p: 4, display:"flex" }} >
+          <Card square sx={{ display: "flex", backgroundColor: "#f6f8f9" }}>
             <Box
               sx={{
                 my: 4,
                 mx: 4,
                 Height: "100%",
-                display:"flex",
-                color: "#f5f5f5"
+                display: "flex",
               }}
             >
               <img

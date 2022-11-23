@@ -4,6 +4,8 @@ import { BsPhone } from "react-icons/bs";
 import { BsBoxSeam } from "react-icons/bs";
 import { VscNewFolder } from "react-icons/vsc";
 import { TiTick } from "react-icons/ti";
+import NextLink from "next/link";
+import { Button, Typography } from "@mui/material";
 
 export default function GetReporting() {
   return (
@@ -24,7 +26,7 @@ export default function GetReporting() {
               <i className={styles.marginRight}>
                 <BsPhone />
               </i>
-              Easily upload your existing inventory list into Sortly.
+              Easily upload your existing inventory list into Sortlog.
             </p>
             <p className={styles.inventoryParagraph}>
               <i className={styles.marginRight}>
@@ -42,10 +44,19 @@ export default function GetReporting() {
               <div className={styles.quoteWrap}></div>
             </div>
             <div className={styles.homeSwitchingTo_cta}>
-              <button type="button" className={styles.btn}>
-                See All Plan
-              </button>
-              <p className={styles.productTour}>Take a product tour</p>
+              <NextLink href="#pricing" passHref>
+                <Button variant="contained" sx={{ backgroundColor: "#f13514" }}>
+                  See All Plan
+                </Button>
+              </NextLink>
+              <NextLink href="#pricing" passHref>
+                <Typography
+                  variant="subtitle2"
+                  sx={{ ml: 1, mt: 1, color: "#f13514", cursor: "pointer" }}
+                >
+                  Take a pricing tour
+                </Typography>
+              </NextLink>
             </div>
           </div>
           <div className={styles.col}>
