@@ -1,8 +1,11 @@
 import React from "react";
 import styles from "./OrganizeInventory.module.scss";
+import NextLink from "next/link";
+import { Button, Typography } from "@mui/material";
+
 export default function OrganizeInventory() {
   return (
-    <div className={styles.inventorySection}>
+    <div className={styles.inventorySection} id="solutions">
       <div className={styles.InventoryContainer}>
         <div className={styles.homeSwitchingTo}>
           <div className={styles.homeCol}>
@@ -15,10 +18,19 @@ export default function OrganizeInventory() {
               <div className={styles.quoteWrap}></div>
             </div>
             <div className={styles.homeSwitchingTo_cta}>
-              <button type="button" className={styles.btn}>
-                See All Plan
-              </button>
-              <p className={styles.productTour}>Take a product tour</p>
+              <NextLink href="#pricing" passHref>
+                <Button variant="contained" sx={{ backgroundColor: "#f13514" }}>
+                  See All Plan
+                </Button>
+              </NextLink>
+              <NextLink href="#pricing" passHref>
+                <Typography
+                  variant="subtitle2"
+                  sx={{ ml: 1, mt: 1, color: "#f13514", cursor: "pointer" }}
+                >
+                  Take a pricing tour
+                </Typography>
+              </NextLink>
             </div>
           </div>
           <div className={styles.col}>
