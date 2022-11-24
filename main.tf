@@ -37,7 +37,7 @@ module "DNS" {
   source = "./terraform/modules/DNS record"
   cdndomain = module.website_CDN.cloudfrontdomain
   hosted_zone_id=module.website_CDN.cloudfronthosted_zone_id
-  url= "frontend-${var.app_env}.sortlog.net" //var.frontendurl
+  url= "${var.app_env}.sortlog.net" //var.frontendurl
 }
 
 ####To configure Terraform to store the state in your S3 bucket (with encryption and locking), you need to add a backend configuration to your Terraform code.
