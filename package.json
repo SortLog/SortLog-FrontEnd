@@ -6,7 +6,7 @@
         "dev7200": "yarn prettier && next dev -p 7200",
         "pre-commit": "yarn prettier && yarn lint && yarn typecheck && yarn test",
         "build": "next build",
-        "export": "yarn build && yarn export",
+        "export": "next build && next export",
         "start": "next start",
         "lint": "next lint --fix",
         "prettier": "prettier -c .prettierrc \"src/{pages,store,components}/**/*.{js,jsx,ts,tsx}\" --write",
