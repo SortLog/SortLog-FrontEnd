@@ -11,6 +11,7 @@ import {
   Table,
   TableBody,
   TablePagination,
+  Container,
 } from "@mui/material";
 import { Dayjs } from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -281,6 +282,7 @@ export default function history() {
   const groupedHistories = groupHistories(paginatedHistories);
 
   return (
+    <Container maxWidth="lg" color="background">
     <Box
       sx={{
         flexGrow: 1,
@@ -302,7 +304,7 @@ export default function history() {
         </NextLink>
       </Grid>
 
-      <Grid container spacing={2} sx={{ pt: 5, minWidth: 600 }} className={"searchBox"}>
+      <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 }} className={"searchBox"}>
         <Grid item xs>
           <TextField
             fullWidth
@@ -374,5 +376,6 @@ export default function history() {
         rowsPerPageOptions={[5, 10, 25]}
       />
     </Box>
+    </Container>
   );
 }

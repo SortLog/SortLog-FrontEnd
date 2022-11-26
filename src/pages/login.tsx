@@ -1,4 +1,4 @@
-import { TextField, Button, Grid, Box, Paper, Typography, Link, Container } from "@mui/material";
+import { TextField, Button, Card, Box, Paper, Typography, Link, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { FcGoogle } from "react-icons/fc";
 import { useInput } from "@/util/forms";
@@ -6,13 +6,16 @@ import { useRouter } from "next/router";
 import { useAuth } from "@/hooks/use-auth";
 import toast from "react-hot-toast";
 import { getUserByEmail } from "@/services/api/users";
+import NextLink from "next/link";
+import { Logo } from "@/components/logo";
+import Head from "next/head";
 
 const StyledTextField = styled(TextField)({
   borderRadius: "5px",
   background: "transparent",
 });
 
-const SignIn: React.FC = () => {
+const LgIn: React.FC = () => {
   const { value: email, bind: bindEmail } = useInput("");
   const { value: password, bind: bindPassword } = useInput("");
   const router = useRouter();
@@ -42,161 +45,150 @@ const SignIn: React.FC = () => {
   ``;
 
   return (
-    <Container>
-      <Grid container component="main" sx={{ height: "100vh", flexWrap: "wrap" }} spacing={2}>
-        <Grid
-          item
-          xs={12}
-          sm={8}
-          md={6}
-          component={Paper}
-          elevation={6}
-          square
-          alignItems="center"
-          display="flex"
-        >
-          <Box
-            sx={{
-              my: 8,
-              mx: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-start",
-            }}
-          >
+    <>
+      <Head>
+        <title>Login | SortLog </title>
+      </Head>
+      <Box
+        component="main"
+        sx={{
+          backgroundColor: "background.default",
+          display: "flex",
+          flexDirection: "row",
+          minHeight: "100vh",
+        }}
+      >
+        <Container sx={{ py: { xs: "60px", md: "120px" }, display: "flex", flexDirection: "row" }}>
+          <Card square sx={{ p: 8 }}>
             <Box
               sx={{
-                mb: 1,
+                my: 8,
+                mx: 4,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-start",
+              }}
+            >
+              <NextLink href="/" passHref>
+                <a>
+                  <Logo
+                    sx={{
+                      height: 40,
+                      width: 40,
+                    }}
+                  />
+                </a>
+              </NextLink>
+              <Typography variant="h4">Welcome Back!</Typography>
+              <Typography color="textSecondary" component="p" sx={{ mb: 2 }}>
+                Log in to your account.
+              </Typography>
+            </Box>
+            <Box
+              sx={{
+                flexGrow: 1,
+                mt: 3,
+              }}
+            >
+              <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 2 }}>
+                <StyledTextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  type="text"
+                  autoFocus
+                  onChange={(event) => bindEmail.onChange(event)}
+                />
+                <StyledTextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  onChange={(event) => bindPassword.onChange(event)}
+                />
+
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2, bgcolor: "neutral.200", color: "text.primary" }}
+                >
+                  Continue
+                </Button>
+                <Box
+                  display="flex"
+                  sx={{
+                    alignItems: "center",
+                    "& hr": {
+                      flexBasis: "45%",
+                      height: 1,
+                      bgcolor: "divider",
+                    },
+                  }}
+                >
+                  <hr />
+                  <Typography component="span" sx={{ color: "text.secondary" }}>
+                    OR
+                  </Typography>
+                  <hr />
+                </Box>
+              </Box>
+            </Box>
+            <Button
+              type="submit"
+              fullWidth
+              variant="outlined"
+              sx={{
+                mt: 3,
+                mb: 2,
+                bgcolor: "background.default",
+                color: "text.primary",
+                display: "flex",
+                borderColor: "neutral.300",
+              }}
+            >
+              <FcGoogle fontSize={22} style={{ justifySelf: "flex-start" }} />
+              <Typography component="p" sx={{ margin: "0 auto" }}>
+                Sign in via Google
+              </Typography>
+            </Button>
+            <Box display="flex" justifyContent="center">
+              <Typography>
+                New here?&nbsp;
+                <Link href="./register" variant="body2" color="info.main">
+                  Create an account
+                </Link>
+              </Typography>
+            </Box>
+          </Card>
+          <Card square sx={{ display: "flex", backgroundColor: "#f6f8f9" }}>
+            <Box
+              sx={{
+                my: 4,
+                ml: 12,
+                Height: "100%",
+                display: "flex",
               }}
             >
               <img
-                src="./png/favicon.png"
-                style={{
-                  backgroundPosition: "center",
-                  backgroundSize: "cover",
-                  width: "32px",
-                  height: "32px",
-                }}
+                src="./png/logo-no-background.png"
+                alt="logo"
+                style={{ width: "80%", minWidth: "200px", objectFit: "contain" }}
               />
             </Box>
-            <Typography component="h1" variant="h2" sx={{ mb: 1 }}>
-              Welcome Back!
-            </Typography>
-            <Typography component="p" sx={{ mb: 2 }}>
-              Log in to your account.
-            </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }}>
-              <StyledTextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                type="text"
-                autoFocus
-                onChange={(event) => bindEmail.onChange(event)}
-              />
-              <StyledTextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                onChange={(event) => bindPassword.onChange(event)}
-              />
-
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2, bgcolor: "neutral.200", color: "text.primary" }}
-              >
-                Continue
-              </Button>
-              <Box
-                display="flex"
-                sx={{
-                  alignItems: "center",
-                  "& hr": {
-                    flexBasis: "45%",
-                    height: 1,
-                    bgcolor: "divider",
-                  },
-                }}
-              >
-                <hr />
-                <Typography component="span" sx={{ color: "text.secondary" }}>
-                  OR
-                </Typography>
-                <hr />
-              </Box>
-              <Button
-                type="submit"
-                fullWidth
-                variant="outlined"
-                sx={{
-                  mt: 3,
-                  mb: 2,
-                  bgcolor: "background.default",
-                  color: "text.primary",
-                  display: "flex",
-                  borderColor: "neutral.300",
-                }}
-              >
-                <FcGoogle fontSize={22} style={{ justifySelf: "flex-start" }} />
-                <Typography component="p" sx={{ margin: "0 auto" }}>
-                  Sign in via Google
-                </Typography>
-              </Button>
-              <Box display="flex" justifyContent="center">
-                <Typography>
-                  New here?&nbsp;
-                  <Link href="/register" variant="body2" color="info.main">
-                    Create an account
-                  </Link>
-                </Typography>
-              </Box>
-            </Box>
-          </Box>
-        </Grid>
-        <Grid
-          item
-          xs={false}
-          sm={4}
-          md={6}
-          display="flex"
-          alignItems="center"
-          alignContent="center"
-          sx={{
-            backgroundColor: "#f5f5f5",
-            "&>span": {
-              height: "100% !important",
-            },
-          }}
-        >
-          <Box
-            sx={{
-              my: 4,
-              mx: 4,
-              Height: "100%",
-            }}
-          >
-            <img
-              src="./png/logo-no-background.png"
-              alt="logo"
-              style={{ width: "100%", minWidth: "200px", objectFit: "contain" }}
-            />
-          </Box>
-        </Grid>
-      </Grid>
-    </Container>
+          </Card>
+        </Container>
+      </Box>
+    </>
   );
 };
 
-// @ts-ignore
-export default SignIn;
+export default LgIn;

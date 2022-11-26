@@ -13,36 +13,34 @@ const About: NextPage = () => {
   return (
     <>
       <Container maxWidth="lg" color="background">
-        <div className="App">
-          <header className="App-header">
-            <GlobalStyles
-              styles={{
-                body: { backgroundColor: "#eeecec" },
-              }}
-            />
-            <Typography
-              variant="h1"
-              component="div"
-              fontWeight="bold"
-              color="#373b54"
-              align="center"
-              paddingTop="66px"
-            >
-              About <text style={{ color: "#ce132f" }}>Us</text>.
-            </Typography>
-            <Typography
-              fontSize="17.5px"
-              paddingLeft="390px"
-              paddingRight="390px"
-              paddingTop="33px"
-              color="#8c8989"
-              align="center"
-            >
-              Sortly is a software solution designed for businesses to streamline and modernize
-              every aspect of managing inventory.
-            </Typography>
-          </header>
-        </div>
+        <>
+          <GlobalStyles
+            styles={{
+              body: { backgroundColor: "#eeecec" },
+            }}
+          />
+          <Typography
+            variant="h1"
+            component="div"
+            fontWeight="bold"
+            color="#373b54"
+            align="center"
+            paddingTop="66px"
+          >
+            About <text style={{ color: "#ce132f" }}>Us</text>.
+          </Typography>
+          <Typography
+            fontSize="17.5px"
+            paddingLeft="390px"
+            paddingRight="390px"
+            paddingTop="33px"
+            color="#8c8989"
+            align="center"
+          >
+            Sortlog is a software solution designed for businesses to streamline and modernize every
+            aspect of managing inventory.
+          </Typography>
+        </>
       </Container>
 
       <Container maxWidth="xl">
