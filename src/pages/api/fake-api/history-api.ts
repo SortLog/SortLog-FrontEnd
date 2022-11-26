@@ -33,13 +33,13 @@ class HistoryApi {
       },
       {
         id: "5ecb868d0f437390ef3ac62c",
-        trackingNumber: "Inbound-001",
+        trackingNumber: "Inbound-002",
         status: "Done",
         Date: subHours(now, 1).getTime(),
         totalQTY: 110,
         items: [
           {
-            SKU: "a00001",
+            SKU: "a00002",
             name: "Apple",
             price: 5,
             QTY: 100,
@@ -57,16 +57,15 @@ class HistoryApi {
           name: "TOM JACKY",
         },
       },
-      ,
       {
         id: "5ecb868d0f437390ef3ac63c",
-        trackingNumber: "Inbound-001",
+        trackingNumber: "Inbound-003",
         status: "Done",
         Date: subHours(now, 1).getTime(),
         totalQTY: 110,
         items: [
           {
-            SKU: "a00001",
+            SKU: "a00003",
             name: "Apple",
             price: 5,
             QTY: 100,
@@ -86,13 +85,13 @@ class HistoryApi {
       },
       {
         id: "5ecb868d0f437390ef3ac64c",
-        trackingNumber: "Inbound-001",
+        trackingNumber: "Inbound-004",
         status: "Done",
         Date: subHours(now, 1).getTime(),
         totalQTY: 110,
         items: [
           {
-            SKU: "a00001",
+            SKU: "a00004",
             name: "Apple",
             price: 5,
             QTY: 100,
@@ -112,13 +111,13 @@ class HistoryApi {
       },
       {
         id: "5ecb868d0f437390ef3ac65c",
-        trackingNumber: "Inbound-001",
+        trackingNumber: "Inbound-005",
         status: "Done",
         Date: subHours(now, 1).getTime(),
         totalQTY: 110,
         items: [
           {
-            SKU: "a00001",
+            SKU: "a00005",
             name: "Apple",
             price: 5,
             QTY: 100,
@@ -138,13 +137,13 @@ class HistoryApi {
       },
       {
         id: "5ecb868d0f437390ef3ac66c",
-        trackingNumber: "Inbound-001",
+        trackingNumber: "Inbound-006",
         status: "Done",
         Date: subHours(now, 1).getTime(),
         totalQTY: 110,
         items: [
           {
-            SKU: "a00001",
+            SKU: "a00006",
             name: "Apple",
             price: 5,
             QTY: 100,
@@ -164,13 +163,13 @@ class HistoryApi {
       },
       {
         id: "5ecb868d0f437390ef3ac67c",
-        trackingNumber: "Inbound-001",
+        trackingNumber: "Inbound-007",
         status: "Done",
         Date: subHours(now, 1).getTime(),
         totalQTY: 110,
         items: [
           {
-            SKU: "a00001",
+            SKU: "a00007",
             name: "Apple",
             price: 5,
             QTY: 100,
@@ -190,13 +189,13 @@ class HistoryApi {
       },
       {
         id: "5ecb868d0f437390ef3ac68c",
-        trackingNumber: "Inbound-001",
+        trackingNumber: "Inbound-008",
         status: "Done",
         Date: subHours(now, 1).getTime(),
         totalQTY: 110,
         items: [
           {
-            SKU: "a00001",
+            SKU: "a00008",
             name: "Apple",
             price: 5,
             QTY: 100,
