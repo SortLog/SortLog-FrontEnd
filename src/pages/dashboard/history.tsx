@@ -22,6 +22,7 @@ import { format } from "date-fns";
 import NextLink from "next/link";
 import { getInitials } from "@/utils/get-initials";
 import { ArrowRight as ArrowRightIcon } from "@/icons/arrow-right";
+<<<<<<< HEAD:src/pages/dashboard/history.tsx
 import { historyApi } from "../api/history-api";
 import { useMounted } from "@/hooks/use-mounted";
 import Button from "@mui/material/Button";
@@ -45,6 +46,33 @@ interface histories {
   };
 }
 [];
+||||||| parent of 518a095 (update history page without states, change history data source from fakeAPI file):src/pages/dashboard/history/index.tsx
+import { addDays, subHours } from "date-fns";
+=======
+import { addDays, subHours } from "date-fns";
+import { historyApi } from "../../api/fake-api/history-api";
+import { useMounted } from "@/hooks/use-mounted";
+
+interface histories {
+  id: string;
+  trackingNumber: string;
+  status: string;
+  Date: number;
+  totalQTY: number;
+  items: {
+    SKU: string;
+    name: string;
+    price: number;
+    QTY: number;
+  }[];
+  user: {
+    companyName: string;
+    email: string;
+    name: string;
+  };
+}
+[];
+>>>>>>> 518a095 (update history page without states, change history data source from fakeAPI file):src/pages/dashboard/history/index.tsx
 
 const now = new Date();
 
@@ -121,6 +149,7 @@ const HistoryRow = (props: { history: any }) => {
             flexDirection: "column",
           }}
         >
+<<<<<<< HEAD:src/pages/dashboard/history.tsx
           <Typography variant="subtitle2">Items</Typography>
           <Typography color="textSecondary" variant="body2">
             {history.items[0].name + ", " + history.items[1].name + "..."}
@@ -135,6 +164,23 @@ const HistoryRow = (props: { history: any }) => {
             flexDirection: "column",
           }}
         >
+||||||| parent of 518a095 (update history page without states, change history data source from fakeAPI file):src/pages/dashboard/history/index.tsx
+=======
+          <Typography variant="subtitle2">Items</Typography>
+          <Typography color="textSecondary" variant="body2">
+            {history.items[0].name +", "+ history.items[1].name + "..."}
+          </Typography>
+        </Box>
+      </TableCell>
+
+      <TableCell>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+>>>>>>> 518a095 (update history page without states, change history data source from fakeAPI file):src/pages/dashboard/history/index.tsx
           <Typography variant="subtitle2">Total QTY</Typography>
           <Typography variant="body2">
             {"x "}
@@ -161,7 +207,19 @@ const HistoryRow = (props: { history: any }) => {
             display: "flex",
             flexDirection: "column",
           }}
+<<<<<<< HEAD:src/pages/dashboard/history.tsx
         ></Box>
+||||||| parent of 518a095 (update history page without states, change history data source from fakeAPI file):src/pages/dashboard/history/index.tsx
+        >
+          <Typography variant="subtitle2">Finish Date</Typography>
+          <Typography color="textSecondary" variant="body2">
+            {history.finishDate && format(history.finishDate, "dd/MM/yyyy")}
+          </Typography>
+        </Box>
+=======
+        >
+        </Box>
+>>>>>>> 518a095 (update history page without states, change history data source from fakeAPI file):src/pages/dashboard/history/index.tsx
       </TableCell>
       <TableCell align="right">
         <NextLink href="/dashboard/history-form" passHref>
@@ -227,6 +285,7 @@ export default function history() {
           <Typography variant="h3" component="h3" marginLeft={1}>
             History
           </Typography>
+<<<<<<< HEAD:src/pages/dashboard/history.tsx
           <NextLink href={"/dashboard/inbound"} passHref>
             <Button variant="contained" startIcon={<Add />} sx={{ backgroundColor: "#e70a3e" }}>
               ADD NEW
@@ -235,6 +294,13 @@ export default function history() {
         </Grid>
 
         <Grid container spacing={2} sx={{ pl: 1, minWidth: 600, mb: 5 }} className={"searchBox"}>
+||||||| parent of 518a095 (update history page without states, change history data source from fakeAPI file):src/pages/dashboard/history/index.tsx
+        </Box>
+        <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 }} className={"searchBox"}>
+=======
+        </Box>
+        <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 , mb: 5}} className={"searchBox"}>
+>>>>>>> 518a095 (update history page without states, change history data source from fakeAPI file):src/pages/dashboard/history/index.tsx
           <Grid item xs>
             <TextField
               fullWidth
