@@ -20,6 +20,7 @@ pipeline {
         {
             steps{
              sh "yarn build "
+             sh " yarn export"
              sh 'ls -la ./out'
              }
         } 
