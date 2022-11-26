@@ -226,14 +226,14 @@ const Register = () => {
               </NextLink>
             </div>
           </Card>
-          <Card elevation={16} square sx={{ p: 4, display:"flex" }} >
+          <Card elevation={16} square sx={{ p: 4, display: "flex" }}>
             <Box
               sx={{
                 my: 4,
                 mx: 4,
                 Height: "100%",
-                display:"flex",
-                color: "#f5f5f5"
+                display: "flex",
+                color: "#f5f5f5",
               }}
             >
               <img

@@ -11,6 +11,8 @@ class HistoryApi {
         status: "Done",
         Date: subHours(now, 1).getTime(),
         totalQTY: 110,
+        createdAt: subDays(now, 3).getTime(),
+        updatedAt: subDays(now, 3).getTime(),
         items: [
           {
             SKU: "a00001",
@@ -36,6 +38,8 @@ class HistoryApi {
         trackingNumber: "Inbound-001",
         status: "Done",
         Date: subHours(now, 1).getTime(),
+        createdAt: subDays(now, 3).getTime(),
+        updatedAt: subDays(now, 3).getTime(),
         totalQTY: 110,
         items: [
           {
@@ -63,6 +67,8 @@ class HistoryApi {
         trackingNumber: "Inbound-001",
         status: "Done",
         Date: subHours(now, 1).getTime(),
+        createdAt: subDays(now, 3).getTime(),
+        updatedAt: subDays(now, 3).getTime(),
         totalQTY: 110,
         items: [
           {
@@ -89,6 +95,8 @@ class HistoryApi {
         trackingNumber: "Inbound-001",
         status: "Done",
         Date: subHours(now, 1).getTime(),
+        createdAt: subDays(now, 3).getTime(),
+        updatedAt: subDays(now, 3).getTime(),
         totalQTY: 110,
         items: [
           {
@@ -115,6 +123,8 @@ class HistoryApi {
         trackingNumber: "Inbound-001",
         status: "Done",
         Date: subHours(now, 1).getTime(),
+        createdAt: subDays(now, 3).getTime(),
+        updatedAt: subDays(now, 3).getTime(),
         totalQTY: 110,
         items: [
           {
@@ -141,6 +151,8 @@ class HistoryApi {
         trackingNumber: "Inbound-001",
         status: "Done",
         Date: subHours(now, 1).getTime(),
+        createdAt: subDays(now, 3).getTime(),
+        updatedAt: subDays(now, 3).getTime(),
         totalQTY: 110,
         items: [
           {
@@ -167,6 +179,8 @@ class HistoryApi {
         trackingNumber: "Inbound-001",
         status: "Done",
         Date: subHours(now, 1).getTime(),
+        createdAt: subDays(now, 3).getTime(),
+        updatedAt: subDays(now, 3).getTime(),
         totalQTY: 110,
         items: [
           {
@@ -193,6 +207,8 @@ class HistoryApi {
         trackingNumber: "Inbound-001",
         status: "Done",
         Date: subHours(now, 1).getTime(),
+        createdAt: subDays(now, 3).getTime(),
+        updatedAt: subDays(now, 3).getTime(),
         totalQTY: 110,
         items: [
           {

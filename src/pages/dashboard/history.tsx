@@ -22,6 +22,10 @@ import NextLink from "next/link";
 import { getInitials } from "@/utils/get-initials";
 import { ArrowRight as ArrowRightIcon } from "@/icons/arrow-right";
 import { addDays, subHours } from "date-fns";
+import Button from "@mui/material/Button";
+import SouthIcon from "@mui/icons-material/South";
+import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
+import { Add } from "@mui/icons-material";
 
 const now = new Date();
 
@@ -36,9 +40,7 @@ const groupHistories = (histories: any[]) =>
       };
     },
     {
-      Pending: [],
       Done: [],
-      Canceled: [],
     }
   );
 // row component showing each history
@@ -134,7 +136,7 @@ const HistoryRow = (props: { history: any }) => {
         </Box>
       </TableCell>
       <TableCell align="right">
-        <NextLink href="/dashboard/history/history-form" passHref>
+        <NextLink href="/dashboard/history-form" passHref>
           <IconButton component="a">
             <ArrowRightIcon fontSize="small" />
           </IconButton>
@@ -178,7 +180,6 @@ export default function history() {
       status: "Done",
       totalQTY: 555,
     },
-    ,
     {
       id: "2a05e7f757c35fe823da3c5a",
       itemName: "Ball",
@@ -204,7 +205,7 @@ export default function history() {
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
       trackingNumber: "Inbound-003",
-      status: "Pending",
+      status: "Done",
       totalQTY: 99,
     },
     {
@@ -218,7 +219,7 @@ export default function history() {
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
       trackingNumber: "Inbound-006",
-      status: "Pending",
+      status: "Done",
       totalQTY: 100,
     },
     {
@@ -232,7 +233,7 @@ export default function history() {
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
       trackingNumber: "Outbound-001",
-      status: "Canceled",
+      status: "Done",
       totalQTY: 55,
     },
     {
@@ -246,7 +247,7 @@ export default function history() {
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
       trackingNumber: "Inbound-011",
-      status: "Canceled",
+      status: "Done",
       totalQTY: 100,
     },
     {
@@ -260,7 +261,7 @@ export default function history() {
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
       trackingNumber: "Outbound-002",
-      status: "Canceled",
+      status: "Done",
       totalQTY: 1,
     },
   ];
@@ -284,17 +285,24 @@ export default function history() {
       sx={{
         flexGrow: 1,
         mx: 1,
+        pl: 10,
         width: "95%",
         backgroundColor: "background.default",
         overflow: "hidden",
       }}
     >
-      <Box className={"Header"}>
+      <Grid container spacing={6} paddingTop="60px" justifyContent="space-between">
         <Typography variant="h3" component="h3" marginLeft={1}>
           History
         </Typography>
-      </Box>
-      <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 }} className={"searchBox"}>
+        <NextLink href={"/dashboard/inbound"} passHref>
+          <Button variant="contained" startIcon={<Add />} sx={{ backgroundColor: "#e70a3e" }}>
+            ADD NEW
+          </Button>
+        </NextLink>
+      </Grid>
+
+      <Grid container spacing={2} sx={{ pt: 5, minWidth: 600 }} className={"searchBox"}>
         <Grid item xs>
           <TextField
             fullWidth

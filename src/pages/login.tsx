@@ -43,7 +43,7 @@ const SignIn: React.FC = () => {
 
   return (
     <Container>
-      <Grid container component="main" sx={{ height:"100vh", flexWrap: "wrap" }} spacing={2}>
+      <Grid container component="main" sx={{ height: "100vh", flexWrap: "wrap" }} spacing={2}>
         <Grid
           item
           xs={12}

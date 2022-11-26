@@ -15,7 +15,6 @@ import {
 
 const HistoryPreview = (props: any) => {
   const { history, ...other } = props;
-
   return (
     <Paper {...other}>
       <Box
@@ -29,14 +28,7 @@ const HistoryPreview = (props: any) => {
             <Typography variant="h5">Company</Typography>
             <Typography variant="subtitle2">{history.user.companyName}</Typography>
           </Grid>
-          <Grid item>
-            <Typography align="right" variant="h4">
-              {history.status.toUpperCase()}
-            </Typography>
-            <Typography align="right" variant="subtitle2">
-              Form ID: #{history.id}
-            </Typography>
-          </Grid>
+
         </Grid>
         <Box sx={{ my: 4 }}>
           <Grid container justifyContent="space-between">
