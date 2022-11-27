@@ -44,7 +44,7 @@ export const AmplifyRegister = (props: any) => {
         await register(values.email, values.password);
         // store current user info to localstorage
         localStorage.setItem(
-          "userInfo",
+          "currentUser",
           JSON.stringify({
             email: values.email,
             password: values.password,
