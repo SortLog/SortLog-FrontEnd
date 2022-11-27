@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -48,23 +48,22 @@ interface histories {
 
 const now = new Date();
 
-// // const groupHistories = (histories: any[]) =>
-// //   histories.reduce(
-// //     (acc, history) => {
-// //       const { status } = history;
+// const groupHistories = (histories: any[]) =>
+//   histories.reduce(
+//     (acc, history) => {
+//       const { status } = history;
 
-// //       return {
-// //         ...acc,
-// //         [status]: [...acc[status], history],
-// //       };
-// //     },
-// //     {
-// //       Pending: [],
-// //       Done: [],
-// //       Canceled: [],
-// //     }
-// //   );
-
+//       return {
+//         ...acc,
+//         [status]: [...acc[status], history],
+//       };
+//     },
+//     {
+//       Pending: [],
+//       Done: [],
+//       Canceled: [],
+//     }
+//   );
 
 // row component showing each history
 const HistoryRow = (props: { history: any }) => {
