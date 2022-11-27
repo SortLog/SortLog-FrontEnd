@@ -1,10 +1,10 @@
-eepipeline {
-     agent any
+pipeline {
+    agent any
 
     environment{
-         
-        AWS_CRED        = 'AWS_sortlog' //Change to yours //IAM role in the EC2 server instance profile admin acess.//Cloud front invalidate S3 (AWS CLI)
-        AWS_REGION      = 'ap-southeast-2'// AWS region //check202210
+        CI ='true'
+        AWS_CRED        = 'AWS_sortlog' //Change to yours
+        AWS_REGION      = 'ap-southeast-2'// AWS region 
     }
         //Install denpendencies 
     stages{
