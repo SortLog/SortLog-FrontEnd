@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useCallback, useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -48,22 +48,23 @@ interface histories {
 
 const now = new Date();
 
-// const groupHistories = (histories: any[]) =>
-//   histories.reduce(
-//     (acc, history) => {
-//       const { status } = history;
+// // const groupHistories = (histories: any[]) =>
+// //   histories.reduce(
+// //     (acc, history) => {
+// //       const { status } = history;
 
-//       return {
-//         ...acc,
-//         [status]: [...acc[status], history],
-//       };
-//     },
-//     {
-//       Pending: [],
-//       Done: [],
-//       Canceled: [],
-//     }
-//   );
+// //       return {
+// //         ...acc,
+// //         [status]: [...acc[status], history],
+// //       };
+// //     },
+// //     {
+// //       Pending: [],
+// //       Done: [],
+// //       Canceled: [],
+// //     }
+// //   );
+
 
 // row component showing each history
 const HistoryRow = (props: { history: any }) => {
@@ -135,6 +136,52 @@ const HistoryRow = (props: { history: any }) => {
             flexDirection: "column",
           }}
         >
+          <Typography variant="subtitle2">Items</Typography>
+          <Typography color="textSecondary" variant="body2">
+            {history.items[0].name + ", " + history.items[1].name + "..."}
+          </Typography>
+        </Box>
+      </TableCell>
+
+      <TableCell>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+<<<<<<< HEAD:src/pages/dashboard/history.tsx
+          <Typography variant="subtitle2">Items</Typography>
+          <Typography color="textSecondary" variant="body2">
+            {history.items[0].name + ", " + history.items[1].name + "..."}
+          </Typography>
+        </Box>
+      </TableCell>
+
+      <TableCell>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+||||||| 2c67de9:src/pages/dashboard/history/index.tsx
+=======
+          <Typography variant="subtitle2">Items</Typography>
+          <Typography color="textSecondary" variant="body2">
+            {history.items[0].name +", "+ history.items[1].name + "..."}
+          </Typography>
+        </Box>
+      </TableCell>
+
+      <TableCell>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+>>>>>>> 50e62649ddd2d7fe4fde57641ef6363d013ebbb9:src/pages/dashboard/history/index.tsx
           <Typography variant="subtitle2">Total QTY</Typography>
           <Typography variant="body2">
             {"x "}
@@ -176,6 +223,7 @@ const HistoryRow = (props: { history: any }) => {
 
 export default function history() {
   const isMounted = useMounted();
+  const isMounted = useMounted();
   const [value, setValue] = React.useState<Dayjs | null>(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -209,7 +257,7 @@ export default function history() {
 
   const paginatedHistories = applyPagination(histories, page, rowsPerPage);
 
-  // const groupedHistories = groupHistories(paginatedHistories);
+  // // const groupedHistories = groupHistories(paginatedHistories);
 
   return (
     <Container maxWidth="lg" color="background">
