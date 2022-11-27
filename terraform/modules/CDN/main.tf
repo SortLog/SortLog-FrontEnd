@@ -43,6 +43,15 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     min_ttl                = 0
     default_ttl            = 3600
     max_ttl                = 86400
+
+
+  lambda_function_association {
+      event_type   = "origin-request"
+      lambda_arn   = "arn:aws:lambda:us-east-1:003374733998:function:sortlog-lambdaedge:7"
+      include_body = false
+  }
+
+
   }
 
   price_class = "PriceClass_All"
@@ -56,14 +65,6 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     acm_certificate_arn="arn:aws:acm:us-east-1:003374733998:certificate/dd8d6c01-ca80-427b-9880-34c776904a24"//var.acm_certificate_arn 
     ssl_support_method = "sni-only"
     minimum_protocol_version ="TLSv1.2_2021"
-  }
-  
-  ordered_cache_behavior {
-    lambda_function_association {
-      event_type   = "viewer-request"
-      lambda_arn   = "arn:aws:lambda:us-east-1:003374733998:function:sortlog-lambdaedge:7"
-      include_body = false
-    }
   }
 
 }
