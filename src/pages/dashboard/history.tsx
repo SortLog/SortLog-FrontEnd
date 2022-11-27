@@ -22,10 +22,10 @@ import { format } from "date-fns";
 import NextLink from "next/link";
 import { getInitials } from "@/utils/get-initials";
 import { ArrowRight as ArrowRightIcon } from "@/icons/arrow-right";
-import { addDays, subHours } from "date-fns";
-import { historyApi } from "../../api/fake-api/history-api";
+import { historyApi } from "../api/history-api";
 import { useMounted } from "@/hooks/use-mounted";
-
+import Button from "@mui/material/Button";
+import { Add } from "@mui/icons-material";
 interface histories {
   id: string;
   trackingNumber: string;
@@ -123,7 +123,7 @@ const HistoryRow = (props: { history: any }) => {
         >
           <Typography variant="subtitle2">Items</Typography>
           <Typography color="textSecondary" variant="body2">
-            {history.items[0].name +", "+ history.items[1].name + "..."}
+            {history.items[0].name + ", " + history.items[1].name + "..."}
           </Typography>
         </Box>
       </TableCell>
@@ -161,11 +161,10 @@ const HistoryRow = (props: { history: any }) => {
             display: "flex",
             flexDirection: "column",
           }}
-        >
-        </Box>
+        ></Box>
       </TableCell>
       <TableCell align="right">
-        <NextLink href="/dashboard/history/history-form" passHref>
+        <NextLink href="/dashboard/history-form" passHref>
           <IconButton component="a">
             <ArrowRightIcon fontSize="small" />
           </IconButton>
@@ -218,16 +217,24 @@ export default function history() {
         sx={{
           flexGrow: 1,
           mx: 1,
+          pl: 10,
+          width: "95%",
           backgroundColor: "background.default",
           overflow: "hidden",
         }}
       >
-        <Box className={"Header"}>
+        <Grid container spacing={6} paddingTop="60px" justifyContent="space-between">
           <Typography variant="h3" component="h3" marginLeft={1}>
             History
           </Typography>
-        </Box>
-        <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 , mb: 5}} className={"searchBox"}>
+          <NextLink href={"/dashboard/inbound"} passHref>
+            <Button variant="contained" startIcon={<Add />} sx={{ backgroundColor: "#e70a3e" }}>
+              ADD NEW
+            </Button>
+          </NextLink>
+        </Grid>
+
+        <Grid container spacing={2} sx={{ pl: 1, minWidth: 600, mb: 5 }} className={"searchBox"}>
           <Grid item xs>
             <TextField
               fullWidth
