@@ -57,12 +57,15 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     ssl_support_method = "sni-only"
     minimum_protocol_version ="TLSv1.2_2021"
   }
-
-  lambda_function_association {
-    event_type   = "viewer-request"
-    lambda_arn   = "arn:aws:lambda:us-east-1:003374733998:function:sortlog-lambdaedge:7"
-    include_body = false
+  
+  ordered_cache_behavior {
+    lambda_function_association {
+      event_type   = "viewer-request"
+      lambda_arn   = "arn:aws:lambda:us-east-1:003374733998:function:sortlog-lambdaedge:7"
+      include_body = false
+    }
   }
+
 }
 
 
