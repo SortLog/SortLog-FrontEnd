@@ -38,9 +38,9 @@ const AddMembers = () => {
   const [memberEmail, setMemberEmail] = useState<string>("");
   const [memberList, setMemberList] = useState(initialMemberList);
 
-  // const [companyLayer, setCompanyLayer] = useState<string>("none");
-  // const [memberLayer, setMemberLayer] = useState<string>("none");
-  const [memberLayer, setMemberLayer] = useState<string>("block");
+  const [companyLayer, setCompanyLayer] = useState<string>("block");
+  const [memberLayer, setMemberLayer] = useState<string>("none");
+  // const [memberLayer, setMemberLayer] = useState<string>("block");
 
   const [company, setCompany] = useState<any>([]);
   useEffect(() => {
@@ -128,12 +128,12 @@ const AddMembers = () => {
       </Grid>
     );
   });
-  //
-  // const onCompanyInputChange = (event: any) => {
-  //   const value = event.target.value;
-  //   setCompanyName(value);
-  //   console.log(value);
-  // };
+
+  const onCompanyInputChange = (event: any) => {
+    const value = event.target.value;
+    setCompanyName(value);
+    console.log(value);
+  };
 
   const onMemberInputChange = (event: any) => {
     const value = event.target.value;
@@ -142,20 +142,20 @@ const AddMembers = () => {
     console.log(memberEmail);
   };
 
-  // const onNextButtonClick = async (event: any) => {
-  //   event.preventDefault();
-  //   try {
-  //     const memberListData = await getMemberListByCompanyName(companyName);
-  //
-  //     setMemberList(memberListData);
-  //     setCompanyLayer("none");
-  //     setMemberLayer("block");
-  //   } catch (error) {
-  //     console.error("Failed to match company due to error: ", error);
-  //     // alert("No matched comapny exists");
-  //   }
-  //   console.log(event);
-  // };
+  const onNextButtonClick = async (event: any) => {
+    event.preventDefault();
+    try {
+      const memberListData = await getMemberListByCompanyName(companyName);
+
+      setMemberList(memberListData);
+      setCompanyLayer("none");
+      setMemberLayer("block");
+    } catch (error) {
+      console.error("Failed to match company due to error: ", error);
+      // alert("No matched comapny exists");
+    }
+    console.log(event);
+  };
 
   const onAddButtonClick = async (event: any) => {
     event.preventDefault();
@@ -184,51 +184,45 @@ const AddMembers = () => {
 
   return (
     <>
-      {/* <Container */}
-      {/*   component="form" */}
-      {/*   onSubmit={onNextButtonClick} */}
-      {/*   maxWidth="md" */}
-      {/*   sx={{ display: `${companyLayer}` }} */}
-      {/* > */}
-      {/*   <Box sx={{ width: "100%" }} /> */}
-      {/*   <Typography sx={{ fontSize: 40 }} color="text.secondary" gutterBottom> */}
-      {/*     Create Company */}
-      {/*   </Typography> */}
-      {/*   <Divider variant="middle" /> */}
-      {/*   <Card style={cardStyle.card} sx={{ minWidth: 275 }}> */}
-      {/*     <CardContent> */}
-      {/*       <CardMedia */}
-      {/*         sx={{ textAlign: "center" }} */}
-      {/*         component="img" */}
-      {/*         image="./png/logo-no-background-h.png" */}
-      {/*         alt="sortlog icon" */}
-      {/*       /> */}
-      {/*       <Typography */}
-      {/*         sx={{ fontSize: 20, textAlign: "center" }} */}
-      {/*         color="text.secondary" */}
-      {/*         gutterBottom */}
-      {/*       > */}
-      {/*         What is the name of your company? */}
-      {/*       </Typography> */}
-      {/*       <Box sx={cardStyle.cardInput}> */}
-      {/*         <TextField */}
-      {/*           style={cardStyle.textField} */}
-      {/*           inputProps={{ readOnly: true }} */}
-      {/*           required */}
-      {/*           label="Company Name" */}
-      {/*           value={companyName} */}
-      {/*           onChange={onCompanyInputChange} */}
-      {/*         /> */}
-      {/*       </Box> */}
-      {/*     </CardContent> */}
-      {/*   </Card> */}
-      {/*   <Divider variant="middle" /> */}
-      {/*   <div style={{ display: "flex", flexDirection: "row-reverse" }}> */}
-      {/*     <Button type="submit" sx={{ margin: "20px" }}> */}
-      {/*       NEXT */}
-      {/*     </Button> */}
-      {/*   </div> */}
-      {/* </Container> */}
+      <Container
+        component="form"
+        onSubmit={onNextButtonClick}
+        maxWidth="md"
+        sx={{ display: `${companyLayer}` }}
+      >
+        <Box sx={{ width: "100%" }} />
+        <Typography sx={{ fontSize: 40 }} color="text.secondary" gutterBottom>
+          Create Company
+        </Typography>
+        <Divider variant="middle" />
+        <Card style={cardStyle.card} sx={{ minWidth: 275 }}>
+          <CardContent>
+            <Typography
+              sx={{ fontSize: 20, textAlign: "center" }}
+              color="text.secondary"
+              gutterBottom
+            >
+              What is the name of your company?
+            </Typography>
+            <Box sx={cardStyle.cardInput}>
+              <TextField
+                style={cardStyle.textField}
+                inputProps={{ readOnly: true }}
+                required
+                label="Company Name"
+                value={companyName}
+                onChange={onCompanyInputChange}
+              />
+            </Box>
+          </CardContent>
+        </Card>
+        <Divider variant="middle" />
+        <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+          <Button type="submit" sx={{ margin: "20px" }}>
+            NEXT
+          </Button>
+        </div>
+      </Container>
 
       <Container maxWidth="md" sx={{ display: `${memberLayer}` }}>
         <Box sx={{ width: "100%" }} />

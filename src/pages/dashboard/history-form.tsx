@@ -13,16 +13,13 @@ import {
   Typography,
 } from "@mui/material";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { Calendar as CalendarIcon } from "../../../icons/calendar";
-import { ChevronDown as ChevronDownIcon } from "../../../icons/chevron-down";
-import { PencilAlt as PencilAltIcon } from "../../../icons/pencil-alt";
 import NextLink from "next/link";
 import Head from "next/head";
-import { historyApi } from "../../api/fake-api/history-api";
+import { historyApi } from "@/pages/api/history-api";
 import { getInitials } from "@/utils/get-initials";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
-import HistoryPDF from "./history-form-pdf";
-import HistoryPreview from "./history-preview";
+import HistoryPDF from "@/components/History/history-form-pdf";
+import HistoryPreview from "@/components/History/history-preview";
 
 interface History {
   id: string;

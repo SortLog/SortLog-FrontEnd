@@ -6,14 +6,13 @@ import { useTranslation } from 'react-i18next';
 import { Box, Divider, Drawer, useMediaQuery } from '@mui/material';
 import HomeIcon from '@mui/icons-material/Home';
 import StyleIcon from '@mui/icons-material/Style';
-import SearchIcon from '@mui/icons-material/Search';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import { Logo } from './logo';
 import { Scrollbar } from './scrollbar';
 import { DashboardSidebarSection } from './dashboard-sidebar-section';
 import Button from "@mui/material/Button";
 import SettingsIcon from '@mui/icons-material/Settings';
-import {Logout} from "@mui/icons-material";
+import {Groups, Logout, Reorder, SyncAlt} from "@mui/icons-material";
 import {useAuth} from "@/hooks/use-auth";
 import toast from "react-hot-toast";
 
@@ -31,14 +30,19 @@ const getSections = (t) => [
         icon: <InventoryIcon fontSize="small" />,
       },
       {
+        title: t('Inbound'),
+        icon: <SyncAlt fontSize="small" />,
+        path: '/dashboard/inbound',
+      },
+      {
         title: t('History'),
-        icon: <SearchIcon fontSize="small" />,
+        icon: <Reorder fontSize="small" />,
         path: '/dashboard/history ',
       },
       {
         title: t('Member'),
         path: '/dashboard/member',
-        icon: <StyleIcon fontSize="small" />,
+        icon: <Groups fontSize="small" />,
       }
     ]
   },
