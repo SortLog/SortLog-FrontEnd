@@ -19,7 +19,8 @@ pipeline {
         stage('yarn build') 
         {
             steps{
-             sh "yarn export "
+
+             sh " yarn export"
              sh 'ls -la ./out'
              }
         } 

@@ -110,6 +110,14 @@ function changeBackground(e: any) {
   e.target.style.background = "red";
 }
 
+function nullValue(data: any) {
+  if ((data = 0)) {
+    return "0";
+  } else {
+    return "$" + parseInt(data.price).toFixed(2).toString();
+  }
+}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiFilledInput-root": {
@@ -196,7 +204,9 @@ const MuiDrawer = (props: any) => {
           </Typography>
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Total Value:</text>{" "}
-            <text style={{ color: "#131213" }}>${parseInt(data.price).toFixed(2)}</text>
+            <text style={{ color: "#131213" }}>
+              ${(data.price = {} ? "" : parseInt(data.price).toFixed(2))}
+            </text>
           </Typography>
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Updated at:</text>{" "}
@@ -254,7 +264,7 @@ const MuiDrawer = (props: any) => {
                   <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
                   <OutlinedInput
                     label="Amount"
-                    value={"$" + parseInt(data.price).toFixed(2)}
+                    value={(data.price = {} ? "" : "$" + parseInt(data.price).toFixed(2).toString())}
                     endAdornment={<InputAdornment position="end">AUD</InputAdornment>}
                   />
                 </FormControl>
@@ -262,7 +272,7 @@ const MuiDrawer = (props: any) => {
                   <InputLabel htmlFor="outlined-adornment-amount">Total value</InputLabel>
                   <OutlinedInput
                     label="Total value"
-                    value={"AU$" + (data.quantity * data.price).toFixed(2)}
+                    value={(data.price = {} ? "" : "AU$" + (data.quantity * data.price).toFixed(2))}
                     endAdornment={<InputAdornment position="end">AUD</InputAdornment>}
                   />
                 </FormControl>
@@ -298,7 +308,7 @@ const MuiDrawer = (props: any) => {
         <Grid m="20px">
           <Typography sx={{ color: "#939393", mt: 3 }}>QR / BARCODES</Typography>
           <Grid container>
-            <Grid
+            {/* <Grid
               container
               sx={{
                 mt: 3,
@@ -314,7 +324,7 @@ const MuiDrawer = (props: any) => {
                   Create via <text style={{ color: "#ff0000", fontStyle: "italic" }}>SortLog</text>
                 </Typography>
               </Typography>
-            </Grid>
+            </Grid> */}
             <Button
               variant="outlined"
               color="inherit"
