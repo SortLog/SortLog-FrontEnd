@@ -47,7 +47,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
   lambda_function_association {
       event_type   = "origin-request"
-      lambda_arn   = "arn:aws:lambda:us-east-1:003374733998:function:sortlog-lambdaedge:7"
+      lambda_arn   = "arn:aws:lambda:us-east-1:003374733998:function:sortlog-lambdaedge:8"
       include_body = false
   }
 
