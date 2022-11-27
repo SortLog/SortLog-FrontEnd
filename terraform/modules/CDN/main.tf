@@ -24,7 +24,7 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   default_root_object = "index.html"
 
 
-   aliases = ["${var.app_env}.sortlog.net"] //[var.url] // ["frontend-tf.sortlog.net"]//CNAME of CDN 
+   aliases = ["www.sortlog.net"]//["${var.app_env}.sortlog.net"] //[var.url] // ["frontend-tf.sortlog.net"]//CNAME of CDN 
 
   default_cache_behavior {
     allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
