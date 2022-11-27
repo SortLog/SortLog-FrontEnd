@@ -11,6 +11,7 @@ import {
   Table,
   TableBody,
   TablePagination,
+  Container,
 } from "@mui/material";
 import { Dayjs } from "dayjs";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -64,7 +65,7 @@ const HistoryRow = (props: { history: any }) => {
       }}
     >
       <TableCell width="25%">
-        <NextLink href="/tracking-form" passHref>
+        <NextLink href="/dashboard/history-form" passHref>
           <Box
             component="a"
             sx={{
@@ -100,7 +101,7 @@ const HistoryRow = (props: { history: any }) => {
             flexDirection: "column",
           }}
         >
-          <Typography variant="subtitle2">QTY</Typography>
+          <Typography variant="subtitle2">Total QTY</Typography>
           <Typography variant="body2">
             {"x "}
             {history.totalQTY}
@@ -114,7 +115,7 @@ const HistoryRow = (props: { history: any }) => {
             flexDirection: "column",
           }}
         >
-          <Typography variant="subtitle2">Created</Typography>
+          <Typography variant="subtitle2">Creat Date</Typography>
           <Typography color="textSecondary" variant="body2">
             {history.createDate && format(history.createDate, "dd/MM/yyyy")}
           </Typography>
@@ -134,7 +135,7 @@ const HistoryRow = (props: { history: any }) => {
         </Box>
       </TableCell>
       <TableCell align="right">
-        <NextLink href="/dashboard/tracking-form" passHref>
+        <NextLink href="/dashboard/history/history-form" passHref>
           <IconButton component="a">
             <ArrowRightIcon fontSize="small" />
           </IconButton>
@@ -160,7 +161,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckIn-001",
+      trackingNumber: "Inbound-001",
       status: "Done",
       totalQTY: 55,
     },
@@ -174,7 +175,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckIn-002",
+      trackingNumber: "Inbound-002",
       status: "Done",
       totalQTY: 555,
     },
@@ -189,7 +190,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckOut-001",
+      trackingNumber: "Outbound-001",
       status: "Done",
       totalQTY: 5555,
     },
@@ -203,7 +204,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckIn-003",
+      trackingNumber: "Inbound-003",
       status: "Pending",
       totalQTY: 99,
     },
@@ -217,7 +218,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckIn-006",
+      trackingNumber: "Inbound-006",
       status: "Pending",
       totalQTY: 100,
     },
@@ -231,7 +232,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckOut-001",
+      trackingNumber: "Outbound-001",
       status: "Canceled",
       totalQTY: 55,
     },
@@ -245,7 +246,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckIn-011",
+      trackingNumber: "Inbound-011",
       status: "Canceled",
       totalQTY: 100,
     },
@@ -259,7 +260,7 @@ export default function history() {
       },
       finishDate: addDays(now, 5).getTime(),
       createDate: subHours(now, 1).getTime(),
-      trackingNumber: "CheckOut-002",
+      trackingNumber: "Outbound-002",
       status: "Canceled",
       totalQTY: 1,
     },
@@ -280,91 +281,92 @@ export default function history() {
   const groupedHistories = groupHistories(paginatedHistories);
 
   return (
-    <Box
-      sx={{
-        flexGrow: 1,
-        mx: 1,
-        width: "95%",
-        backgroundColor: "background.default",
-        overflow: "hidden",
-      }}
-    >
-      <Box className={"Header"}>
-        <Typography variant="h3" component="h3" marginLeft={1}>
-          History
-        </Typography>
-      </Box>
-      <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 }} className={"searchBox"}>
-        <Grid item xs>
-          <TextField
-            fullWidth
-            id="standard-basic"
-            label="search history..."
-            variant="standard"
-            color="primary"
-          />
-        </Grid>
-        <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="Start Date"
-              value={value}
-              onChange={(newValue) => {
-                setValue(newValue);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-        </Grid>
-        <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="Finish Date"
-              value={value}
-              onChange={(newValue) => {
-                setValue(newValue);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-        </Grid>
-      </Grid>
-      <Table
+    <Container maxWidth="lg" color="background">
+      <Box
         sx={{
-          borderCollapse: "separate",
-          borderSpacing: (theme) => `0 ${theme.spacing(3)}`,
-          minWidth: 600,
-          marginTop: (theme) => `-${theme.spacing(3)}`,
-          p: "1px",
+          flexGrow: 1,
+          mx: 1,
+          backgroundColor: "background.default",
+          overflow: "hidden",
         }}
       >
-        <TableBody>
-          {Object.keys(groupedHistories).map((status) => (
-            <Fragment key={status}>
-              <TableRow>
-                <TableCell colSpan={5} sx={{ px: 0 }}>
-                  <Typography color="textSecondary" variant="h6">
-                    {status.charAt(0).toUpperCase() + status.slice(1)} (
-                    {groupedHistories[status].length})
-                  </Typography>
-                </TableCell>
-              </TableRow>
-              {groupedHistories[status].map((history: { id: React.Key | null | undefined }) => (
-                <HistoryRow history={history} key={history.id} />
-              ))}
-            </Fragment>
-          ))}
-        </TableBody>
-      </Table>
-      <TablePagination
-        component="div"
-        count={histories.length}
-        onPageChange={handlePageChange}
-        onRowsPerPageChange={handleRowsPerPageChange}
-        page={page}
-        rowsPerPage={rowsPerPage}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
-    </Box>
+        <Box className={"Header"}>
+          <Typography variant="h3" component="h3" marginLeft={1}>
+            History
+          </Typography>
+        </Box>
+        <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 }} className={"searchBox"}>
+          <Grid item xs>
+            <TextField
+              fullWidth
+              id="standard-basic"
+              label="search history..."
+              variant="standard"
+              color="primary"
+            />
+          </Grid>
+          <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Start Date"
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </Grid>
+          <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Finish Date"
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </Grid>
+        </Grid>
+        <Table
+          sx={{
+            borderCollapse: "separate",
+            borderSpacing: (theme) => `0 ${theme.spacing(3)}`,
+            minWidth: 600,
+            marginTop: (theme) => `-${theme.spacing(3)}`,
+            p: "1px",
+          }}
+        >
+          <TableBody>
+            {Object.keys(groupedHistories).map((status) => (
+              <Fragment key={status}>
+                <TableRow>
+                  <TableCell colSpan={5} sx={{ px: 0 }}>
+                    <Typography color="textSecondary" variant="h6">
+                      {status.charAt(0).toUpperCase() + status.slice(1)} (
+                      {groupedHistories[status].length})
+                    </Typography>
+                  </TableCell>
+                </TableRow>
+                {groupedHistories[status].map((history: { id: React.Key | null | undefined }) => (
+                  <HistoryRow history={history} key={history.id} />
+                ))}
+              </Fragment>
+            ))}
+          </TableBody>
+        </Table>
+        <TablePagination
+          component="div"
+          count={histories.length}
+          onPageChange={handlePageChange}
+          onRowsPerPageChange={handleRowsPerPageChange}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          rowsPerPageOptions={[5, 10, 25]}
+        />
+      </Box>
+    </Container>
   );
 }

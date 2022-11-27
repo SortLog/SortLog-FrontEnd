@@ -4,6 +4,8 @@ import { AiOutlineScan } from "react-icons/ai";
 import { TiTick } from "react-icons/ti";
 import { BsPhone } from "react-icons/bs";
 import { BsPlusSquare } from "react-icons/bs";
+import NextLink from "next/link";
+import { Button, Typography } from "@mui/material";
 
 export default function SyncInventory() {
   return (
@@ -50,10 +52,19 @@ export default function SyncInventory() {
               <div className={styles.quoteWrap}></div>
             </div>
             <div className={styles.homeSwitchingTo_cta}>
-              <button type="button" className={styles.btn}>
-                Try shortly free
-              </button>
-              <p className={styles.productTour}>Take a product tour</p>
+              <NextLink href="./register" passHref>
+                <Button variant="contained" sx={{ backgroundColor: "#f13514" }}>
+                  Try shortly free
+                </Button>
+              </NextLink>
+              <NextLink href="#pricing" passHref>
+                <Typography
+                  variant="subtitle2"
+                  sx={{ ml: 1, mt: 1, color: "#f13514", cursor: "pointer" }}
+                >
+                  Take a pricing tour
+                </Typography>
+              </NextLink>
             </div>
           </div>
         </div>

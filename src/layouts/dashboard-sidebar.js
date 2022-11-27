@@ -13,6 +13,10 @@ import { Scrollbar } from './scrollbar';
 import { DashboardSidebarSection } from './dashboard-sidebar-section';
 import Button from "@mui/material/Button";
 import SettingsIcon from '@mui/icons-material/Settings';
+import {Logout} from "@mui/icons-material";
+import {useAuth} from "@/hooks/use-auth";
+import toast from "react-hot-toast";
+
 const getSections = (t) => [
   {
     items: [
@@ -44,6 +48,21 @@ export const DashboardSidebar = (props) => {
   const { onClose, open } = props;
   const router = useRouter();
   const { t } = useTranslation();
+
+  const { logout } = useAuth();
+  const userLogout = async () => {
+    try {
+      await logout();
+      localStorage.setItem("currentUser", null);
+      toast.success("Logout successfully");
+      await router.push("/login");
+    } catch (e) {
+      toast.error(e.message);
+    }
+
+
+  }
+
   const lgUp = useMediaQuery((theme) => theme.breakpoints.up('lg'), {
     noSsr: true
   });
@@ -138,7 +157,19 @@ export const DashboardSidebar = (props) => {
               >
                 {t('Settings')}
               </Button>
+
             </NextLink>
+            <Button
+                color="primary"
+                startIcon={<Logout fontSize="small" />}
+                component="a"
+                fullWidth
+                sx={{ mt: 2 }}
+                variant="contained"
+                onClick={userLogout}
+            >
+              {t('Log Out')}
+            </Button>
           </Box>
         </Box>
       </Scrollbar>

@@ -26,9 +26,9 @@ const About: NextPage = () => {
               fontWeight="bold"
               color="#373b54"
               align="center"
-              paddingTop="166px"
+              paddingTop="64px"
             >
-              About <text style={{ color: "#cd1530" }}>Us</text>.
+              About <text style={{ color: "#cd1530" }}>Us</text>
             </Typography>
             <Typography
               fontSize="17.5px"

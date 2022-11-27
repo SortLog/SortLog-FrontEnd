@@ -1,6 +1,8 @@
 import React from "react";
 import styles from "./SyncInventory.module.scss";
 import { BsPhone } from "react-icons/bs";
+import NextLink from "next/link";
+import { Button } from "@mui/material";
 
 export default function AccessInventory() {
   return (
@@ -26,16 +28,18 @@ export default function AccessInventory() {
               Automatically sync your inventory across all devices, all teams.
             </h1>
             <p className={styles.inventoryParagraph}>
-              Use Sortly on mobile, desktop, or tablet, thanks to automatic, cloud-based syncing.
+              Use Sortlog on mobile, desktop, or tablet, thanks to automatic, cloud-based syncing.
               You and your team can update inventory in real time from any location.
             </p>
             <div className={styles.homeJobDone}>
               <div className={styles.quoteWrap}></div>
             </div>
             <div className={styles.homeSwitchingTo_cta}>
-              <button type="button" className={styles.btn}>
-                See All Plan
-              </button>
+              <NextLink href="./register" passHref>
+                <Button variant="contained" sx={{ backgroundColor: "#f13514" }}>
+                  See All Plan
+                </Button>
+              </NextLink>
             </div>
           </div>
         </div>
