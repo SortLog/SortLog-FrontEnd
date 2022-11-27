@@ -264,7 +264,9 @@ const MuiDrawer = (props: any) => {
                   <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
                   <OutlinedInput
                     label="Amount"
-                    value={(data.price = {} ? "" : "$" + parseInt(data.price).toFixed(2).toString())}
+                    value={
+                      (data.price = {} ? "" : "$" + parseInt(data.price).toFixed(2).toString())
+                    }
                     endAdornment={<InputAdornment position="end">AUD</InputAdornment>}
                   />
                 </FormControl>
