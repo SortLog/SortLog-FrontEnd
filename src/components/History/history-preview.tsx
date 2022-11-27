@@ -28,7 +28,6 @@ const HistoryPreview = (props: any) => {
             <Typography variant="h5">Company</Typography>
             <Typography variant="subtitle2">{history.user.companyName}</Typography>
           </Grid>
-
         </Grid>
         <Box sx={{ my: 4 }}>
           <Grid container justifyContent="space-between">

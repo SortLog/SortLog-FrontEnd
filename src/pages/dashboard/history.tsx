@@ -22,12 +22,9 @@ import { format } from "date-fns";
 import NextLink from "next/link";
 import { getInitials } from "@/utils/get-initials";
 import { ArrowRight as ArrowRightIcon } from "@/icons/arrow-right";
-import { addDays, subHours } from "date-fns";
-import { historyApi } from "../../api/fake-api/history-api";
+import { historyApi } from "../api/history-api";
 import { useMounted } from "@/hooks/use-mounted";
 import Button from "@mui/material/Button";
-import SouthIcon from "@mui/icons-material/South";
-import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import { Add } from "@mui/icons-material";
 interface histories {
   id: string;
@@ -126,7 +123,7 @@ const HistoryRow = (props: { history: any }) => {
         >
           <Typography variant="subtitle2">Items</Typography>
           <Typography color="textSecondary" variant="body2">
-            {history.items[0].name +", "+ history.items[1].name + "..."}
+            {history.items[0].name + ", " + history.items[1].name + "..."}
           </Typography>
         </Box>
       </TableCell>
@@ -164,8 +161,7 @@ const HistoryRow = (props: { history: any }) => {
             display: "flex",
             flexDirection: "column",
           }}
-        >
-        </Box>
+        ></Box>
       </TableCell>
       <TableCell align="right">
         <NextLink href="/dashboard/history-form" passHref>
@@ -217,88 +213,87 @@ export default function history() {
 
   return (
     <Container maxWidth="lg" color="background">
-    <Box
-      sx={{
-        flexGrow: 1,
-        mx: 1,
-        pl: 10,
-        width: "95%",
-        backgroundColor: "background.default",
-        overflow: "hidden",
-      }}
-    >
-      <Grid container spacing={6} paddingTop="60px" justifyContent="space-between">
-        <Typography variant="h3" component="h3" marginLeft={1}>
-          History
-        </Typography>
-        <NextLink href={"/dashboard/inbound"} passHref>
-          <Button variant="contained" startIcon={<Add />} sx={{ backgroundColor: "#e70a3e" }}>
-            ADD NEW
-          </Button>
-        </NextLink>
-      </Grid>
-
-      <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 , mb: 5}} className={"searchBox"}>
-        <Grid item xs>
-          <TextField
-            fullWidth
-            id="standard-basic"
-            label="search history..."
-            variant="standard"
-            color="primary"
-          />
-        </Grid>
-        <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="Start Date"
-              value={value}
-              onChange={(newValue) => {
-                setValue(newValue);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-        </Grid>
-        <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
-          <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker
-              label="Finish Date"
-              value={value}
-              onChange={(newValue) => {
-                setValue(newValue);
-              }}
-              renderInput={(params) => <TextField {...params} />}
-            />
-          </LocalizationProvider>
-        </Grid>
-      </Grid>
-      <Table
+      <Box
         sx={{
-          borderCollapse: "separate",
-          borderSpacing: (theme) => `0 ${theme.spacing(3)}`,
-          minWidth: 600,
-          marginTop: (theme) => `-${theme.spacing(3)}`,
-          p: "1px",
+          flexGrow: 1,
+          mx: 1,
+          pl: 10,
+          width: "95%",
+          backgroundColor: "background.default",
+          overflow: "hidden",
         }}
       >
-        <TableBody>
-          {paginatedHistories.map((history: { id: React.Key | null | undefined }) => (
-                <HistoryRow history={history} key={history.id} />
+        <Grid container spacing={6} paddingTop="60px" justifyContent="space-between">
+          <Typography variant="h3" component="h3" marginLeft={1}>
+            History
+          </Typography>
+          <NextLink href={"/dashboard/inbound"} passHref>
+            <Button variant="contained" startIcon={<Add />} sx={{ backgroundColor: "#e70a3e" }}>
+              ADD NEW
+            </Button>
+          </NextLink>
+        </Grid>
 
-          ))}
-        </TableBody>
-      </Table>
-      <TablePagination
-        component="div"
-        count={histories.length}
-        onPageChange={handlePageChange}
-        onRowsPerPageChange={handleRowsPerPageChange}
-        page={page}
-        rowsPerPage={rowsPerPage}
-        rowsPerPageOptions={[5, 10, 25]}
-      />
-    </Box>
+        <Grid container spacing={2} sx={{ pl: 1, minWidth: 600, mb: 5 }} className={"searchBox"}>
+          <Grid item xs>
+            <TextField
+              fullWidth
+              id="standard-basic"
+              label="search history..."
+              variant="standard"
+              color="primary"
+            />
+          </Grid>
+          <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Start Date"
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </Grid>
+          <Grid item xs={2} display="flex" justifyContent="flex-end" pr={1} minWidth={160}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+                label="Finish Date"
+                value={value}
+                onChange={(newValue) => {
+                  setValue(newValue);
+                }}
+                renderInput={(params) => <TextField {...params} />}
+              />
+            </LocalizationProvider>
+          </Grid>
+        </Grid>
+        <Table
+          sx={{
+            borderCollapse: "separate",
+            borderSpacing: (theme) => `0 ${theme.spacing(3)}`,
+            minWidth: 600,
+            marginTop: (theme) => `-${theme.spacing(3)}`,
+            p: "1px",
+          }}
+        >
+          <TableBody>
+            {paginatedHistories.map((history: { id: React.Key | null | undefined }) => (
+              <HistoryRow history={history} key={history.id} />
+            ))}
+          </TableBody>
+        </Table>
+        <TablePagination
+          component="div"
+          count={histories.length}
+          onPageChange={handlePageChange}
+          onRowsPerPageChange={handleRowsPerPageChange}
+          page={page}
+          rowsPerPage={rowsPerPage}
+          rowsPerPageOptions={[5, 10, 25]}
+        />
+      </Box>
     </Container>
   );
 }
