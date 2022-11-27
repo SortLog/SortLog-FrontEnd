@@ -44,7 +44,7 @@ export const AmplifyRegister = (props: any) => {
         await register(values.email, values.password);
         // store current user info to localstorage
         localStorage.setItem(
-          "userInfo",
+          "currentUser",
           JSON.stringify({
             email: values.email,
             password: values.password,
@@ -213,7 +213,11 @@ const Register = () => {
             <Divider sx={{ my: 3 }} />
             <div>
               <NextLink
-                href={disableGuard ? `./login?disableGuard=${disableGuard}` : "./login"}
+                href={
+                  disableGuard
+                    ? `/authentication/login?disableGuard=${disableGuard}`
+                    : "/authentication/login"
+                }
                 passHref
               >
                 <Link color="textSecondary" variant="body2">
