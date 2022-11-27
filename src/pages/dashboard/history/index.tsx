@@ -123,7 +123,7 @@ const HistoryRow = (props: { history: any }) => {
         >
           <Typography variant="subtitle2">Items</Typography>
           <Typography color="textSecondary" variant="body2">
-            {history.items[0].name +", "+ history.items[1].name + "..."}
+            {history.items[0].name + ", " + history.items[1].name + "..."}
           </Typography>
         </Box>
       </TableCell>
@@ -161,8 +161,7 @@ const HistoryRow = (props: { history: any }) => {
             display: "flex",
             flexDirection: "column",
           }}
-        >
-        </Box>
+        ></Box>
       </TableCell>
       <TableCell align="right">
         <NextLink href="/dashboard/history/history-form" passHref>
@@ -227,7 +226,7 @@ export default function history() {
             History
           </Typography>
         </Box>
-        <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 , mb: 5}} className={"searchBox"}>
+        <Grid container spacing={2} sx={{ pl: 1, minWidth: 600, mb: 5 }} className={"searchBox"}>
           <Grid item xs>
             <TextField
               fullWidth
