@@ -140,7 +140,7 @@ export const CustomerListTable = (props) => {
                   </TableCell>
                   <TableCell>
                     {customer.tags.map((tag) => (
-                      <SeverityPill color="info" sx={{ ml: 1 }}>
+                      <SeverityPill color="info" sx={{ ml: 1 }} key={tag}>
                         {tag}
                       </SeverityPill>
                     ))}
