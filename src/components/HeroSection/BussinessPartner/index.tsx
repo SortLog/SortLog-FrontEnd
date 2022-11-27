@@ -6,7 +6,7 @@ export default function BusinessPartner() {
     <div className={styles.sectionFeatured}>
       <div className={styles.container}>
         <div className={styles.headingFeaturedIn}>
-          Over 10,000 businesses trust Sortly to track their inventory.
+          Over 10,000 businesses trust Sortlog to track their inventory.
         </div>
         <div className={styles.logos}>
           <img

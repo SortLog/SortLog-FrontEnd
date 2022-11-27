@@ -66,7 +66,6 @@
 
 .gridContainer {
   max-width: 120rem;
-  padding: 0 3.2rem;
   margin: 0 auto;
   display: grid;
   column-gap: 6.4rem;
@@ -105,7 +104,7 @@
 }
 
 .price {
-  box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
+  // box-shadow: 0 2.4rem 4.8rem rgba(0, 0, 0, 0.075);
   border-radius: 11px;
   overflow: hidden;
   transition: all 0.4s;

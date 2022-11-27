@@ -1,6 +1,6 @@
 .container {
   max-width: 1100px;
-  max-height: 500px;
+  max-height: 200px;
   margin: auto;
   ul {
     list-style: none;
@@ -47,7 +47,7 @@
   display: inline-block;
   height: 40px;
   width: 40px;
-  margin: 0 10px 10px 0;
+  margin: 20px 10px 10px 0;
   text-align: center;
   line-height: 40px;
   border-radius: 50%;
@@ -59,7 +59,7 @@
 }
 .copyright {
   color: #ffffff;
-  margin-top: 100px;
+  margin-top: 80px;
   text-align: center;
   font-size: 12px;
 }

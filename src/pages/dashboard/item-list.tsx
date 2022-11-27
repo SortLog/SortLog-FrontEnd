@@ -123,7 +123,7 @@ const dataCal = (rows: any) => {
 
 const ItemList: NextPage = () => {
   const [isGrid, setIsGrid] = useState(false);
-  // const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const [isQRCodeButtonClicked, setIsQRCodeButtonClicked] = useState(false);
@@ -243,9 +243,10 @@ const ItemList: NextPage = () => {
                   placeholder="Search All Items"
                   inputProps={{ "aria-label": "search google maps" }}
                   onChange={(e) => {
-                    // setSearchText((e.target as any).value);
+                    setSearchText((e.target as any).value);
+                    setSearchInput((e.target as any).value);
                   }}
-                  value={searchInput ?? ""}
+                  value={searchInput ? searchInput : searchText}
                 />
                 <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
                 <IconButton

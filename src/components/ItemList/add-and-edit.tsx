@@ -89,6 +89,7 @@ import {
   Button,
   IconButton,
   Tooltip,
+  Input,
 } from "@mui/material";
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import HelpIcon from "@mui/icons-material/Help";
@@ -108,6 +109,14 @@ function unitOrunits(quantity: any) {
 
 function changeBackground(e: any) {
   e.target.style.background = "red";
+}
+
+function nullValue(data: any) {
+  if ((data = 0)) {
+    return "0";
+  } else {
+    return "$" + parseInt(data.price).toFixed(2).toString();
+  }
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -136,6 +145,7 @@ const MuiDrawer = (props: any) => {
   const [isShown, setIsShown] = useState(false);
   const classes = useStyles();
   const [isQRCodeShowed, setIsQRCodeShowed] = useState(false);
+  const [sku, setSku] = useState("");
 
   return (
     <>
@@ -153,15 +163,13 @@ const MuiDrawer = (props: any) => {
         open={isDrawerOpen}
         PaperProps={{
           sx: {
-            // height: 1000,
             width: 1260,
             padding: 2,
-            // mt: 20,
           },
         }}
         onClose={() => setIsDrawerOpen(false)}
       >
-        <Box p={2} sx={{ mt: 3 }}>
+        <Box sx={{ mt: 3 }}>
           <TextField
             value={data.name}
             variant="filled"
@@ -182,9 +190,9 @@ const MuiDrawer = (props: any) => {
           paddingTop="60px"
           paddingLeft="76px"
           paddingRight="166px"
-          justifyContent="space-between"
+          justifyContent="flex-end"
         >
-          <Typography variant="subtitle1" component="div">
+          {/* <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Sortlog ID:</text>{" "}
             <text style={{ color: "#131213" }}>{data.id}</text>
           </Typography>
@@ -196,8 +204,10 @@ const MuiDrawer = (props: any) => {
           </Typography>
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Total Value:</text>{" "}
-            <text style={{ color: "#131213" }}>${parseInt(data.price).toFixed(2)}</text>
-          </Typography>
+            <text style={{ color: "#131213" }}>
+              ${(data.price = {} ? "" : parseInt(data.price).toFixed(2))}
+            </text>
+          </Typography> */}
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Updated at:</text>{" "}
             <text style={{ color: "#131213" }}>
@@ -206,7 +216,7 @@ const MuiDrawer = (props: any) => {
           </Typography>
         </Grid>
         <Grid container sx={{ mt: 6 }}>
-          <Grid>
+          <Grid md={6}>
             <Grid
               component="form"
               sx={{
@@ -220,26 +230,31 @@ const MuiDrawer = (props: any) => {
                   <InputLabel htmlFor="outlined-adornment-amount">Quantity</InputLabel>
                   <OutlinedInput
                     label="Quantity"
-                    value={data.quantity}
-                    endAdornment={
-                      <InputAdornment position="end">
-                        <IconButton>
-                          <UnfoldMoreIcon />
-                        </IconButton>
-                      </InputAdornment>
-                    }
+                    defaultValue={data.quantity}
+                    // endAdornment={
+                    //   <InputAdornment position="end">
+                    //     <IconButton>
+                    //       <UnfoldMoreIcon />
+                    //     </IconButton>
+                    //   </InputAdornment>
+                    // }
+                    type="number"
                   />
                 </FormControl>
                 <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-amount">Min Level</InputLabel>
+                  <InputLabel htmlFor="outlined-adornment-amount">SKU</InputLabel>
                   <OutlinedInput
-                    label="Min Level"
-                    value={0}
+                    label="SKU"
+                    defaultValue={data.sku}
+                    onChange={(e) => {
+                      setSku(e.target.value);
+                    }}
+                    value={sku}
                     endAdornment={
                       <InputAdornment position="end">
                         <Tooltip
                           placement="top"
-                          title="Set a minimum level to easily identify low stock items. Item will be highlighted when its quantity is at or below min level."
+                          title="A stock-keeping unit, or SKU, is a unique code that a seller assigns to every type of item it sells"
                           arrow
                         >
                           <HelpIcon />
@@ -251,21 +266,23 @@ const MuiDrawer = (props: any) => {
               </div>
               <div>
                 <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                  <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
                   <OutlinedInput
-                    label="Amount"
-                    value={"$" + parseInt(data.price).toFixed(2)}
+                    label="Price"
+                    defaultValue={
+                      data.price !== undefined ? `$ ${parseFloat(data.price).toFixed(2)}` : ""
+                    }
                     endAdornment={<InputAdornment position="end">AUD</InputAdornment>}
                   />
                 </FormControl>
-                <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
+                {/* <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                   <InputLabel htmlFor="outlined-adornment-amount">Total value</InputLabel>
                   <OutlinedInput
                     label="Total value"
-                    value={"AU$" + (data.quantity * data.price).toFixed(2)}
+                    value={(data.price = {} ? "" : "AU$" + (data.quantity * data.price).toFixed(2))}
                     endAdornment={<InputAdornment position="end">AUD</InputAdornment>}
                   />
-                </FormControl>
+                </FormControl> */}
               </div>
             </Grid>
             <Grid
@@ -285,20 +302,40 @@ const MuiDrawer = (props: any) => {
               </div>
             </Grid>
           </Grid>
-          <Grid>
-            <CardMedia
-              component="img"
-              alt="green iguana"
-              height="390"
-              sx={{ ml: 6 }}
-              image={data.image}
-            />
+          <Grid md={6}>
+            {data.image === undefined ? (
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Button variant="contained" color="inherit" size="large">
+                  <label htmlFor="uploadImg" style={{ padding: "100px", cursor: "pointer" }}>
+                    <img src="/png/upload-image.png" alt="image required" />
+                    <p>Upload your image</p>
+                  </label>
+                  <input type="file" style={{ display: "none" }} id="uploadImg" />
+                </Button>
+              </div>
+            ) : (
+              <CardMedia
+                component="img"
+                // alt="green iguana"
+                height="390"
+                sx={{ ml: 6 }}
+                image={data.image}
+              />
+            )}
           </Grid>
         </Grid>
         <Grid m="20px">
           <Typography sx={{ color: "#939393", mt: 3 }}>QR / BARCODES</Typography>
           <Grid container>
-            <Grid
+            {/* <Grid
               container
               sx={{
                 mt: 3,
@@ -314,7 +351,7 @@ const MuiDrawer = (props: any) => {
                   Create via <text style={{ color: "#ff0000", fontStyle: "italic" }}>SortLog</text>
                 </Typography>
               </Typography>
-            </Grid>
+            </Grid> */}
             <Button
               variant="outlined"
               color="inherit"
@@ -322,7 +359,7 @@ const MuiDrawer = (props: any) => {
               onClick={() => setIsQRCodeShowed(!isQRCodeShowed)}
             >
               {isQRCodeShowed ? (
-                <QRCodeGenerator data={{ id: data.id }} />
+                <QRCodeGenerator data={{ id: sku }} />
               ) : (
                 <>
                   <QrCode2Icon sx={{ color: "#000000" }}></QrCode2Icon>
