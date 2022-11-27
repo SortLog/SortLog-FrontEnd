@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -22,26 +22,49 @@ import { format } from "date-fns";
 import NextLink from "next/link";
 import { getInitials } from "@/utils/get-initials";
 import { ArrowRight as ArrowRightIcon } from "@/icons/arrow-right";
-import { addDays, subHours } from "date-fns";
+import { historyApi } from "../api/history-api";
+import { useMounted } from "@/hooks/use-mounted";
+import Button from "@mui/material/Button";
+import { Add } from "@mui/icons-material";
+interface histories {
+  id: string;
+  trackingNumber: string;
+  status: string;
+  Date: number;
+  totalQTY: number;
+  items: {
+    SKU: string;
+    name: string;
+    price: number;
+    QTY: number;
+  }[];
+  user: {
+    companyName: string;
+    email: string;
+    name: string;
+  };
+}
+[];
 
 const now = new Date();
 
-const groupHistories = (histories: any[]) =>
-  histories.reduce(
-    (acc, history) => {
-      const { status } = history;
+// const groupHistories = (histories: any[]) =>
+//   histories.reduce(
+//     (acc, history) => {
+//       const { status } = history;
 
-      return {
-        ...acc,
-        [status]: [...acc[status], history],
-      };
-    },
-    {
-      Pending: [],
-      Done: [],
-      Canceled: [],
-    }
-  );
+//       return {
+//         ...acc,
+//         [status]: [...acc[status], history],
+//       };
+//     },
+//     {
+//       Pending: [],
+//       Done: [],
+//       Canceled: [],
+//     }
+//   );
+
 // row component showing each history
 const HistoryRow = (props: { history: any }) => {
   const { history } = props;
@@ -84,16 +107,27 @@ const HistoryRow = (props: { history: any }) => {
               {getInitials(history.user.name)}
             </Avatar>
             <Box sx={{ ml: 2 }}>
-              <Typography color="textPrimary" variant="subtitle2">
+              <Typography color="textPrimary" variant="subtitle1">
                 {history.trackingNumber}
-              </Typography>
-              <Typography color="textSecondary" variant="body2">
-                {history.itemName}
               </Typography>
             </Box>
           </Box>
         </NextLink>
       </TableCell>
+      <TableCell>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Typography variant="subtitle2">Items</Typography>
+          <Typography color="textSecondary" variant="body2">
+            {history.items[0].name + ", " + history.items[1].name + "..."}
+          </Typography>
+        </Box>
+      </TableCell>
+
       <TableCell>
         <Box
           sx={{
@@ -115,9 +149,9 @@ const HistoryRow = (props: { history: any }) => {
             flexDirection: "column",
           }}
         >
-          <Typography variant="subtitle2">Creat Date</Typography>
+          <Typography variant="subtitle2">Date</Typography>
           <Typography color="textSecondary" variant="body2">
-            {history.createDate && format(history.createDate, "dd/MM/yyyy")}
+            {history.Date && format(history.Date, "dd/MM/yyyy")}
           </Typography>
         </Box>
       </TableCell>
@@ -127,15 +161,10 @@ const HistoryRow = (props: { history: any }) => {
             display: "flex",
             flexDirection: "column",
           }}
-        >
-          <Typography variant="subtitle2">Finish Date</Typography>
-          <Typography color="textSecondary" variant="body2">
-            {history.finishDate && format(history.finishDate, "dd/MM/yyyy")}
-          </Typography>
-        </Box>
+        ></Box>
       </TableCell>
       <TableCell align="right">
-        <NextLink href="/dashboard/history/history-form" passHref>
+        <NextLink href="/dashboard/history-form" passHref>
           <IconButton component="a">
             <ArrowRightIcon fontSize="small" />
           </IconButton>
@@ -146,125 +175,27 @@ const HistoryRow = (props: { history: any }) => {
 };
 
 export default function history() {
+  const isMounted = useMounted();
   const [value, setValue] = React.useState<Dayjs | null>(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  /* fake data */
-  const histories = [
-    {
-      id: "5ecb868d0f437390ef3ac62c",
-      itemName: "Apple",
-      SKU: "a00001",
-      user: {
-        email: "11111@sortlog.com",
-        name: "TOM JACKY",
-      },
-      finishDate: addDays(now, 5).getTime(),
-      createDate: subHours(now, 1).getTime(),
-      trackingNumber: "Inbound-001",
-      status: "Done",
-      totalQTY: 55,
-    },
-    {
-      id: "59d78b0b0e15394130c373ff",
-      itemName: "Pear",
-      SKU: "a00002",
-      user: {
-        email: "22222@sortlog.com",
-        name: "Sunny Copper",
-      },
-      finishDate: addDays(now, 5).getTime(),
-      createDate: subHours(now, 1).getTime(),
-      trackingNumber: "Inbound-002",
-      status: "Done",
-      totalQTY: 555,
-    },
-    ,
-    {
-      id: "2a05e7f757c35fe823da3c5a",
-      itemName: "Ball",
-      SKU: "a00003",
-      user: {
-        email: "33333@sortlog.com",
-        name: "Zac Lee",
-      },
-      finishDate: addDays(now, 5).getTime(),
-      createDate: subHours(now, 1).getTime(),
-      trackingNumber: "Outbound-001",
-      status: "Done",
-      totalQTY: 5555,
-    },
-    {
-      id: "5ecb868ada8deedee0638502",
-      itemName: "Milk",
-      SKU: "b00001",
-      user: {
-        email: "44444@sortlog.com",
-        name: "Ayden Chuck",
-      },
-      finishDate: addDays(now, 5).getTime(),
-      createDate: subHours(now, 1).getTime(),
-      trackingNumber: "Inbound-003",
-      status: "Pending",
-      totalQTY: 99,
-    },
-    {
-      id: "750f519b8bc4d21af9528437",
-      itemName: "Ham",
-      SKU: "a00006",
-      user: {
-        email: "66666@sortlog.com",
-        name: "Any How",
-      },
-      finishDate: addDays(now, 5).getTime(),
-      createDate: subHours(now, 1).getTime(),
-      trackingNumber: "Inbound-006",
-      status: "Pending",
-      totalQTY: 100,
-    },
-    {
-      id: "5ecb868700aba84d0f1c0e48",
-      itemName: "Can",
-      SKU: "a00008",
-      user: {
-        email: "88888@sortlog.com",
-        name: "Harry Tommy",
-      },
-      finishDate: addDays(now, 5).getTime(),
-      createDate: subHours(now, 1).getTime(),
-      trackingNumber: "Outbound-001",
-      status: "Canceled",
-      totalQTY: 55,
-    },
-    {
-      id: "5ecb8682038e1rl239438dks1",
-      itemName: "Meat",
-      SKU: "a00012",
-      user: {
-        email: "121212@sortlog.com",
-        name: "Ian Hank",
-      },
-      finishDate: addDays(now, 5).getTime(),
-      createDate: subHours(now, 1).getTime(),
-      trackingNumber: "Inbound-011",
-      status: "Canceled",
-      totalQTY: 100,
-    },
-    {
-      id: "5ecb8682038e1ddf4e868764",
-      itemName: "Toy",
-      SKU: "c00001",
-      user: {
-        email: "99999@sortlog.com",
-        name: "Hello World",
-      },
-      finishDate: addDays(now, 5).getTime(),
-      createDate: subHours(now, 1).getTime(),
-      trackingNumber: "Outbound-002",
-      status: "Canceled",
-      totalQTY: 1,
-    },
-  ];
+  const [histories, setHistories] = useState<histories[]>([]);
+
+  const getHistories = useCallback(async () => {
+    try {
+      const data = await historyApi.getHistories();
+
+      if (isMounted()) {
+        setHistories(data);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  }, [isMounted]);
+
+  useEffect(() => {
+    getHistories();
+  }, []);
 
   const handlePageChange = (event: any, newPage: React.SetStateAction<number>) => {
     setPage(newPage);
@@ -278,7 +209,7 @@ export default function history() {
 
   const paginatedHistories = applyPagination(histories, page, rowsPerPage);
 
-  const groupedHistories = groupHistories(paginatedHistories);
+  // const groupedHistories = groupHistories(paginatedHistories);
 
   return (
     <Container maxWidth="lg" color="background">
@@ -286,16 +217,24 @@ export default function history() {
         sx={{
           flexGrow: 1,
           mx: 1,
+          pl: 10,
+          width: "95%",
           backgroundColor: "background.default",
           overflow: "hidden",
         }}
       >
-        <Box className={"Header"}>
+        <Grid container spacing={6} paddingTop="60px" justifyContent="space-between">
           <Typography variant="h3" component="h3" marginLeft={1}>
             History
           </Typography>
-        </Box>
-        <Grid container spacing={2} sx={{ pl: 1, minWidth: 600 }} className={"searchBox"}>
+          <NextLink href={"/dashboard/inbound"} passHref>
+            <Button variant="contained" startIcon={<Add />} sx={{ backgroundColor: "#e70a3e" }}>
+              ADD NEW
+            </Button>
+          </NextLink>
+        </Grid>
+
+        <Grid container spacing={2} sx={{ pl: 1, minWidth: 600, mb: 5 }} className={"searchBox"}>
           <Grid item xs>
             <TextField
               fullWidth
@@ -340,20 +279,8 @@ export default function history() {
           }}
         >
           <TableBody>
-            {Object.keys(groupedHistories).map((status) => (
-              <Fragment key={status}>
-                <TableRow>
-                  <TableCell colSpan={5} sx={{ px: 0 }}>
-                    <Typography color="textSecondary" variant="h6">
-                      {status.charAt(0).toUpperCase() + status.slice(1)} (
-                      {groupedHistories[status].length})
-                    </Typography>
-                  </TableCell>
-                </TableRow>
-                {groupedHistories[status].map((history: { id: React.Key | null | undefined }) => (
-                  <HistoryRow history={history} key={history.id} />
-                ))}
-              </Fragment>
+            {paginatedHistories.map((history: { id: React.Key | null | undefined }) => (
+              <HistoryRow history={history} key={history.id} />
             ))}
           </TableBody>
         </Table>

@@ -3,8 +3,8 @@ eepipeline {
 
     environment{
          
-        AWS_CRED        = 'AWS_sortlog' //Change to yours //IAM role in the EC2 server instance profile admin acess.//Cloud front invalidate S3 (AWS CLI)
-        AWS_REGION      = 'ap-southeast-2'// AWS region //check202210
+        AWS_CRED        = 'AWS_sortlog' //Change to yours AWS credentials
+        AWS_REGION      = 'ap-southeast-2'
     }
         
     stages{
