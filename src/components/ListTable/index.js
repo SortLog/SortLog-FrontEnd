@@ -38,7 +38,6 @@ export const CustomerListTable = (props) => {
   const handleSelectOneCustomer = (event, customerId) => {
     if (!selectedItems.includes(customerId)) {
       setSelectedItems((prevSelected) => [...prevSelected, customerId]);
-      console.log(customerId);
     } else {
       setSelectedItems((prevSelected) => prevSelected.filter((id) => id !== customerId));
     }
@@ -138,7 +137,7 @@ export const CustomerListTable = (props) => {
                   </TableCell>
 
                   <TableCell>
-                    <NumberBar max={tab === "out" ? customer.quantity : 9999} />
+                    <NumberBar max={tab === "outbound" ? customer.quantity : 99} />
                   </TableCell>
                 </TableRow>
               );

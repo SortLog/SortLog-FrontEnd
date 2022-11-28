@@ -127,10 +127,11 @@ export const DashboardSidebar = (props) => {
             </Box>
           </div>
           <Box sx={{ flexGrow: 1 }}>
-            {sections.map((section) => (
+            {sections.map((section, i) => (
               <DashboardSidebarSection
-                key={section.title}
+                key={section.title + i}
                 path={router.asPath}
+                title={section.title}
                 sx={{
                   mt: 2,
                   "& + &": {

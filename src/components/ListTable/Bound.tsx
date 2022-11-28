@@ -136,13 +136,6 @@ const Bound = (props: any) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
 
-  const handleNumberChange = (event: any, customer: any) => {
-    const target = event.target;
-    customer.changeNumber = target.value;
-    const cuss: any = customers.filter((c: any) => c._id !== customer._id);
-    cuss.push(customer);
-    setCustomers(cuss);
-  };
   const getOrders = useCallback(async () => {
     try {
       const { data } = await itemApi.listItems();
@@ -150,7 +143,6 @@ const Bound = (props: any) => {
       data.forEach((item: any) => {
         item.changeNumber = 0;
       });
-      console.log(data);
       setCustomers(data);
       if (isMounted()) {
         // @ts-ignore
@@ -165,25 +157,25 @@ const Bound = (props: any) => {
     getOrders();
   }, []);
 
-  const handleTabsChange = (event: any, value: any) => {
-    if (cart.length > 0) {
-      const dialogComfirm = () => {
-        const updatedFilters: any = {
-          ...filters,
-          hasAcceptedMarketing: undefined,
-          isProspect: undefined,
-          isReturning: undefined,
-        };
+//   const handleTabsChange = (event: any, value: any) => {
+//     if (cart.length > 0) {
+//       const dialogComfirm = () => {
+//         const updatedFilters: any = {
+//           ...filters,
+//           hasAcceptedMarketing: undefined,
+//           isProspect: undefined,
+//           isReturning: undefined,
+//         };
 
-        updatedFilters[value] = true;
+//         updatedFilters[value] = true;
 
-        setFilters(updatedFilters);
-        setCurrentTab(value);
-      };
-      setDialogComfirmFunc(dialogComfirm);
-      setOpenDialog(true);
-    }
-  };
+//         setFilters(updatedFilters);
+//         setCurrentTab(value);
+//       };
+//       setDialogComfirmFunc(dialogComfirm);
+//       setOpenDialog(true);
+//     }
+//   };
 
   const handleQueryChange = (event: any) => {
     event.preventDefault();
@@ -205,19 +197,13 @@ const Bound = (props: any) => {
     setRowsPerPage(parseInt(event.target.value, 10));
   };
   const insertOrder = () => {
-    // get the current selected item
-    console.log(selectedItems);
-    const items: any = [];
-    customers.filter((customer: any) => {
+    const selected = customers.filter((customer: any) => {
       // @ts-ignore
-      if (selectedItems.includes(customer._id)) {
-        items.push(customer);
-      }
+      return selectedItems.includes(customer._id);
     });
-    console.log(items);
-    // insert the order
-    // orderApi.insertOrder(items);
+    console.log(selected);
   };
+
   // Usually query is done on backend with indexing solutions
   const filteredCustomers = applyFilters(customers, filters);
   const sortedCustomers = applySort(filteredCustomers, sort);
@@ -245,19 +231,6 @@ const Bound = (props: any) => {
           </Grid>
         </Box>
         <Card>
-          <Tabs
-            indicatorColor="primary"
-            onChange={handleTabsChange}
-            scrollButtons="auto"
-            sx={{ px: 3, display: "none" }}
-            textColor="primary"
-            value={currentTab}
-            variant="scrollable"
-          >
-            <Tab label="Outbound" value="outbound" />
-            <Tab label="Inbound" value="inbound" />
-          </Tabs>
-          <Divider />
           <Box
             sx={{
               alignItems: "center",
@@ -308,7 +281,6 @@ const Bound = (props: any) => {
           <CustomerListTable
             tab={currentTab}
             customers={paginatedCustomers}
-            handleNumberChange={handleNumberChange}
             customersCount={filteredCustomers.length}
             onPageChange={handlePageChange}
             onRowsPerPageChange={handleRowsPerPageChange}

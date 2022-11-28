@@ -80,9 +80,3 @@ export const DashboardSidebarSection = (props) => {
     </List>
   );
 };
-
-DashboardSidebarSection.propTypes = {
-  items: PropTypes.array.isRequired,
-  path: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired
-};
