@@ -135,6 +135,34 @@ const HistoryRow = (props: { history: any }) => {
             flexDirection: "column",
           }}
         >
+          <Typography variant="subtitle2">Items</Typography>
+          <Typography color="textSecondary" variant="body2">
+            {history.items[0].name + ", " + history.items[1].name + "..."}
+          </Typography>
+        </Box>
+      </TableCell>
+
+      <TableCell>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
+          <Typography variant="subtitle2">Items</Typography>
+          <Typography color="textSecondary" variant="body2">
+            {history.items[0].name + ", " + history.items[1].name + "..."}
+          </Typography>
+        </Box>
+      </TableCell>
+
+      <TableCell>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+          }}
+        >
           <Typography variant="subtitle2">Total QTY</Typography>
           <Typography variant="body2">
             {"x "}
@@ -209,7 +237,7 @@ export default function history() {
 
   const paginatedHistories = applyPagination(histories, page, rowsPerPage);
 
-  // const groupedHistories = groupHistories(paginatedHistories);
+  // // const groupedHistories = groupHistories(paginatedHistories);
 
   return (
     <Container maxWidth="lg" color="background">

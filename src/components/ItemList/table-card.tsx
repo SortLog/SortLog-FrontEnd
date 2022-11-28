@@ -8,10 +8,6 @@ import { Chip, Divider } from "@mui/material";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import MuiDrawer from "@/components/ItemList/add-and-edit";
 
-// const handleClick = () => {
-//   console.info("You clicked the Chip.");
-// };
-
 function unitOrunits(quantity: any) {
   if (quantity > 1) {
     return "units";
@@ -30,7 +26,6 @@ function printTag(tags: any) {
   const tagArr = new Array(tags.length);
   for (let index = 0; index < tags.length; index++) {
     tagArr[index] = <Chip variant="filled" label={tags[index]} {...getTag()} />;
-    console.log(tags);
   }
   return tagArr;
 }

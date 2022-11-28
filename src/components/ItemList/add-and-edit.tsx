@@ -1,79 +1,3 @@
-// import * as React from "react";
-// import Box from "@mui/material/Box";
-// import Drawer from "@mui/material/Drawer";
-// import Button from "@mui/material/Button";
-// import List from "@mui/material/List";
-// import Divider from "@mui/material/Divider";
-// import ListItem from "@mui/material/ListItem";
-// import ListItemButton from "@mui/material/ListItemButton";
-// import ListItemIcon from "@mui/material/ListItemIcon";
-// import ListItemText from "@mui/material/ListItemText";
-// import InboxIcon from "@mui/icons-material/MoveToInbox";
-// import MailIcon from "@mui/icons-material/Mail";
-
-// const TemporaryDrawer = () => {
-//   const [state, setState] = React.useState({
-//     top: false,
-//     left: false,
-//     bottom: false,
-//     right: false,
-//   });
-
-//   const toggleDrawer = (anchor, open) => (event) => {
-//     if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
-//       return;
-//     }
-
-//     setState({ ...state, [anchor]: open });
-//   };
-
-//   const list = (anchor) => (
-//     <Box
-//       sx={{ width: anchor === "top" || anchor === "bottom" ? "auto" : 250 }}
-//       role="presentation"
-//       onClick={toggleDrawer(anchor, false)}
-//       onKeyDown={toggleDrawer(anchor, false)}
-//     >
-//       <List>
-//         {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-//           <ListItem key={text} disablePadding>
-//             <ListItemButton>
-//               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-//               <ListItemText primary={text} />
-//             </ListItemButton>
-//           </ListItem>
-//         ))}
-//       </List>
-//       <Divider />
-//       <List>
-//         {["All mail", "Trash", "Spam"].map((text, index) => (
-//           <ListItem key={text} disablePadding>
-//             <ListItemButton>
-//               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-//               <ListItemText primary={text} />
-//             </ListItemButton>
-//           </ListItem>
-//         ))}
-//       </List>
-//     </Box>
-//   );
-
-//   return (
-//     <div>
-//       {["right"].map((anchor) => (
-//         <React.Fragment key={anchor}>
-//           <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
-//           <Drawer anchor={anchor} open={state[anchor]} onClose={toggleDrawer(anchor, false)}>
-//             {list(anchor)}
-//           </Drawer>
-//         </React.Fragment>
-//       ))}
-//     </div>
-//   );
-// };
-
-// export default TemporaryDrawer;
-
 import {
   Drawer,
   Box,
@@ -107,18 +31,6 @@ function unitOrunits(quantity: any) {
   }
 }
 
-function changeBackground(e: any) {
-  e.target.style.background = "red";
-}
-
-function nullValue(data: any) {
-  if ((data = 0)) {
-    return "0";
-  } else {
-    return "$" + parseInt(data.price).toFixed(2).toString();
-  }
-}
-
 const useStyles = makeStyles((theme) => ({
   root: {
     "& .MuiFilledInput-root": {
@@ -139,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 const MuiDrawer = (props: any) => {
   const { isDrawerOpen, setIsDrawerOpen, data } = props;
-  // console.log(data);
+
   const currDate = new Date().toLocaleDateString();
   const currTime = new Date().toLocaleTimeString();
   const [isShown, setIsShown] = useState(false);
@@ -149,15 +61,6 @@ const MuiDrawer = (props: any) => {
 
   return (
     <>
-      {/* <IconButton
-        size="large"
-        edge="start"
-        color="inherit"
-        aria-label="logo"
-        onClick={() => setIsDrawerOpen(true)}
-      >
-        <MenuIcon />
-      </IconButton> */}
       <Drawer
         anchor="right"
         open={isDrawerOpen}
@@ -171,8 +74,11 @@ const MuiDrawer = (props: any) => {
       >
         <Box sx={{ mt: 3 }}>
           <TextField
+            id="standard-password-input"
+            label="Name"
+            autoComplete="current-password"
+            variant="standard"
             value={data.name}
-            variant="filled"
             InputProps={{ disableUnderline: true }}
             className={classes.root}
             onChange={(e) => props.onChange(e.target.value)}
@@ -194,7 +100,7 @@ const MuiDrawer = (props: any) => {
         >
           {/* <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Sortlog ID:</text>{" "}
-            <text style={{ color: "#131213" }}>{data.id}</text>
+            <text style={{ color: "#131213" }}>{data.sku}</text>
           </Typography>
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Quantity:</text>{" "}
@@ -205,7 +111,7 @@ const MuiDrawer = (props: any) => {
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Total Value:</text>{" "}
             <text style={{ color: "#131213" }}>
-              ${(data.price = {} ? "" : parseInt(data.price).toFixed(2))}
+              ${data.price && parseInt(data.price).toFixed(2)}
             </text>
           </Typography> */}
           <Typography variant="subtitle1" component="div">
@@ -277,7 +183,7 @@ const MuiDrawer = (props: any) => {
                   <InputLabel htmlFor="outlined-adornment-amount">Total value</InputLabel>
                   <OutlinedInput
                     label="Total value"
-                    value={(data.price = {} ? "" : "AU$" + (data.quantity * data.price).toFixed(2))}
+                    value={data.price && "AU$" + (data.quantity * data.price).toFixed(2)}
                     endAdornment={<InputAdornment position="end">AUD</InputAdornment>}
                   />
                 </FormControl> */}
@@ -293,7 +199,6 @@ const MuiDrawer = (props: any) => {
             >
               <div>
                 <TextField label="Tags" value={data.tags} />
-                {/* {console.log(data.image)}; */}
               </div>
               <div>
                 <TextField label="Notes" variant="outlined" multiline maxRows={6} />
@@ -333,23 +238,6 @@ const MuiDrawer = (props: any) => {
         <Grid m="20px">
           <Typography sx={{ color: "#939393", mt: 3 }}>QR / BARCODES</Typography>
           <Grid container>
-            {/* <Grid
-              container
-              sx={{
-                mt: 3,
-                border: "1px solid #c3c0c0",
-                borderRadius: "3px",
-                width: "auto",
-                borderBlockColor: "#c3c0c0",
-              }}
-            >
-              <Typography m="6px">
-                {data.name}
-                <Typography fontSize={6} sx={{ color: "#757575", mt: 1 }}>
-                  Create via <text style={{ color: "#ff0000", fontStyle: "italic" }}>SortLog</text>
-                </Typography>
-              </Typography>
-            </Grid> */}
             <Button
               variant="outlined"
               color="inherit"
