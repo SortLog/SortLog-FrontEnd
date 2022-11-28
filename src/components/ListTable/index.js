@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react";
 import numeral from "numeral";
 import { SeverityPill } from "../severity-pill";
 import {
   Avatar,
   Box,
-  Button,
   Checkbox,
   LinearProgress,
   Link,
@@ -17,6 +15,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Scrollbar } from "../../layouts/scrollbar";
+import NumberBar from "./numberBar";
 
 export const CustomerListTable = (props) => {
   const {
@@ -28,6 +27,7 @@ export const CustomerListTable = (props) => {
     rowsPerPage,
     selectedItems,
     setSelectedItems,
+    tab,
     ...other
   } = props;
 
@@ -65,6 +65,7 @@ export const CustomerListTable = (props) => {
               <TableCell>Stock</TableCell>
               <TableCell>Price</TableCell>
               <TableCell>Tag</TableCell>
+              <TableCell>Quantity</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -134,6 +135,10 @@ export const CustomerListTable = (props) => {
                         {tag}
                       </SeverityPill>
                     ))}
+                  </TableCell>
+
+                  <TableCell>
+                    <NumberBar max={tab === "out" ? customer.quantity : 9999} />
                   </TableCell>
                 </TableRow>
               );

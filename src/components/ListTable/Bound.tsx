@@ -12,12 +12,15 @@ import {
   TextField,
   Typography,
   SwipeableDrawer,
+  SpeedDial,
 } from "@mui/material";
 import { PlaylistAdd, Search } from "@mui/icons-material";
-import { orderApi } from "../api/order-api";
-import { CustomerListTable } from "../../components/ListTable";
+import { CustomerListTable } from "@/components/ListTable";
 import { useMounted } from "../../hooks/use-mounted";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import * as itemApi from "../../services/api/items";
+import ImgMediaCard from "@/components/ItemList/table-card";
+import Dialog from "@/components/ListTable/Dialog";
 
 const sortOptions = [
   {
@@ -94,32 +97,33 @@ const applySort = (customers: any, sort: any) => {
   const [sortBy, sortDir] = sort.split("|");
   const comparator = getComparator(sortDir, sortBy);
   const stabilizedThis = customers.map((el: any, index: any) => [el, index]);
-
   stabilizedThis.sort((a: any, b: any) => {
     const newOrder = comparator(a[0], b[0]);
-
     if (newOrder !== 0) {
       return newOrder;
     }
-
     return a[1] - b[1];
   });
-
   return stabilizedThis.map((el: any) => el[0]);
 };
 
 const applyPagination = (customers: any, page: any, rowsPerPage: any) =>
   customers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
-const CustomerList = () => {
+const Bound = (props: any) => {
+  const { type } = props;
   const isMounted = useMounted();
   const queryRef = useRef(null);
   const [customers, setCustomers] = useState([]);
-  const [currentTab, setCurrentTab] = useState("in");
+  const [currentTab, setCurrentTab] = useState(type);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sort, setSort] = useState(sortOptions[0].value);
   const [selectedItems, setSelectedItems] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dialogComfirmFunc, setDialogComfirmFunc] = useState(() => {});
+  const [openCart, setOpenCart] = useState(false);
+  const [cart, setCart] = useState([]);
 
   const [filters, setFilters] = useState({
     query: "",
@@ -127,6 +131,10 @@ const CustomerList = () => {
     isProspect: undefined,
     isReturning: undefined,
   });
+
+  function up1stLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
 
   const handleNumberChange = (event: any, customer: any) => {
     const target = event.target;
@@ -158,20 +166,23 @@ const CustomerList = () => {
   }, []);
 
   const handleTabsChange = (event: any, value: any) => {
-    const updatedFilters = {
-      ...filters,
-      hasAcceptedMarketing: undefined,
-      isProspect: undefined,
-      isReturning: undefined,
-    };
+    if (cart.length > 0) {
+      const dialogComfirm = () => {
+        const updatedFilters: any = {
+          ...filters,
+          hasAcceptedMarketing: undefined,
+          isProspect: undefined,
+          isReturning: undefined,
+        };
 
-    if (value !== "all") {
-      // @ts-ignore
-      updatedFilters[value] = true;
+        updatedFilters[value] = true;
+
+        setFilters(updatedFilters);
+        setCurrentTab(value);
+      };
+      setDialogComfirmFunc(dialogComfirm);
+      setOpenDialog(true);
     }
-
-    setFilters(updatedFilters);
-    setCurrentTab(value);
   };
 
   const handleQueryChange = (event: any) => {
@@ -198,23 +209,25 @@ const CustomerList = () => {
     console.log(selectedItems);
     const items: any = [];
     customers.filter((customer: any) => {
+      // @ts-ignore
       if (selectedItems.includes(customer._id)) {
         items.push(customer);
       }
     });
     console.log(items);
     // insert the order
-    orderApi.insertOrder(items);
+    // orderApi.insertOrder(items);
   };
   // Usually query is done on backend with indexing solutions
   const filteredCustomers = applyFilters(customers, filters);
   const sortedCustomers = applySort(filteredCustomers, sort);
   const paginatedCustomers = applyPagination(sortedCustomers, page, rowsPerPage);
+
   // @ts-ignore
   return (
     <>
       <Head>
-        <title>Dashboard: Customer List | Creatalog</title>
+        <title>{up1stLetter(type)}</title>
       </Head>
       <Box
         component="main"
@@ -227,7 +240,7 @@ const CustomerList = () => {
         <Box sx={{ mb: 4 }}>
           <Grid container justifyContent="space-between" spacing={3}>
             <Grid item>
-              <Typography variant="h4">Orders</Typography>
+              <Typography variant="h4">{up1stLetter(type)}</Typography>
             </Grid>
           </Grid>
         </Box>
@@ -236,13 +249,13 @@ const CustomerList = () => {
             indicatorColor="primary"
             onChange={handleTabsChange}
             scrollButtons="auto"
-            sx={{ px: 3 }}
+            sx={{ px: 3, display: "none" }}
             textColor="primary"
             value={currentTab}
             variant="scrollable"
           >
-            <Tab label="Inbound" value="in" />
-            <Tab label="Outbound" value="out" />
+            <Tab label="Outbound" value="outbound" />
+            <Tab label="Inbound" value="inbound" />
           </Tabs>
           <Divider />
           <Box
@@ -293,6 +306,7 @@ const CustomerList = () => {
             </TextField>
           </Box>
           <CustomerListTable
+            tab={currentTab}
             customers={paginatedCustomers}
             handleNumberChange={handleNumberChange}
             customersCount={filteredCustomers.length}
@@ -317,17 +331,29 @@ const CustomerList = () => {
           </Grid>
         </Grid>
       </Box>
-      <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+      <SpeedDial
+        ariaLabel="cart"
+        sx={{ position: "absolute", bottom: 24, right: 24 }}
+        icon={<ShoppingCartIcon />}
+        onClick={() => setOpenCart(true)}
+      />
       <SwipeableDrawer
-        anchor={anchor}
-        open={state[anchor]}
-        onClose={toggleDrawer(anchor, false)}
-        onOpen={toggleDrawer(anchor, true)}
+        anchor="right"
+        open={openCart}
+        onClose={() => setOpenCart(false)}
+        onOpen={() => setOpenCart(true)}
       >
-        asdasdasd
+        <Box sx={{ mx: 3, my: 3 }}>
+          {cart.map((item: any) => (
+            <Box sx={{ mt: 3, mr: 3 }} key={item.id} id={item.id}>
+              <ImgMediaCard data={item} details={item} />
+            </Box>
+          ))}
+        </Box>
       </SwipeableDrawer>
+      <Dialog open={openDialog} setOpen={setOpenDialog} func={dialogComfirmFunc} />
     </>
   );
 };
 
-export default CustomerList;
+export default Bound;
