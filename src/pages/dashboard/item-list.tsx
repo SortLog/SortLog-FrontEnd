@@ -77,7 +77,7 @@ const columns = [
       return (
         <TableCell>
           {params.row.tags.map((tag: any) => (
-            <SeverityPill color="success" sx={{ ml: 1 }} key={tag}>
+            <SeverityPill color="success" key={tag}>
               {tag}
             </SeverityPill>
           ))}
@@ -130,6 +130,9 @@ const ItemList: NextPage = () => {
     };
     fetchData();
   }, []);
+  {
+    console.log(itemList);
+  }
 
   return (
     <>
@@ -215,7 +218,6 @@ const ItemList: NextPage = () => {
                 <Typography sx={{ display: "none" }}>
                   {(items = items + 1)} {(quantity = quantity + value.quantity)}{" "}
                   {(totalValue = totalValue + value.price)}
-                  {console.log(totalValue)}
                 </Typography>
               </Box>
             ))}

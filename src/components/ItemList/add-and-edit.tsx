@@ -37,7 +37,7 @@ function tagsCheck(data: any) {
     <TableCell>
       {data.tags &&
         data.tags.map((tag: any) => (
-          <SeverityPill color="success" sx={{ ml: 1 }} key={tag}>
+          <SeverityPill color="success" key={tag}>
             {tag}
           </SeverityPill>
         ))}

@@ -42,5 +42,13 @@ export const SeverityPill = (props) => {
 
 SeverityPill.propTypes = {
   children: PropTypes.node,
-  color: PropTypes.oneOf(["primary", "secondary", "error", "info", "warning", "success", "neutral"]),
+  color: PropTypes.oneOf([
+    "primary",
+    "secondary",
+    "error",
+    "info",
+    "warning",
+    "success",
+    "neutral",
+  ]),
 };
