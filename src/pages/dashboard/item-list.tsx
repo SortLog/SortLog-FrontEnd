@@ -92,7 +92,6 @@ const dataMapper = (rows: any, searchText: string) => {
 const ItemList: NextPage = () => {
   const [isGrid, setIsGrid] = useState(false);
   const [searchText, setSearchText] = useState("");
-  const [searchText, setSearchText] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const [isQRCodeButtonClicked, setIsQRCodeButtonClicked] = useState(false);
@@ -184,7 +183,6 @@ const ItemList: NextPage = () => {
                     setSearchText((e.target as any).value);
                     setSearchInput((e.target as any).value);
                   }}
-                  value={searchInput ? searchInput : searchText}
                   value={searchInput ? searchInput : searchText}
                 />
                 <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
