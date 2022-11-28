@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import NextLink from "next/link";
 import numeral from "numeral";
-import PropTypes from "prop-types";
 import { SeverityPill } from "../severity-pill";
 import {
   Avatar,
@@ -16,7 +14,6 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  TextField,
   Typography,
 } from "@mui/material";
 import { Scrollbar } from "../../layouts/scrollbar";
@@ -31,17 +28,8 @@ export const CustomerListTable = (props) => {
     rowsPerPage,
     selectedItems,
     setSelectedItems,
-    handleNumberChange,
     ...other
   } = props;
-
-  // // Reset selected customers when customers change
-  // useEffect(() => {
-  //   if (selectedItems.length) {
-  //     setSelectedItems([]);
-  //     console.log("effect")
-  //   }
-  // }, [customers]);
 
   const handleSelectAllCustomers = (event) => {
     setSelectedItems(event.target.checked ? customers.map((customer) => customer._id) : []);
@@ -56,7 +44,6 @@ export const CustomerListTable = (props) => {
     }
   };
 
-  const enableBulkActions = selectedItems.length > 0;
   const selectedSomeCustomers = selectedItems.length > 0 && selectedItems.length < customers.length;
   const selectedAllCustomers = selectedItems.length === customers.length;
 
@@ -73,12 +60,11 @@ export const CustomerListTable = (props) => {
                   onChange={handleSelectAllCustomers}
                 />
               </TableCell>
-              <TableCell>Item</TableCell>
               <TableCell>SKU</TableCell>
+              <TableCell>Item</TableCell>
               <TableCell>Stock</TableCell>
               <TableCell>Price</TableCell>
               <TableCell>Tag</TableCell>
-              <TableCell>Change Numbers</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -93,6 +79,7 @@ export const CustomerListTable = (props) => {
                       value={isCustomerSelected}
                     />
                   </TableCell>
+                  <TableCell>{customer.sku}</TableCell>
 
                   <TableCell>
                     <Box
@@ -102,12 +89,13 @@ export const CustomerListTable = (props) => {
                       }}
                     >
                       <Avatar
+                        variant="square"
                         src={customer.image}
                         sx={{
-                          height: 52,
-                          width: 52,
+                          height: 64,
+                          width: 64,
                         }}
-                      ></Avatar>
+                      />
                       <Box sx={{ ml: 1 }}>
                         <Link color="inherit" variant="subtitle2">
                           {customer.name}
@@ -118,7 +106,7 @@ export const CustomerListTable = (props) => {
                       </Box>
                     </Box>
                   </TableCell>
-                  <TableCell>{customer.sku}</TableCell>
+
                   <TableCell width="20%">
                     <LinearProgress
                       value={customer.quantity}
@@ -133,28 +121,19 @@ export const CustomerListTable = (props) => {
                       {customer.quantity} in stock
                     </Typography>
                   </TableCell>
+
                   <TableCell>
                     <Typography color="success.main" variant="subtitle2">
                       {numeral(customer.price).format(`${customer.price},0.00`)}
                     </Typography>
                   </TableCell>
+
                   <TableCell>
                     {customer.tags.map((tag) => (
                       <SeverityPill color="info" sx={{ ml: 1 }} key={tag}>
                         {tag}
                       </SeverityPill>
                     ))}
-                  </TableCell>
-                  <TableCell>
-                    <TextField
-                      type="number"
-                      size="small"
-                      variant="standard"
-                      value={customer.state}
-                      onChange={(event) => handleNumberChange(event, customer)}
-                      InputProps={{ disableUnderline: true, style: { fontSize: "inherit" } }}
-                      // onChange={(e) => handleEditCell(e, rowData.id, dataKey)}
-                    />
                   </TableCell>
                 </TableRow>
               );
@@ -173,16 +152,4 @@ export const CustomerListTable = (props) => {
       />
     </div>
   );
-};
-
-CustomerListTable.propTypes = {
-  customers: PropTypes.array.isRequired,
-  customersCount: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
-  onRowsPerPageChange: PropTypes.func,
-  page: PropTypes.number.isRequired,
-  rowsPerPage: PropTypes.number.isRequired,
-  selectedItems: PropTypes.array.isRequired,
-  setSelectedItems: PropTypes.func.isRequired,
-  handleNumberChange: PropTypes.func.isRequired,
 };

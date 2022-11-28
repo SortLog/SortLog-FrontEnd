@@ -4,15 +4,16 @@ import { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { Box, Divider, Drawer, useMediaQuery } from '@mui/material';
-import HomeIcon from '@mui/icons-material/Home';
-import StyleIcon from '@mui/icons-material/Style';
+import LowPriorityIcon from '@mui/icons-material/LowPriority';
+import HistoryIcon from '@mui/icons-material/History';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import { Logo } from './logo';
 import { Scrollbar } from './scrollbar';
 import { DashboardSidebarSection } from './dashboard-sidebar-section';
 import Button from "@mui/material/Button";
 import SettingsIcon from '@mui/icons-material/Settings';
-import {Groups, Logout, Reorder, SyncAlt} from "@mui/icons-material";
+import {Groups, Logout} from "@mui/icons-material";
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import {useAuth} from "@/hooks/use-auth";
 import toast from "react-hot-toast";
 
@@ -22,7 +23,7 @@ const getSections = (t) => [
       {
         title: t('Dashboard'),
         path: '/dashboard',
-        icon: <HomeIcon fontSize="small" />
+        icon: <DashboardIcon fontSize="small" />
       },
       {
         title: t('Items'),
@@ -30,13 +31,13 @@ const getSections = (t) => [
         icon: <InventoryIcon fontSize="small" />,
       },
       {
-        title: t('Inbound'),
-        icon: <SyncAlt fontSize="small" />,
-        path: '/dashboard/inbound',
+        title: t('Order'),
+        icon: <LowPriorityIcon fontSize="small" />,
+        path: '/dashboard/order',
       },
       {
         title: t('History'),
-        icon: <Reorder fontSize="small" />,
+        icon: <HistoryIcon fontSize="small" />,
         path: '/dashboard/history ',
       },
       {
@@ -122,14 +123,7 @@ export const DashboardSidebar = (props) => {
                 </a>
               </NextLink>
             </Box>
-
           </div>
-          <Divider
-            sx={{
-              borderColor: '#2D3748',
-              my: 3
-            }}
-          />
           <Box sx={{ flexGrow: 1 }}>
             {sections.map((section) => (
               <DashboardSidebarSection
@@ -144,9 +138,7 @@ export const DashboardSidebar = (props) => {
                 {...section} />
             ))}
           </Box>
-
           <Box sx={{ p: 2 }}>
-
             <NextLink
               href="/dashboard/settings"
               passHref
@@ -161,7 +153,6 @@ export const DashboardSidebar = (props) => {
               >
                 {t('Settings')}
               </Button>
-
             </NextLink>
             <Button
                 color="primary"

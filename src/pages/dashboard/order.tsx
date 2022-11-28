@@ -11,31 +11,13 @@ import {
   Tabs,
   TextField,
   Typography,
+  SwipeableDrawer,
 } from "@mui/material";
 import { PlaylistAdd, Search } from "@mui/icons-material";
 import { orderApi } from "../api/order-api";
-import { CustomerListTable } from "../../components/customer/customer-list-table";
+import { CustomerListTable } from "../../components/ListTable";
 import { useMounted } from "../../hooks/use-mounted";
 import * as itemApi from "../../services/api/items";
-
-const tabs = [
-  {
-    label: "All",
-    value: "all",
-  },
-  {
-    label: "Accepts Marketing",
-    value: "hasAcceptedMarketing",
-  },
-  {
-    label: "Prospect",
-    value: "isProspect",
-  },
-  {
-    label: "Returning",
-    value: "isReturning",
-  },
-];
 
 const sortOptions = [
   {
@@ -56,8 +38,8 @@ const sortOptions = [
   },
 ];
 
-const applyFilters = (customers, filters) =>
-  customers.filter((customer) => {
+const applyFilters = (customers: any, filters: any) =>
+  customers.filter((customer: any) => {
     if (filters.query) {
       let queryMatched = false;
       const properties = ["email", "name"];
@@ -88,7 +70,7 @@ const applyFilters = (customers, filters) =>
     return true;
   });
 
-const descendingComparator = (a, b, sortBy) => {
+const descendingComparator = (a: any, b: any, sortBy: any) => {
   // When compared to something undefined, always returns false.
   // This means that if a field does not exist from either element ('a' or 'b') the return will be 0.
 
@@ -103,17 +85,17 @@ const descendingComparator = (a, b, sortBy) => {
   return 0;
 };
 
-const getComparator = (sortDir, sortBy) =>
+const getComparator = (sortDir: any, sortBy: any) =>
   sortDir === "desc"
-    ? (a, b) => descendingComparator(a, b, sortBy)
-    : (a, b) => -descendingComparator(a, b, sortBy);
+    ? (a: any, b: any) => descendingComparator(a, b, sortBy)
+    : (a: any, b: any) => -descendingComparator(a, b, sortBy);
 
-const applySort = (customers, sort) => {
+const applySort = (customers: any, sort: any) => {
   const [sortBy, sortDir] = sort.split("|");
   const comparator = getComparator(sortDir, sortBy);
-  const stabilizedThis = customers.map((el, index) => [el, index]);
+  const stabilizedThis = customers.map((el: any, index: any) => [el, index]);
 
-  stabilizedThis.sort((a, b) => {
+  stabilizedThis.sort((a: any, b: any) => {
     const newOrder = comparator(a[0], b[0]);
 
     if (newOrder !== 0) {
@@ -123,17 +105,17 @@ const applySort = (customers, sort) => {
     return a[1] - b[1];
   });
 
-  return stabilizedThis.map((el) => el[0]);
+  return stabilizedThis.map((el: any) => el[0]);
 };
 
-const applyPagination = (customers, page, rowsPerPage) =>
+const applyPagination = (customers: any, page: any, rowsPerPage: any) =>
   customers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
 const CustomerList = () => {
   const isMounted = useMounted();
   const queryRef = useRef(null);
   const [customers, setCustomers] = useState([]);
-  const [currentTab, setCurrentTab] = useState("all");
+  const [currentTab, setCurrentTab] = useState("in");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sort, setSort] = useState(sortOptions[0].value);
@@ -146,10 +128,10 @@ const CustomerList = () => {
     isReturning: undefined,
   });
 
-  const handleNumberChange = (event, customer) => {
+  const handleNumberChange = (event: any, customer: any) => {
     const target = event.target;
     customer.changeNumber = target.value;
-    const cuss = customers.filter((c) => c._id !== customer._id);
+    const cuss: any = customers.filter((c: any) => c._id !== customer._id);
     cuss.push(customer);
     setCustomers(cuss);
   };
@@ -157,7 +139,7 @@ const CustomerList = () => {
     try {
       const { data } = await itemApi.listItems();
       // add state as a
-      data.forEach((item) => {
+      data.forEach((item: any) => {
         item.changeNumber = 0;
       });
       console.log(data);
@@ -175,7 +157,7 @@ const CustomerList = () => {
     getOrders();
   }, []);
 
-  const handleTabsChange = (event, value) => {
+  const handleTabsChange = (event: any, value: any) => {
     const updatedFilters = {
       ...filters,
       hasAcceptedMarketing: undefined,
@@ -192,7 +174,7 @@ const CustomerList = () => {
     setCurrentTab(value);
   };
 
-  const handleQueryChange = (event) => {
+  const handleQueryChange = (event: any) => {
     event.preventDefault();
     setFilters((prevState) => ({
       ...prevState,
@@ -200,22 +182,22 @@ const CustomerList = () => {
     }));
   };
 
-  const handleSortChange = (event) => {
+  const handleSortChange = (event: any) => {
     setSort(event.target.value);
   };
 
-  const handlePageChange = (event, newPage) => {
+  const handlePageChange = (event: any, newPage: any) => {
     setPage(newPage);
   };
 
-  const handleRowsPerPageChange = (event) => {
+  const handleRowsPerPageChange = (event: any) => {
     setRowsPerPage(parseInt(event.target.value, 10));
   };
   const insertOrder = () => {
     // get the current selected item
     console.log(selectedItems);
-    const items = [];
-    customers.filter((customer) => {
+    const items: any = [];
+    customers.filter((customer: any) => {
       if (selectedItems.includes(customer._id)) {
         items.push(customer);
       }
@@ -245,16 +227,7 @@ const CustomerList = () => {
         <Box sx={{ mb: 4 }}>
           <Grid container justifyContent="space-between" spacing={3}>
             <Grid item>
-              <Typography variant="h4">Inbound & Outbound Orders</Typography>
-            </Grid>
-            <Grid item>
-              <Button
-                startIcon={<PlaylistAdd fontSize="small" />}
-                variant="contained"
-                onClick={insertOrder}
-              >
-                Add
-              </Button>
+              <Typography variant="h4">Orders</Typography>
             </Grid>
           </Grid>
         </Box>
@@ -268,9 +241,8 @@ const CustomerList = () => {
             value={currentTab}
             variant="scrollable"
           >
-            {tabs.map((tab) => (
-              <Tab key={tab.value} label={tab.label} value={tab.value} />
-            ))}
+            <Tab label="Inbound" value="in" />
+            <Tab label="Outbound" value="out" />
           </Tabs>
           <Divider />
           <Box
@@ -332,7 +304,28 @@ const CustomerList = () => {
             setSelectedItems={setSelectedItems}
           />
         </Card>
+        <Grid container justifyContent="space-between" spacing={3} sx={{ mt: 0 }}>
+          <Grid item />
+          <Grid item>
+            <Button
+              startIcon={<PlaylistAdd fontSize="small" />}
+              variant="contained"
+              onClick={insertOrder}
+            >
+              Add
+            </Button>
+          </Grid>
+        </Grid>
       </Box>
+      <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+      <SwipeableDrawer
+        anchor={anchor}
+        open={state[anchor]}
+        onClose={toggleDrawer(anchor, false)}
+        onOpen={toggleDrawer(anchor, true)}
+      >
+        asdasdasd
+      </SwipeableDrawer>
     </>
   );
 };
