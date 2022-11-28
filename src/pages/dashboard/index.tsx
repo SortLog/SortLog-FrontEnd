@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Box, Button, Container, Grid, MenuItem, TextField, Typography } from "@mui/material";
 // import { AuthGuard } from '../../components/authentication/auth-guard';
 // import { DashboardLayout } from '../../components/dashboard/dashboard-layout';
-import AnalyticsGeneralOverview from "../../components/Dashboard/analytics-general-overview";
+import AnalyticsGeneralOverview from "@/components/Dashboard/analytics-general-overview";
 import { AnalyticsMostVisited } from "../../components/Dashboard/analytics-most-visited";
 import { Reports as ReportsIcon } from "../../icons/reports";
 // import { gtm } from '../../lib/gtm';

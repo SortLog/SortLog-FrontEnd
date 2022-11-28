@@ -95,7 +95,7 @@ export default function historyForm() {
                   </Box>
                 </Link>
               </NextLink>
-              <Box sx={{ mt: 3 }}/>
+              <Box sx={{ mt: 3 }} />
               <NextLink href="/dashboard" passHref>
                 <Link color="textPrimary" variant="subtitle2">
                   <Box
