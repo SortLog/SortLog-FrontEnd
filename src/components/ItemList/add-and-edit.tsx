@@ -269,9 +269,7 @@ const MuiDrawer = (props: any) => {
                   <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
                   <OutlinedInput
                     label="Price"
-                    defaultValue={
-                      data.price !== undefined ? `$ ${parseFloat(data.price).toFixed(2)}` : ""
-                    }
+                    defaultValue={data.price && `$ ${parseFloat(data.price).toFixed(2)}`}
                     endAdornment={<InputAdornment position="end">AUD</InputAdornment>}
                   />
                 </FormControl>
@@ -424,3 +422,4 @@ export default MuiDrawer;
 // };
 
 // export default MuiDrawer;
+
