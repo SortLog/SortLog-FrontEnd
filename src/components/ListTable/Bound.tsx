@@ -3,12 +3,11 @@ import Head from "next/head";
 import {
   Box,
   Button,
+  Badge,
   Card,
-  Divider,
   Grid,
+  Fab,
   InputAdornment,
-  Tab,
-  Tabs,
   TextField,
   Typography,
   SwipeableDrawer,
@@ -19,8 +18,10 @@ import { CustomerListTable } from "@/components/ListTable";
 import { useMounted } from "../../hooks/use-mounted";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import * as itemApi from "../../services/api/items";
-import ImgMediaCard from "@/components/ItemList/table-card";
+import ItemCard from "./ItemCard";
 import Dialog from "@/components/ListTable/Dialog";
+import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
+import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
 
 const sortOptions = [
   {
@@ -30,14 +31,6 @@ const sortOptions = [
   {
     label: "Last update (oldest)",
     value: "updatedAt|asc",
-  },
-  {
-    label: "Total orders (highest)",
-    value: "totalOrders|desc",
-  },
-  {
-    label: "Total orders (lowest)",
-    value: "totalOrders|asc",
   },
 ];
 
@@ -74,9 +67,6 @@ const applyFilters = (customers: any, filters: any) =>
   });
 
 const descendingComparator = (a: any, b: any, sortBy: any) => {
-  // When compared to something undefined, always returns false.
-  // This means that if a field does not exist from either element ('a' or 'b') the return will be 0.
-
   if (b[sortBy] < a[sortBy]) {
     return -1;
   }
@@ -114,8 +104,7 @@ const Bound = (props: any) => {
   const { type } = props;
   const isMounted = useMounted();
   const queryRef = useRef(null);
-  const [customers, setCustomers] = useState([]);
-  const [currentTab, setCurrentTab] = useState(type);
+  const [customers, setCustomers] = useState<any>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sort, setSort] = useState(sortOptions[0].value);
@@ -138,15 +127,14 @@ const Bound = (props: any) => {
 
   const getOrders = useCallback(async () => {
     try {
-      const { data } = await itemApi.listItems();
-      // add state as a
-      data.forEach((item: any) => {
-        item.changeNumber = 0;
-      });
-      setCustomers(data);
+      const { data }: any = await itemApi.listItems();
+      const mappedData = data.map((item: any) => ({
+        ...item,
+        change: 1,
+      }));
+      setCustomers(mappedData);
       if (isMounted()) {
-        // @ts-ignore
-        setCustomers(data);
+        setCustomers(mappedData);
       }
     } catch (err) {
       console.error(err);
@@ -156,26 +144,6 @@ const Bound = (props: any) => {
   useEffect(() => {
     getOrders();
   }, []);
-
-//   const handleTabsChange = (event: any, value: any) => {
-//     if (cart.length > 0) {
-//       const dialogComfirm = () => {
-//         const updatedFilters: any = {
-//           ...filters,
-//           hasAcceptedMarketing: undefined,
-//           isProspect: undefined,
-//           isReturning: undefined,
-//         };
-
-//         updatedFilters[value] = true;
-
-//         setFilters(updatedFilters);
-//         setCurrentTab(value);
-//       };
-//       setDialogComfirmFunc(dialogComfirm);
-//       setOpenDialog(true);
-//     }
-//   };
 
   const handleQueryChange = (event: any) => {
     event.preventDefault();
@@ -196,12 +164,24 @@ const Bound = (props: any) => {
   const handleRowsPerPageChange = (event: any) => {
     setRowsPerPage(parseInt(event.target.value, 10));
   };
-  const insertOrder = () => {
-    const selected = customers.filter((customer: any) => {
-      // @ts-ignore
-      return selectedItems.includes(customer._id);
+  const addButton = () => {
+    // @ts-ignore
+    let selected = customers.filter((customer: any) => selectedItems.includes(customer._id));
+    // add to cart, no duplicate
+    let newCart: any = [...cart];
+    newCart = newCart.map((item: any) => {
+      const found = selected.find((s: any) => s._id === item._id);
+      if (found) {
+        selected = selected.filter((s: any) => s._id !== item._id);
+        return {
+          ...item,
+          change: item.change,
+        };
+      }
+      return item;
     });
-    console.log(selected);
+    newCart = [...newCart, ...selected];
+    setCart(newCart);
   };
 
   // Usually query is done on backend with indexing solutions
@@ -259,7 +239,7 @@ const Bound = (props: any) => {
                     </InputAdornment>
                   ),
                 }}
-                placeholder="Search orders"
+                placeholder="Search Items"
               />
             </Box>
             <TextField
@@ -279,8 +259,9 @@ const Bound = (props: any) => {
             </TextField>
           </Box>
           <CustomerListTable
-            tab={currentTab}
+            tab={type}
             customers={paginatedCustomers}
+            setCustomers={setCustomers}
             customersCount={filteredCustomers.length}
             onPageChange={handlePageChange}
             onRowsPerPageChange={handleRowsPerPageChange}
@@ -296,7 +277,7 @@ const Bound = (props: any) => {
             <Button
               startIcon={<PlaylistAdd fontSize="small" />}
               variant="contained"
-              onClick={insertOrder}
+              onClick={addButton}
             >
               Add
             </Button>
@@ -306,7 +287,11 @@ const Bound = (props: any) => {
       <SpeedDial
         ariaLabel="cart"
         sx={{ position: "absolute", bottom: 24, right: 24 }}
-        icon={<ShoppingCartIcon />}
+        icon={
+          <Badge badgeContent={cart.length}>
+            <ShoppingCartIcon sx={{ color: "#fff" }} />
+          </Badge>
+        }
         onClick={() => setOpenCart(true)}
       />
       <SwipeableDrawer
@@ -314,16 +299,45 @@ const Bound = (props: any) => {
         open={openCart}
         onClose={() => setOpenCart(false)}
         onOpen={() => setOpenCart(true)}
+        sx={{}}
       >
         <Box sx={{ mx: 3, my: 3 }}>
-          {cart.map((item: any) => (
-            <Box sx={{ mt: 3, mr: 3 }} key={item.id} id={item.id}>
-              <ImgMediaCard data={item} details={item} />
-            </Box>
-          ))}
+          {cart.length > 0 ? (
+            <>
+              {cart.map((item: any) => (
+                <Box sx={{ mt: 3, width: 300 }} key={item.id} id={item.id}>
+                  <ItemCard
+                    data={item}
+                    // @ts-ignore
+                    onRemove={() => setCart(cart.filter((c) => c._id !== item._id))}
+                  />
+                </Box>
+              ))}
+              <Fab
+                color="error"
+                sx={{ position: "absolute", bottom: 24, right: 96 }}
+                onClick={() => setCart([])}
+              >
+                <CleaningServicesIcon sx={{ color: "#fff" }} />
+              </Fab>
+              <Fab
+                color="success"
+                sx={{ position: "absolute", bottom: 24, right: 24 }}
+                onClick={() => setOpenCart(true)}
+              >
+                <CallMissedOutgoingIcon sx={{ color: "#fff" }} />
+              </Fab>
+            </>
+          ) : (
+            <>
+              <Typography variant="h6" sx={{ mt: 3, mr: 3, width: 300 }}>
+                Cart is empty
+              </Typography>
+            </>
+          )}
         </Box>
       </SwipeableDrawer>
-      <Dialog open={openDialog} setOpen={setOpenDialog} func={dialogComfirmFunc} />
+      {/* <Dialog open={openDialog} setOpen={setOpenDialog} func={dialogComfirmFunc} /> */}
     </>
   );
 };

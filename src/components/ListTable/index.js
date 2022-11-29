@@ -1,8 +1,9 @@
-import numeral from "numeral";
 import { SeverityPill } from "../severity-pill";
 import {
   Avatar,
   Box,
+  Grid,
+  Slider,
   Checkbox,
   LinearProgress,
   Link,
@@ -15,11 +16,12 @@ import {
   Typography,
 } from "@mui/material";
 import { Scrollbar } from "../../layouts/scrollbar";
-import NumberBar from "./numberBar";
 
 export const CustomerListTable = (props) => {
   const {
+    tab,
     customers,
+    setCustomers,
     customersCount,
     onPageChange,
     onRowsPerPageChange,
@@ -27,7 +29,6 @@ export const CustomerListTable = (props) => {
     rowsPerPage,
     selectedItems,
     setSelectedItems,
-    tab,
     ...other
   } = props;
 
@@ -107,11 +108,11 @@ export const CustomerListTable = (props) => {
                     </Box>
                   </TableCell>
 
-                  <TableCell width="20%">
+                  <TableCell>
                     <LinearProgress
                       value={customer.quantity}
                       variant="determinate"
-                      color={customer.quantity >= 10 ? "success" : "error"}
+                      color={customer.quantity >= 20 ? "success" : "error"}
                       sx={{
                         height: 8,
                         width: 36,
@@ -124,7 +125,7 @@ export const CustomerListTable = (props) => {
 
                   <TableCell>
                     <Typography color="success.main" variant="subtitle2">
-                      {numeral(customer.price).format(`${customer.price},0.00`)}
+                      {`$ ${customer.price}`}
                     </Typography>
                   </TableCell>
 
@@ -137,7 +138,30 @@ export const CustomerListTable = (props) => {
                   </TableCell>
 
                   <TableCell>
-                    <NumberBar max={tab === "outbound" ? customer.quantity : 99} />
+                    <Box sx={{ width: 200 }}>
+                      <Grid container spacing={2} alignItems="center">
+                        <Grid item xs>
+                          <Slider
+                            value={customer.change}
+                            onChange={(value) => {
+                              setCustomers(
+                                customers.map((item) =>
+                                  item._id === customer._id
+                                    ? { ...item, change: value.target.value }
+                                    : item
+                                )
+                              );
+                            }}
+                            step={1}
+                            min={1}
+                            max={tab === "outbound" ? customer.quantity : 99}
+                          />
+                        </Grid>
+                        <Grid item>
+                          <Typography>{customer.change}</Typography>
+                        </Grid>
+                      </Grid>
+                    </Box>
                   </TableCell>
                 </TableRow>
               );
