@@ -14,6 +14,7 @@ import {
 import { ExternalLink as ExternalLinkIcon } from "../../icons/external-link";
 import { InformationCircleOutlined as InformationCircleOutlinedIcon } from "../../icons/information-circle-outlined";
 import { Scrollbar } from "../../layouts/scrollbar";
+import NextLink from "next/link";
 
 const pages = [
   {
@@ -91,12 +92,19 @@ export const AnalyticsMostVisited = () => (
                     display: "flex",
                   }}
                 >
-                  <ExternalLinkIcon
-                    sx={{
-                      color: "action.active",
-                      cursor: "pointer",
-                    }}
-                  />
+                  <NextLink href="/dashboard/history-form" passHref>
+                    <ExternalLinkIcon
+                      sx={{
+                        color: "action.active",
+                        cursor: "pointer",
+                      }}
+                      // onClick={() => {
+                      //   setIsDrawerOpen(true);
+                      //   setDetails({});
+                      //   setQrCode(false);
+                      // }}
+                    />
+                  </NextLink>
                   <Typography sx={{ ml: 2 }} variant="body2">
                     {page.activity}
                   </Typography>

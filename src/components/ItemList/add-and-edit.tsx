@@ -13,6 +13,7 @@ import {
   Button,
   IconButton,
   Tooltip,
+  TableCell,
 } from "@mui/material";
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import HelpIcon from "@mui/icons-material/Help";
@@ -21,6 +22,7 @@ import { useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { makeStyles } from "@mui/styles";
 import QRCodeGenerator from "../QRcodeHandler/qrcode-generation";
+import { SeverityPill } from "@/components/severity-pill";
 
 function unitOrunits(quantity: any) {
   if (quantity > 1) {
@@ -28,6 +30,19 @@ function unitOrunits(quantity: any) {
   } else {
     return "unit";
   }
+}
+
+function tagsCheck(data: any) {
+  return (
+    <TableCell>
+      {data.tags &&
+        data.tags.map((tag: any) => (
+          <SeverityPill color="success" key={tag}>
+            {tag}
+          </SeverityPill>
+        ))}
+    </TableCell>
+  );
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -193,7 +208,7 @@ const MuiDrawer = (props: any) => {
               autoComplete="off"
             >
               <div>
-                <TextField label="Tags" value={data.tags} />
+                <TextField label="Tags" value={data.tags && data.tags.join("  |  ")} />
               </div>
               <div>
                 <TextField label="Notes" variant="outlined" multiline maxRows={6} />
