@@ -182,13 +182,15 @@ const AnalyticsGeneralOverview = () => {
     };
     fetchData();
   }, []);
+  
   // @ts-ignore
-  console.log(Array.from(companyList).find((c)=>c.teamMember.includes(userInfo.email)) && Array.from(companyList).find((c)=>c.teamMember.includes(userInfo.email)).teamMember.length);
+  // console.log(Array.from(companyList).find((c)=>c.teamMember.includes("aaa"))===undefined ? 1 : Array.from(companyList).find((c)=>c.teamMember.includes("aaa")).teamMember.length);
+  // console.log(Array.from(companyList).find((c)=>c.teamMember.includes("aaa")) && Array.from(companyList).find((c)=>c.teamMember.includes("aaa")).teamMember.length);
   // console.log([companyList].find((c)=>c.teamMember.include(userInfo.email)));
+  
   let items = 0;
   let quantity = 0;
   let totalValue = 0;
-
   {
     itemMapper(itemList).map((value: any) => (
       <Box sx={{ mt: 3, mr: 3 }} key={value}>
@@ -199,9 +201,8 @@ const AnalyticsGeneralOverview = () => {
       </Box>
     ));
   }
-
+  
   // let companyMember = 0;
-
   // {
   //   for (let index = 0; index < companyMapper(companyList).length; index++) {
   //     {console.log(companyMapper(companyList))}
@@ -307,7 +308,7 @@ const AnalyticsGeneralOverview = () => {
               {/* {console.log(companyMapper(companyList))} */}
               <Typography sx={{ mt: 1 }} variant="h5">
                 {/* @ts-ignore */}
-                {Array.from(companyList).find((c)=>c.teamMember.includes(userInfo.email)) && Array.from(companyList).find((c)=>c.teamMember.includes(userInfo.email)).teamMember.length}
+                {Array.from(companyList).find((c)=>c.teamMember.includes(userInfo.email))===undefined ? 1 : Array.from(companyList).find((c)=>c.teamMember.includes(userInfo.email)).teamMember.length}
               </Typography>
             </div>
             {/* <LineChart /> */}
