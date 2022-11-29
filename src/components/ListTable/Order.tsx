@@ -1,59 +1,19 @@
 import * as React from "react";
-import { useMounted } from "@/hooks/use-mounted";
-import { useCallback, useEffect, useState } from "react";
 import { Avatar, Box, Button, Container, Divider, Grid, Typography } from "@mui/material";
 import Head from "next/head";
-import { historyApi } from "@/pages/api/history-api";
-import { getInitials } from "@/utils/get-initials";
-import HistoryPreview from "@/components/History/history-preview";
+import OrderTable from "./OrderTable";
 import CancelIcon from "@mui/icons-material/Cancel";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import * as historyApi from "@/services/api/history";
+import NextClientOnly from "../NextClientOnly";
 
-interface History {
-  id: string;
-  trackingNumber: string;
-  status: string;
-  Date: number;
-  totalQTY: number;
-  items: {
-    SKU: string;
-    name: string;
-    price: number;
-    QTY: number;
-  }[];
-  user: {
-    companyName: string;
-    email: string;
-    name: string;
-  };
-}
-
-export default function historyForm() {
-  const isMounted = useMounted();
-  const [history, setHistory] = useState<History>();
-  const [viewPDF, setViewPDF] = useState(false);
-
-  const getHistory = useCallback(async () => {
-    try {
-      const history = await historyApi.getHistory();
-
-      if (isMounted()) {
-        setHistory(history);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }, [isMounted]);
-
-  useEffect(() => {
-    getHistory();
-  }, []);
-
+export default function Order(props: any) {
+  const { order: history, setOrder } = props;
   if (!history) {
     return null;
   }
   return (
-    <>
+    <NextClientOnly>
       <Head>
         <title>Dashboard: Processing</title>
       </Head>
@@ -84,7 +44,7 @@ export default function historyForm() {
                     width: 42,
                   }}
                 >
-                  {getInitials(history.user.name)}
+                  history.user.name
                 </Avatar>
                 <div>
                   <Typography variant="h4">{history.trackingNumber}</Typography>
@@ -95,7 +55,7 @@ export default function historyForm() {
                     }}
                   >
                     <Typography color="textSecondary" variant="body2">
-                      {history.user.name}
+                      history.user.name
                     </Typography>
                   </Box>
                 </div>
@@ -106,17 +66,34 @@ export default function historyForm() {
             </Grid>
             <Divider sx={{ mt: 3 }} />
           </Box>
-          <HistoryPreview history={history} />
+          <OrderTable history={history} />
           <Grid container sx={{ mt: 1 }} justifyContent="flex-end">
-            <Button variant="outlined" startIcon={<CancelIcon />} sx={{ mr: 2 }}>
+            <Button
+              variant="outlined"
+              startIcon={<CancelIcon />}
+              sx={{ mr: 2 }}
+              onClick={() => setOrder(undefined)}
+            >
               Cancel
             </Button>
-            <Button variant="contained" endIcon={<KeyboardDoubleArrowRightIcon />}>
+            <Button
+              variant="contained"
+              endIcon={<KeyboardDoubleArrowRightIcon />}
+              onClick={async () => {
+                const { data: list } = await historyApi.listHistorys();
+                const trackingNumber = `000${list.length + 1}`.slice(-3);
+                await historyApi.postHistory({
+                  ...history,
+                  trackingNumber: history.trackingNumber + trackingNumber,
+                });
+                window.location.reload();
+              }}
+            >
               Process
             </Button>
           </Grid>
         </Container>
       </Box>
-    </>
+    </NextClientOnly>
   );
 }

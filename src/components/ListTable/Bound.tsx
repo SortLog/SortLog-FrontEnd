@@ -19,7 +19,7 @@ import { useMounted } from "../../hooks/use-mounted";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import * as itemApi from "../../services/api/items";
 import ItemCard from "./ItemCard";
-import Dialog from "@/components/ListTable/Dialog";
+// import Dialog from "@/components/ListTable/Dialog";
 import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
 import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
 
@@ -101,7 +101,7 @@ const applyPagination = (customers: any, page: any, rowsPerPage: any) =>
   customers.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
 const Bound = (props: any) => {
-  const { type } = props;
+  const { type, setOrder } = props;
   const isMounted = useMounted();
   const queryRef = useRef(null);
   const [customers, setCustomers] = useState<any>([]);
@@ -109,8 +109,8 @@ const Bound = (props: any) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [sort, setSort] = useState(sortOptions[0].value);
   const [selectedItems, setSelectedItems] = useState([]);
-  const [openDialog, setOpenDialog] = useState(false);
-  const [dialogComfirmFunc, setDialogComfirmFunc] = useState(() => {});
+  // const [openDialog, setOpenDialog] = useState(false);
+  // const [dialogComfirmFunc, setDialogComfirmFunc] = useState(() => {});
   const [openCart, setOpenCart] = useState(false);
   const [cart, setCart] = useState([]);
 
@@ -323,7 +323,17 @@ const Bound = (props: any) => {
               <Fab
                 color="success"
                 sx={{ position: "absolute", bottom: 24, right: 24 }}
-                onClick={() => setOpenCart(true)}
+                onClick={() =>
+                  setOrder({
+                    trackingNumber: up1stLetter(type) + " - ",
+                    Date: new Date(),
+                    changeQuantities: cart.map((item: any) =>
+                      type === "inbound" ? item.change : -item.change
+                    ),
+                    items: cart.map(({ change, ...keepAttrs }: any) => keepAttrs),
+                    users: JSON.parse(localStorage.getItem("userInfo") || "{}"),
+                  })
+                }
               >
                 <CallMissedOutgoingIcon sx={{ color: "#fff" }} />
               </Fab>
