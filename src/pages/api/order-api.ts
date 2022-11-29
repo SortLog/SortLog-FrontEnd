@@ -170,7 +170,7 @@ class OrderApi {
     return Promise.resolve(customers);
   }
 
-  insertOrder() {
+  insertOrder(items: any) {
     const customer = {
       id: "5e86805e2bafd54f66cc95c3",
       address1: "Street John Wick, no. 7",
