@@ -1,4 +1,4 @@
-import Bound from "@/components/ListTable/bound";
+import Bound from "@/components/ListTable/Bound";
 import { NextPage } from "next";
 
 const OutBound: NextPage = () => {
