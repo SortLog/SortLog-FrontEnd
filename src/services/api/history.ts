@@ -2,7 +2,7 @@ import { api } from "@/utils/axios";
 
 export const getHistories = () => api(`/history/list`, { method: "GET" });
 
-export const getHistory = (id: any) => api(`/history/${id}`, { method: "GET" });
+export const getHistory = (id: any) => api(`/history/get/${id}`, { method: "GET" });
 
 export const postHistory = (history: any) =>
   api(`/history/add`, {
