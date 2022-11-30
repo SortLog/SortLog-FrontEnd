@@ -20,28 +20,14 @@ import { getInitials } from "@/utils/get-initials";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import HistoryPDF from "@/components/History/history-form-pdf";
 import HistoryPreview from "@/components/History/history-preview";
-
-interface History {
-  id: string;
-  trackingNumber: string;
-  status: string;
-  Date: number;
-  totalQTY: number;
-  items: {
-    SKU: string;
-    name: string;
-    price: number;
-    QTY: number;
-  }[];
-  user: {
-    companyName: string;
-    email: string;
-    name: string;
-  };
-}
+import { useRouter } from 'next/router'
+import { HistoryState } from "next/dist/shared/lib/router/router";
 
 export default function historyForm() {
   const isMounted = useMounted();
+  const router = useRouter();
+  const { id } = router.query;
+  console.log(id);
   const [history, setHistory] = useState<History>();
   const [viewPDF, setViewPDF] = useState(false);
 
