@@ -157,7 +157,7 @@ const HistoryPDF = (props: any) => {
                   </View>
                   <View style={styles.tableCell1}>
                     <Text style={[styles.body2, styles.alignRight]}>
-                    {numeral(items.price * history.changeQuantities).format(`$0,0.00`)}
+                      {numeral(items.price * history.changeQuantities).format(`$0,0.00`)}
                     </Text>
                   </View>
                 </View>
@@ -170,10 +170,11 @@ const HistoryPDF = (props: any) => {
                 </View>
                 <View style={styles.tableCellN}>
                   <Text style={[styles.body2, styles.alignRight]}>
-                    x {history.changeQuantities.reduce(
-                    (sum: any, changeQuantities: any) => sum + changeQuantities,
-                    0
-                  )}
+                    x{" "}
+                    {history.changeQuantities.reduce(
+                      (sum: any, changeQuantities: any) => sum + changeQuantities,
+                      0
+                    )}
                   </Text>
                 </View>
               </View>
@@ -184,9 +185,12 @@ const HistoryPDF = (props: any) => {
                 </View>
                 <View style={styles.tableCellN}>
                   <Text style={[styles.body2, styles.alignRight]}>
-                  {numeral(
-                    history.items.reduce((sum: any, item: any) => sum + item.price * history.changeQuantities, 0)
-                  ).format(`$ 0,0.00`)}
+                    {numeral(
+                      history.items.reduce(
+                        (sum: any, item: any) => sum + item.price * history.changeQuantities,
+                        0
+                      )
+                    ).format(`$ 0,0.00`)}
                   </Text>
                 </View>
               </View>

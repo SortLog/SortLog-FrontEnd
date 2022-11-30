@@ -33,7 +33,7 @@ export default function historyForm() {
   useEffect(() => {
     const getHistory = async () => {
       try {
-        const { data:history }: any = await historyApi.getHistory(id);
+        const { data: history }: any = await historyApi.getHistory(id);
 
         // if (isMounted()) {
         setHistory(history);
@@ -46,7 +46,7 @@ export default function historyForm() {
   }, [id]);
 
   if (!history) {
-    console.log("xxx")
+    console.log("xxx");
     return null;
   }
   return (

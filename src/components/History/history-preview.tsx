@@ -106,7 +106,10 @@ const HistoryPreview = (props: any) => {
               <TableCell align="right">
                 <Typography gutterBottom variant="subtitle1">
                   {numeral(
-                    history.items.reduce((sum: any, item: any) => sum + item.price * history.changeQuantities, 0)
+                    history.items.reduce(
+                      (sum: any, item: any) => sum + item.price * history.changeQuantities,
+                      0
+                    )
                   ).format(`$ 0,0.00`)}
                 </Typography>
               </TableCell>
