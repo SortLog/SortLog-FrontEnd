@@ -21,6 +21,7 @@ import QRCodeGenerator from "../QRcodeHandler/qrcode-generation";
 import TagsArray from "./tagChips";
 import * as ItemApi from "@/services/api/items";
 import ImgDropzone from "../ImageUploader";
+import toast from "react-hot-toast";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,7 +48,7 @@ const MuiDrawer = (props: any) => {
   const initialQuantity: number = data.quantity ? data.quantity : null;
   const initialSku: string = data.sku ? data.sku : null;
   const initialPrice: number = data.price ? data.price : null;
-  const initialTags: string[] = data.tags;
+  // const initialTags: string[] = data.tags;
   const initialNote: string = data.note ? data.note : null;
   const initialImage: string = data.image ? data.image : undefined;
   const initialId: string = data._id ? data._id : undefined;
@@ -61,7 +62,7 @@ const MuiDrawer = (props: any) => {
   const [quantity, setQuantity] = useState<number | null>(initialQuantity);
   const [sku, setSku] = useState<string | null>(initialSku);
   const [price, setPrice] = useState<number | null>(initialPrice);
-  const [tag, setTag] = useState<string[]>(initialTags);
+  const [tag, setTag] = useState<string[]>(data.tags);
   const [note, setNote] = useState<string | null>(initialNote);
   const [image, setImage] = useState(initialImage);
 
@@ -89,8 +90,8 @@ const MuiDrawer = (props: any) => {
   }, [initialPrice]);
 
   useEffect(() => {
-    setTag(initialTags);
-  }, [initialTags]);
+    setTag(data.tags);
+  }, [data.tags]);
 
   useEffect(() => {
     setNote(initialNote);
@@ -102,6 +103,7 @@ const MuiDrawer = (props: any) => {
 
   const onSaveClick = () => {
     setIsSaved(!isSaved);
+    toast.success("Successfully updated");
   };
 
   useEffect(() => {
@@ -150,6 +152,8 @@ const MuiDrawer = (props: any) => {
     onAddNewTag(newTag);
     setNewTag("");
   };
+
+  console.log(tag);
 
   return (
     <>
@@ -267,7 +271,8 @@ const MuiDrawer = (props: any) => {
               noValidate
               autoComplete="off"
             >
-              <TagsArray tags={tag} />
+              <TagsArray tags={tag} setTag={setTag} />
+
               <div style={{ display: "flex" }}>
                 <TextField
                   label="New Tags"
