@@ -18,10 +18,13 @@ import {
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import HelpIcon from "@mui/icons-material/Help";
 import QrCode2Icon from "@mui/icons-material/QrCode2";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EditIcon from "@mui/icons-material/Edit";
 import { makeStyles } from "@mui/styles";
 import QRCodeGenerator from "../QRcodeHandler/qrcode-generation";
+import TagsArray from "./tagChips";
+import * as ItemApi from "@/services/api/items";
+import ImgDropzone from "../ImageUploader";
 
 function unitOrunits(quantity: any) {
   if (quantity > 1) {
@@ -52,12 +55,114 @@ const useStyles = makeStyles((theme) => ({
 const MuiDrawer = (props: any) => {
   const { isDrawerOpen, setIsDrawerOpen, data } = props;
 
+  const initialName: string = data.name ? data.name : null;
+  const initialQuantity: number = data.quantity ? data.quantity : null;
+  const initialSku: string = data.sku ? data.sku : null;
+  const initialPrice: number = data.price ? data.price : null;
+  const initialTags: string[] = data.tags ? data.tags : [];
+  const initialNote: string = data.note ? data.note : null;
+  const initialImage: string = data.image ? data.image : undefined;
+  const initialId: string = data._id ? data._id : undefined;
+
   const currDate = new Date().toLocaleDateString();
   const currTime = new Date().toLocaleTimeString();
   const [isShown, setIsShown] = useState(false);
   const classes = useStyles();
   const [isQRCodeShowed, setIsQRCodeShowed] = useState(false);
-  const [sku, setSku] = useState("");
+  const [itemId, setItemId] = useState("");
+
+  const [name, setName] = useState<string | null>(initialName);
+  const [quantity, setQuantity] = useState<number | null>(initialQuantity);
+  const [sku, setSku] = useState<string | null>(initialSku);
+  const [price, setPrice] = useState<number | null>(initialPrice);
+  const [tag, setTag] = useState<string[]>(initialTags);
+  const [note, setNote] = useState<string | null>(initialNote);
+  const [image, setImage] = useState(initialImage);
+
+  const [newTag, setNewTag] = useState("");
+  const [isSaved, setIsSaved] = useState(false);
+
+  useEffect(() => {
+    setItemId(initialId);
+  }, [initialId]);
+
+  useEffect(() => {
+    setName(initialName);
+  }, [initialName]);
+
+  useEffect(() => {
+    setQuantity(initialQuantity);
+  }, [initialQuantity]);
+
+  useEffect(() => {
+    setSku(initialSku);
+  }, [initialSku]);
+
+  useEffect(() => {
+    setPrice(initialPrice);
+  }, [initialPrice]);
+
+  // useEffect(() => {
+  //   setTag(initialTags);
+  // }, [initialTags]);
+
+  useEffect(() => {
+    setNote(initialNote);
+  }, [initialNote]);
+
+  useEffect(() => {
+    setImage(initialImage);
+  }, [initialImage]);
+
+  console.log(itemId);
+  console.log(name);
+  console.log(quantity);
+  console.log(sku);
+  console.log(tag);
+
+  const onSaveClick = () => {
+    setIsSaved(!isSaved);
+  };
+
+  useEffect(() => {
+    const item = {
+      sku: sku,
+      name: name,
+      price: price,
+      quantity: quantity,
+      size: null,
+      tags: tag,
+      category: null,
+      image: image,
+      note: note,
+    };
+    if (itemId !== undefined) {
+      const put = async () => {
+        await ItemApi.putItem(itemId, item);
+      };
+      put();
+    } else if (itemId === undefined) {
+      const post = async () => {
+        await ItemApi.postItem(item);
+      };
+      post();
+    }
+  }, [isSaved]);
+
+  const onAddNewTag = (newTag: string) => {
+    if (newTag === "") {
+      return;
+    } else {
+      setTag((prevState: any) => {
+        return [...prevState, newTag];
+      });
+    }
+  };
+
+  const onNewTagSubmit = (e: any) => {
+    onAddNewTag(newTag);
+    setNewTag("");
+  };
 
   return (
     <>
@@ -78,10 +183,11 @@ const MuiDrawer = (props: any) => {
             label="Name"
             autoComplete="current-password"
             variant="standard"
-            value={data.name}
+            defaultValue={name}
             InputProps={{ disableUnderline: true }}
             className={classes.root}
-            onChange={(e) => props.onChange(e.target.value)}
+            onChange={(e) => setName(e.target.value)}
+            value={name}
             inputProps={{ style: { fontSize: 36 } }}
             sx={{ width: 300 }}
             onMouseEnter={() => setIsShown(true)}
@@ -136,7 +242,7 @@ const MuiDrawer = (props: any) => {
                   <InputLabel htmlFor="outlined-adornment-amount">Quantity</InputLabel>
                   <OutlinedInput
                     label="Quantity"
-                    defaultValue={data.quantity}
+                    defaultValue={quantity}
                     // endAdornment={
                     //   <InputAdornment position="end">
                     //     <IconButton>
@@ -145,13 +251,15 @@ const MuiDrawer = (props: any) => {
                     //   </InputAdornment>
                     // }
                     type="number"
+                    onChange={(e) => setQuantity(Number(e.target.value))}
+                    value={quantity}
                   />
                 </FormControl>
                 <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
                   <InputLabel htmlFor="outlined-adornment-amount">SKU</InputLabel>
                   <OutlinedInput
                     label="SKU"
-                    defaultValue={data.sku}
+                    defaultValue={sku}
                     onChange={(e) => {
                       setSku(e.target.value);
                     }}
@@ -175,8 +283,12 @@ const MuiDrawer = (props: any) => {
                   <InputLabel htmlFor="outlined-adornment-amount">Price</InputLabel>
                   <OutlinedInput
                     label="Price"
-                    defaultValue={data.price && `$ ${parseFloat(data.price).toFixed(2)}`}
-                    endAdornment={<InputAdornment position="end">AUD</InputAdornment>}
+                    defaultValue={price}
+                    startAdornment={<InputAdornment position="start">AU$</InputAdornment>}
+                    onChange={(e) => {
+                      setPrice(Number(e.target.value));
+                    }}
+                    value={price}
                   />
                 </FormControl>
                 {/* <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
@@ -198,15 +310,31 @@ const MuiDrawer = (props: any) => {
               autoComplete="off"
             >
               <div>
-                <TextField label="Tags" value={data.tags} />
+                <TagsArray tags={tag} />
               </div>
               <div>
-                <TextField label="Notes" variant="outlined" multiline maxRows={6} />
+                <TextField
+                  label="New Tags"
+                  onChange={(e) => setNewTag(e.target.value)}
+                  value={newTag}
+                />
+                <Button onClick={onNewTagSubmit}>Add</Button>
+              </div>
+              <div>
+                <TextField
+                  label="Notes"
+                  variant="outlined"
+                  multiline
+                  maxRows={6}
+                  defaultValue={note}
+                  onChange={(e) => setNote(e.target.value)}
+                  value={note}
+                />
               </div>
             </Grid>
           </Grid>
           <Grid md={6}>
-            {data.image === undefined ? (
+            {image === undefined ? (
               <div
                 style={{
                   width: "100%",
@@ -216,22 +344,63 @@ const MuiDrawer = (props: any) => {
                   alignItems: "center",
                 }}
               >
-                <Button variant="contained" color="inherit" size="large">
-                  <label htmlFor="uploadImg" style={{ padding: "100px", cursor: "pointer" }}>
-                    <img src="/png/upload-image.png" alt="image required" />
-                    <p>Upload your image</p>
-                  </label>
-                  <input type="file" style={{ display: "none" }} id="uploadImg" />
-                </Button>
+                <ImgDropzone
+                  aspectRatio={1}
+                  accept="image/jpg,image/png, image/jpeg"
+                  afterCrop={(base64: string) => {
+                    // @ts-ignore
+                    setImage(base64);
+                  }}
+                  lockAspectRatio={false}
+                >
+                  <Button variant="contained" color="inherit" size="large">
+                    <label htmlFor="uploadImg" style={{ padding: "100px", cursor: "pointer" }}>
+                      <img src="/png/upload-image.png" alt="image required" />
+                      <p>Upload your image</p>
+                    </label>
+                    {/* <input
+                    type="file"
+                    style={{ display: "none" }}
+                    id="uploadImg"
+                    onChange={onImageChange}
+                  /> */}
+                  </Button>
+                </ImgDropzone>
               </div>
             ) : (
-              <CardMedia
-                component="img"
-                // alt="green iguana"
-                height="390"
-                sx={{ ml: 6 }}
-                image={data.image}
-              />
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  padding: "10%",
+                }}
+              >
+                {/* <CardMedia
+                  component="img"
+                  // alt="green iguana"
+                  height="390"
+                  sx={{ ml: 6 }}
+                  image={data.image}
+                /> */}
+                {/* <Box
+                  sx={{
+                    backgroundImage: `${image}`,
+                    // backgroundPosition: "center",
+                    // backgroundSize: "cover",
+                    borderRadius: 1,
+                    height: 380,
+                    mt: 3,
+                  }}
+                /> */}
+                <img
+                  style={{ objectFit: "cover", maxWidth: "100%", maxHeight: "100%" }}
+                  src={image}
+                  alt="image"
+                />
+              </div>
             )}
           </Grid>
         </Grid>
@@ -259,7 +428,12 @@ const MuiDrawer = (props: any) => {
         </Grid>
         <Divider />
         <Grid container paddingLeft={2} paddingTop={3}>
-          <Button variant="contained" color="secondary" sx={{ bgcolor: "#2329d3" }}>
+          <Button
+            variant="contained"
+            color="secondary"
+            sx={{ bgcolor: "#2329d3" }}
+            onClick={onSaveClick}
+          >
             Save
           </Button>
         </Grid>
@@ -310,4 +484,3 @@ export default MuiDrawer;
 // };
 
 // export default MuiDrawer;
-

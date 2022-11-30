@@ -106,6 +106,13 @@ const ItemList: NextPage = () => {
 
   const [details, setDetails] = React.useState({});
   const [qrCode, setQrCode] = useState(true);
+
+  useEffect(() => {
+    if (isDrawerOpen === false) {
+      setDetails({});
+    }
+  }, [isDrawerOpen]);
+
   const handleRowClick = (params: any) => {
     setIsDrawerOpen(true);
     setDetails(params.row);
