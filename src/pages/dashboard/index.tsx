@@ -1,17 +1,21 @@
-// import { useEffect } from 'react';
+import { useEffect, useState } from "react";
 import Head from "next/head";
 import { Box, Button, Container, Grid, MenuItem, TextField, Typography } from "@mui/material";
-// import { AuthGuard } from '../../components/authentication/auth-guard';
-// import { DashboardLayout } from '../../components/dashboard/dashboard-layout';
 import AnalyticsGeneralOverview from "@/components/Dashboard/analytics-general-overview";
 import { AnalyticsMostVisited } from "../../components/Dashboard/analytics-most-visited";
 import { Reports as ReportsIcon } from "../../icons/reports";
-// import { gtm } from '../../lib/gtm';
+import * as historyApi from "@/services/api/history";
 
-const Analytics = () => {
-  // useEffect(() => {
-  //   gtm.push({ event: 'page_view' });
-  // }, []);
+const Dashboard = () => {
+  const [historyList, setHistoryList] = useState([]);
+
+  useEffect(() => {
+    const getHistoryList = async () => {
+      const { data } = await historyApi.listHistorys();
+      setHistoryList(data);
+    };
+    getHistoryList();
+  }, []);
 
   return (
     <>
@@ -54,11 +58,11 @@ const Analytics = () => {
               </Grid>
             </Grid>
           </Box>
-          <AnalyticsGeneralOverview />
+          <AnalyticsGeneralOverview historyList={historyList} />
           <Box sx={{ mt: 4 }}>
             <Grid container spacing={4}>
               <Grid item md={12} xs={12}>
-                <AnalyticsMostVisited />
+                <AnalyticsMostVisited historyList={historyList} />
               </Grid>
             </Grid>
           </Box>
@@ -68,12 +72,4 @@ const Analytics = () => {
   );
 };
 
-// Analytics.getLayout = (page) => (
-//   <AuthGuard>
-//     <DashboardLayout>
-//       {page}
-//     </DashboardLayout>
-//   </AuthGuard>
-// );
-
-export default Analytics;
+export default Dashboard;
