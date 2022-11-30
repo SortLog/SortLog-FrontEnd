@@ -1,6 +1,6 @@
 import React from "react";
 import { createStyles, makeStyles } from "@mui/styles";
-import { Chip, Paper } from "@mui/material";
+import { Chip } from "@mui/material";
 
 interface ChipData {
   key: number;
@@ -30,7 +30,10 @@ export default function TagsArray(props: any) {
     return { key: tags.indexOf(data), label: data };
   });
 
-  console.log(tagsChipData);
+  if (!tagsChipData) {
+    return null;
+  }
+
   const classes = useStyles();
   const [chipData, setChipData] = React.useState<ChipData[]>(tagsChipData);
 
@@ -39,14 +42,12 @@ export default function TagsArray(props: any) {
   };
 
   return (
-    <Paper component="ul" className={classes.root}>
-      {chipData?.map((data) => {
+    <>
+      {chipData.map((data, i) => {
         return (
-          <li key={data.key}>
-            <Chip label={data.label} onDelete={handleDelete(data)} className={classes.chip} />
-          </li>
+          <Chip label={data.label} key={i} onDelete={handleDelete(data)} className={classes.chip} />
         );
       })}
-    </Paper>
+    </>
   );
 }
