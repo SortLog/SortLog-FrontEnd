@@ -5,18 +5,13 @@ import {
   Divider,
   Grid,
   TextField,
-  CardMedia,
   FormControl,
   OutlinedInput,
   InputAdornment,
   InputLabel,
   Button,
-  IconButton,
   Tooltip,
-  Input,
-  TableCell,
 } from "@mui/material";
-import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import HelpIcon from "@mui/icons-material/Help";
 import QrCode2Icon from "@mui/icons-material/QrCode2";
 import { useEffect, useState } from "react";
@@ -26,29 +21,6 @@ import QRCodeGenerator from "../QRcodeHandler/qrcode-generation";
 import TagsArray from "./tagChips";
 import * as ItemApi from "@/services/api/items";
 import ImgDropzone from "../ImageUploader";
-import { SeverityPill } from "@/components/severity-pill";
-import { date } from "yup";
-
-function unitOrunits(quantity: any) {
-  if (quantity > 1) {
-    return "units";
-  } else {
-    return "unit";
-  }
-}
-
-function tagsCheck(data: any) {
-  return (
-    <TableCell>
-      {data.tags &&
-        data.tags.map((tag: any) => (
-          <SeverityPill color="success" key={tag}>
-            {tag}
-          </SeverityPill>
-        ))}
-    </TableCell>
-  );
-}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,9 +51,6 @@ const MuiDrawer = (props: any) => {
   const initialNote: string = data.note ? data.note : null;
   const initialImage: string = data.image ? data.image : undefined;
   const initialId: string = data._id ? data._id : undefined;
-
-  // const currDate = new Date().toLocaleDateString();
-  // const currTime = new Date().toLocaleTimeString();
 
   const [isShown, setIsShown] = useState(false);
   const classes = useStyles();
@@ -130,13 +99,6 @@ const MuiDrawer = (props: any) => {
   useEffect(() => {
     setImage(initialImage);
   }, [initialImage]);
-
-  console.log(itemId);
-  console.log(name);
-  console.log(quantity);
-  console.log(sku);
-  console.log(image);
-  console.log(tag);
 
   const onSaveClick = () => {
     setIsSaved(!isSaved);
@@ -229,22 +191,6 @@ const MuiDrawer = (props: any) => {
           paddingRight="166px"
           justifyContent="flex-end"
         >
-          {/* <Typography variant="subtitle1" component="div">
-            <text style={{ color: "#a2a2a2" }}>Sortlog ID:</text>{" "}
-            <text style={{ color: "#131213" }}>{data.sku}</text>
-          </Typography>
-          <Typography variant="subtitle1" component="div">
-            <text style={{ color: "#a2a2a2" }}>Quantity:</text>{" "}
-            <text style={{ color: "#ad3c3c" }}>
-              {data.quantity} {unitOrunits(data.quantity)}
-            </text>
-          </Typography>
-          <Typography variant="subtitle1" component="div">
-            <text style={{ color: "#a2a2a2" }}>Total Value:</text>{" "}
-            <text style={{ color: "#131213" }}>
-              ${data.price && parseInt(data.price).toFixed(2)}
-            </text>
-          </Typography> */}
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Updated at:</text>{" "}
             <text style={{ color: "#131213" }}>
@@ -270,13 +216,6 @@ const MuiDrawer = (props: any) => {
                   <OutlinedInput
                     label="Quantity"
                     defaultValue={quantity}
-                    // endAdornment={
-                    //   <InputAdornment position="end">
-                    //     <IconButton>
-                    //       <UnfoldMoreIcon />
-                    //     </IconButton>
-                    //   </InputAdornment>
-                    // }
                     type="number"
                     onChange={(e) => setQuantity(Number(e.target.value))}
                     value={quantity}
@@ -318,14 +257,6 @@ const MuiDrawer = (props: any) => {
                     value={price}
                   />
                 </FormControl>
-                {/* <FormControl sx={{ m: 1, width: "25ch" }} variant="outlined">
-                  <InputLabel htmlFor="outlined-adornment-amount">Total value</InputLabel>
-                  <OutlinedInput
-                    label="Total value"
-                    value={data.price && "AU$" + (data.quantity * data.price).toFixed(2)}
-                    endAdornment={<InputAdornment position="end">AUD</InputAdornment>}
-                  />
-                </FormControl> */}
               </div>
             </Grid>
             <Grid
@@ -336,10 +267,7 @@ const MuiDrawer = (props: any) => {
               noValidate
               autoComplete="off"
             >
-              <div>
-                <TagsArray tags={tag} />
-                {/* <TextField label="Tags" disabled={true} value={tag && tag.join("  |  ")} /> */}
-              </div>
+              <TagsArray tags={tag} />
               <div style={{ display: "flex" }}>
                 <TextField
                   label="New Tags"

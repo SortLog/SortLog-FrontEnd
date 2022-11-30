@@ -3761,7 +3761,7 @@
     clsx "^1.2.1"
     lru-cache "^7.14.0"
 
-"@mui/x-data-grid-premium@5.17.13", "@mui/x-data-grid-premium@^5.17.10":
+"@mui/x-data-grid-premium@5.17.13":
   version "5.17.13"
   resolved "https://registry.yarnpkg.com/@mui/x-data-grid-premium/-/x-data-grid-premium-5.17.13.tgz#d46f40d9951833e120750d9af0924a9574ee2a3a"
   integrity sha512-rDIhNM1hHDJSC35GyTdv8ocl7Kc5Y1AcIaGpW7YpudJEpnL5y0rTH/Z4q3ZSyS4yd34OLLIURW9ARb0SiAMK4g==
@@ -3777,7 +3777,7 @@
     prop-types "^15.8.1"
     reselect "^4.1.6"
 
-"@mui/x-data-grid-pro@5.17.13", "@mui/x-data-grid-pro@^5.17.10":
+"@mui/x-data-grid-pro@5.17.13":
   version "5.17.13"
   resolved "https://registry.yarnpkg.com/@mui/x-data-grid-pro/-/x-data-grid-pro-5.17.13.tgz#9dc0352f4a7a651ad397c6778cca649bcd89f08b"
   integrity sha512-unt14Sc+X9vAQqVPJY2sqVISpuRrW8HnkAJH92Io4IlKh63H65VdoGk2tOBEEaNieYd7zsX8IlVfFKFXZbUVHw==
