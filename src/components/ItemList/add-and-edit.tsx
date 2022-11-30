@@ -153,10 +153,6 @@ const MuiDrawer = (props: any) => {
     setNewTag("");
   };
 
-  const onReturnTag = (data: any) => {
-    setTag(data);
-  };
-
   console.log(tag);
 
   return (
@@ -275,7 +271,7 @@ const MuiDrawer = (props: any) => {
               noValidate
               autoComplete="off"
             >
-              <TagsArray tags={tag} setTag={setTag} returnTag={onReturnTag} />
+              <TagsArray tags={tag} setTag={setTag} />
 
               <div style={{ display: "flex" }}>
                 <TextField
