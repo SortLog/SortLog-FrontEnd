@@ -160,6 +160,9 @@ const companyMapper = (rows: any) => {
 };
 
 const AnalyticsGeneralOverview = () => {
+  // @ts-ignore
+  const userInfo = JSON.parse(localStorage.getItem("currentUser"));
+  // console.log(userInfo);
   const [itemList, setItemList] = React.useState({});
   useEffect(() => {
     const fetchData = async () => {
@@ -173,17 +176,21 @@ const AnalyticsGeneralOverview = () => {
   const [companyList, setCompanyList] = React.useState({});
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await companyApi.getCompany(`6365461f8343572de07dd2bd`);
+      const { data } = await companyApi.getAllCompanies();
 
       setCompanyList(data);
     };
     fetchData();
   }, []);
-
+  
+  // @ts-ignore
+  // console.log(Array.from(companyList).find((c)=>c.teamMember.includes("aaa"))===undefined ? 1 : Array.from(companyList).find((c)=>c.teamMember.includes("aaa")).teamMember.length);
+  // console.log(Array.from(companyList).find((c)=>c.teamMember.includes("aaa")) && Array.from(companyList).find((c)=>c.teamMember.includes("aaa")).teamMember.length);
+  // console.log([companyList].find((c)=>c.teamMember.include(userInfo.email)));
+  
   let items = 0;
   let quantity = 0;
   let totalValue = 0;
-
   {
     itemMapper(itemList).map((value: any) => (
       <Box sx={{ mt: 3, mr: 3 }} key={value}>
@@ -194,9 +201,8 @@ const AnalyticsGeneralOverview = () => {
       </Box>
     ));
   }
-
+  
   // let companyMember = 0;
-
   // {
   //   for (let index = 0; index < companyMapper(companyList).length; index++) {
   //     {console.log(companyMapper(companyList))}
@@ -301,7 +307,8 @@ const AnalyticsGeneralOverview = () => {
               </Typography>
               {/* {console.log(companyMapper(companyList))} */}
               <Typography sx={{ mt: 1 }} variant="h5">
-                {companyMapper(companyList) && companyMapper(companyList).length}
+                {/* @ts-ignore */}
+                {Array.from(companyList).find((c)=>c.teamMember.includes(userInfo.email))===undefined ? 1 : Array.from(companyList).find((c)=>c.teamMember.includes(userInfo.email)).teamMember.length}
               </Typography>
             </div>
             {/* <LineChart /> */}
