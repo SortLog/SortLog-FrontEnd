@@ -3,6 +3,7 @@ import { format } from "date-fns";
 import numeral from "numeral";
 import { Document, Image, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import { Avatar } from "@mui/material";
+import moment from "moment";
 
 const COL1_WIDTH = 60;
 const COLN_WIDTH = (100 - COL1_WIDTH) / 2;
@@ -95,7 +96,7 @@ const HistoryPDF = (props: any) => {
         <View style={styles.header}>
           <View>
             <Text style={styles.h6}>COMPANY</Text>
-            <Text style={styles.h4}>{history.user.companyName}</Text>
+            <Text style={styles.h4}>{history.users.provider}</Text>
           </View>
           <View>
             <Text style={styles.h4}>{history.status}</Text>
@@ -104,7 +105,7 @@ const HistoryPDF = (props: any) => {
         <View style={styles.references}>
           <View>
             <Text style={[styles.subtitle2, styles.gutterBottom]}>Date</Text>
-            <Text style={styles.body2}>{history.Date && format(history.Date, "dd MMM yyyy")}</Text>
+            <Text style={styles.body2}>{moment(history.createdAt).format("MMM Do YY")}</Text>
           </View>
           <View>
             <Text style={[styles.subtitle2, styles.gutterBottom]}>Tracking Number</Text>
@@ -114,7 +115,7 @@ const HistoryPDF = (props: any) => {
         <View style={styles.billing}>
           <Text style={[styles.subtitle2, styles.gutterBottom]}>Inbound/Outbound Operator</Text>
           <Text style={styles.body2}></Text>
-          <Text style={styles.body2}>{history.user.name}</Text>
+          <Text style={styles.body2}>{history.users.name}</Text>
         </View>
         <View style={styles.items}>
           <View style={styles.table}>
@@ -139,9 +140,9 @@ const HistoryPDF = (props: any) => {
             </View>
             <View style={styles.tableBody}>
               {(history.items || []).map((items: any) => (
-                <View style={styles.tableRow} key={items.SKU}>
+                <View style={styles.tableRow} key={items.sku}>
                   <View style={styles.tableCell1}>
-                    <Text style={styles.body2}>{items.SKU}</Text>
+                    <Text style={styles.body2}>{items.sku}</Text>
                   </View>
                   <View style={styles.tableCell1}>
                     <Text style={styles.body2}>{items.name}</Text>
@@ -152,11 +153,11 @@ const HistoryPDF = (props: any) => {
                     </Text>
                   </View>
                   <View style={styles.tableCell1}>
-                    <Text style={styles.body2}>{items.QTY}</Text>
+                    <Text style={styles.body2}>{history.changeQuantities}</Text>
                   </View>
                   <View style={styles.tableCell1}>
                     <Text style={[styles.body2, styles.alignRight]}>
-                      {numeral(items.price * items.QTY).format(`$0,0.00`)}
+                    {numeral(items.price * history.changeQuantities).format(`$0,0.00`)}
                     </Text>
                   </View>
                 </View>
@@ -169,7 +170,10 @@ const HistoryPDF = (props: any) => {
                 </View>
                 <View style={styles.tableCellN}>
                   <Text style={[styles.body2, styles.alignRight]}>
-                    x {history.items.reduce((sum: any, item: any) => sum + item.QTY, 0)}
+                    x {history.changeQuantities.reduce(
+                    (sum: any, changeQuantities: any) => sum + changeQuantities,
+                    0
+                  )}
                   </Text>
                 </View>
               </View>
@@ -180,9 +184,9 @@ const HistoryPDF = (props: any) => {
                 </View>
                 <View style={styles.tableCellN}>
                   <Text style={[styles.body2, styles.alignRight]}>
-                    {numeral(
-                      history.items.reduce((sum: any, item: any) => sum + item.price * item.QTY, 0)
-                    ).format(`$ 0,0.00`)}
+                  {numeral(
+                    history.items.reduce((sum: any, item: any) => sum + item.price * history.changeQuantities, 0)
+                  ).format(`$ 0,0.00`)}
                   </Text>
                 </View>
               </View>
