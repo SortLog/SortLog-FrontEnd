@@ -14,6 +14,7 @@ import {
   IconButton,
   Tooltip,
   Input,
+  TableCell,
 } from "@mui/material";
 import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import HelpIcon from "@mui/icons-material/Help";
@@ -25,6 +26,7 @@ import QRCodeGenerator from "../QRcodeHandler/qrcode-generation";
 import TagsArray from "./tagChips";
 import * as ItemApi from "@/services/api/items";
 import ImgDropzone from "../ImageUploader";
+import { SeverityPill } from "@/components/severity-pill";
 
 function unitOrunits(quantity: any) {
   if (quantity > 1) {
@@ -32,6 +34,19 @@ function unitOrunits(quantity: any) {
   } else {
     return "unit";
   }
+}
+
+function tagsCheck(data: any) {
+  return (
+    <TableCell>
+      {data.tags &&
+        data.tags.map((tag: any) => (
+          <SeverityPill color="success" key={tag}>
+            {tag}
+          </SeverityPill>
+        ))}
+    </TableCell>
+  );
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -311,6 +326,7 @@ const MuiDrawer = (props: any) => {
             >
               <div>
                 <TagsArray tags={tag} />
+                <TextField label="Tags" value={data.tags && data.tags.join("  |  ")} />
               </div>
               <div>
                 <TextField
@@ -443,44 +459,3 @@ const MuiDrawer = (props: any) => {
 };
 
 export default MuiDrawer;
-
-// import { Drawer, Box, Typography, Divider, Chip } from "@mui/material";
-// import Card from "@mui/material/Card";
-// import CardActions from "@mui/material/CardActions";
-// import CardContent from "@mui/material/CardContent";
-// import CardMedia from "@mui/material/CardMedia";
-// import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
-
-// const MuiDrawer = (props: any) => {
-//   const { isDrawerOpen, setIsDrawerOpen, data } = props;
-
-//   return (
-//     <Card sx={{ maxWidth: 345 }}>
-//       <CardMedia component="img" alt="green iguana" height="200" image={data.img} />
-//       <CardContent>
-//         <Typography gutterBottom variant="h5" component="div">
-//           {data.name}
-//         </Typography>
-//         <Typography variant="body2" color="text.secondary">
-//           Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-//           across all continents except Antarctica
-//         </Typography>
-//       </CardContent>
-//       <CardActions>
-//         <Typography variant="body2" color="text.secondary">
-//           {data.quantity}
-//         </Typography>
-//         <Divider sx={{ height: 28, ml: 2, mr: 2 }} orientation="vertical" />
-//         <Typography variant="body2" color="text.secondary">
-//           {data.price}
-//         </Typography>
-//       </CardActions>
-//       <CardActions>
-//         <Chip icon={<LocalOfferOutlinedIcon />} label="tag" />
-//         <Chip icon={<LocalOfferOutlinedIcon />} label="Clickable" />
-//       </CardActions>
-//     </Card>
-//   );
-// };
-
-// export default MuiDrawer;

@@ -4,7 +4,7 @@ import Container from "@mui/material/Container";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { Chip, Divider, GlobalStyles, Grid, Icon, Paper } from "@mui/material";
+import { Chip, Divider, GlobalStyles, Grid, Icon, Paper, TableCell } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Add } from "@mui/icons-material";
 import { Box } from "@mui/system";
@@ -18,6 +18,7 @@ import MuiDrawer from "@/components/ItemList/add-and-edit";
 import QRCodeScanner from "../../components/QRcodeHandler/qrcode-scanner";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import * as itemApi from "@/services/api/items";
+import { SeverityPill } from "@/components/severity-pill";
 
 function moneyMapper(money: any) {
   return parseFloat(money)
@@ -57,9 +58,6 @@ function unitOrunits(quantity: any) {
 
 // function printTag(params: any) {
 function printTag(params: GridValueGetterParams) {
-  // {
-  //   console.log(params.tags);
-  // }
   const tagArr = new Array(params.row.tags.length);
   for (let index = 0; index < params.row.tags.length; index++) {
     tagArr[index] = <Chip variant="filled" label={params.row.tags[index]} {...getTag()} />;
@@ -76,8 +74,19 @@ const columns = [
     headerName: "Tag",
     // valueGetter: printTag
     renderCell: (params: any) => {
-      return <Chip variant="filled" label={params.row.tags.join(" ")} {...getTag()} />;
+      return (
+        <TableCell>
+          {params.row.tags.map((tag: any) => (
+            <SeverityPill color="success" key={tag}>
+              {tag}
+            </SeverityPill>
+          ))}
+        </TableCell>
+      );
+      // <Chip variant="filled" label={params.row.tags.join(" ")} {...getTag()} />;
     },
+    flex: 1,
+    // width: '100%'
   },
 ];
 
@@ -128,6 +137,9 @@ const ItemList: NextPage = () => {
     };
     fetchData();
   }, []);
+  {
+    console.log(itemList);
+  }
 
   return (
     <>
@@ -214,7 +226,6 @@ const ItemList: NextPage = () => {
                 <Typography sx={{ display: "none" }}>
                   {(items = items + 1)} {(quantity = quantity + value.quantity)}{" "}
                   {(totalValue = totalValue + value.price)}
-                  {console.log(totalValue)}
                 </Typography>
               </Box>
             ))}

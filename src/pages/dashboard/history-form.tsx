@@ -95,6 +95,20 @@ export default function historyForm() {
                   </Box>
                 </Link>
               </NextLink>
+              <Box sx={{ mt: 3 }} />
+              <NextLink href="/dashboard" passHref>
+                <Link color="textPrimary" variant="subtitle2">
+                  <Box
+                    sx={{
+                      alignItems: "center",
+                      display: "flex",
+                    }}
+                  >
+                    <ArrowBackIcon fontSize="small" sx={{ mr: 1 }} />
+                    <Typography variant="subtitle2">Dashboard</Typography>
+                  </Box>
+                </Link>
+              </NextLink>
             </Box>
             <Grid container justifyContent="space-between" spacing={3}>
               <Grid
