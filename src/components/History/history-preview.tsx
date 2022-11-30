@@ -12,6 +12,7 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
+import moment from "moment";
 
 const HistoryPreview = (props: any) => {
   const { history, ...other } = props;
@@ -26,7 +27,7 @@ const HistoryPreview = (props: any) => {
         <Grid container justifyContent="space-between">
           <Grid item>
             <Typography variant="h5">Company</Typography>
-            <Typography variant="subtitle2">{history.user.companyName}</Typography>
+            <Typography variant="subtitle2">{history.users.provider}</Typography>
           </Grid>
         </Grid>
         <Box sx={{ my: 4 }}>
@@ -36,7 +37,7 @@ const HistoryPreview = (props: any) => {
                 Date
               </Typography>
               <Typography variant="body2">
-                {history.Date && format(history.Date, "dd MMM yyyy")}
+                {moment(history.createdAt).format("MMM Do YY")}
               </Typography>
             </Grid>
             <Grid item>
@@ -60,14 +61,14 @@ const HistoryPreview = (props: any) => {
           </TableHead>
           <TableBody>
             {(history.items || []).map((items: any) => (
-              <TableRow key={items.SKU}>
-                <TableCell>{items.SKU}</TableCell>
+              <TableRow key={items.sku}>
+                <TableCell>{items.sku}</TableCell>
                 <TableCell>{items.name}</TableCell>
                 <TableCell>{numeral(items.price).format(`${items.price}0,0.00`)}</TableCell>
-                <TableCell>{items.QTY}</TableCell>
+                <TableCell>{history.changeQuantities}</TableCell>
                 <TableCell />
                 <TableCell align="right">
-                  {numeral(items.price * items.QTY).format(`$0,0.00`)}
+                  {numeral(items.price * history.changeQuantities).format(`$0,0.00`)}
                 </TableCell>
               </TableRow>
             ))}
@@ -84,7 +85,11 @@ const HistoryPreview = (props: any) => {
               </TableCell>
               <TableCell align="right">
                 <Typography gutterBottom variant="subtitle1">
-                  x {history.items.reduce((sum: any, item: any) => sum + item.QTY, 0)}
+                  x{" "}
+                  {history.changeQuantities.reduce(
+                    (sum: any, changeQuantities: any) => sum + changeQuantities,
+                    0
+                  )}
                 </Typography>
               </TableCell>
             </TableRow>
@@ -101,7 +106,7 @@ const HistoryPreview = (props: any) => {
               <TableCell align="right">
                 <Typography gutterBottom variant="subtitle1">
                   {numeral(
-                    history.items.reduce((sum: any, item: any) => sum + item.price * item.QTY, 0)
+                    history.items.reduce((sum: any, item: any) => sum + item.price * history.changeQuantities, 0)
                   ).format(`$ 0,0.00`)}
                 </Typography>
               </TableCell>

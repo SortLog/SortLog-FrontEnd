@@ -80,7 +80,7 @@ export default function Order(props: any) {
               variant="contained"
               endIcon={<KeyboardDoubleArrowRightIcon />}
               onClick={async () => {
-                const { data: list } = await historyApi.listHistorys();
+                const { data: list } = await historyApi.getHistories();
                 const trackingNumber = `000${list.length + 1}`.slice(-3);
                 await historyApi.postHistory({
                   ...history,
