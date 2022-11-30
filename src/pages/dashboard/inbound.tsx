@@ -7,7 +7,7 @@ const InBound: NextPage = () => {
   const [order, setOrder] = useState(undefined);
 
   return order ? (
-    <Order order={order} setOrder={setOrder} />
+    <Order type={"inbound"} order={order} setOrder={setOrder} />
   ) : (
     <Bound type={"inbound"} setOrder={setOrder} />
   );

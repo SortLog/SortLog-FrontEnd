@@ -1,4 +1,3 @@
-import numeral from "numeral";
 import {
   Box,
   Card,
@@ -15,52 +14,14 @@ import { ExternalLink as ExternalLinkIcon } from "../../icons/external-link";
 import { InformationCircleOutlined as InformationCircleOutlinedIcon } from "../../icons/information-circle-outlined";
 import { Scrollbar } from "../../layouts/scrollbar";
 import NextLink from "next/link";
+import moment from "moment";
 
-const pages = [
-  {
-    date: "16/11/2022",
-    uniqueVisits: 8584,
-    activity: "Created folder Mango Syrup in store JM",
-    visitors: "Junyi Men",
-  },
-  {
-    date: "11/11/2022",
-    uniqueVisits: 648,
-    activity: "Removed 10 quantity of laptop from store JM",
-    visitors: "Junyi Men",
-  },
-  {
-    date: "06/11/2022",
-    uniqueVisits: 568,
-    activity: "Added 20 quantity of wooden spoon to store JM",
-    visitors: "Junyi Men",
-  },
-  {
-    date: "19/10/2022",
-    uniqueVisits: 12322,
-    activity: "Removed 50 quantity of CoffeeBean to store JM",
-    visitors: "Junyi Men",
-  },
-  {
-    date: "08/10/2022",
-    uniqueVisits: 11645,
-    activity: "Deleted folder plastic spoon in store JM",
-    visitors: "Junyi Men",
-  },
-  {
-    date: "22/09/2022",
-    uniqueVisits: 10259,
-    activity: "Added 30 quantity of straw to store JM",
-    visitors: "Junyi Men",
-  },
-];
-
-export const AnalyticsMostVisited = () => (
+export const AnalyticsMostVisited = ({ historyList }) => (
   <Card>
     <CardHeader
-      title="History"
+      title="History Forms"
       action={
-        <Tooltip title="Refresh rate is 24h">
+        <Tooltip>
           <InformationCircleOutlinedIcon sx={{ color: "action.active" }} />
         </Tooltip>
       }
@@ -69,51 +30,45 @@ export const AnalyticsMostVisited = () => (
       <Table sx={{ minWidth: 600 }}>
         <TableHead>
           <TableRow>
-            <TableCell>Page Name</TableCell>
-            <TableCell>Visitors</TableCell>
-            {/* <TableCell>Unique page visits</TableCell> */}
+            <TableCell>Track Number</TableCell>
+            <TableCell>Create User</TableCell>
             <TableCell>Date</TableCell>
           </TableRow>
         </TableHead>
+        {console.log(historyList)}
         <TableBody>
-          {pages.map((page) => (
-            <TableRow
-              key={page.activity}
-              sx={{
-                "&:last-child td": {
-                  border: 0,
-                },
-              }}
-            >
-              <TableCell>
-                <Box
-                  sx={{
-                    alignItems: "center",
-                    display: "flex",
-                  }}
-                >
-                  <NextLink href="/dashboard/history-form" passHref>
+          {historyList.map((history) => (
+            <NextLink href={`/dashboard/historyForm/${history._id}`} key={history._id} passHref>
+              <TableRow
+                sx={{
+                  "&:last-child td": {
+                    border: 0,
+                  },
+                  cursor: "pointer",
+                }}
+              >
+                <TableCell>
+                  <Box
+                    sx={{
+                      alignItems: "center",
+                      display: "flex",
+                    }}
+                  >
                     <ExternalLinkIcon
                       sx={{
                         color: "action.active",
                         cursor: "pointer",
                       }}
-                      // onClick={() => {
-                      //   setIsDrawerOpen(true);
-                      //   setDetails({});
-                      //   setQrCode(false);
-                      // }}
                     />
-                  </NextLink>
-                  <Typography sx={{ ml: 2 }} variant="body2">
-                    {page.activity}
-                  </Typography>
-                </Box>
-              </TableCell>
-              <TableCell>{page.visitors}</TableCell>
-              {/* <TableCell>{numeral(page.uniqueVisits).format("0,0")}</TableCell> */}
-              <TableCell>{page.date}</TableCell>
-            </TableRow>
+                    <Typography sx={{ ml: 2 }} variant="body2">
+                      {history.trackingNumber}
+                    </Typography>
+                  </Box>
+                </TableCell>
+                <TableCell>{history.users.name}</TableCell>
+                <TableCell>{moment(history.createdAt).fromNow()}</TableCell>
+              </TableRow>
+            </NextLink>
           ))}
         </TableBody>
       </Table>

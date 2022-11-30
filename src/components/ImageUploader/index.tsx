@@ -1,8 +1,8 @@
 import React, { useCallback, useState } from "react";
+// @ts-ignore
 import { useDropzone } from "react-dropzone";
 import { Box } from "@mui/material";
 import ImgCropDialog from "./imgCropDialog";
-import hotToast from "../../utils/hotToast";
 
 const ImgDropzone = ({
   children,
@@ -22,8 +22,6 @@ const ImgDropzone = ({
   // @ts-ignore
   const onDrop = useCallback(([file]) => {
     const reader = new FileReader();
-    reader.onabort = () => hotToast("fail", "file reading was aborted");
-    reader.onerror = () => hotToast("fail", "file reading has failed");
     reader.onload = () => {
       setImage(reader.result as string);
       setOpen(true);

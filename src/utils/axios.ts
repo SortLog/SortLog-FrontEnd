@@ -6,7 +6,7 @@ const backendHttpInstance = () => {
 
   // set token here, locoalStorage or rudux store
   const token = localStorage.getItem("token");
-  
+
   axiosInstance.defaults.headers.common.Authorization = token || "";
 
   axiosInstance.interceptors.response.use(
@@ -14,7 +14,9 @@ const backendHttpInstance = () => {
       return config;
     },
     (error) => {
-      error && console.log(error.response);
+      if (process.env.NODE_ENV == "development") {
+        error && console.log(error.response);
+      }
       return Promise.reject(error);
     }
   );

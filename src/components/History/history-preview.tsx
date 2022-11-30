@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-import { format } from "date-fns";
 import numeral from "numeral";
 import {
   Box,
@@ -60,15 +58,15 @@ const HistoryPreview = (props: any) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {(history.items || []).map((items: any) => (
+            {(history.items || []).map((items: any, i: any) => (
               <TableRow key={items.sku}>
                 <TableCell>{items.sku}</TableCell>
                 <TableCell>{items.name}</TableCell>
                 <TableCell>{numeral(items.price).format(`${items.price}0,0.00`)}</TableCell>
-                <TableCell>{history.changeQuantities}</TableCell>
+                <TableCell>{history.changeQuantities[i]}</TableCell>
                 <TableCell />
                 <TableCell align="right">
-                  {numeral(items.price * history.changeQuantities).format(`$0,0.00`)}
+                  {numeral(items.price * history.changeQuantities[i]).format(`$0,0.00`)}
                 </TableCell>
               </TableRow>
             ))}
@@ -107,7 +105,8 @@ const HistoryPreview = (props: any) => {
                 <Typography gutterBottom variant="subtitle1">
                   {numeral(
                     history.items.reduce(
-                      (sum: any, item: any) => sum + item.price * history.changeQuantities,
+                      (sum: any, item: any, i: any) =>
+                        sum + item.price * history.changeQuantities[i],
                       0
                     )
                   ).format(`$ 0,0.00`)}

@@ -1,8 +1,6 @@
 import PropTypes from "prop-types";
-import { format } from "date-fns";
 import numeral from "numeral";
-import { Document, Image, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
-import { Avatar } from "@mui/material";
+import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import moment from "moment";
 
 const COL1_WIDTH = 60;
@@ -139,7 +137,7 @@ const HistoryPDF = (props: any) => {
               </View>
             </View>
             <View style={styles.tableBody}>
-              {(history.items || []).map((items: any) => (
+              {(history.items || []).map((items: any, i: any) => (
                 <View style={styles.tableRow} key={items.sku}>
                   <View style={styles.tableCell1}>
                     <Text style={styles.body2}>{items.sku}</Text>
@@ -153,11 +151,11 @@ const HistoryPDF = (props: any) => {
                     </Text>
                   </View>
                   <View style={styles.tableCell1}>
-                    <Text style={styles.body2}>{history.changeQuantities}</Text>
+                    <Text style={styles.body2}>{history.changeQuantities[i]}</Text>
                   </View>
                   <View style={styles.tableCell1}>
                     <Text style={[styles.body2, styles.alignRight]}>
-                      {numeral(items.price * history.changeQuantities).format(`$0,0.00`)}
+                      {numeral(items.price * history.changeQuantities[i]).format(`$0,0.00`)}
                     </Text>
                   </View>
                 </View>
@@ -187,7 +185,8 @@ const HistoryPDF = (props: any) => {
                   <Text style={[styles.body2, styles.alignRight]}>
                     {numeral(
                       history.items.reduce(
-                        (sum: any, item: any) => sum + item.price * history.changeQuantities,
+                        (sum: any, item: any, i: any) =>
+                          sum + item.price * history.changeQuantities[i],
                         0
                       )
                     ).format(`$ 0,0.00`)}

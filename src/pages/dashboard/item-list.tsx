@@ -4,21 +4,21 @@ import Container from "@mui/material/Container";
 import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import { Chip, Divider, GlobalStyles, Grid, Icon, Paper, TableCell } from "@mui/material";
+import { Divider, GlobalStyles, Grid, Icon, Paper, TableCell } from "@mui/material";
 import Button from "@mui/material/Button";
 import { Add } from "@mui/icons-material";
 import { Box } from "@mui/system";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
+import QRCodeScanner from "../../components/QRcodeHandler/qrcode-scanner";
 import { DataGrid, GridValueGetterParams } from "@mui/x-data-grid";
 import ImgMediaCard from "@/components/ItemList/table-card";
 import SplitButton from "@/components/ItemList/split-button";
 import MuiDrawer from "@/components/ItemList/add-and-edit";
-import QRCodeScanner from "../../components/QRcodeHandler/qrcode-scanner";
-import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
 import * as itemApi from "@/services/api/items";
 import { SeverityPill } from "@/components/severity-pill";
+import Head from "next/head";
 
 function moneyMapper(money: any) {
   return parseFloat(money)
@@ -42,27 +42,12 @@ function getPrice(params: GridValueGetterParams) {
   return `${"$" + moneyMapper(params.row.price)}`;
 }
 
-function getTag() {
-  return {
-    icon: <LocalOfferOutlinedIcon />,
-  };
-}
-
 function unitOrunits(quantity: any) {
   if (quantity > 1) {
     return "units";
   } else {
     return "unit";
   }
-}
-
-// function printTag(params: any) {
-function printTag(params: GridValueGetterParams) {
-  const tagArr = new Array(params.row.tags.length);
-  for (let index = 0; index < params.row.tags.length; index++) {
-    tagArr[index] = <Chip variant="filled" label={params.row.tags[index]} {...getTag()} />;
-  }
-  return `${tagArr}`;
 }
 
 const columns = [
@@ -73,7 +58,6 @@ const columns = [
   {
     field: "tag",
     headerName: "Tag",
-    // valueGetter: printTag
     renderCell: (params: any) => {
       return (
         <TableCell>
@@ -84,14 +68,11 @@ const columns = [
           ))}
         </TableCell>
       );
-      // <Chip variant="filled" label={params.row.tags.join(" ")} {...getTag()} />;
     },
     flex: 1,
-    // width: '100%'
   },
 ];
 
-// Tutor的数据编辑的方法：
 const dataMapper = (rows: any, searchText: string) => {
   return rows.filter(
     (row: any) =>
@@ -103,11 +84,11 @@ const dataMapper = (rows: any, searchText: string) => {
 
 const ItemList: NextPage = () => {
   const [isGrid, setIsGrid] = useState(false);
-  const [searchText, setSearchText] = useState("");
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const [searchText, setSearchText] = useState("");
   const [isQRCodeButtonClicked, setIsQRCodeButtonClicked] = useState(false);
-  // const [searchInput, setSearchInput] = useState("");
+
   const onSearchArea = (data: string) => {
     setSearchText(data);
   };
@@ -143,6 +124,9 @@ const ItemList: NextPage = () => {
 
   return (
     <>
+      <Head>
+        <title> Items </title>
+      </Head>
       <Container maxWidth="lg" color="background">
         <div className="App">
           <header className="App-header">
@@ -197,10 +181,9 @@ const ItemList: NextPage = () => {
                 <InputBase
                   sx={{ ml: 1, flex: 1 }}
                   placeholder="Search All Items"
-                  inputProps={{ "aria-label": "search google maps" }}
+                  inputProps={{ "aria-label": "search" }}
                   onChange={(e) => {
                     setSearchText((e.target as any).value);
-                    // setSearchInput((e.target as any).value);
                   }}
                   value={searchText}
                 />
@@ -221,8 +204,8 @@ const ItemList: NextPage = () => {
                 <SplitButton setIsGrid={setIsGrid} sx={{ height: 100 }} />
               </Grid>
             </Grid>
-            {dataMapper(itemList, searchText).map((value: any) => (
-              <Box sx={{ mt: 3, mr: 3 }} key={value}>
+            {dataMapper(itemList, searchText).map((value: any, i: any) => (
+              <Box sx={{ mt: 3, mr: 3 }} key={i}>
                 <Typography sx={{ display: "none" }}>
                   {(items = items + 1)} {(quantity = quantity + value.quantity)}{" "}
                   {(totalValue = totalValue + value.price * value.quantity)}
@@ -231,12 +214,6 @@ const ItemList: NextPage = () => {
             ))}
 
             <Grid container spacing={6} pb="10px">
-              {/* <Grid item color="#6a6a6c">
-                Folders:{" "}
-                <Grid sx={{ display: "inline" }} color="#393939" fontWeight="bold">
-                  0
-                </Grid>
-              </Grid> */}
               <Grid item color="#6a6a6c">
                 Items:{" "}
                 <Grid sx={{ display: "inline" }} color="#393939" fontWeight="bold">
@@ -275,7 +252,6 @@ const ItemList: NextPage = () => {
                     columns={columns}
                     pageSize={5}
                     rowsPerPageOptions={[5]}
-                    checkboxSelection
                     disableSelectionOnClick
                     onRowClick={handleRowClick}
                   />

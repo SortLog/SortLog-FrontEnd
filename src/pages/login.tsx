@@ -31,6 +31,7 @@ const LgIn: React.FC = () => {
       // @ts-ignore
       console.log("mong" + userFromMongo);
       // set user in localstorage
+      localStorage.setItem("userInfo", JSON.stringify(userFromMongo.data));
       localStorage.setItem("currentUser", JSON.stringify(userFromMongo.data));
       // set token to localstorage
       localStorage.setItem("token", user.signInUserSession.idToken.jwtToken);

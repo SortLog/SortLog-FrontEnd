@@ -25,7 +25,7 @@ function getTag() {
 function printTag(tags: any) {
   const tagArr = new Array(tags.length);
   for (let index = 0; index < tags.length; index++) {
-    tagArr[index] = <Chip variant="filled" label={tags[index]} {...getTag()} />;
+    tagArr[index] = <Chip variant="filled" key={index} label={tags[index]} {...getTag()} />;
   }
   return tagArr;
 }

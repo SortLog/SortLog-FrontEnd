@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -18,7 +18,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import * as React from "react";
-import { format } from "date-fns";
 import NextLink from "next/link";
 import { getInitials } from "@/utils/get-initials";
 import { ArrowRight as ArrowRightIcon } from "@/icons/arrow-right";
@@ -27,8 +26,6 @@ import { useMounted } from "@/hooks/use-mounted";
 import Button from "@mui/material/Button";
 import { Add } from "@mui/icons-material";
 import moment from "moment";
-
-const now = new Date();
 
 // row component showing each history
 const HistoryRow = (props: { history: any }) => {
@@ -178,8 +175,6 @@ export default function history() {
 
   const paginatedHistories = applyPagination(histories, page, rowsPerPage);
 
-  // // const groupedHistories = groupHistories(paginatedHistories);
-
   return (
     <Container maxWidth="lg" color="background">
       <Box
@@ -200,7 +195,7 @@ export default function history() {
             <Button
               variant="contained"
               startIcon={<Add />}
-              sx={{ backgroundColor: "#e70a3e", height: 5 }}
+              sx={{ backgroundColor: "#e70a3e", height: 40 }}
             >
               INBOUND / OUTBOUND
             </Button>
