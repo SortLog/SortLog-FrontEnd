@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Head from "next/head";
 import { Box, Button, Container, Grid, MenuItem, TextField, Typography } from "@mui/material";
 import AnalyticsGeneralOverview from "@/components/Dashboard/analytics-general-overview";
-import { AnalyticsMostVisited } from "../../components/Dashboard/analytics-most-visited";
+import { AnalyticsMostVisited } from "@/components/Dashboard/analytics-most-visited";
 import { Reports as ReportsIcon } from "../../icons/reports";
 import * as historyApi from "@/services/api/history";
 
@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     const getHistoryList = async () => {
-      const { data } = await historyApi.listHistorys();
+      const { data } = await historyApi.getHistories();
       setHistoryList(data);
     };
     getHistoryList();

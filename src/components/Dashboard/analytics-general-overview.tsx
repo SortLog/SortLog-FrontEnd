@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Box, Card, Divider, Grid, Typography } from "@mui/material";
-import { FolderOpen as FolderOpenIcon } from "../../icons/folder-open";
-import { Cash as CashIcon } from "../../icons/cash";
-import { Archive as ArchiveIcon } from "../../icons/archive";
-import { Collection as CollectionIcon } from "../../icons/collection";
 import * as itemApi from "@/services/api/items";
 import * as companyApi from "@/services/api/companies";
+import InventoryIcon from '@mui/icons-material/Inventory';
+import PriceChangeIcon from '@mui/icons-material/PriceChange';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import { Collection as CollectionIcon } from "../../icons/collection";
 
 const itemMapper = (rows: any) => {
   if (Array.isArray(rows)) {
@@ -19,15 +19,10 @@ const itemMapper = (rows: any) => {
   }
 };
 
-const companyMapper = (rows: any) => {
-  return rows.teamMember;
-};
-
 const AnalyticsGeneralOverview = (props: any) => {
   const { historyList } = props;
   // @ts-ignore
   const userInfo = JSON.parse(localStorage.getItem("currentUser"));
-  // console.log(userInfo);
   const [itemList, setItemList] = React.useState({});
   useEffect(() => {
     const fetchData = async () => {
@@ -47,12 +42,7 @@ const AnalyticsGeneralOverview = (props: any) => {
     };
     fetchData();
   }, []);
-  
-  // @ts-ignore
-  // console.log(Array.from(companyList).find((c)=>c.teamMember.includes("aaa"))===undefined ? 1 : Array.from(companyList).find((c)=>c.teamMember.includes("aaa")).teamMember.length);
-  // console.log(Array.from(companyList).find((c)=>c.teamMember.includes("aaa")) && Array.from(companyList).find((c)=>c.teamMember.includes("aaa")).teamMember.length);
-  // console.log([companyList].find((c)=>c.teamMember.include(userInfo.email)));
-  
+
   let items = 0;
   let quantity = 0;
   let totalValue = 0;
@@ -66,7 +56,7 @@ const AnalyticsGeneralOverview = (props: any) => {
       </Box>
     ));
   }
-  
+
   return (
     <Grid container spacing={4}>
       <Grid item md={3} sm={6} xs={12}>
@@ -81,7 +71,7 @@ const AnalyticsGeneralOverview = (props: any) => {
             }}
           >
             <div style={{ textAlign: "center" }}>
-              <FolderOpenIcon />
+              <InventoryIcon />
               <Typography color="textSecondary" variant="body2">
                 Item Count
               </Typography>
@@ -89,7 +79,6 @@ const AnalyticsGeneralOverview = (props: any) => {
                 {quantity}
               </Typography>
             </div>
-            {/* <LineChart /> */}
           </Box>
           <Divider />
         </Card>
@@ -106,12 +95,12 @@ const AnalyticsGeneralOverview = (props: any) => {
             }}
           >
             <div style={{ textAlign: "center" }}>
-              <CashIcon />
+              <PriceChangeIcon />
               <Typography color="textSecondary" variant="body2">
                 Item Price Sum
               </Typography>
               <Typography sx={{ mt: 1 }} variant="h5">
-                {totalValue.toFixed(2)}
+                ${totalValue.toFixed(2)}
               </Typography>
             </div>
           </Box>
@@ -129,13 +118,18 @@ const AnalyticsGeneralOverview = (props: any) => {
             }}
           >
             <div style={{ textAlign: "center" }}>
-              <ArchiveIcon />
+              <AssignmentIndIcon />
               <Typography color="textSecondary" variant="body2">
                 User Count
               </Typography>
               <Typography sx={{ mt: 1 }} variant="h5">
                 {/* @ts-ignore */}
-                {Array.from(companyList).find((c)=>c.teamMember.includes(userInfo.email))===undefined ? 1 : Array.from(companyList).find((c)=>c.teamMember.includes(userInfo.email)).teamMember.length}
+                {Array.from(companyList).find((c) => c.teamMember.includes(userInfo.email)) ===
+                undefined
+                  ? 1
+                  // @ts-ignore
+                  : Array.from(companyList).find((c) => c.teamMember.includes(userInfo.email))
+                      .teamMember.length}
               </Typography>
             </div>
           </Box>

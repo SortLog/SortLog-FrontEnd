@@ -6,7 +6,6 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import CardMedia from "@mui/material/CardMedia";
 import Grid from "@mui/material/Grid";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -40,7 +39,6 @@ const AddMembers = () => {
 
   const [companyLayer, setCompanyLayer] = useState<string>("block");
   const [memberLayer, setMemberLayer] = useState<string>("none");
-  // const [memberLayer, setMemberLayer] = useState<string>("block");
 
   const [company, setCompany] = useState<any>([]);
   useEffect(() => {
@@ -184,6 +182,9 @@ const AddMembers = () => {
 
   return (
     <>
+      <Head>
+        <title> Member </title>
+      </Head>
       <Container
         component="form"
         onSubmit={onNextButtonClick}

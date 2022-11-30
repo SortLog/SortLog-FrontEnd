@@ -103,7 +103,6 @@ const applyPagination = (customers: any, page: any, rowsPerPage: any) =>
 const Bound = (props: any) => {
   const { type, setOrder } = props;
   const isMounted = useMounted();
-  const queryRef = useRef(null);
   const [customers, setCustomers] = useState<any>([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -113,13 +112,14 @@ const Bound = (props: any) => {
   // const [dialogComfirmFunc, setDialogComfirmFunc] = useState(() => {});
   const [openCart, setOpenCart] = useState(false);
   const [cart, setCart] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
-  const [filters, setFilters] = useState({
+  const filters = {
     query: "",
     hasAcceptedMarketing: undefined,
     isProspect: undefined,
     isReturning: undefined,
-  });
+  };
 
   function up1stLetter(string: string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -145,14 +145,6 @@ const Bound = (props: any) => {
     getOrders();
   }, []);
 
-  const handleQueryChange = (event: any) => {
-    event.preventDefault();
-    setFilters((prevState) => ({
-      ...prevState,
-      query: "",
-    }));
-  };
-
   const handleSortChange = (event: any) => {
     setSort(event.target.value);
   };
@@ -175,7 +167,7 @@ const Bound = (props: any) => {
         selected = selected.filter((s: any) => s._id !== item._id);
         return {
           ...item,
-          change: item.change,
+          change: found.change,
         };
       }
       return item;
@@ -221,17 +213,13 @@ const Bound = (props: any) => {
             }}
           >
             <Box
-              component="form"
-              onSubmit={handleQueryChange}
               sx={{
                 flexGrow: 1,
                 m: 1.5,
               }}
             >
               <TextField
-                defaultValue=""
                 fullWidth
-                inputProps={{ ref: queryRef }}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
@@ -240,6 +228,7 @@ const Bound = (props: any) => {
                   ),
                 }}
                 placeholder="Search Items"
+                onChange={(e) => setSearchText(e.target.value)}
               />
             </Box>
             <TextField
@@ -260,7 +249,9 @@ const Bound = (props: any) => {
           </Box>
           <CustomerListTable
             tab={type}
-            customers={paginatedCustomers}
+            customers={paginatedCustomers.filter((item: any) =>
+              item.name.toLowerCase().includes(searchText.toLowerCase())
+            )}
             setCustomers={setCustomers}
             customersCount={filteredCustomers.length}
             onPageChange={handlePageChange}
@@ -304,8 +295,8 @@ const Bound = (props: any) => {
         <Box sx={{ mx: 3, my: 3 }}>
           {cart.length > 0 ? (
             <>
-              {cart.map((item: any) => (
-                <Box sx={{ mt: 3, width: 300 }} key={item.id} id={item.id}>
+              {cart.map((item: any, i: any) => (
+                <Box sx={{ mt: 3, width: 300 }} key={i}>
                   <ItemCard
                     data={item}
                     // @ts-ignore
@@ -325,11 +316,9 @@ const Bound = (props: any) => {
                 sx={{ position: "absolute", bottom: 24, right: 24 }}
                 onClick={() =>
                   setOrder({
-                    trackingNumber: up1stLetter(type) + " - ",
+                    trackingNumber: up1stLetter(type) + " - XXX",
                     Date: new Date(),
-                    changeQuantities: cart.map((item: any) =>
-                      type === "inbound" ? item.change : -item.change
-                    ),
+                    changeQuantities: cart.map((item: any) => item.change),
                     items: cart.map(({ change, ...keepAttrs }: any) => keepAttrs),
                     users: JSON.parse(localStorage.getItem("userInfo") || "{}"),
                   })

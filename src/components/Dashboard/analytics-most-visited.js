@@ -38,12 +38,13 @@ export const AnalyticsMostVisited = ({ historyList }) => (
         {console.log(historyList)}
         <TableBody>
           {historyList.map((history) => (
-            <NextLink href={`/dashboard/history-form/${history._id}`} key={history._id} passHref>
+            <NextLink href={`/dashboard/historyForm/${history._id}`} key={history._id} passHref>
               <TableRow
                 sx={{
                   "&:last-child td": {
                     border: 0,
                   },
+                  cursor: "pointer",
                 }}
               >
                 <TableCell>
