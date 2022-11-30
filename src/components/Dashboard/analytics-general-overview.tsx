@@ -308,7 +308,12 @@ const AnalyticsGeneralOverview = () => {
               {/* {console.log(companyMapper(companyList))} */}
               <Typography sx={{ mt: 1 }} variant="h5">
                 {/* @ts-ignore */}
-                {Array.from(companyList).find((c) => c.teamMember.includes(userInfo.email)) === undefined ? 1: Array.from(companyList).find((c) => c.teamMember.includes(userInfo.email)).teamMember.length}
+                {Array.from(companyList).find((c) => c.teamMember.includes(userInfo.email)) ===
+                undefined
+                  ? 1
+                  : // @ts-ignore
+                    Array.from(companyList).find((c) => c.teamMember.includes(userInfo.email))
+                      .teamMember.length}
               </Typography>
             </div>
             {/* <LineChart /> */}
