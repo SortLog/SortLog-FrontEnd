@@ -12,6 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import Avatar from "@mui/material/Avatar";
 import { useState, useEffect } from "react";
 import * as companyApi from "@/services/api/companies";
+import Head from "next/head";
 
 // style ----------------------------------------------
 const cardStyle = {
