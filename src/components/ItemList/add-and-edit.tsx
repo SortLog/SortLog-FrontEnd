@@ -27,6 +27,7 @@ import TagsArray from "./tagChips";
 import * as ItemApi from "@/services/api/items";
 import ImgDropzone from "../ImageUploader";
 import { SeverityPill } from "@/components/severity-pill";
+import { date } from "yup";
 
 function unitOrunits(quantity: any) {
   if (quantity > 1) {
@@ -74,13 +75,14 @@ const MuiDrawer = (props: any) => {
   const initialQuantity: number = data.quantity ? data.quantity : null;
   const initialSku: string = data.sku ? data.sku : null;
   const initialPrice: number = data.price ? data.price : null;
-  const initialTags: string[] = data.tags ? data.tags : [];
+  const initialTags: string[] = data.tags;
   const initialNote: string = data.note ? data.note : null;
   const initialImage: string = data.image ? data.image : undefined;
   const initialId: string = data._id ? data._id : undefined;
 
-  const currDate = new Date().toLocaleDateString();
-  const currTime = new Date().toLocaleTimeString();
+  // const currDate = new Date().toLocaleDateString();
+  // const currTime = new Date().toLocaleTimeString();
+
   const [isShown, setIsShown] = useState(false);
   const classes = useStyles();
   const [isQRCodeShowed, setIsQRCodeShowed] = useState(false);
@@ -117,9 +119,9 @@ const MuiDrawer = (props: any) => {
     setPrice(initialPrice);
   }, [initialPrice]);
 
-  // useEffect(() => {
-  //   setTag(initialTags);
-  // }, [initialTags]);
+  useEffect(() => {
+    setTag(initialTags);
+  }, [initialTags]);
 
   useEffect(() => {
     setNote(initialNote);
@@ -133,6 +135,7 @@ const MuiDrawer = (props: any) => {
   console.log(name);
   console.log(quantity);
   console.log(sku);
+  console.log(image);
   console.log(tag);
 
   const onSaveClick = () => {
@@ -151,6 +154,7 @@ const MuiDrawer = (props: any) => {
       image: image,
       note: note,
     };
+
     if (itemId !== undefined) {
       const put = async () => {
         await ItemApi.putItem(itemId, item);
@@ -164,6 +168,12 @@ const MuiDrawer = (props: any) => {
     }
   }, [isSaved]);
 
+  useEffect(() => {
+    if (isDrawerOpen === false) {
+      setImage(initialImage);
+    }
+  }, [isDrawerOpen]);
+
   const onAddNewTag = (newTag: string) => {
     if (newTag === "") {
       return;
@@ -174,7 +184,7 @@ const MuiDrawer = (props: any) => {
     }
   };
 
-  const onNewTagSubmit = (e: any) => {
+  const onNewTagSubmit = () => {
     onAddNewTag(newTag);
     setNewTag("");
   };
@@ -205,8 +215,8 @@ const MuiDrawer = (props: any) => {
             value={name}
             inputProps={{ style: { fontSize: 36 } }}
             sx={{ width: 300 }}
-            onMouseEnter={() => setIsShown(true)}
-            onMouseLeave={() => setIsShown(false)}
+            // onMouseEnter={() => setIsShown(true)}
+            // onMouseLeave={() => setIsShown(false)}
           />
           {isShown && <EditIcon sx={{ m: 3 }} />}
         </Box>
@@ -238,7 +248,9 @@ const MuiDrawer = (props: any) => {
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Updated at:</text>{" "}
             <text style={{ color: "#131213" }}>
-              {currDate} {currTime}
+              {String(data.updatedAt)
+                .replace(/T/, " ")
+                .substring(0, String(data.updatedAt).length - 5)}
             </text>
           </Typography>
         </Grid>
@@ -326,9 +338,9 @@ const MuiDrawer = (props: any) => {
             >
               <div>
                 <TagsArray tags={tag} />
-                <TextField label="Tags" value={data.tags && data.tags.join("  |  ")} />
+                {/* <TextField label="Tags" disabled={true} value={tag && tag.join("  |  ")} /> */}
               </div>
-              <div>
+              <div style={{ display: "flex" }}>
                 <TextField
                   label="New Tags"
                   onChange={(e) => setNewTag(e.target.value)}

@@ -11,7 +11,7 @@ const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: "flex",
-      justifyContent: "center",
+      justifyContent: "flex-start",
       flexWrap: "wrap",
       listStyle: "none",
       padding: "5px",

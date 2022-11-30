@@ -69,6 +69,7 @@ const columns = [
   { field: "name", headerName: "Name" },
   { field: "quantity", headerName: "Quantity", valueGetter: getQuantity },
   { field: "price", headerName: "Price", valueGetter: getPrice },
+  { field: "sku", headerName: "SKU" },
   {
     field: "tag",
     headerName: "Tag",
@@ -94,7 +95,9 @@ const columns = [
 const dataMapper = (rows: any, searchText: string) => {
   return rows.filter(
     (row: any) =>
-      row.name.includes(searchText) || row.tags.find((t: string) => t.includes(searchText))
+      row.name.includes(searchText) ||
+      row.tags.find((t: string) => t.includes(searchText)) ||
+      row.sku.includes(searchText)
   );
 };
 
@@ -104,9 +107,9 @@ const ItemList: NextPage = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const [isQRCodeButtonClicked, setIsQRCodeButtonClicked] = useState(false);
-  const [searchInput, setSearchInput] = useState("");
+  // const [searchInput, setSearchInput] = useState("");
   const onSearchArea = (data: string) => {
-    setSearchInput(data);
+    setSearchText(data);
   };
 
   let items = 0;
@@ -136,7 +139,7 @@ const ItemList: NextPage = () => {
       setItemList(data);
     };
     fetchData();
-  }, []);
+  }, [isDrawerOpen]);
   {
     console.log(itemList);
   }
@@ -200,9 +203,9 @@ const ItemList: NextPage = () => {
                   inputProps={{ "aria-label": "search google maps" }}
                   onChange={(e) => {
                     setSearchText((e.target as any).value);
-                    setSearchInput((e.target as any).value);
+                    // setSearchInput((e.target as any).value);
                   }}
-                  value={searchInput ? searchInput : searchText}
+                  value={searchText}
                 />
                 <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
                 <IconButton
@@ -225,18 +228,18 @@ const ItemList: NextPage = () => {
               <Box sx={{ mt: 3, mr: 3 }} key={value}>
                 <Typography sx={{ display: "none" }}>
                   {(items = items + 1)} {(quantity = quantity + value.quantity)}{" "}
-                  {(totalValue = totalValue + value.price)}
+                  {(totalValue = totalValue + value.price * value.quantity)}
                 </Typography>
               </Box>
             ))}
 
             <Grid container spacing={6} pb="10px">
-              <Grid item color="#6a6a6c">
+              {/* <Grid item color="#6a6a6c">
                 Folders:{" "}
                 <Grid sx={{ display: "inline" }} color="#393939" fontWeight="bold">
                   0
                 </Grid>
-              </Grid>
+              </Grid> */}
               <Grid item color="#6a6a6c">
                 Items:{" "}
                 <Grid sx={{ display: "inline" }} color="#393939" fontWeight="bold">
