@@ -140,9 +140,6 @@ const ItemList: NextPage = () => {
     };
     fetchData();
   }, [isDrawerOpen]);
-  {
-    console.log(itemList);
-  }
 
   return (
     <>

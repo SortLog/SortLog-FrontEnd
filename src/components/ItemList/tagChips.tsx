@@ -24,7 +24,7 @@ const useStyles = makeStyles(() =>
 );
 
 export default function TagsArray(props: any) {
-  const { tags } = props;
+  const { tags, setTag } = props;
 
   const tagsChipData = tags?.map((data: any) => {
     return { key: tags.indexOf(data), label: data };
@@ -35,15 +35,24 @@ export default function TagsArray(props: any) {
   }
 
   const classes = useStyles();
-  const [chipData, setChipData] = React.useState<ChipData[]>(tagsChipData);
+  // const [chipData, setChipData] = React.useState<ChipData[]>(tagsChipData);
 
   const handleDelete = (chipToDelete: ChipData) => () => {
-    setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+    setTag(
+      tagsChipData.filter((tag: any) => tag.key !== chipToDelete.key).map((tag: any) => tag.label)
+    );
+    // setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+    // const newTag = chipData.map((data) => data.label);
+    // setTag(newTag);
   };
+
+  // console.log(chipData);
+  // console.log(newTag);
+  // console.log(tags);
 
   return (
     <>
-      {chipData.map((data, i) => {
+      {tagsChipData.map((data: any, i: any) => {
         return (
           <Chip label={data.label} key={i} onDelete={handleDelete(data)} className={classes.chip} />
         );
