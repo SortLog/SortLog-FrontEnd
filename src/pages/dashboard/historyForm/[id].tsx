@@ -1,6 +1,5 @@
 import * as React from "react";
-import { useMounted } from "@/hooks/use-mounted";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Avatar,
   Box,
@@ -21,23 +20,19 @@ import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import HistoryPDF from "@/components/History/history-form-pdf";
 import HistoryPreview from "@/components/History/history-preview";
 import { useRouter } from "next/router";
-import { HistoryState } from "next/dist/shared/lib/router/router";
 
 export default function historyForm() {
   const router = useRouter();
   const { id } = router.query;
-  console.log(id);
+  
   const [history, setHistory] = useState<any>();
   const [viewPDF, setViewPDF] = useState(false);
 
   useEffect(() => {
     const getHistory = async () => {
       try {
-        const { data:history }: any = await historyApi.getHistory(id);
-
-        // if (isMounted()) {
+        const { data: history }: any = await historyApi.getHistory(id);
         setHistory(history);
-        // }
       } catch (err) {
         console.error(err);
       }
@@ -46,7 +41,6 @@ export default function historyForm() {
   }, [id]);
 
   if (!history) {
-    console.log("xxx")
     return null;
   }
   return (
@@ -77,20 +71,6 @@ export default function historyForm() {
                   >
                     <ArrowBackIcon fontSize="small" sx={{ mr: 1 }} />
                     <Typography variant="subtitle2">Histories</Typography>
-                  </Box>
-                </Link>
-              </NextLink>
-              <Box sx={{ mt: 3 }} />
-              <NextLink href="/dashboard" passHref>
-                <Link color="textPrimary" variant="subtitle2">
-                  <Box
-                    sx={{
-                      alignItems: "center",
-                      display: "flex",
-                    }}
-                  >
-                    <ArrowBackIcon fontSize="small" sx={{ mr: 1 }} />
-                    <Typography variant="subtitle2">Dashboard</Typography>
                   </Box>
                 </Link>
               </NextLink>

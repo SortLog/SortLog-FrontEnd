@@ -1,10 +1,7 @@
 import {ReactNode, useState} from "react";
 import { styled } from '@mui/material/styles';
 import { DashboardSidebar } from './dashboard-sidebar';
-// @ts-ignore
 import { useRouter } from 'next/router'
-
-
 import { Box } from '@mui/material';
 import PropTypes from "prop-types";
 
@@ -21,7 +18,6 @@ const DashboardLayoutRoot = styled('div')(({ theme }) => ({
 const DashboardLayout: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const router = useRouter()
-  console.log('pathname', location.pathname);
   if(router.pathname.includes('dashboard') ){
     return (
       <>
