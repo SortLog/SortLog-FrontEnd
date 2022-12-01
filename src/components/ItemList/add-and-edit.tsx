@@ -143,7 +143,7 @@ const MuiDrawer = (props: any) => {
       return;
     } else {
       setTag((prevState: any) => {
-        if (prevState===undefined) {
+        if (prevState === undefined) {
           return [newTag];
         }
         return [...prevState, newTag];
