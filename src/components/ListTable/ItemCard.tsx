@@ -1,14 +1,28 @@
 import * as React from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Chip, Divider } from "@mui/material";
+import { Chip, Box, CardHeader, Grid, Button } from "@mui/material";
 import LocalOfferOutlinedIcon from "@mui/icons-material/LocalOfferOutlined";
-import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
-import Grid from "@mui/material/Grid";
+import { SeverityPill } from "../severity-pill";
+import LinearProgress, { LinearProgressProps } from "@mui/material/LinearProgress";
+
+function LinearProgressWithLabel(props: LinearProgressProps & { value: number; text: string }) {
+  return (
+    <Box sx={{ display: "flex", alignItems: "center", mt: 1 }}>
+      <Box sx={{ width: "100%", mr: 1 }}>
+        <LinearProgress variant="determinate" {...props} />
+      </Box>
+      <Box sx={{ minWidth: 100 }}>
+        <Typography variant="body2" color="text.secondary">
+          {props.text}
+        </Typography>
+      </Box>
+    </Box>
+  );
+}
 
 function unitOrunits(quantity: any) {
   if (quantity > 1) {
@@ -36,29 +50,47 @@ const ItemCard = (props: any) => {
   const { data, onRemove } = props;
   return (
     <>
-      <Card sx={{ maxWidth: 345 }}>
+      <Card elevation={7} sx={{ maxWidth: 800 }}>
         <CardMedia component="img" alt="green iguana" height="200" image={data.image} />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            {data.name}
+        <CardHeader
+          sx={{ mt: -3 }}
+          title={data.name}
+          subheader={
+            <LinearProgressWithLabel
+              variant="determinate"
+              color={data.quantity >= 20 ? "success" : "error"}
+              value={data.quantity}
+              text={`${data.quantity} IN STOCK`}
+            />
+          }
+        />
+        <CardContent sx={{ mt: -7 }}>
+          <Typography variant="subtitle2" color="black">
+            {data.change} {unitOrunits(data.change).toUpperCase()}
           </Typography>
+          <Typography variant="subtitle2" color="red">
+            $ {data.price * data.change}
+          </Typography>
+          <Box sx={{ mt: 1 }}>
+            {data.tags.map((tag: any) => (
+              <SeverityPill color="info" key={tag}>
+                {tag}
+              </SeverityPill>
+            ))}
+          </Box>
+          <Grid container sx={{ mt: 2, mb: -2 }} justifyContent="center">
+            <Button
+              variant="outlined"
+              startIcon={<DeleteIcon />}
+              onClick={onRemove}
+              sx={{ height: 30 }}
+              fullWidth
+            >
+              Delete
+            </Button>
+          </Grid>
         </CardContent>
-        <CardActions>
-          <Typography variant="body2" color="text.secondary">
-            {data.change} {unitOrunits(data.change)}
-          </Typography>
-          <Divider sx={{ height: 28, ml: 2, mr: 2 }} orientation="vertical" />
-          <Typography variant="body2" color="text.secondary">
-            $ {data.price}
-          </Typography>
-        </CardActions>
-        <CardActions>{printTag(data.tags)}</CardActions>
       </Card>
-      <Grid container sx={{ mt: 1 }} justifyContent="flex-end">
-        <Button variant="outlined" startIcon={<DeleteIcon />} onClick={onRemove}>
-          Delete
-        </Button>
-      </Grid>
     </>
   );
 };

@@ -2,9 +2,9 @@ import React, { useEffect } from "react";
 import { Box, Card, Divider, Grid, Typography } from "@mui/material";
 import * as itemApi from "@/services/api/items";
 import * as companyApi from "@/services/api/companies";
-import InventoryIcon from '@mui/icons-material/Inventory';
-import PriceChangeIcon from '@mui/icons-material/PriceChange';
-import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import InventoryIcon from "@mui/icons-material/Inventory";
+import PriceChangeIcon from "@mui/icons-material/PriceChange";
+import AssignmentIndIcon from "@mui/icons-material/AssignmentInd";
 import { Collection as CollectionIcon } from "../../icons/collection";
 
 const itemMapper = (rows: any) => {
@@ -127,8 +127,8 @@ const AnalyticsGeneralOverview = (props: any) => {
                 {Array.from(companyList).find((c) => c.teamMember.includes(userInfo.email)) ===
                 undefined
                   ? 1
-                  // @ts-ignore
-                  : Array.from(companyList).find((c) => c.teamMember.includes(userInfo.email))
+                  : // @ts-ignore
+                    Array.from(companyList).find((c) => c.teamMember.includes(userInfo.email))
                       .teamMember.length}
               </Typography>
             </div>

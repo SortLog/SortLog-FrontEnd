@@ -60,11 +60,7 @@ const VerifyCode = () => {
           {platform === "Amplify" && (
             <div>
               <NextLink
-                href={
-                  disableGuard
-                    ? `/login?disableGuard=${disableGuard}`
-                    : "/login"
-                }
+                href={disableGuard ? `/login?disableGuard=${disableGuard}` : "/login"}
                 passHref
               >
                 <Link color="textSecondary" variant="body2">

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Head from "next/head";
 import {
   Box,
@@ -22,6 +22,7 @@ import ItemCard from "./ItemCard";
 // import Dialog from "@/components/ListTable/Dialog";
 import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
 import CallMissedOutgoingIcon from "@mui/icons-material/CallMissedOutgoing";
+import Zoom from "@mui/material/Zoom";
 
 const sortOptions = [
   {
@@ -113,6 +114,7 @@ const Bound = (props: any) => {
   const [openCart, setOpenCart] = useState(false);
   const [cart, setCart] = useState([]);
   const [searchText, setSearchText] = useState("");
+  const [zoom, setZoom] = useState(true);
 
   const filters = {
     query: "",
@@ -174,6 +176,7 @@ const Bound = (props: any) => {
     });
     newCart = [...newCart, ...selected];
     setCart(newCart);
+    setZoom(!zoom);
   };
 
   // Usually query is done on backend with indexing solutions
@@ -275,16 +278,26 @@ const Bound = (props: any) => {
           </Grid>
         </Grid>
       </Box>
-      <SpeedDial
-        ariaLabel="cart"
-        sx={{ position: "absolute", bottom: 24, right: 24 }}
-        icon={
-          <Badge badgeContent={cart.length}>
-            <ShoppingCartIcon sx={{ color: "#fff" }} />
-          </Badge>
-        }
-        onClick={() => setOpenCart(true)}
-      />
+      <Zoom
+        key={zoom.toString()}
+        in={true}
+        timeout={500}
+        style={{
+          transitionDelay: `0ms`,
+        }}
+        unmountOnExit
+      >
+        <SpeedDial
+          ariaLabel="cart"
+          sx={{ position: "absolute", bottom: 24, right: 24 }}
+          icon={
+            <Badge badgeContent={cart.length}>
+              <ShoppingCartIcon sx={{ color: "#fff" }} />
+            </Badge>
+          }
+          onClick={() => setOpenCart(true)}
+        />
+      </Zoom>
       <SwipeableDrawer
         anchor="right"
         open={openCart}
@@ -304,16 +317,17 @@ const Bound = (props: any) => {
                   />
                 </Box>
               ))}
+              <Box sx={{ width: 300, height: 60, mt: 1 }} />
               <Fab
                 color="error"
-                sx={{ position: "absolute", bottom: 24, right: 96 }}
+                sx={{ position: "fixed", bottom: 24, right: 96, zIndex: 9 }}
                 onClick={() => setCart([])}
               >
                 <CleaningServicesIcon sx={{ color: "#fff" }} />
               </Fab>
               <Fab
                 color="success"
-                sx={{ position: "absolute", bottom: 24, right: 24 }}
+                sx={{ position: "fixed", bottom: 24, right: 24, zIndex: 9 }}
                 onClick={() =>
                   setOrder({
                     trackingNumber: up1stLetter(type) + " - XXX",
