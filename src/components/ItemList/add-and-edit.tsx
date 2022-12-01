@@ -22,6 +22,7 @@ import TagsArray from "./tagChips";
 import * as ItemApi from "@/services/api/items";
 import ImgDropzone from "../ImageUploader";
 import toast from "react-hot-toast";
+import moment from "moment";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -143,6 +144,9 @@ const MuiDrawer = (props: any) => {
       return;
     } else {
       setTag((prevState: any) => {
+        if (prevState === undefined) {
+          return [newTag];
+        }
         return [...prevState, newTag];
       });
     }
@@ -198,9 +202,8 @@ const MuiDrawer = (props: any) => {
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Updated at:</text>{" "}
             <text style={{ color: "#131213" }}>
-              {String(data.updatedAt)
-                .replace(/T/, " ")
-                .substring(0, String(data.updatedAt).length - 5)}
+              {data.updatedAt ? moment(data.updatedAt).calendar()
+                 : moment(new Date()).calendar()}            
             </text>
           </Typography>
         </Grid>
@@ -254,6 +257,7 @@ const MuiDrawer = (props: any) => {
                   <OutlinedInput
                     label="Price"
                     defaultValue={price}
+                    type="number"
                     startAdornment={<InputAdornment position="start">AU$</InputAdornment>}
                     onChange={(e) => {
                       setPrice(Number(e.target.value));
