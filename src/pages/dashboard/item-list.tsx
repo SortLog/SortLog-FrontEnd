@@ -250,8 +250,8 @@ const ItemList: NextPage = () => {
                       id: item._id,
                     }))}
                     columns={columns}
-                    pageSize={5}
-                    rowsPerPageOptions={[5]}
+                    pageSize={20}
+                    rowsPerPageOptions={[20]}
                     disableSelectionOnClick
                     onRowClick={handleRowClick}
                   />
