@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Box,
   TextField,
@@ -18,52 +18,14 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import * as React from "react";
-import { format } from "date-fns";
 import NextLink from "next/link";
 import { getInitials } from "@/utils/get-initials";
 import { ArrowRight as ArrowRightIcon } from "@/icons/arrow-right";
-import { historyApi } from "../api/history-api";
+import * as historyApi from "@/services/api/history";
 import { useMounted } from "@/hooks/use-mounted";
 import Button from "@mui/material/Button";
 import { Add } from "@mui/icons-material";
-interface histories {
-  id: string;
-  trackingNumber: string;
-  status: string;
-  Date: number;
-  totalQTY: number;
-  items: {
-    SKU: string;
-    name: string;
-    price: number;
-    QTY: number;
-  }[];
-  user: {
-    companyName: string;
-    email: string;
-    name: string;
-  };
-}
-[];
-
-const now = new Date();
-
-// const groupHistories = (histories: any[]) =>
-//   histories.reduce(
-//     (acc, history) => {
-//       const { status } = history;
-
-//       return {
-//         ...acc,
-//         [status]: [...acc[status], history],
-//       };
-//     },
-//     {
-//       Pending: [],
-//       Done: [],
-//       Canceled: [],
-//     }
-//   );
+import moment from "moment";
 
 // row component showing each history
 const HistoryRow = (props: { history: any }) => {
@@ -71,7 +33,7 @@ const HistoryRow = (props: { history: any }) => {
 
   return (
     <TableRow
-      key={history.id}
+      key={history._id}
       sx={{
         boxShadow: 1,
         transition: (theme) =>
@@ -88,7 +50,7 @@ const HistoryRow = (props: { history: any }) => {
       }}
     >
       <TableCell width="25%">
-        <NextLink href="/dashboard/history-form" passHref>
+        <NextLink href={`/dashboard/historyForm/${history._id}`} passHref>
           <Box
             component="a"
             sx={{
@@ -104,7 +66,7 @@ const HistoryRow = (props: { history: any }) => {
                 width: 42,
               }}
             >
-              {getInitials(history.user.name)}
+              {getInitials(history.users.name)}
             </Avatar>
             <Box sx={{ ml: 2 }}>
               <Typography color="textPrimary" variant="subtitle1">
@@ -123,35 +85,7 @@ const HistoryRow = (props: { history: any }) => {
         >
           <Typography variant="subtitle2">Items</Typography>
           <Typography color="textSecondary" variant="body2">
-            {history.items[0].name + ", " + history.items[1].name + "..."}
-          </Typography>
-        </Box>
-      </TableCell>
-
-      <TableCell>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <Typography variant="subtitle2">Items</Typography>
-          <Typography color="textSecondary" variant="body2">
-            {history.items[0].name + ", " + history.items[1].name + "..."}
-          </Typography>
-        </Box>
-      </TableCell>
-
-      <TableCell>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-          }}
-        >
-          <Typography variant="subtitle2">Items</Typography>
-          <Typography color="textSecondary" variant="body2">
-            {history.items[0].name + ", " + history.items[1].name + "..."}
+            {history.items[0].name + "..."}
           </Typography>
         </Box>
       </TableCell>
@@ -166,7 +100,10 @@ const HistoryRow = (props: { history: any }) => {
           <Typography variant="subtitle2">Total QTY</Typography>
           <Typography variant="body2">
             {"x "}
-            {history.totalQTY}
+            {history.changeQuantities.reduce(
+              (sum: any, changeQuantities: any) => sum + changeQuantities,
+              0
+            )}
           </Typography>
         </Box>
       </TableCell>
@@ -178,8 +115,9 @@ const HistoryRow = (props: { history: any }) => {
           }}
         >
           <Typography variant="subtitle2">Date</Typography>
+
           <Typography color="textSecondary" variant="body2">
-            {history.Date && format(history.Date, "dd/MM/yyyy")}
+            {moment(history.createdAt).fromNow()}
           </Typography>
         </Box>
       </TableCell>
@@ -192,7 +130,7 @@ const HistoryRow = (props: { history: any }) => {
         ></Box>
       </TableCell>
       <TableCell align="right">
-        <NextLink href="/dashboard/history-form" passHref>
+        <NextLink href={`/dashboard/historyForm/${history._id}`} passHref>
           <IconButton component="a">
             <ArrowRightIcon fontSize="small" />
           </IconButton>
@@ -207,11 +145,11 @@ export default function history() {
   const [value, setValue] = React.useState<Dayjs | null>(null);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [histories, setHistories] = useState<histories[]>([]);
+  const [histories, setHistories] = useState<any>([]);
 
   const getHistories = useCallback(async () => {
     try {
-      const data = await historyApi.getHistories();
+      const { data } = await historyApi.getHistories();
 
       if (isMounted()) {
         setHistories(data);
@@ -237,8 +175,6 @@ export default function history() {
 
   const paginatedHistories = applyPagination(histories, page, rowsPerPage);
 
-  // // const groupedHistories = groupHistories(paginatedHistories);
-
   return (
     <Container maxWidth="lg" color="background">
       <Box
@@ -246,18 +182,22 @@ export default function history() {
           flexGrow: 1,
           mx: 1,
           pl: 10,
-          width: "95%",
+          width: "100%",
           backgroundColor: "background.default",
           overflow: "hidden",
         }}
       >
-        <Grid container spacing={6} paddingTop="60px" justifyContent="space-between">
-          <Typography variant="h3" component="h3" marginLeft={1}>
+        <Grid container spacing={4} marginTop="20px" justifyContent="space-between">
+          <Typography variant="h3" component="h3" marginBottom={3}>
             History
           </Typography>
           <NextLink href={"/dashboard/inbound"} passHref>
-            <Button variant="contained" startIcon={<Add />} sx={{ backgroundColor: "#e70a3e" }}>
-              ADD NEW
+            <Button
+              variant="contained"
+              startIcon={<Add />}
+              sx={{ backgroundColor: "#e70a3e", height: 40 }}
+            >
+              INBOUND / OUTBOUND
             </Button>
           </NextLink>
         </Grid>
@@ -307,8 +247,8 @@ export default function history() {
           }}
         >
           <TableBody>
-            {paginatedHistories.map((history: { id: React.Key | null | undefined }) => (
-              <HistoryRow history={history} key={history.id} />
+            {paginatedHistories.map((history: { _id: React.Key | null | undefined }) => (
+              <HistoryRow history={history} key={history._id} />
             ))}
           </TableBody>
         </Table>

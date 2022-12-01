@@ -65,6 +65,7 @@ export const DashboardSidebar = (props) => {
     try {
       await logout();
       localStorage.setItem("currentUser", null);
+      localStorage.setItem("userInfo", null);
       toast.success("Logout successfully");
       await router.push("/login");
     } catch (e) {

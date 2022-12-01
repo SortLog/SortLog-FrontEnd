@@ -1,6 +1,5 @@
 import * as React from "react";
-import { useMounted } from "@/hooks/use-mounted";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Avatar,
   Box,
@@ -15,51 +14,31 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import NextLink from "next/link";
 import Head from "next/head";
-import { historyApi } from "@/pages/api/history-api";
+import * as historyApi from "@/services/api/history";
 import { getInitials } from "@/utils/get-initials";
 import { PDFDownloadLink, PDFViewer } from "@react-pdf/renderer";
 import HistoryPDF from "@/components/History/history-form-pdf";
 import HistoryPreview from "@/components/History/history-preview";
-
-interface History {
-  id: string;
-  trackingNumber: string;
-  status: string;
-  Date: number;
-  totalQTY: number;
-  items: {
-    SKU: string;
-    name: string;
-    price: number;
-    QTY: number;
-  }[];
-  user: {
-    companyName: string;
-    email: string;
-    name: string;
-  };
-}
+import { useRouter } from "next/router";
 
 export default function historyForm() {
-  const isMounted = useMounted();
-  const [history, setHistory] = useState<History>();
+  const router = useRouter();
+  const { id } = router.query;
+  
+  const [history, setHistory] = useState<any>();
   const [viewPDF, setViewPDF] = useState(false);
 
-  const getHistory = useCallback(async () => {
-    try {
-      const history = await historyApi.getHistory();
-
-      if (isMounted()) {
-        setHistory(history);
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }, [isMounted]);
-
   useEffect(() => {
-    getHistory();
-  }, []);
+    const getHistory = async () => {
+      try {
+        const { data: history }: any = await historyApi.getHistory(id);
+        setHistory(history);
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    if (typeof id !== "undefined") getHistory();
+  }, [id]);
 
   if (!history) {
     return null;
@@ -95,20 +74,6 @@ export default function historyForm() {
                   </Box>
                 </Link>
               </NextLink>
-              <Box sx={{ mt: 3 }} />
-              <NextLink href="/dashboard" passHref>
-                <Link color="textPrimary" variant="subtitle2">
-                  <Box
-                    sx={{
-                      alignItems: "center",
-                      display: "flex",
-                    }}
-                  >
-                    <ArrowBackIcon fontSize="small" sx={{ mr: 1 }} />
-                    <Typography variant="subtitle2">Dashboard</Typography>
-                  </Box>
-                </Link>
-              </NextLink>
             </Box>
             <Grid container justifyContent="space-between" spacing={3}>
               <Grid
@@ -125,7 +90,7 @@ export default function historyForm() {
                     width: 42,
                   }}
                 >
-                  {getInitials(history.user.name)}
+                  {getInitials(history.users.name)}
                 </Avatar>
                 <div>
                   <Typography variant="h4">{history.trackingNumber}</Typography>
@@ -136,7 +101,7 @@ export default function historyForm() {
                     }}
                   >
                     <Typography color="textSecondary" variant="body2">
-                      {history.user.name}
+                      {history.users.name}
                     </Typography>
                   </Box>
                 </div>

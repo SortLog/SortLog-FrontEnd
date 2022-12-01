@@ -1,21 +1,27 @@
 import * as React from "react";
 import { Avatar, Box, Button, Container, Divider, Grid, Typography } from "@mui/material";
 import Head from "next/head";
-import OrderTable from "./OrderTable";
+import HistoryPreview from "@/components/History/history-preview";
 import CancelIcon from "@mui/icons-material/Cancel";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import * as historyApi from "@/services/api/history";
 import NextClientOnly from "../NextClientOnly";
+import { getInitials } from "@/utils/get-initials";
+import toast from "react-hot-toast";
 
 export default function Order(props: any) {
-  const { order: history, setOrder } = props;
+  function up1stLetter(string: string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  const { order: history, setOrder, type } = props;
   if (!history) {
     return null;
   }
   return (
     <NextClientOnly>
       <Head>
-        <title>Dashboard: Processing</title>
+        <title>Dashboard: Form Preview</title>
       </Head>
       <Box
         component="main"
@@ -44,7 +50,7 @@ export default function Order(props: any) {
                     width: 42,
                   }}
                 >
-                  history.user.name
+                  {getInitials(history.users.name)}
                 </Avatar>
                 <div>
                   <Typography variant="h4">{history.trackingNumber}</Typography>
@@ -55,7 +61,7 @@ export default function Order(props: any) {
                     }}
                   >
                     <Typography color="textSecondary" variant="body2">
-                      history.user.name
+                      {history.users.name}
                     </Typography>
                   </Box>
                 </div>
@@ -66,8 +72,8 @@ export default function Order(props: any) {
             </Grid>
             <Divider sx={{ mt: 3 }} />
           </Box>
-          <OrderTable history={history} />
-          <Grid container sx={{ mt: 1 }} justifyContent="flex-end">
+          <HistoryPreview history={history} />
+          <Grid container sx={{ mt: 2 }} justifyContent="flex-end">
             <Button
               variant="outlined"
               startIcon={<CancelIcon />}
@@ -80,12 +86,14 @@ export default function Order(props: any) {
               variant="contained"
               endIcon={<KeyboardDoubleArrowRightIcon />}
               onClick={async () => {
-                const { data: list } = await historyApi.listHistorys();
+                const { data: list } = await historyApi.getHistories();
                 const trackingNumber = `000${list.length + 1}`.slice(-3);
                 await historyApi.postHistory({
                   ...history,
-                  trackingNumber: history.trackingNumber + trackingNumber,
+                  trackingNumber: up1stLetter(type) + " - " + trackingNumber,
+                  type,
                 });
+                toast.success(`Successfully ${type}!`);
                 window.location.reload();
               }}
             >

@@ -62,8 +62,8 @@ const VerifyCode = () => {
               <NextLink
                 href={
                   disableGuard
-                    ? `/authentication/login?disableGuard=${disableGuard}`
-                    : "/authentication/login"
+                    ? `/login?disableGuard=${disableGuard}`
+                    : "/login"
                 }
                 passHref
               >
