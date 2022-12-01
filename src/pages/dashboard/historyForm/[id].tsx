@@ -24,7 +24,7 @@ import { useRouter } from "next/router";
 export default function historyForm() {
   const router = useRouter();
   const { id } = router.query;
-  
+
   const [history, setHistory] = useState<any>();
   const [viewPDF, setViewPDF] = useState(false);
 

@@ -213,11 +213,7 @@ const Register = () => {
             <Divider sx={{ my: 3 }} />
             <div>
               <NextLink
-                href={
-                  disableGuard
-                    ? `/login?disableGuard=${disableGuard}`
-                    : "/login"
-                }
+                href={disableGuard ? `/login?disableGuard=${disableGuard}` : "/login"}
                 passHref
               >
                 <Link color="textSecondary" variant="body2">
