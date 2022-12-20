@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -10,6 +10,8 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import * as userApi from "@/services/api/users";
 import toast from "react-hot-toast";
+import { Auth } from "@aws-amplify/auth";
+import PasswordForgotten from "../../components/PasswordForgottenHandler/passwordForgotten";
 
 const cardStyle = {
   card: {
@@ -32,11 +34,36 @@ export default function setting() {
   // @ts-ignore
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
+  const user = async () => await Auth.currentUserInfo();
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser({
+      bypassCache: false, // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+    })
+      .then((user) => {
+        console.log(user);
+        setCognitoUser(user);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  // const getCognitoUser = ()=>{
+  //   Auth.currentAuthenticatedUser({
+  //     bypassCache: false // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+  //   })
+  //     .then((user) => {console.log(user);
+  //     setCognitoUser(user)})
+  //     .catch((err) => console.log(err));
+  // }
+
   const [name, setName] = useState(currentUser.name);
   const [email, setEmail] = useState(currentUser.email);
   const [companyName, setCompanyName] = useState(currentUser.provider);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [cognitoUser, setCognitoUser] = useState("");
+
+  const [isForgotPasswordClicked, setIsForgotPasswordClicked] = useState(false);
 
   const onPersonalInfoSaveChangesButton = () => {
     console.log("change user info" + currentUser);
@@ -51,6 +78,27 @@ export default function setting() {
       toast.error(error.message);
     }
   };
+
+  const onPasswordSaveChangesButton = () => {
+    // console.log(cognitoUser);
+
+    Auth.currentAuthenticatedUser()
+      .then((user) => {
+        return Auth.changePassword(cognitoUser, currentPassword, newPassword);
+      })
+      .then((data) => {
+        console.log(data);
+        toast.success("Password changed");
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error(err.message);
+      });
+  };
+
+  // const onForgotPassWordButton =()=> {
+  //   <PasswordForgotten/>
+  // }
 
   return (
     <Container maxWidth="md">
@@ -109,10 +157,11 @@ export default function setting() {
               style={cardStyle.textField}
               required
               id="outlined-required"
-              label="Old Password"
+              label="Current Password"
               // label="Current Password"
               defaultValue=""
               onChange={(e) => setCurrentPassword(e.target.value)}
+              value={currentPassword}
             />
             <TextField
               style={cardStyle.textField}
@@ -121,16 +170,21 @@ export default function setting() {
               label="New Password"
               defaultValue=""
               onChange={(e) => setNewPassword(e.target.value)}
+              value={newPassword}
             />
           </div>
         </CardContent>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <CardActions>
-            <Button>SAVE CHANGES</Button>
+            <Button onClick={onPasswordSaveChangesButton}>SAVE CHANGES</Button>
           </CardActions>
-          <a style={{ margin: "0 30px", textDecoration: "none" }} href="#">
+          <Button
+            sx={{ margin: "0 30px", textDecoration: "none" }}
+            onClick={() => setIsForgotPasswordClicked(true)}
+          >
             Forgot password?
-          </a>
+            {isForgotPasswordClicked ? <PasswordForgotten onModalDismiss={()=>setIsForgotPasswordClicked(false)}/> : null}
+          </Button>
         </div>
       </Card>
     </Container>
