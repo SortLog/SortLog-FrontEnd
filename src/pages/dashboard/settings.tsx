@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
@@ -100,93 +100,114 @@ export default function setting() {
   //   <PasswordForgotten/>
   // }
 
+  // const closeModal = useCallback((state: boolean) => {
+  //   setIsForgotPasswordClicked(state)
+  // },[])
+
   return (
-    <Container maxWidth="md">
-      <Box sx={{ width: "100%", maxWidth: 500 }} />
-      <Typography sx={{ fontSize: 40 }} color="text.secondary" gutterBottom>
-        User Profile
-      </Typography>
-      <Divider variant="middle" />
-      <Card style={cardStyle.card} sx={{ minWidth: 275 }}>
-        <CardContent>
-          <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
-            Personal Information
-          </Typography>
-          <div style={cardStyle.cardInput}>
-            <TextField
-              style={cardStyle.textField}
-              required
-              id="outlined-required"
-              label="Name"
-              defaultValue={currentUser.name}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <TextField
-              style={cardStyle.textField}
-              required
-              inputProps={{ readOnly: true }}
-              id="outlined-password-input"
-              label="Email"
-              defaultValue={currentUser.email}
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <TextField
-              style={cardStyle.textField}
-              required
-              id="outlined-read-only-input"
-              label="Company Name"
-              defaultValue={currentUser.provider}
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-            />
-          </div>
-        </CardContent>
-        <CardActions>
-          <Button onClick={onPersonalInfoSaveChangesButton}>SAVE CHANGES</Button>
-        </CardActions>
-      </Card>
-      <Card style={cardStyle.card} sx={{ minWidth: 275 }}>
-        <CardContent>
-          <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
-            Change Password
-          </Typography>
-          <div style={cardStyle.cardInput}>
-            <TextField
-              style={cardStyle.textField}
-              required
-              id="outlined-required"
-              label="Current Password"
-              // label="Current Password"
-              defaultValue=""
-              onChange={(e) => setCurrentPassword(e.target.value)}
-              value={currentPassword}
-            />
-            <TextField
-              style={cardStyle.textField}
-              required
-              id="outlined-required"
-              label="New Password"
-              defaultValue=""
-              onChange={(e) => setNewPassword(e.target.value)}
-              value={newPassword}
-            />
-          </div>
-        </CardContent>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+    <>
+      {isForgotPasswordClicked && (
+        <PasswordForgotten
+          onModalDismiss={() => {
+            setIsForgotPasswordClicked(false);
+          }}
+        />
+      )}
+      <Container maxWidth="md">
+        <Box sx={{ width: "100%", maxWidth: 500 }} />
+        <Typography sx={{ fontSize: 40 }} color="text.secondary" gutterBottom>
+          User Profile
+        </Typography>
+        <Divider variant="middle" />
+        <Card style={cardStyle.card} sx={{ minWidth: 275 }}>
+          <CardContent>
+            <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+              Personal Information
+            </Typography>
+            <div style={cardStyle.cardInput}>
+              <TextField
+                style={cardStyle.textField}
+                required
+                id="outlined-required"
+                label="Name"
+                defaultValue={currentUser.name}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <TextField
+                style={cardStyle.textField}
+                required
+                inputProps={{ readOnly: true }}
+                id="outlined-password-input"
+                label="Email"
+                defaultValue={currentUser.email}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <TextField
+                style={cardStyle.textField}
+                required
+                id="outlined-read-only-input"
+                label="Company Name"
+                defaultValue={currentUser.provider}
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
+              />
+            </div>
+          </CardContent>
           <CardActions>
-            <Button onClick={onPasswordSaveChangesButton}>SAVE CHANGES</Button>
+            <Button onClick={onPersonalInfoSaveChangesButton}>SAVE CHANGES</Button>
           </CardActions>
-          <Button
-            sx={{ margin: "0 30px", textDecoration: "none" }}
-            onClick={() => setIsForgotPasswordClicked(true)}
-          >
-            Forgot password?
-            {isForgotPasswordClicked ? <PasswordForgotten onModalDismiss={()=>setIsForgotPasswordClicked(false)}/> : null}
-          </Button>
-        </div>
-      </Card>
-    </Container>
+        </Card>
+        <Card style={cardStyle.card} sx={{ minWidth: 275 }}>
+          <CardContent>
+            <Typography sx={{ fontSize: 20 }} color="text.secondary" gutterBottom>
+              Change Password
+            </Typography>
+            <div style={cardStyle.cardInput}>
+              <TextField
+                style={cardStyle.textField}
+                required
+                id="outlined-required"
+                label="Current Password"
+                // label="Current Password"
+                defaultValue=""
+                onChange={(e) => setCurrentPassword(e.target.value)}
+                value={currentPassword}
+              />
+              <TextField
+                style={cardStyle.textField}
+                required
+                id="outlined-required"
+                label="New Password"
+                defaultValue=""
+                onChange={(e) => setNewPassword(e.target.value)}
+                value={newPassword}
+              />
+            </div>
+          </CardContent>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <CardActions>
+              <Button onClick={onPasswordSaveChangesButton}>SAVE CHANGES</Button>
+            </CardActions>
+            <Button
+              sx={{ margin: "0 30px", textDecoration: "none" }}
+              onClick={() => {
+                setIsForgotPasswordClicked(true);
+              }}
+            >
+              Forgot password?
+              {/* {isForgotPasswordClicked && (
+                <PasswordForgotten
+                  onModalDismiss={() => {
+                    setIsForgotPasswordClicked(false);
+                  }}
+                />
+              )} */}
+            </Button>
+          </div>
+        </Card>
+      </Container>
+    </>
   );
 }
