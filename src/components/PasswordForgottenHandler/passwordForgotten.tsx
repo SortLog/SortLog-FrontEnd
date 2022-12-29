@@ -87,11 +87,11 @@ const PasswordForgotten = (props: any) => {
       <div style={styles.background} onClick={props.onModalDismiss}></div>
       {isConfirmClicked ? (
         <Card sx={styles.card}>
-        <CardContent sx={styles.content}>
-          <Typography sx={styles.title} color="textSecondary" gutterBottom>
-            Your verification code and new password are required
-          </Typography>
-          <TextField
+          <CardContent sx={styles.content}>
+            <Typography sx={styles.title} color="textSecondary" gutterBottom>
+              Your verification code and new password are required
+            </Typography>
+            <TextField
               disabled
               sx={styles.text}
               required
@@ -103,30 +103,31 @@ const PasswordForgotten = (props: any) => {
                 readOnly: true,
               }}
             />
-          <TextField
-            sx={styles.text}
-            required
-            id="outlined-required"
-            label="verification code"
-            onChange={(e) => setCode(e.target.value)}
-          />
-          <TextField
-            sx={styles.text}
-            required
-            id="outlined-required"
-            label="new password"
-            onChange={(e) => setNewPassword(e.target.value)}
-          />
-        </CardContent>
-        <CardActions sx={styles.buttons}>
-          <Button onClick={onNewInfoSaved} size="small">
-            SAVE
-          </Button>
-          <Button onClick={props.onModalDismiss} size="small">
-            CANCEL
-          </Button>
-        </CardActions>
-      </Card>
+            <TextField
+              sx={styles.text}
+              required
+              id="outlined-required"
+              label="verification code"
+              onChange={(e) => setCode(e.target.value)}
+            />
+            <TextField
+              sx={styles.text}
+              required
+              id="outlined-required"
+              label="new password"
+              type='password'
+              onChange={(e) => setNewPassword(e.target.value)}
+            />
+          </CardContent>
+          <CardActions sx={styles.buttons}>
+            <Button onClick={onNewInfoSaved} size="small">
+              SAVE
+            </Button>
+            <Button onClick={props.onModalDismiss} size="small">
+              CANCEL
+            </Button>
+          </CardActions>
+        </Card>
       ) : (
         <Card sx={styles.card}>
           <CardContent sx={styles.content}>

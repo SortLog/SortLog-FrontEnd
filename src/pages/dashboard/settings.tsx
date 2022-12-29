@@ -80,11 +80,13 @@ export default function setting() {
   };
 
   const onPasswordSaveChangesButton = () => {
-    // console.log(cognitoUser);
-
     Auth.currentAuthenticatedUser()
-      .then((user) => {
-        return Auth.changePassword(cognitoUser, currentPassword, newPassword);
+      .then(() => {
+        if (currentPassword === newPassword) {
+          toast.error("New password should not be same as current password");
+        } else {
+          return Auth.changePassword(cognitoUser, currentPassword, newPassword);
+        }
       })
       .then((data) => {
         console.log(data);
@@ -95,14 +97,6 @@ export default function setting() {
         toast.error(err.message);
       });
   };
-
-  // const onForgotPassWordButton =()=> {
-  //   <PasswordForgotten/>
-  // }
-
-  // const closeModal = useCallback((state: boolean) => {
-  //   setIsForgotPasswordClicked(state)
-  // },[])
 
   return (
     <>
@@ -170,7 +164,7 @@ export default function setting() {
                 required
                 id="outlined-required"
                 label="Current Password"
-                // label="Current Password"
+                type="password"
                 defaultValue=""
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 value={currentPassword}
@@ -180,6 +174,7 @@ export default function setting() {
                 required
                 id="outlined-required"
                 label="New Password"
+                type="password"
                 defaultValue=""
                 onChange={(e) => setNewPassword(e.target.value)}
                 value={newPassword}
@@ -197,13 +192,6 @@ export default function setting() {
               }}
             >
               Forgot password?
-              {/* {isForgotPasswordClicked && (
-                <PasswordForgotten
-                  onModalDismiss={() => {
-                    setIsForgotPasswordClicked(false);
-                  }}
-                />
-              )} */}
             </Button>
           </div>
         </Card>
