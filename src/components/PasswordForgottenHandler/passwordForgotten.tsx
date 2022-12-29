@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import { useState, useCallback } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -18,7 +18,7 @@ const styles = {
     height: "100vh",
     zIndex: 10,
     background: "rgba(0, 0, 0, 0.75)",
-  },
+  } as CSSProperties,
   card: {
     top: "30vh",
     left: "30%",
@@ -54,7 +54,6 @@ const PasswordForgotten = (props: any) => {
   const [newPassword, setNewPassword] = useState("");
 
   const [isConfirmClicked, setIsConfirmClicked] = useState(false);
-  // const [isSaveClicked, setIsSaveClicked] = useState(false);
 
   const onEmailConfirm = () => {
     Auth.forgotPassword(email)
