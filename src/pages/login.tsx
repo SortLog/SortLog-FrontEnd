@@ -26,7 +26,7 @@ const LgIn: React.FC = () => {
       const user = await login(email, password);
       // get user from mongodb
       // @ts-ignore
-      console.log("cognito" + user);
+      console.log(user);
       const userFromMongo = await getUserByEmail(user.username);
       // @ts-ignore
       console.log("mong" + userFromMongo);
@@ -35,6 +35,7 @@ const LgIn: React.FC = () => {
       localStorage.setItem("currentUser", JSON.stringify(userFromMongo.data));
       // set token to localstorage
       localStorage.setItem("token", user.signInUserSession.idToken.jwtToken);
+      localStorage.setItem("cognitoUser", user);
       // redirect to dashboard
       router.push("/dashboard");
       toast.success(user.username + " logged in successfully");

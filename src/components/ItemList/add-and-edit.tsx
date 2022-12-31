@@ -202,8 +202,7 @@ const MuiDrawer = (props: any) => {
           <Typography variant="subtitle1" component="div">
             <text style={{ color: "#a2a2a2" }}>Updated at:</text>{" "}
             <text style={{ color: "#131213" }}>
-              {data.updatedAt ? moment(data.updatedAt).calendar()
-                 : moment(new Date()).calendar()}            
+              {data.updatedAt ? moment(data.updatedAt).calendar() : moment(new Date()).calendar()}
             </text>
           </Typography>
         </Grid>
