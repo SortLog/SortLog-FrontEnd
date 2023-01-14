@@ -114,7 +114,7 @@ const PasswordForgotten = (props: any) => {
               required
               id="outlined-required"
               label="new password"
-              type='password'
+              type="password"
               onChange={(e) => setNewPassword(e.target.value)}
             />
           </CardContent>
