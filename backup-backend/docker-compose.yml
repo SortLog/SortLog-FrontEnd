@@ -1,0 +1,50 @@
+version: "3.7"
+services:
+  mongo:
+    container_name: mongo
+    image: mongo
+    restart: always
+    # env_file: ./.env
+    volumes:
+      - ./data:/data/db
+    ports:
+      - 27017:27017
+  app:
+    container_name: app
+    restart: always
+    image: sortlogbackend
+    # env_file: ./.env
+    build: .
+    environment:
+      - PORT=4000
+      - MONGO_URL=$MONGO_URL
+    ports:
+      - 4000:4000
+    external_links:
+      - mongo
+    depends_on:
+      - mongo
+volumes:
+  mongo-data:
+    driver: local
+
+
+
+    #volumes: named volumes that keeps our data alive after restart.
+    #– mongodb:
+
+#image: official Docker image
+#restart: configure the restart policy
+#env_file: specify our .env path that we will create later
+#environment: provide setting using environment variables
+#ports: specify ports will be used
+#volumes: map volume foldersdocker-compose up -d 
+#– app:
+
+#depends_on: dependency order, mongodb is started before app
+#build: configuration options that are applied at build time that we defined in the Dockerfile with relative path
+#environment: environmental variables that Node application uses
+#stdin_open and tty: keep open the terminal after building container
+
+#docker-compose up 
+#xx

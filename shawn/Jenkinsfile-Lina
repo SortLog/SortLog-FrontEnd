@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     environment{
-         
-        AWS_CRED        = 'AWS_sortlog' //Change to yours AWS credentials
-        AWS_REGION      = 'ap-southeast-2'
+        CI ='true'
+        AWS_CRED        = 'AWS_sortlog' //Change to yours
+        AWS_REGION      = 'ap-southeast-2'// AWS region 
     }
         //Install denpendencies 
     stages{
@@ -19,7 +19,7 @@ pipeline {
         stage('yarn build') 
         {
             steps{
-             sh " yarn export"
+             sh "yarn export "
              sh 'ls -la ./out'
              }
         } 
@@ -31,10 +31,10 @@ pipeline {
                    
                     
                         sh '''
-                            export APP_ENV="frontend"
+                            export APP_ENV="production-f"
                             terraform init -input=false
                             terraform workspace select ${APP_ENV} || terraform workspace new ${APP_ENV}
-                            terraform apply \
+                            terraform destroy \
                                -var="app_env=${APP_ENV}"\
                                --auto-approve
                         '''
@@ -69,7 +69,7 @@ pipeline {
                    
                     
                         sh '''
-                            export APP_ENV="uat-p"
+                            export APP_ENV="uat-f"
                             terraform init -input=false
                             terraform workspace select ${APP_ENV} || terraform workspace new ${APP_ENV}
                             terraform destroy \
